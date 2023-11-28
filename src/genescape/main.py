@@ -15,8 +15,8 @@ def cli():
 
 @cli.command()
 @click.option("--obo", default=utils.OBO, help="Input OBO file")
-@click.argument("fname")
-def run(fname, obo=obo):
+@click.argument("fname", default=utils.CSV)
+def tree(fname=utils.CSV, obo=utils.OBO):
     """
     Subcommand for query operations.
     """
@@ -24,7 +24,7 @@ def run(fname, obo=obo):
         utils.stop(f"OBO file {obo} not found!")
     from genescape import subtree
 
-    subtree.run(json_name=obo, fname=fname)
+    subtree.run(json_obo=obo, fname=fname)
 
 
 @cli.command()
