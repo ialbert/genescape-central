@@ -34,6 +34,9 @@ Source = "https://github.com/ialbert/genescape-central"
 [project.scripts]
 "genescape" = "genescape.main:cli"
 
+[tool.hatch.metadata]
+include = ['src/genescape/data/go-basic.json.gz']
+
 [tool.hatch.build.targets.sdist]
 exclude = [
   "/.github",

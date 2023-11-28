@@ -4,6 +4,10 @@
 # pipx install hatch
 #
 
+# Default OBO file.
+URL = http://current.geneontology.org/ontology/go-basic.obo
+OBO = tmp/go-basic.obo
+
 # Usage information.
 usage:
 	@echo "#"
@@ -23,10 +27,15 @@ lint:
 fix:
 	hatch run lint:fmt
 
-dist:
+build:
 	hatch build 
 
 pypi:
 	hatch run publish
 
+$(OBO):
+	mkdir -p $(dir $(OBO))
+	curl -L $(URL) > $(OBO)
 
+get: $(OBO)
+	@ls -l $(OBO)
