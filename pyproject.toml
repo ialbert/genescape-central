@@ -24,7 +24,10 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = [ "click" ]
+dependencies = [
+  "click",
+  "networkx",
+]
 
 [project.urls]
 Documentation = "https://github.com/ialbert/genescape-central#readme"
@@ -35,7 +38,10 @@ Source = "https://github.com/ialbert/genescape-central"
 "genescape" = "genescape.main:cli"
 
 [tool.hatch.metadata]
-include = ['src/genescape/data/go-basic.json.gz']
+include = [
+  'src/genescape/data/go-basic.json.gz',
+  'src/genescape/data/gprofiler.csv',
+]
 
 [tool.hatch.build.targets.sdist]
 exclude = [
@@ -138,8 +144,8 @@ select = [
   "YTT",
 ]
 ignore = [
-  # Allow non-abstract empty methods in abstract base classes
-  "B027",
+  # Allow non-abstract empty methods in abstract base classes, dict calls
+  "B027", "C408",
   # Allow boolean positional values in function calls, like `dict.get(... True)`
   "FBT003",
   # Ignore checks for possible passwords

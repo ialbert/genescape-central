@@ -20,8 +20,7 @@ test:
 
 # Runs a linter.
 lint:
-	hatch run lint:all
-	hatch run lint:typing
+	hatch run lint:style
 
 # Fix linting errors.
 fix:

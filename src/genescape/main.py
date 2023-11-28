@@ -14,15 +14,17 @@ def cli():
 
 
 @cli.command()
-@click.option("--name", "-n", default="JOE", help="Name parameter for query.")
 @click.option("--obo", default=utils.OBO, help="Input OBO file")
-def run(name, obo=obo):
+@click.argument("fname")
+def run(fname, obo=obo):
     """
     Subcommand for query operations.
     """
     if not os.path.exists(obo):
         utils.stop(f"OBO file {obo} not found!")
-    utils.info(f"Using name={name}")
+    from genescape import subtree
+
+    subtree.run(json_name=obo, fname=fname)
 
 
 @cli.command()
