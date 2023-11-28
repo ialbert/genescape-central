@@ -1,4 +1,4 @@
-# genescape
+# GeneScape
 
 [![PyPI - Version](https://img.shields.io/pypi/v/genescape.svg)](https://pypi.org/project/genescape)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/genescape.svg)](https://pypi.org/project/genescape)

@@ -27,9 +27,30 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Documentation = "https://github.com/unknown/genescape#readme"
-Issues = "https://github.com/unknown/genescape/issues"
-Source = "https://github.com/unknown/genescape"
+Documentation = "https://github.com/ialbert/genescape-central#readme"
+Issues = "https://github.com/ialbert/genescape-central/issues"
+Source = "https://github.com/ialbert/genescape-central"
+
+[project.scripts]
+"genescape" = "genescape.main:run"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+  "/.idea",
+  "/.DS_Store",
+  "/docs",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+  "src/genescape",
+]
+
+[tool.hatch.build.targets.scripts]
+packages = [
+  "src/genescape",
+]
 
 [tool.hatch.version]
 path = "src/genescape/__about__.py"
