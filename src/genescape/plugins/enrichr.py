@@ -14,6 +14,7 @@ EXTRA = {
     "query_size": 0
 }
 
+
 def parse_term(term):
     # Extract goid and term name from the 'Term' column
     name, goid = None, None
