@@ -16,8 +16,12 @@ def cli():
 @cli.command()
 @click.option("--obo", default=utils.OBO, help="input OBO file")
 @click.option("--out", "-o", default="output.pdf", help="output file")
+@click.option("--category", "-c", default="MF", help="GO category")
+@click.option("--pcol", default="pval", help="p-value column")
+@click.option("--pval", default=0.05, help="p-value threshold")
+@click.option('--verbose', "-v", is_flag=False)
 @click.argument("fname", default=utils.DEMO_DATA)
-def tree(fname, obo, out):
+def tree(fname, obo, out, pcol, pval, category, verbose):
     """
     Subcommand for query operations.
     """
@@ -25,7 +29,10 @@ def tree(fname, obo, out):
         utils.stop(f"OBO file {obo} not found!")
     from genescape import tree
 
-    tree.run(json_obo=obo, fname=fname, out=out)
+    if verbose:
+        utils.logger.setLevel(utils.DEBUG)
+
+    tree.run(json_obo=obo, fname=fname, out=out, cat=category)
 
 
 @cli.command()

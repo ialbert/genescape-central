@@ -1,6 +1,7 @@
 import logging
 import os
 import sys
+from logging import DEBUG, INFO, WARNING, ERROR
 
 # Default paths.
 DIR = os.path.dirname(os.path.realpath(__file__))
@@ -22,6 +23,12 @@ NODE_ATTRS = dict(fillcolor=BG_COLOR, shape=SHAPE, style="filled")
 # Loggin format
 LOG_FORMAT = "# %(levelname)s\t%(module)s.%(funcName)s\t%(message)s"
 
+# Map the GO categories to the short names
+NAMESPACE_MAP = {
+    "biological_process": "BP",
+    "molecular_function": "MF",
+    "cellular_component": "CC",
+}
 
 # A callable to initialize the logger
 def init_logger(logger):
@@ -30,19 +37,19 @@ def init_logger(logger):
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
-
 # Get the logger.
 logger = logging.getLogger(__name__)
 
-logger.setLevel(logging.INFO)
+# Set the default loglevel.
+logger.setLevel(INFO)
 
 # Initialize the logger
 init_logger(logger)
 
+debug = logger.debug
 info = logger.info
-error = logger.error
 warn = logger.warning
-
+error = logger.error
 
 def stop(msg):
     logger.error(msg)

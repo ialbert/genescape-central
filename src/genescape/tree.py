@@ -10,6 +10,7 @@ from genescape import utils
 from genescape.plugins import reader
 
 
+
 # Parse GO Ontology file from fname into a networkx graph
 def build_graph(json_obo):
     graph = nx.DiGraph()
@@ -21,7 +22,8 @@ def build_graph(json_obo):
     for node in terms:
         name = textwrap.fill(node["name"], width=20)
         label = f"{node['id']}\n{name}"
-        graph.add_node(node["id"], label=label, **utils.NODE_ATTRS)
+        namespace = utils.NAMESPACE_MAP.get(node["namespace"], "?")
+        graph.add_node(node["id"], label=label, namespace=namespace, **utils.NODE_ATTRS)
 
     # Add all edges to Graph
     for node in terms:
@@ -34,7 +36,12 @@ def build_graph(json_obo):
     return graph
 
 
-def run(fname, json_obo=utils.OBO, mcol="category", mval="GO:MF", pcol="pval", pval=0.05, out="output.pdf"):
+def run(fname, json_obo=utils.OBO, cat="MF", pcol="pval", pval=0.05, out="output.pdf"):
+
+    # Check the category.
+    if cat not in utils.NAMESPACE_MAP.values():
+        utils.stop(f"unknown category: {cat} valid ")
+
     # Build graph from JSON file
     graph = build_graph(json_obo=json_obo)
 
@@ -48,26 +55,24 @@ def run(fname, json_obo=utils.OBO, mcol="category", mval="GO:MF", pcol="pval", p
     if pcol and pval:
         stream = filter(lambda x: float(x[pcol]) < pval, stream)
 
-    # Filter by regular exprssion
-    if mcol and mval:
-        stream = filter(lambda x: re.search(x[mcol], mval), stream)
-
     # Dictionary keyed by GO terms
-    terms, g2d = [], {}
-    for row in stream:
-        goid = row["goid"]
-        terms.append(goid)
-        g2d[goid] = row
+    g2d = dict(map(lambda x: (x["goid"], x), stream))
+
+    # The list of GO terms
+    terms = list(g2d.keys())
 
     # Select subtree from ancestors
     anc = set()
 
     miss = list(filter(lambda x: graph.has_node(x) is False, terms))
     if miss:
-        utils.warn(f"# unknown ids: {','.join(miss)}")
+        utils.debug(f"unknown: {','.join(miss)}")
 
     # Keep only valid nodes
     nodes = list(filter(lambda x: graph.has_node(x), terms))
+
+    # Keep only nodes in the correct category
+    nodes = list(filter(lambda x: graph.nodes[x]["namespace"] == cat, nodes))
 
     # Print the valid ids
     utils.info(f"valid ids: {len(nodes)}")
