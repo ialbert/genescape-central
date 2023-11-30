@@ -1,14 +1,41 @@
 import csv
+import gzip
 
-COL_MAP = {}
+# Should be a list of pairs
+COL_MAP = []
 
 
-def get_csv(fname, col_map):
-    # Get the separator used in the file
-    sep = "," if fname.endswith(".csv") else "\t"
+# Opens a file and returns a stream.
+def open_file(fname, sep=None):
+    if fname.endswith(".gz"):
+        stream = gzip.open(fname, mode="rt", encoding="UTF-8")
+    else:
+        stream = open(fname, encoding="utf-8-sig")
 
-    # Get the stream from the file
-    stream = csv.DictReader(open(fname), delimiter=sep)
+    if sep is None:
+        sep = "," if fname.endswith(".csv") else "\t"
+    stream = csv.DictReader(stream, delimiter=sep)
+    return stream
+
+
+# Checks format based on a column map.
+def check_format(fname, col_map):
+    stream = open_file(fname)
+    header = set(stream.fieldnames)
+    target = set(col_map.keys())
+    miss = target - header
+    valid = len(miss) == 0
+    return valid
+
+
+def relabel(graph, node, g2d):
+    label = graph.nodes[node]["label"]
+    return label
+
+
+def rename_columns(fname, col_map):
+    # Open the file.
+    stream = open_file(fname)
 
     # Produce the new remapped rows.
     for old_row in stream:

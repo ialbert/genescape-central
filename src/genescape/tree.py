@@ -7,6 +7,7 @@ import textwrap
 import networkx as nx
 
 from genescape import utils
+from genescape.plugins import reader
 
 
 # Parse GO Ontology file from fname into a networkx graph
@@ -37,13 +38,11 @@ def run(fname, json_obo=utils.OBO, mcol="category", mval="GO:MF", pcol="pval", p
     # Build graph from JSON file
     graph = build_graph(json_obo=json_obo)
 
-    # Stores GO terms
-    terms = []
-
-    from genescape.plugins.gprofiler import get_csv, relabel
+    # Print the input file name.
+    utils.info(f"reading: {fname}")
 
     # Get the stream from the file
-    stream = get_csv(fname)
+    stream, relabel = reader.csv(fname)
 
     # Filter by p-value
     if pcol and pval:
@@ -86,7 +85,7 @@ def run(fname, json_obo=utils.OBO, mcol="category", mval="GO:MF", pcol="pval", p
     tree = graph.subgraph(total)
 
     # Print information on the subgraph.
-    utils.info(f"subgraph has {len(tree.nodes())} nodes and {len(tree.edges())} edges.")
+    utils.info(f"subgraph: {len(tree.nodes())} nodes and {len(tree.edges())} edges")
 
     # Exit here on windows but continue on Linux
     if os.name == "nt":
@@ -118,4 +117,5 @@ def run(fname, json_obo=utils.OBO, mcol="category", mval="GO:MF", pcol="pval", p
 
 
 if __name__ == "__main__":
-    run(fname=utils.CSV, json_obo=utils.OBO)
+    out = os.path.join(utils.DIR, "../../output.pdf")
+    run(fname=utils.DEMO_DATA, json_obo=utils.OBO, out=out)

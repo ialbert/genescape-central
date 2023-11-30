@@ -14,17 +14,18 @@ def cli():
 
 
 @cli.command()
-@click.option("--obo", default=utils.OBO, help="Input OBO file")
-@click.argument("fname", default=utils.CSV)
-def tree(fname=utils.CSV, obo=utils.OBO):
+@click.option("--obo", default=utils.OBO, help="input OBO file")
+@click.option("--out", "-o", default="output.pdf", help="output file")
+@click.argument("fname", default=utils.DEMO_DATA)
+def tree(fname, obo, out):
     """
     Subcommand for query operations.
     """
     if not os.path.exists(obo):
         utils.stop(f"OBO file {obo} not found!")
-    from genescape import subtree
+    from genescape import tree
 
-    subtree.run(json_obo=obo, fname=fname)
+    tree.run(json_obo=obo, fname=fname, out=out)
 
 
 @cli.command()

@@ -27,6 +27,7 @@ classifiers = [
 dependencies = [
   "click",
   "networkx",
+  "pygraphviz"
 ]
 
 [project.urls]

@@ -5,9 +5,11 @@ import sys
 # Default paths.
 DIR = os.path.dirname(os.path.realpath(__file__))
 
-# Demo file paths
+# Data file paths.
 OBO = os.path.join(DIR, "data", "go-basic.json.gz")
-CSV = os.path.join(DIR, "data", "gprofiler.csv")
+
+# Demo data.
+DEMO_DATA = os.path.join(DIR, "data", "gprofiler-demo.csv")
 
 # Colors and shapes
 FG_COLOR = "lightgreen"
@@ -18,7 +20,7 @@ SHAPE = "box"
 NODE_ATTRS = dict(fillcolor=BG_COLOR, shape=SHAPE, style="filled")
 
 # Loggin format
-LOG_FORMAT = f"# %(levelname)s\t{__package__}.%(module)s.%(funcName)s\t%(message)s"
+LOG_FORMAT = "# %(levelname)s\t%(module)s.%(funcName)s\t%(message)s"
 
 
 # A callable to initialize the logger

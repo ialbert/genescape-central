@@ -13,16 +13,12 @@ COL_MAP = {
 }
 
 
-def get_csv(fname):
-    return default.get_csv(fname, col_map=COL_MAP)
+def get_stream(fname):
+    return default.rename_columns(fname, col_map=COL_MAP)
 
 
-def check_format(stream):
-    header = set(stream.fieldnames)
-    target = set(COL_MAP.keys())
-    diff = target - header
-    if diff:
-        utils.stop(f"Missing columns: {diff}")
+def check_format(fname):
+    return default.check_format(fname, col_map=COL_MAP)
 
 
 def relabel(graph, node, g2d):
@@ -46,8 +42,8 @@ def relabel(graph, node, g2d):
 
 
 if __name__ == "__main__":
-    inp = utils.CSV
-    data = get_csv(inp)
-    for row in data:
+    inp = utils.DEMO_DATA
+    stream = get_stream(inp)
+    for row in stream:
         utils.info(row)
         break

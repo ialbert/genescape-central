@@ -1,6 +1,7 @@
+import re
+
 from genescape import utils
 from genescape.plugins import default
-import re
 
 COL_MAP = {
     "Term": "goid",
@@ -8,18 +9,18 @@ COL_MAP = {
     "Adjusted P-value": "pval",
 }
 
-EXTRA = {
-    "category": "",
-    "domain_size": 0,
-    "query_size": 0
-}
+EMPTY_COLS = {"category": "", "domain_size": 0, "query_size": 0}
+
+
+def relabel(graph, node, g2d):
+    return default.relabel(graph, node, g2d)
 
 
 def parse_term(term):
     # Extract goid and term name from the 'Term' column
-    name, goid = None, None
+    name = goid = "?"
 
-    patt = r'(.*) \((GO:\d+)\)'
+    patt = r"(.*) \((GO:\d+)\)"
     match = re.search(patt, term)
     if match:
         name = match.group(1)
@@ -29,40 +30,36 @@ def parse_term(term):
 
 def parse_overlap(overlap):
     # Extract common size and term size from the 'Overlap' column
-    common_size, term_size = overlap.split('/')
+    common_size, term_size = overlap.split("/")
     common_size = int(common_size)
     term_size = int(term_size)
     return common_size, term_size
 
 
-def get_csv(fname):
+def check_format(fname):
+    return default.check_format(fname, col_map=COL_MAP)
 
-    parsed = default.get_csv(fname, col_map=COL_MAP)
 
-    for old_row in parsed:
-        new_row = {}
-        for key, val in old_row.items():
-            if key == "goid":
-                new_row["goid"], new_row["name"] = parse_term(val)
-            elif key == "common_size":
-                common_size, term_size = parse_overlap(val)
-                new_row["common_size"] = common_size
-                new_row["term_size"] = term_size
-            else:
-                new_row[key] = val
+def get_stream(fname):
+    stream = default.rename_columns(fname, col_map=COL_MAP)
 
-        # Add extra columns
-        for key, val in EXTRA.items():
-            new_row[key] = val
+    def remapper(row):
+        row["goid"], row["name"] = parse_term(row["goid"])
+        row["common_size"], row["term_size"] = parse_overlap(row["common_size"])
 
-        yield new_row
+        row.update(EMPTY_COLS)
+
+        return row
+
+    stream = map(remapper, stream)
+
+    return stream
 
 
 if __name__ == "__main__":
     # inp = utils.CSV
-    inp = "src/genescape/data/enrichr.txt"
-    data = get_csv(inp)
-    for row in data:
-        utils.info(row)
+    inp = "../data/enrichr-output.txt"
+    stream = get_stream(inp)
+    for row in stream:
+        # print(row)
         break
-
