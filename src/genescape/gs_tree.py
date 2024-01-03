@@ -1,14 +1,12 @@
 import gzip
 import json
-import os
+import os, csv
 import re
 import textwrap
 
 import networkx as nx
 
 from genescape import utils
-from genescape.plugins import reader
-
 
 
 # Parse GO Ontology file from fname into a networkx graph
@@ -20,10 +18,12 @@ def build_graph(json_obo):
 
     # Add all nodes to Graph
     for node in terms:
-        name = textwrap.fill(node["name"], width=20)
-        label = f"{node['id']}\n{name}"
+        oid = node["id"]
+        name = node["name"]
+        text = textwrap.fill(name, width=20)
+        label = f"{node['id']}\n{text}"
         namespace = utils.NAMESPACE_MAP.get(node["namespace"], "?")
-        graph.add_node(node["id"], label=label, namespace=namespace, **utils.NODE_ATTRS)
+        graph.add_node(oid, id=oid, name=name, namespace=namespace, label=label, **utils.NODE_ATTRS)
 
     # Add all edges to Graph
     for node in terms:
@@ -36,51 +36,48 @@ def build_graph(json_obo):
     return graph
 
 
-def run(fname, json_obo=utils.OBO, cat="MF", pcol="pval", pval=0.05, out="output.pdf"):
-
-    # Check the category.
-    if cat not in utils.NAMESPACE_MAP.values():
-        utils.stop(f"unknown category: {cat} valid ")
+def run(fname, json_obo=utils.OBO_JSON, out="output.pdf"):
 
     # Build graph from JSON file
     graph = build_graph(json_obo=json_obo)
 
+    def count_descendants(graph, start_node):
+        # Count all nodes reachable from start_node, excluding start_node itself
+        return len(nx.descendants(graph, start_node)) + 1
+
+    # Expected counts
+    exp_counts = {node: count_descendants(graph, node) for node in graph.nodes()}
+
     # Print the input file name.
-    utils.info(f"reading: {fname}")
+
 
     # Get the stream from the file
-    stream, relabel = reader.csv(fname)
-
-    # Filter by p-value
-    if pcol and pval:
-        stream = filter(lambda x: float(x[pcol]) < pval, stream)
-
-    # Dictionary keyed by GO terms
-    g2d = dict(map(lambda x: (x["goid"], x), stream))
+    stream = utils.get_stream(fname)
+    stream = map(lambda x: x.strip(), stream)
+    stream = filter(lambda x: x, stream)
+    stream = filter(lambda x: not x.startswith("#"), stream)
 
     # The list of GO terms
-    terms = list(g2d.keys())
+    terms = list(stream)
 
     # Select subtree from ancestors
     anc = set()
 
     miss = list(filter(lambda x: graph.has_node(x) is False, terms))
     if miss:
-        utils.debug(f"unknown: {','.join(miss)}")
+        utils.info(f"unknown ids: {len(miss)}")
+        utils.debug(f"unknown: {miss}")
 
     # Keep only valid nodes
     nodes = list(filter(lambda x: graph.has_node(x), terms))
 
-    # Keep only nodes in the correct category
-    nodes = list(filter(lambda x: graph.nodes[x]["namespace"] == cat, nodes))
-
     # Print the valid ids
     utils.info(f"valid ids: {len(nodes)}")
+    utils.debug(f"valid: {nodes}")
 
     # Get all ancestors and mark the ones that are terms.
     for node in nodes:
         graph.nodes[node]["fillcolor"] = utils.FG_COLOR
-        graph.nodes[node]["label"] = relabel(graph=graph, g2d=g2d, node=node)
         anc = anc.union(nx.ancestors(graph, node))
 
     # Add the original nodes as well.
@@ -88,6 +85,16 @@ def run(fname, json_obo=utils.OBO, cat="MF", pcol="pval", pval=0.05, out="output
 
     # Subset the graph to the ancestors only.
     tree = graph.subgraph(total)
+
+    # Create the observed counts.
+    obs_counts = {node: count_descendants(tree, node) for node in tree.nodes()}
+
+    # Add the observed and expected counts to the labels.
+    for node, obs_value in obs_counts.items():
+        exp_value = exp_counts[node]
+        value = f"{obs_value}/{exp_value}"
+        label = graph.nodes[node]["label"]
+        graph.nodes[node]["label"] = f"{label}\n{value}"
 
     # Print information on the subgraph.
     utils.info(f"subgraph: {len(tree.nodes())} nodes and {len(tree.edges())} edges")
@@ -102,25 +109,16 @@ def run(fname, json_obo=utils.OBO, cat="MF", pcol="pval", pval=0.05, out="output
     # Set the plot orientation
     # tree.graph_attr['rankdir'] = 'LR'
 
-    # Create the legend
-    legend = tree.add_subgraph(name="legend", label="Legend", rank="sink")
-    legend.add_node(
-        "x",
-        label="Legend: \n 88 / 2.5x = 88 observered counts / 2.5x fold enrichment.\n "
-        "Green indicates GO term observed in data",
-        shape="box",
-        color="white",
-    )
-
     # Layout the graph
     tree.layout("dot")
 
     # Render and save the graph
     tree.draw(out)
 
+    # Print the output file name.
     utils.info(f"output: {out}")
 
 
 if __name__ == "__main__":
-    out = os.path.join(utils.DIR, "../../output.pdf")
-    run(fname=utils.DEMO_DATA, json_obo=utils.OBO, out=out)
+    out = os.path.join("output.pdf")
+    run(fname=utils.DEMO_DATA, json_obo=utils.OBO_JSON, out=out)

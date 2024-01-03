@@ -53,4 +53,4 @@ def make_json(obo_name, json_name):
 
 
 if __name__ == "__main__":
-    make_json("tmp/go-basic.obo", "tmp/go-basic.json.gz")
+    make_json("go-basic.obo", "go-basic.json.gz")
