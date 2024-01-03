@@ -15,19 +15,20 @@ GO:0005515
 GO:0048029
 GO:0005537
 GO:0003824
+...
 ```
 
-run the `tree` command in the following way:
+You can run the `tree` command in the following way:
 
 ```console
 genescape tree -o demo.pdf goids.txt 
 ```
 
-to generate the following graph:
+The above command generates the following output:
 
 ![demo](docs/images/demo.png)
 
-The image displays a subtree with various colored nodes representing different types of Gene Ontology (GO) terms from a provided list. Here's what each color means:
+The image displays the GO subtree that contains all the input GO terms. Here's what each color means:
 
 * Green nodes: These are the GO terms from your list.
 * Light blue nodes: These are leaf nodes (the end points of the tree) representing the most granular annotation possible.
