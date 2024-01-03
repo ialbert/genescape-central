@@ -44,7 +44,7 @@ In the larger tree before filtering to your specific GO terms, this node's subtr
 
 These numbers and colors are meant to help you understand the level of detail and the specificity of the functional terms you visualize.
 
-The last line of numbers may be replaced with custom labels by listing them as the next column in the input file. For example, the following input file:
+Customizing the labels. The last line of numbers may be replaced with custom labels read from the second column of the comma separated input file. For example, the following input file:
 
 ```
 GO:0005488,A
@@ -55,7 +55,7 @@ GO:0003824,E
 ...
 ```
 
-Would generate `A`, `B`, `C`, `D`, and `E` as the labels for the last line of numbers.
+Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers.
 
 ## Installation
 
