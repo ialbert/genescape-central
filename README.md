@@ -55,7 +55,7 @@ GO:0003824,E
 ...
 ```
 
-Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers.
+Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers. See the [demo-labels.png](docs/images/demo-labels.png) file for an example.
 
 ## Installation
 
