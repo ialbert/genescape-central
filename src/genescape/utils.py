@@ -1,7 +1,6 @@
 import logging
 import os
 import sys
-import re
 from logging import DEBUG, ERROR, INFO, WARNING
 
 # Current directory.
@@ -62,12 +61,13 @@ def stop(msg):
     logger.error(msg)
     sys.exit(1)
 
-def get_stream(fname, op=None, match=None, pcol=None, pval=0.05):
+
+def get_stream(fname):
     stream = None
 
     if fname:
         debug(f"reading: {fname}")
-        stream = open(fname, mode='r', encoding='utf-8-sig')
+        stream = open(fname, encoding="utf-8-sig")
     elif not sys.stdin.isatty():
         stream = sys.stdin
     else:

@@ -149,7 +149,7 @@ ignore = [
   # Allow non-abstract empty methods in abstract base classes, dict calls
   "B027", "C408",
   # Allow boolean positional values in function calls, like `dict.get(... True)`
-  "FBT003",
+  "FBT003", "C417", "FBT002",
   # Ignore checks for possible passwords
   "S105", "S106", "S107",
   # Ignore complexity

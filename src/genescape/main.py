@@ -1,8 +1,9 @@
-import os, sys
+import os
 
 import click
 
 from genescape import utils
+
 
 @click.group()
 def cli():
@@ -18,7 +19,7 @@ def cli():
 @click.option("-b", "obo", metavar="TEXT", default=utils.OBO_JSON, help="OBO file (optional)")
 @click.option("--verbose", "-v", is_flag=True)
 @click.option("-d", "--demo", is_flag=True, help="run with demo data")
-@click.help_option('-h', '--help')
+@click.help_option("-h", "--help")
 def tree(fname, obo, out, verbose, demo=False):
     """
     Draws a tree from GO terms.
@@ -41,10 +42,11 @@ def tree(fname, obo, out, verbose, demo=False):
     # Run the tree command.
     gs_tree.run(json_obo=obo, fname=fname, out=out)
 
+
 @cli.command()
 @click.option("--inp", "-i", default="go-basic.obo", help="Input OBO file")
 @click.option("--out", "-o", default="go-basic.json.gz", help="Output JSON file (gzipped)")
-@click.help_option('-h', '--help')
+@click.help_option("-h", "--help")
 def build(inp, out):
     """
     Builds a JSON file from an OBO file.
@@ -54,16 +56,17 @@ def build(inp, out):
 
     make_json(obo_name=inp, json_name=out)
 
+
 @cli.command()
 @click.argument("fname", default=None, required=False)
-@click.option("-c", "mcol", metavar="TEXT", default='term_id', help="column name to extract")
+@click.option("-c", "mcol", metavar="TEXT", default="term_id", help="column name to extract")
 @click.option("-p", "pcol", metavar="TEXT", help="p-value column name")
 @click.option("-v", "pval", default=0.05, type=float, metavar="TEXT", help="p-value treshold (0.05)")
 @click.option("-m", "match", metavar="TEXT", help="regex match on line")
-@click.option("-t", "tab",  is_flag=True, help="tab delimited file")
+@click.option("-t", "tab", is_flag=True, help="tab delimited file")
 @click.option("-d", "--demo", is_flag=True, help="run with demo data")
-@click.help_option('-h', '--help')
-def filter(fname='', mcol='source', pcol='', pval='', match='', tab=False, demo=False):
+@click.help_option("-h", "--help")
+def filter(fname="", mcol="source", pcol="", pval="", match="", tab=False, demo=False):
     """
     Filters a CSV/TSV file by columns.
     """
@@ -76,8 +79,9 @@ def filter(fname='', mcol='source', pcol='', pval='', match='', tab=False, demo=
         match = "BP"
         utils.info(f"input {fname}")
 
-    delim = '\t' if tab else ','
+    delim = "\t" if tab else ","
     gs_filter.run(fname=fname, mcol=mcol, pcol=pcol, pval=pval, match=match, delim=delim)
+
 
 if __name__ == "__main__":
     tree()

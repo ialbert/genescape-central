@@ -1,11 +1,11 @@
 import csv
 import re
-
-from genescape import utils
 from itertools import chain
 
-def run(fname=None, mcol='term_id', pcol=None, pval=None, match=None, delim=','):
+from genescape import utils
 
+
+def run(fname=None, mcol="term_id", pcol=None, pval=None, match=None, delim=","):
     stream = utils.get_stream(fname)
     header = next(stream)
 
@@ -35,6 +35,7 @@ def run(fname=None, mcol='term_id', pcol=None, pval=None, match=None, delim=',')
         print(row)
 
     return stream
+
 
 if __name__ == "__main__":
     run(fname=utils.DEMO_DATA)

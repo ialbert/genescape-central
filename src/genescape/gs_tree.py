@@ -1,7 +1,6 @@
 import gzip
 import json
-import os, csv
-import re
+import os
 import textwrap
 
 import networkx as nx
@@ -37,7 +36,6 @@ def build_graph(json_obo):
 
 
 def run(fname, json_obo=utils.OBO_JSON, out="output.pdf"):
-
     # Build graph from JSON file
     graph = build_graph(json_obo=json_obo)
 
@@ -49,7 +47,6 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf"):
     exp_counts = {node: count_descendants(graph, node) for node in graph.nodes()}
 
     # Print the input file name.
-
 
     # Get the stream from the file
     stream = utils.get_stream(fname)
@@ -95,6 +92,9 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf"):
         value = f"{obs_value}/{exp_value}"
         label = graph.nodes[node]["label"]
         graph.nodes[node]["label"] = f"{label}\n{value}"
+        if exp_value == 1:
+            graph.nodes[node]["fillcolor"] = "lightblue"
+            graph.nodes[node]["shape"] = "circle"
 
     # Print information on the subgraph.
     utils.info(f"subgraph: {len(tree.nodes())} nodes and {len(tree.edges())} edges")
