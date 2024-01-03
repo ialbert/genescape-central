@@ -1,9 +1,6 @@
 # GeneScape
 
-[![PyPI - Version](https://img.shields.io/pypi/v/genescape.svg)](https://pypi.org/project/genescape)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/genescape.svg)](https://pypi.org/project/genescape)
-
-The `genescape` suite is meant to be a collection of tools used to visualize gene ontology and the results of functional analysis. 
+The `genescape` suite is planned to become a collection of tools used to visualize the results of functional genome analysis. Various new tools may be implemented in the future.
 
 * `tree` draws informative gene ontology (GO) graphs based on GO terms.
 
