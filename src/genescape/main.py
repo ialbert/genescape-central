@@ -17,7 +17,7 @@ def cli():
 @click.argument("fname", default=None, required=False)
 @click.option("-o", "out", metavar="TEXT", default="output.pdf", help="output file")
 @click.option("-b", "obo", metavar="TEXT", default=utils.OBO_JSON, help="OBO file (optional)")
-@click.option("--verbose", "-v", is_flag=True)
+@click.option( "-v", "verbose", is_flag=True, help="verbose output")
 @click.option("-d", "--demo", is_flag=True, help="run with demo data")
 @click.help_option("-h", "--help")
 def tree(fname, obo, out, verbose, demo=False):
@@ -44,8 +44,8 @@ def tree(fname, obo, out, verbose, demo=False):
 
 
 @cli.command()
-@click.option("--inp", "-i", default="go-basic.obo", help="Input OBO file")
-@click.option("--out", "-o", default="go-basic.json.gz", help="Output JSON file (gzipped)")
+@click.option("-i", default="go-basic.obo", help="Input OBO file")
+@click.option("-o", default="go-basic.json.gz", help="Output JSON file (gzipped)")
 @click.help_option("-h", "--help")
 def build(inp, out):
     """

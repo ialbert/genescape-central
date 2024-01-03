@@ -94,7 +94,6 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf"):
         graph.nodes[node]["label"] = f"{label}\n{value}"
         if exp_value == 1:
             graph.nodes[node]["fillcolor"] = "lightblue"
-            graph.nodes[node]["shape"] = "circle"
 
     # Print information on the subgraph.
     utils.info(f"subgraph: {len(tree.nodes())} nodes and {len(tree.edges())} edges")
