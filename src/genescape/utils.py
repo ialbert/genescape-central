@@ -13,7 +13,7 @@ OBO_JSON = os.path.join(CURR_DIR, "data", "go-basic.json.gz")
 DEMO_CSV = os.path.join(CURR_DIR, "data", "gprofiler.csv")
 
 # The GO ids to draw.
-DEMO_DATA = os.path.join(CURR_DIR, "data", "goids.txt")
+DEMO_DATA = os.path.join(CURR_DIR, "data", "goids-label.csv")
 
 # Colors and shapes
 FG_COLOR = "lightgreen"

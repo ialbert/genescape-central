@@ -1,6 +1,7 @@
 import gzip
 import json
 import os
+import csv
 import textwrap
 
 import networkx as nx
@@ -35,7 +36,8 @@ def build_graph(json_obo):
     return graph
 
 
-def run(fname, json_obo=utils.OBO_JSON, out="output.pdf"):
+def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None):
+
     # Build graph from JSON file
     graph = build_graph(json_obo=json_obo)
 
@@ -54,8 +56,15 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf"):
     stream = filter(lambda x: x, stream)
     stream = filter(lambda x: not x.startswith("#"), stream)
 
-    # The list of GO terms
-    terms = list(stream)
+    # Turn into a CSV reader
+
+    ann = dict()
+    stream = csv.reader(stream)
+    terms = []
+    for elems in stream:
+        terms.append(elems[0])
+        if len(elems) > 1:
+            ann[elems[0]] = elems[1]
 
     # Select subtree from ancestors
     anc = set()
@@ -89,9 +98,18 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf"):
     # Add the observed and expected counts to the labels.
     for node, obs_value in obs_counts.items():
         exp_value = exp_counts[node]
-        value = f"{obs_value}/{exp_value}"
-        label = graph.nodes[node]["label"]
-        graph.nodes[node]["label"] = f"{label}\n{value}"
+
+        # Annotations may be generated or pulled in from the file
+        if ann:
+            value = ann.get(node, "")
+        else:
+            value = f"{obs_value}/{exp_value}"
+
+        # Fill in only if there is a value.
+        if value:
+            label = graph.nodes[node]["label"]
+            graph.nodes[node]["label"] = f"{label}\n{value}"
+
         if exp_value == 1:
             graph.nodes[node]["fillcolor"] = "lightblue"
 
