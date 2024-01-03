@@ -34,14 +34,15 @@ The image displays the GO subtree that contains all the input GO terms. Here's w
 * Light blue nodes: These are leaf nodes (the end points of the tree) representing the most granular annotation possible.
 * White nodes: These connect the green nodes, forming the tree's structure. These represent the minimal ancestral nodes needed to interconnect your GO terms.
 
-Additionally, each node shows two numbers:
-
 The first number indicates the count of nodes in the subtree starting from that node.
 
-The second number shows the total number of nodes in the original, larger tree that this subtree is a part of. 
+The second number shows the total number of nodes of the original, complete annotation tree that this subtree is a part of. 
 
-For example, a node labeled "16/11235" means there are 16 nodes in the subtree beginning at that node. In the larger tree before filtering to your specific GO terms, this node's subtree had 11,235 nodes. These numbers help you understand the level of detail or specificity in the functional annotation.
+For example, a node labeled "16/11235" indicates there are 16 nodes in the subtree beginning at that node. 
 
+In the larger tree before filtering to your specific GO terms, this node's subtree had 11,235 nodes. 
+
+These numbers and colors are meant to help you understand the level of detail and the specificity of the functional terms you visualize.
 
 ## Installation
 
