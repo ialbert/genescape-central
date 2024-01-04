@@ -19,7 +19,7 @@ GO:0003824
 ...
 ```
 
-You can run the `tree` command in the following way:
+run the `tree` command to visualize the relationships between the GO terms:
 
 ```console
 genescape tree -o demo.pdf goids.txt 
@@ -39,19 +39,16 @@ The image displays the GO subtree that contains all the input GO terms. Here's w
 
 When labels are not explicitly provided an automatic node labeling will take place using two numbers separated by a slash.
 
-The first number indicates the count of nodes in the subtree starting from that node.
+1. The first number indicates the count of nodes in the subtree starting from that node.
+2. The second number is the total number of nodes in the complete annotation tree. 
 
-The second number shows the total number of nodes in original, complete annotation tree that this subtree is a part of. 
+For example, a node labeled `16/11235` indicates there are `16` nodes in the subtree beginning at that node. In the larger tree before filtering to your specific GO terms, this node's subtree had `11,235` nodes. 
 
-For example, a node labeled "16/11235" indicates there are 16 nodes in the subtree beginning at that node. 
-
-In the larger tree before filtering to your specific GO terms, this node's subtree had 11,235 nodes. 
-
-These numbers and colors are meant to help you understand the level of detail and the specificity of the functional terms you visualize.
+The numbers and colors are meant to assist in understanding the level of detail and the specificity of the functional terms you visualize.
 
 ### Custom labels
 
-Customizing the labels. The last line of numbers may be replaced with custom labels read from the second column of the comma-separated input file. For example, the following input file:
+The input may also take the form of a CSV file with headers. In that case the content of the columns `goids` and `labels` will be processed. Example:
 
 ```
 goids,labels
@@ -68,6 +65,10 @@ Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers.
 
 ## genescape annotate
 
+The annotator operates on gene names. To function it needs a so called GAF annotation file available from the [GO website](http://current.geneontology.org/annotations/). 
+
+The human GAF file is included in the distribution. For other organisms, or to use the most up-to-date GAF, you would need to download the GAF file for your organism of interest and provide it to the annotator via the `-g` flag.
+
 Suppose you have a list of gene names in the format
 
 ```
@@ -82,7 +83,7 @@ Then the command:
 ```bash
 genescape annotate names.txt 
 ```
-`
+
 will generate the file containing the top 10 most common functions:
 
 ```
@@ -94,6 +95,7 @@ GO:0005789,2/4
 ...
 ```
 
+The numbers here represent how many of your input genes are annotated with the given function. 
 Piping the output into `genescape tree` will generate and image that visualizes the functional roles of the genes in the input file.
 
 ```bash

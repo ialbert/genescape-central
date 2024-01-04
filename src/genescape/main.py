@@ -45,7 +45,7 @@ def tree(fname, obo, out, verbose, demo=False):
 @cli.command()
 @click.argument("fname", default=None, required=False)
 @click.option("-t", "top", metavar="TEXT", default=10, help="keep top N terms only (10)")
-@click.option("-g", "gaf", metavar="TEXT", default=utils.GAF_REF_DATA, help="OBO file (optional)")
+@click.option("-g", "gaf", metavar="TEXT", default=utils.GAF_REF_DATA, help="GAF file (optional)")
 @click.option( "-v", "verbose", is_flag=True, help="verbose output")
 @click.option("-d", "--demo", is_flag=True, help="run with demo data")
 @click.help_option("-h", "--help")
