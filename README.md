@@ -98,7 +98,7 @@ GO:0005789,2/4
 The numbers here represent how many of your input genes are annotated with the given function. 
 Piping the output into `genescape tree` will generate and image that visualizes the functional roles of the genes in the input file.
 
-```bash
+```console
 genescape annotate names.txt  | genescape tree
 ```
 
