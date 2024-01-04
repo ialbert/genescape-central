@@ -22,6 +22,7 @@ def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, top=10):
         ann.setdefault(gname, []).append(goid)
 
     stream2 = utils.get_stream(fname)
+    stream2 = map(lambda x: x.upper(), stream2)
     stream2 = list(stream2)
     miss, coll = [], []
     for elem in stream2:
@@ -31,7 +32,7 @@ def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, top=10):
             coll.extend(set(ann[elem]))
 
     if miss:
-        utils.warning(f"missing {len(miss)} genes {miss}")
+        utils.warn(f"missing {len(miss)} genes {miss}")
 
     count = Counter(coll)
 
@@ -40,7 +41,8 @@ def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, top=10):
     write.writerow([GOIDS, LABELS])
 
     # Find the most common GO terms
-    size = len(count)
+    size = len(stream2)
+
     for goid, cnt in count.most_common(top):
         label = f"{cnt}/{size}"
         write.writerow([goid, label])

@@ -26,6 +26,9 @@ lint:
 fix:
 	hatch run lint:fmt
 
+demo:
+	ls
+
 build:
 	hatch build 
 
