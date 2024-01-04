@@ -5,6 +5,14 @@ The `genescape` suite a collection of tools used to visualize the results of fun
 * `tree` draws informative gene ontology (GO) graphs based on GO terms.
 * `annotate` annotates a list of genes with functions
 
+We packaged some demo data with the software so you can test the programs like so:
+
+```console
+genescape tree --demo
+genescape annotate --demo
+genescape annotate --demo | genescape tree
+```
+
 ## genescape tree
 
 Starting with a file that contains GO terms (see [goids.txt](src/genescape/data/goids.txt) for the complete file)
@@ -99,36 +107,39 @@ GO:0005789,2/4
 ```
 
 The numbers in this file represent how many of your input genes were annotated with the given function. 
-Piping the output into `genescape tree` will generate an image that visualizes the functional roles of the genes in the input file.
+
+Piping the output of `genescape annotate` into `genescape tree` will generate an image that visualizes the functional roles of the genes in the input file.
 
 ```console
 genescape annotate names.txt  | genescape tree
 ```
 
-will generate the output:
+
+It Will generate a functional map of the genes that looks like so:
 
 ![Example output with labels](docs/images/genelist.png)
+
+By default, only the top 10 most common functions are generated. That cutoff can be changed via the `-t` flag
 
 ## Installation
 
 You can install `genescape` via `pip` or `pipx`.
 
-Since the software is meant to be used as a command line tool, [pipx][pipx] is recommended.
+Since the software is meant to be used as a command line tool, [pipx][pipx] is the recommended approach. You will need Python 3.9 or above.
 
-```bash
+```console
 pipx install genescape
 ```
 
 [pipx]: https://pipx.pypa.io/stable/
 
-To generate images, from command line you need to have the `dot` software from [Graphviz](https://graphviz.org/) installed and available on your `PATH`. You can install Graphviz via your package manager or via `conda` with:
+To generate images from the command line you will need to have the `dot` software from [Graphviz](https://graphviz.org/) installed and available on your `PATH`. You can install Graphviz via your package manager or via `conda` with:
 
 ```console  
 conda install graphviz
 ```
 
 Alternatively, if you are unable to install the `dot` package you can save the output as `.dot` files via the flag `-o graph.dot` and then use an online tool like [viz-js](http://viz-js.com/) to visualize the graph.
-
 
 ## License
 
