@@ -59,10 +59,12 @@ GO:0005537,D
 ...
 ```
 
-Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers.  In this case, only green nodes (nodes in the input list) will be labeled.
+Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers.  
 
 
 ![Example output with labels](docs/images/demo-labels.png)
+
+When the input is in CSV format, only the green nodes (nodes in the input list) will be labeled.
 
 ## genescape annotate
 
