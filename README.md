@@ -1,17 +1,19 @@
 # GeneScape
 
-The `genescape` suite a collection of tools used to visualize the results of functional genome analysis. Various new tools may be implemented in the future.
+The `genescape` suite is a collection of tools used to visualize the results of functional genome analysis. Various new tools may be implemented in the future.
 
-* `tree` draws informative gene ontology (GO) graphs based on GO terms.
-* `annotate` annotates a list of genes with functions
+* `tree` draws informative Gene Ontology (GO) subgraphs
+* `annotate` annotates a list of genes with GO functions
 
-We packaged some demo data with the software so you can test the programs like so:
+We packaged demo data with the software so you can test the programs like so:
 
 ```console
 genescape tree --demo
 genescape annotate --demo
 genescape annotate --demo | genescape tree
 ```
+
+See [Installation](#installation) for more details.
 
 ## genescape tree
 
