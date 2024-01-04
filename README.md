@@ -22,10 +22,10 @@ GO:0003824
 run the `tree` command to visualize the relationships between the GO terms:
 
 ```console
-genescape tree -o demo.pdf goids.txt 
+genescape tree -o output.pdf goids.txt 
 ```
 
-The above command generates the following output:
+The command generates the following output:
 
 ![Example output](docs/images/demo.png)
 
@@ -37,7 +37,7 @@ The image displays the GO subtree that contains all the input GO terms. Here's w
 
 ### Default labels
 
-When labels are not explicitly provided an automatic node labeling will take place using two numbers separated by a slash.
+When labels are not explicitly provided, an automatic node labeling will take place using two numbers separated by a slash.
 
 1. The first number indicates the count of nodes in the subtree starting from that node.
 2. The second number is the total number of nodes in the complete annotation tree. 
@@ -59,15 +59,16 @@ GO:0005537,D
 ...
 ```
 
-Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers. 
+Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers.  In this case, only green nodes (nodes in the input list) will be labeled.
+
 
 ![Example output with labels](docs/images/demo-labels.png)
 
 ## genescape annotate
 
-The annotator operates on gene names. To function it needs a so called GAF annotation file available from the [GO website](http://current.geneontology.org/annotations/). 
+The annotator operates on gene names. To run it needs the so called GAF annotation file that is available from the [GO website](http://current.geneontology.org/annotations/). 
 
-The human GAF file is included in the distribution. For other organisms, or to use the most up-to-date GAF, you would need to download the GAF file for your organism of interest and provide it to the annotator via the `-g` flag.
+The human GAF file is included in the distribution and will be used by default. For other organisms, or to use the most up-to-date GAF for human, you would need to download the GAF file for your organism of interest and provide it to the annotator like so `-g goa_human.gaf.gz`.
 
 Suppose you have a list of gene names in the format
 
@@ -78,9 +79,9 @@ Sptlc2
 Smpd3
 ```
 
-Then the command:
+The command:
 
-```bash
+```console
 genescape annotate names.txt 
 ```
 
@@ -95,12 +96,14 @@ GO:0005789,2/4
 ...
 ```
 
-The numbers here represent how many of your input genes are annotated with the given function. 
-Piping the output into `genescape tree` will generate and image that visualizes the functional roles of the genes in the input file.
+The numbers in this file represent how many of your input genes were annotated with the given function. 
+Piping the output into `genescape tree` will generate an image that visualizes the functional roles of the genes in the input file.
 
 ```console
 genescape annotate names.txt  | genescape tree
 ```
+
+will generate the output:
 
 ![Example output with labels](docs/images/genelist.png)
 
