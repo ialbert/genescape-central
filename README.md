@@ -149,7 +149,13 @@ To generate images from the command line you will need to have the `dot` softwar
 conda install graphviz
 ```
 
-Alternatively, if you are unable to install the `dot` package you can save the output as `.dot` files via the flag `-o graph.dot` and then use an online tool like [viz-js](http://viz-js.com/) to visualize the graph.
+Alternatively, if you are unable to install the `dot` package you can save the output as `.dot` files 
+
+```console
+genescape tree -o graph.dot --demo
+```
+
+Then use an online tool like [viz-js](http://viz-js.com/) to visualize the graph.
 
 ## License
 
