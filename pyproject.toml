@@ -41,7 +41,12 @@ Source = "https://github.com/ialbert/genescape-central"
 [tool.hatch.metadata]
 include = [
   'src/genescape/data/go-basic.json.gz',
+  'src/genescape/data/goa_human.gaf.gz',
   'src/genescape/data/gprofiler.csv',
+  'src/genescape/data/goids.txt',
+  'src/genescape/data/goids-label.csv',
+  'src/genescape/data/genelist.txt',
+  'src/genescape/data/enrichr.txt',
 ]
 
 [tool.hatch.build.targets.sdist]
