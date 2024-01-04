@@ -1,6 +1,7 @@
 #
 # Demo file listing GO terms
 #
+goids,labels
 GO:0005488,A
 GO:0005515,B
 GO:0048029,C

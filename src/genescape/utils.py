@@ -15,9 +15,23 @@ DEMO_CSV = os.path.join(CURR_DIR, "data", "gprofiler.csv")
 # The GO ids to draw.
 DEMO_DATA = os.path.join(CURR_DIR, "data", "goids-label.csv")
 
-# Colors and shapes
-FG_COLOR = "lightgreen"
-BG_COLOR = "white"
+# The GOF demo data.
+GAF_REF_DATA = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
+GAF_GENE_LIST = os.path.join(CURR_DIR, "data", "genelist.txt")
+
+# The name of the columns in the CSV file
+GOIDS, LABELS = "goids", "labels"
+
+# Selection color
+FG_COLOR = "#90EE90"
+
+# Leaf color
+LF_COLOR = "#ADD8E6"
+
+# Background color
+BG_COLOR = "#FFFFFF"
+
+# Default shape
 SHAPE = "box"
 
 # Set the default attributes for the nodes

@@ -27,7 +27,7 @@ dependencies = [
   "click",
   "networkx",
   "pygraphviz",
-  "bio",
+  "pydot",
 ]
 
 [project.urls]

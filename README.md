@@ -47,11 +47,11 @@ These numbers and colors are meant to help you understand the level of detail an
 Customizing the labels. The last line of numbers may be replaced with custom labels read from the second column of the comma separated input file. For example, the following input file:
 
 ```
+goids,labels
 GO:0005488,A
 GO:0005515,B
 GO:0048029,C
 GO:0005537,D
-GO:0003824,E
 ...
 ```
 

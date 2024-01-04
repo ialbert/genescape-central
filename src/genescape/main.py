@@ -42,6 +42,19 @@ def tree(fname, obo, out, verbose, demo=False):
     # Run the tree command.
     gs_tree.run(json_obo=obo, fname=fname, out=out)
 
+@cli.command()
+@click.argument("fname", default=None, required=False)
+@click.option("-t", "top", metavar="TEXT", default=10, help="keep top N terms only (10)")
+@click.option("-g", "gaf", metavar="TEXT", default=utils.GAF_REF_DATA, help="OBO file (optional)")
+@click.option( "-v", "verbose", is_flag=True, help="verbose output")
+@click.option("-d", "--demo", is_flag=True, help="run with demo data")
+@click.help_option("-h", "--help")
+def annotate(fname, gaf, verbose=False, demo=False, top=10):
+    from genescape import gs_annotate
+    if demo:
+        fname = utils.GAF_GENE_LIST
+        utils.info(f"input {fname}")
+    gs_annotate.run(fname=fname, gaf=gaf, top=top)
 
 @cli.command()
 @click.option("-i", default="go-basic.obo", help="Input OBO file")
