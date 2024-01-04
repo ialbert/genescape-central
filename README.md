@@ -125,9 +125,7 @@ By default, only the top 10 most common functions are generated. That cutoff can
 
 ## Installation
 
-The software requires Python 3.9 or above.
-
-You can install `genescape` via `pip` or `pipx`.
+The software requires Python 3.9 or above. You can install `genescape` via `pip` or `pipx`.
 
 Since the software is meant to be used as a command line tool, [pipx][pipx] is the recommended approach. 
 
