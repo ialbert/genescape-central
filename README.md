@@ -1,8 +1,9 @@
 # GeneScape
 
-The `genescape` suite is planned to become a collection of tools used to visualize the results of functional genome analysis. Various new tools may be implemented in the future.
+The `genescape` suite a collection of tools used to visualize the results of functional genome analysis. Various new tools may be implemented in the future.
 
 * `tree` draws informative gene ontology (GO) graphs based on GO terms.
+* `annotate` annotates a list of genes with functions
 
 ## genescape tree
 
@@ -26,7 +27,7 @@ genescape tree -o demo.pdf goids.txt
 
 The above command generates the following output:
 
-![demo](docs/images/demo.png)
+![Example output](docs/images/demo.png)
 
 The image displays the GO subtree that contains all the input GO terms. Here's what each color means:
 
@@ -34,9 +35,13 @@ The image displays the GO subtree that contains all the input GO terms. Here's w
 * Light blue nodes: These are leaf nodes (the end points of the tree) representing the most granular annotation possible.
 * White nodes: These connect the green nodes, forming the tree's structure. These represent the minimal ancestral nodes needed to interconnect your GO terms.
 
+### Default labels
+
+When labels are not explicitly provided an automatic node labeling will take place using two numbers separated by a slash.
+
 The first number indicates the count of nodes in the subtree starting from that node.
 
-The second number shows the total number of nodes of the original, complete annotation tree that this subtree is a part of. 
+The second number shows the total number of nodes in original, complete annotation tree that this subtree is a part of. 
 
 For example, a node labeled "16/11235" indicates there are 16 nodes in the subtree beginning at that node. 
 
@@ -44,7 +49,9 @@ In the larger tree before filtering to your specific GO terms, this node's subtr
 
 These numbers and colors are meant to help you understand the level of detail and the specificity of the functional terms you visualize.
 
-Customizing the labels. The last line of numbers may be replaced with custom labels read from the second column of the comma separated input file. For example, the following input file:
+### Custom labels
+
+Customizing the labels. The last line of numbers may be replaced with custom labels read from the second column of the comma-separated input file. For example, the following input file:
 
 ```
 goids,labels
@@ -55,7 +62,45 @@ GO:0005537,D
 ...
 ```
 
-Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers. See the [demo-labels.png](docs/images/demo-labels.png) file for an example.
+Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers. 
+
+![Example output with labels](docs/images/demo-labels.png)
+
+## genescape annotate
+
+Suppose you have a list of gene names in the format
+
+```
+Cyp1a1
+Sphk2
+Sptlc2
+Smpd3
+```
+
+Then the command:
+
+```bash
+genescape annotate names.txt 
+```
+`
+will generate the file containing the top 10 most common functions:
+
+```
+goids,labels
+GO:0005515,3/4
+GO:0005743,2/4
+GO:0043231,2/4
+GO:0005789,2/4
+...
+```
+
+Piping the output into `genescape tree` will generate and image that visualizes the functional roles of the genes in the input file.
+
+```bash
+genescape annotate names.txt  | genescape tree
+```
+
+![Example output with labels](docs/images/genelist.png)
 
 ## Installation
 
@@ -69,11 +114,14 @@ pipx install genescape
 
 [pipx]: https://pipx.pypa.io/stable/
 
-To run the tool, you will also need to have the `dot` command from [Graphviz](https://graphviz.org/) installed and available on your `PATH`. You can install Graphviz via your package manager or via `conda` with:
+To generate images, from command line you need to have the `dot` software from [Graphviz](https://graphviz.org/) installed and available on your `PATH`. You can install Graphviz via your package manager or via `conda` with:
 
 ```console  
 conda install graphviz
 ```
+
+Alternatively, if you are unable to install the `dot` package you can save the output as `.dot` files via the flag `-o graph.dot` and then use an online tool like [viz-js](http://viz-js.com/) to visualize the graph.
+
 
 ## License
 

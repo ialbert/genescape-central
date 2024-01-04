@@ -25,6 +25,7 @@ def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, top=10):
     stream2 = map(lambda x: x.upper(), stream2)
     stream2 = list(stream2)
     miss, coll = [], []
+
     for elem in stream2:
         if elem not in ann:
             miss.append(elem)
