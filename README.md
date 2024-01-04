@@ -1,4 +1,4 @@
-# GeneScape
+# Genescape
 
 The `genescape` suite is a collection of tools used to visualize the results of functional genome analysis. Various new tools may be implemented in the future.
 
@@ -13,7 +13,7 @@ genescape annotate --demo
 genescape annotate --demo | genescape tree
 ```
 
-See [Installation](#installation) for more details.
+See [Installation](#installation) on how to get started.
 
 ## genescape tree
 
@@ -117,7 +117,7 @@ genescape annotate names.txt  | genescape tree
 ```
 
 
-It Will generate a functional map of the genes that looks like so:
+The output is a functional map of the genes that looks like so:
 
 ![Example output with labels](docs/images/genelist.png)
 
@@ -127,10 +127,16 @@ By default, only the top 10 most common functions are generated. That cutoff can
 
 You can install `genescape` via `pip` or `pipx`.
 
-Since the software is meant to be used as a command line tool, [pipx][pipx] is the recommended approach. You will need Python 3.9 or above.
+Since the software is meant to be used as a command line tool, [pipx][pipx] is the recommended approach. 
+
+You will also need Python 3.9 or above.
 
 ```console
+# We recommend pipx
 pipx install genescape
+
+# Alternatively you can also use pip
+pip install genescape
 ```
 
 [pipx]: https://pipx.pypa.io/stable/
