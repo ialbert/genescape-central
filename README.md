@@ -39,50 +39,11 @@ The command generates the following output:
 
 ![Example output](docs/images/demo.png)
 
-The image displays the GO subtree that contains all the input GO terms. Here's what each color means:
-
-* Green nodes: These are the GO terms from your list.
-* Light blue nodes: These are leaf nodes (the end points of the tree) representing the most granular annotation possible.
-* White nodes: These connect the green nodes, forming the tree's structure. These represent the minimal ancestral nodes needed to interconnect your GO terms.
-
-### Default labels
-
-When labels are not explicitly provided, an automatic node labeling will take place using two numbers separated by a slash.
-
-1. The first number indicates the count of nodes in the subtree starting from that node.
-2. The second number is the total number of nodes in the complete annotation tree. 
-
-For example, a node labeled `16/11235` indicates there are `16` nodes in the subtree beginning at that node. In the larger tree before filtering to your specific GO terms, this node's subtree had `11,235` nodes. 
-
-The numbers and colors are meant to assist in understanding the level of detail and the specificity of the functional terms you visualize.
-
-### Custom labels
-
-The input may also take the form of a CSV file with headers. In that case the content of the columns `goids` and `labels` will be processed. Example:
-
-```
-goids,labels
-GO:0005488,A
-GO:0005515,B
-GO:0048029,C
-GO:0005537,D
-...
-```
-
-Would generate `A`, `B`, `C`, `D`, and `E` instead of the `X/Y` numbers.  
-
-
-![Example output with labels](docs/images/demo-labels.png)
-
-When the input is in CSV format, only the green nodes (nodes in the input list) will be labeled.
+Read more about how [genescape tree](docs/gs_tree.md) works.
 
 ## genescape annotate
 
-The annotator operates on gene names. To run it needs the so called GAF annotation file that is available from the [GO website](http://current.geneontology.org/annotations/). 
-
-The human GAF file is included in the distribution and will be used by default. For other organisms, or to use the most up-to-date GAF for human, you would need to download the GAF file for your organism of interest and provide it to the annotator like so `-g goa_human.gaf.gz`.
-
-Suppose you have a list of gene names in the format
+The annotator operates on gene names. Suppose you have a list of gene names in the format:
 
 ```
 Cyp1a1
@@ -97,7 +58,7 @@ The command:
 genescape annotate names.txt 
 ```
 
-will generate the file containing the top 10 most common functions:
+will generate the file containing the top 10 most common functions across these genes:
 
 ```
 goids,labels
@@ -117,11 +78,15 @@ genescape annotate names.txt  | genescape tree
 ```
 
 
-The output is a functional map of the genes that looks like so:
+The output is a functional map of the genes::
 
 ![Example output with labels](docs/images/genelist.png)
 
 By default, only the top 10 most common functions are generated. That cutoff can be changed via the `-t` flag
+
+The human annotation file (GAF) is included in the distribution and will be used by default. 
+
+For other organisms, or to use the most up-to-date GAF for human, you would need to download the GAF file for your organism of interest and provide it to the annotator like so `-g goa_human.gaf.gz`. The GAF files are available on the [GO website](http://current.geneontology.org/annotations/). 
 
 ## Installation
 
