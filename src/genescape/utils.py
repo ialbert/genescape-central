@@ -80,7 +80,7 @@ def get_stream(fname):
     stream = None
 
     if fname:
-        debug(f"reading: {fname}")
+        debug(f"Reading: {fname}")
         stream = open(fname, encoding="utf-8-sig")
     elif not sys.stdin.isatty():
         stream = sys.stdin

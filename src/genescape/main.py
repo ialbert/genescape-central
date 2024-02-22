@@ -40,7 +40,7 @@ def tree(fname, obo, out, verbose, demo=False):
         utils.info(f"input {fname}")
 
     # Run the tree command.
-    gs_tree.run(json_obo=obo, fname=fname, out=out)
+    gs_tree.run(json_obo=obo, fname=fname, out=out, verbose=verbose)
 
 @cli.command()
 @click.argument("fname", default=None, required=False)
@@ -48,9 +48,11 @@ def tree(fname, obo, out, verbose, demo=False):
 @click.option("-g", "gaf", metavar="TEXT", default=utils.GAF_REF_DATA, help="GAF file.")
 @click.option("-i", "obo", metavar="TEXT", default=utils.OBO_JSON, help="OBO index file.")
 @click.option("-d", "demo", is_flag=True, help="Run with demo data")
+@click.option("-m", "match", metavar="REGEX", default='', help="Regular expression match on function")
+@click.option("-c", "minc", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
 @click.option( "-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, gaf, obo, verbose=False, demo=False, top=10):
+def annotate(fname, gaf, obo, verbose=False, demo=False, top=10, match="", minc=1):
     """
     Generates the GO terms for a list of genes.
     """
@@ -58,7 +60,8 @@ def annotate(fname, gaf, obo, verbose=False, demo=False, top=10):
     if demo:
         fname = utils.GAF_GENE_LIST
         utils.info(f"input {fname}")
-    gs_annotate.run(fname=fname, gaf=gaf, top=top, json_obo=obo, verbose=verbose)
+    utils.debug(f"params n={top} c={minc} m={match}")
+    gs_annotate.run(fname=fname, gaf=gaf, top=top, json_obo=obo, verbose=verbose, match=match, minc=minc)
 
 @cli.command()
 @click.option("-i", default="go-basic.obo", help="Input OBO file")

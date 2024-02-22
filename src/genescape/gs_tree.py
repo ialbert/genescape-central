@@ -37,7 +37,7 @@ def build_graph(json_obo):
 
     return graph
 
-def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None):
+def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None, verbose=False):
 
     # Build graph from JSON file
     graph = build_graph(json_obo=json_obo)
@@ -73,7 +73,8 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None):
     miss = list(filter(lambda x: graph.has_node(x) is False, terms))
     if miss:
         utils.warn(f"unknown ids: {len(miss)}")
-        utils.warn(f"unknown: {miss}")
+        if verbose:
+            utils.warn(f"unknown: {miss}")
 
     # Keep only valid nodes
     nodes = list(filter(lambda x: graph.has_node(x), terms))
