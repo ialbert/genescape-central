@@ -61,20 +61,26 @@ genescape annotate names.txt
 will generate the file containing the top 10 most common functions across these genes:
 
 ```
-goids,labels
-GO:0005515,3/4
-GO:0005743,2/4
-GO:0043231,2/4
-GO:0005789,2/4
+goid,count,size,label
+GO:0005515,3,4,3/4
+GO:0043231,2,4,2/4
+GO:0005789,2,4,2/4
+GO:0005743,2,4,2/4
+GO:0030148,2,4,2/4
+GO:0005737,2,4,2/4
+GO:0046512,2,4,2/4
+GO:0042904,1,4,1/4
+GO:0006805,1,4,1/4
+GO:0009624,1,4,1/4
 ...
 ```
 
-The numbers in this file represent how many of your input genes were annotated with the given function. 
+The numbers in this file represent how many of your input genes were annotated with the given function relative to the total number of genes (4).
 
 Piping the output of `genescape annotate` into `genescape tree` will generate an image that visualizes the functional roles of the genes in the input file.
 
 ```console
-genescape annotate names.txt  | genescape tree
+genescape annotate names.txt | genescape tree
 ```
 
 

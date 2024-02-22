@@ -19,8 +19,8 @@ DEMO_DATA = os.path.join(CURR_DIR, "data", "goids-label.csv")
 GAF_REF_DATA = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
 GAF_GENE_LIST = os.path.join(CURR_DIR, "data", "genelist.txt")
 
-# The name of the columns in the CSV file
-GOIDS, LABELS = "goids", "labels"
+# The name of the columns in the annotation CSV file
+GOID, LABEL, COUNT, SIZE = "goid", "label", "count", "size"
 
 # Selection color
 FG_COLOR = "#90EE90"
@@ -85,7 +85,7 @@ def get_stream(fname):
     elif not sys.stdin.isatty():
         stream = sys.stdin
     else:
-        stop("missing input file or stream")
+        stop("No input found. A filename or stream is required.")
 
     stream = map(lambda x: x.strip(), stream)
     stream = filter(lambda x: x, stream)

@@ -1,12 +1,15 @@
+import csv
 import gzip
 import json
 import os
-import csv
 import textwrap
 from itertools import tee
+
 import networkx as nx
+
 from genescape import utils
-from genescape.utils import GOIDS, LABELS
+from genescape.utils import GOID, LABEL
+
 
 # Parse GO Ontology file from fname into a networkx graph
 def build_graph(json_obo):
@@ -52,10 +55,10 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None):
     # Detect whether the file is header delimiter CSV or not
     headers = next(stream1)
 
-    if GOIDS in headers and LABELS in headers:
+    if GOID in headers and LABEL in headers:
         # Has headers, read the specified columns
         utils.debug("reading annotations")
-        idx1, idx2 = headers.index(GOIDS), headers.index(LABELS)
+        idx1, idx2 = headers.index(GOID), headers.index(LABEL)
         ann = dict((r[idx1], r[idx2]) for r in stream1)
         terms = list(ann.keys())
     else:

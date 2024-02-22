@@ -1,15 +1,19 @@
 """
 Annotates a list of genes with functions based on the GO graph
 """
-import gzip, csv, sys
-from itertools import *
+import csv
+import gzip
+import sys
 from collections import Counter
-from genescape import utils
+from itertools import *
 from pprint import pprint
-from genescape.utils import GOIDS, LABELS
+
+from genescape import utils
+from genescape.gs_tree import build_graph
+from genescape.utils import GOID, LABEL, COUNT, SIZE
+
 
 def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, top=10):
-    gaf = utils.GAF_REF_DATA
     stream1 = gzip.open(gaf, mode="rt", encoding="UTF-8")
     stream1 = filter(lambda x: not x.startswith("!"), stream1)
     stream1 = map(lambda x: x.strip(), stream1)
@@ -37,16 +41,16 @@ def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, top=10):
 
     count = Counter(coll)
 
-
     write = csv.writer(sys.stdout)
-    write.writerow([GOIDS, LABELS])
+    write.writerow([GOID, COUNT, SIZE, LABEL])
 
     # Find the most common GO terms
     size = len(stream2)
 
     for goid, cnt in count.most_common(top):
         label = f"{cnt}/{size}"
-        write.writerow([goid, label])
+
+        write.writerow([goid, cnt, size, label])
 
 if __name__ == "__main__":
 
