@@ -36,7 +36,9 @@ def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, json_obo=utils.OBO_JS
             coll.extend(set(ann[elem]))
 
     if miss:
-        utils.warn(f"missing {len(miss)} genes {miss}")
+        utils.warn(f"missing {len(miss)} ids")
+    if verbose:
+        utils.warn(f"missing ids: {miss} ")
 
     stream = gzip.open(json_obo, mode="rt", encoding="UTF-8")
     terms = json.load(stream)
