@@ -87,7 +87,7 @@ def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, json_obo=utils.OBO_JS
         if match and re.search(match, func) is None:
             continue
         label = f"{cnt}/{size}"
-        write.writerow([goid, cnt, size, label, func])
+        write.writerow([goid, cnt, size, f"{label}", func])
 
     if len(elems) != n_found:
         utils.info(f"there are {n_found-len(elems)} additional terms not shown")

@@ -73,8 +73,7 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None, verbose=Fals
     miss = list(filter(lambda x: graph.has_node(x) is False, terms))
     if miss:
         utils.warn(f"unknown ids: {len(miss)}")
-        if verbose:
-            utils.warn(f"unknown: {miss}")
+        utils.debug(f"unknown: {miss}")
 
     # Keep only valid nodes
     nodes = list(filter(lambda x: graph.has_node(x), terms))
@@ -95,23 +94,19 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None, verbose=Fals
     tree = graph.subgraph(total)
 
     # Generate the expected and observed counts.
-    if not ann:
-        exp_counts = {node: count_descendants(graph, node) for node in graph.nodes()}
-        obs_counts = {node: count_descendants(tree, node) for node in tree.nodes()}
-    else:
-        obs_counts = exp_counts = {}
+    exp_counts = {node: count_descendants(graph, node) for node in graph.nodes()}
+
+    #obs_counts = {node: count_descendants(tree, node) for node in tree.nodes()}
 
     # Add the observed and expected counts to the labels.
     for node in tree.nodes():
+        exp_value = exp_counts[node]
+        value = f"{exp_value:,d}"
 
         if ann:
             # Annotations may be generated or pulled in from the file
-            value = ann.get(node, "")
-        else:
-            # Generate some counts automatically
-            obs_value = obs_counts[node]
-            exp_value = exp_counts[node]
-            value = f"{obs_value}/{exp_value}"
+            annv = ann.get(node, "")
+            value = f"{value} ({annv})" if annv else value
 
         # Fill in only if there is a value.
         if value:

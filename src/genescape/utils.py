@@ -13,7 +13,7 @@ OBO_JSON = os.path.join(CURR_DIR, "data", "go-basic.json.gz")
 DEMO_CSV = os.path.join(CURR_DIR, "data", "gprofiler.csv")
 
 # The GO ids to draw.
-DEMO_DATA = os.path.join(CURR_DIR, "data", "goids-label.csv")
+DEMO_DATA = os.path.join(CURR_DIR, "data", "goids.txt")
 
 # The GOF demo data.
 GAF_REF_DATA = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
