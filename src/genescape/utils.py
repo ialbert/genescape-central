@@ -20,7 +20,7 @@ GAF_REF_DATA = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
 GAF_GENE_LIST = os.path.join(CURR_DIR, "data", "genelist.txt")
 
 # The name of the columns in the annotation CSV file
-GOID, LABEL, COUNT, SIZE = "goid", "label", "count", "size"
+GOID, LABEL = "goid", "label"
 
 # Selection color
 FG_COLOR = "#90EE90"

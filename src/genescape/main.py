@@ -16,9 +16,9 @@ def cli():
 @cli.command()
 @click.argument("fname", default=None, required=False)
 @click.option("-o", "out", metavar="TEXT", default="output.pdf", help="output file")
-@click.option("-b", "obo", metavar="TEXT", default=utils.OBO_JSON, help="OBO file (optional)")
+@click.option("-i", "obo", metavar="TEXT", default=utils.OBO_JSON, help="OBO index file")
+@click.option("-d", "demo", is_flag=True, help="run with demo data")
 @click.option( "-v", "verbose", is_flag=True, help="verbose output")
-@click.option("-d", "--demo", is_flag=True, help="run with demo data")
 @click.help_option("-h", "--help")
 def tree(fname, obo, out, verbose, demo=False):
     """
@@ -44,12 +44,13 @@ def tree(fname, obo, out, verbose, demo=False):
 
 @cli.command()
 @click.argument("fname", default=None, required=False)
-@click.option("-n", "top", metavar="TEXT", default=10, help="keep top N terms only (default=10)")
-@click.option("-g", "gaf", metavar="TEXT", default=utils.GAF_REF_DATA, help="GAF file (from GeneOntology.org)")
-@click.option( "-v", "verbose", is_flag=True, help="verbose output")
-@click.option("-d", "--demo", is_flag=True, help="run with demo data")
+@click.option("-n", "top", metavar="TEXT", default=10, help="Limit to top N terms (default=10).")
+@click.option("-g", "gaf", metavar="TEXT", default=utils.GAF_REF_DATA, help="GAF file.")
+@click.option("-i", "obo", metavar="TEXT", default=utils.OBO_JSON, help="OBO index file.")
+@click.option("-d", "demo", is_flag=True, help="Run with demo data")
+@click.option( "-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, gaf, verbose=False, demo=False, top=10):
+def annotate(fname, gaf, obo, verbose=False, demo=False, top=10):
     """
     Generates the GO terms for a list of genes.
     """
@@ -57,7 +58,7 @@ def annotate(fname, gaf, verbose=False, demo=False, top=10):
     if demo:
         fname = utils.GAF_GENE_LIST
         utils.info(f"input {fname}")
-    gs_annotate.run(fname=fname, gaf=gaf, top=top)
+    gs_annotate.run(fname=fname, gaf=gaf, top=top, json_obo=obo, verbose=verbose)
 
 @cli.command()
 @click.option("-i", default="go-basic.obo", help="Input OBO file")
@@ -80,7 +81,7 @@ def build(inp, out):
 @click.option("-v", "pval", default=0.05, type=float, metavar="TEXT", help="p-value treshold (0.05)")
 @click.option("-m", "match", metavar="TEXT", help="regex match on line")
 @click.option("-t", "tab", is_flag=True, help="tab delimited file")
-@click.option("-d", "--demo", is_flag=True, help="run with demo data")
+@click.option("-d", "demo", is_flag=True, help="run with demo data")
 @click.help_option("-h", "--help")
 def filter(fname="", mcol="source", pcol="", pval="", match="", tab=False, demo=False):
     """
