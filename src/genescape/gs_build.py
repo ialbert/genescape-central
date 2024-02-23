@@ -3,9 +3,10 @@
 #
 import gzip
 import json
+import csv
+from itertools import *
 
-from genescape.utils import info
-
+from genescape import utils
 
 def parse_line(text, sep):
     text = text.strip()
@@ -39,18 +40,54 @@ def parse_obo(stream):
 
     yield term
 
+def parse_gaf(fname):
+    stream = gzip.open(fname, mode="rt", encoding="UTF-8")
+    stream = filter(lambda x: not x.startswith("!"), stream)
+    stream = map(lambda x: x.strip(), stream)
+    #stream = map(lambda x: x.split("\t"), stream)
+    stream = csv.reader(stream, delimiter="\t")
+    return stream
 
-def make_json(obo_name, json_name):
-    info(f"parsing: {obo_name}")
-    stream = open(obo_name)
+
+def make_json(obo, gaf, index):
+    utils.info(f"parsing: {gaf}")
+    stream = parse_gaf(gaf)
+
+    #stream = islice(stream, 10)
+    # Set up mapping dictionaries
+    gene2go, prot2go, go2gene, go2prot = {}, {}, {}, {}
+    for row in stream:
+        gene2go.setdefault(row[2], []).append(row[4])
+        prot2go.setdefault(row[1], []).append(row[4])
+        go2gene.setdefault(row[4], []).append(row[2])
+        go2prot.setdefault(row[4], []).append(row[1])
+
+    utils.info(f"parsing: {obo}")
+    stream = open(obo)
     terms = parse_obo(stream)
     terms = filter(lambda x: not x.get("is_obsolete"), terms)
     terms = list(terms)
-    stream = gzip.open(json_name, "wt", encoding="UTF-8")
-    info(f"writing: {json_name}")
-    json.dump(terms, stream, indent=4)
-    return terms
+    obo = {}
+    for term in terms:
+        obo[term["id"]] = term
+
+
+    # The complete data
+    data = {
+        utils.IDX_OBO: obo,
+        utils.IDX_gene2go: gene2go,
+        utils.IDX_prot2go: prot2go,
+        utils.IDX_go2gene: go2gene,
+        utils.IDX_go2prot: go2prot,
+    }
+
+    # Save the index
+    stream = gzip.open(index,  mode="wt", encoding="UTF-8")
+    utils.info(f"writing: {index}")
+    json.dump(data, stream, indent=4)
+
+    return data
 
 
 if __name__ == "__main__":
-    make_json("go-basic.obo", "go-basic.json.gz")
+    make_json(obo=utils.OBO_FILE, gaf=utils.GAF_FILE, index=utils.INDEX)

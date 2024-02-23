@@ -12,42 +12,41 @@ from genescape import utils
 from genescape.utils import GOID, LABEL
 
 
-def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, json_obo=utils.OBO_JSON, top=10, verbose=False, match='', minc=1):
-    stream1 = gzip.open(gaf, mode="rt", encoding="UTF-8")
-    stream1 = filter(lambda x: not x.startswith("!"), stream1)
-    stream1 = map(lambda x: x.strip(), stream1)
-    stream1 = map(lambda x: x.split("\t"), stream1)
+def run(fname=utils.GENE_LIST, index=utils.INDEX, top=10, verbose=False, match='', minc=1):
 
-    ann = {}
-    for row in stream1:
-        pname, gname, goid = row[1], row[2], row[4]
-        ann.setdefault(pname, []).append(goid)
-        ann.setdefault(gname, []).append(goid)
+    # Open the index stream
+    idx_stream = gzip.open(index, mode="rt", encoding="UTF-8")
 
-    stream2 = utils.get_stream(fname)
-    stream2 = map(lambda x: x.upper(), stream2)
-    stream2 = list(stream2)
+    # Load the full index.
+    data = json.load(idx_stream)
+
+    # Read the genelist
+    stream = utils.get_stream(fname)
+    stream = map(lambda x: x.upper(), stream)
+    stream = list(stream)
+
+    valid_ids = set(list(data[utils.IDX_gene2go].keys()) + list(data[utils.IDX_prot2go].keys()))
+
+    # Fetch functions stored for genes or proteins
+    def get(elem):
+        return set(data[utils.IDX_gene2go].get(elem, []) + data[utils.IDX_prot2go].get(elem, []))
+
     miss, coll = [], []
 
-    for elem in stream2:
-        if elem not in ann:
+    for elem in stream:
+
+        if elem not in valid_ids:
             miss.append(elem)
         else:
-            coll.extend(set(ann[elem]))
+            coll.extend(get(elem))
 
     if miss:
-        utils.warn(f"missing {len(miss)} ids")
+        utils.warn(f"missing {len(miss)} ids: {','.join(miss[:10])} ... ")
     if verbose:
-        utils.warn(f"missing ids: {miss} ")
+        utils.warn(f"all missing ids: {miss} ")
 
-    stream = gzip.open(json_obo, mode="rt", encoding="UTF-8")
-    terms = json.load(stream)
-
-    # Map the GO categories to their names
-    go2func = dict(
-            (x.get("id", "id?"), x.get("name", "name?")) for x in terms
-    )
-
+    def go2func(goid):
+        return data[utils.IDX_OBO][goid]["name"]
 
     # Build the counter.
     count = Counter(coll)
@@ -56,7 +55,7 @@ def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, json_obo=utils.OBO_JS
     elems = count.most_common()
 
     # Fill in the function names.
-    elems = map(lambda x: (x[0], x[1], go2func.get(x[0], "?")), elems)
+    elems = map(lambda x: (x[0], x[1], go2func(x[0])), elems)
 
     # Apply the regex filter
     elems = filter(lambda x: re.search(match, x[2]), elems) if match else elems
@@ -73,24 +72,29 @@ def run(fname=utils.GAF_GENE_LIST, gaf=utils.GAF_REF_DATA, json_obo=utils.OBO_JS
     # Take the top N elements.
     elems = elems[:top] if top > 0 else elems
 
-    # Opent the output stream.
-    write = csv.writer(sys.stdout)
-
-    # Write the header.
-    write.writerow([GOID, "count", "size", LABEL, "function"])
-
     # The size of the original collection.
-    size = len(stream2)
+    size = len(stream)
 
-    # Print the results.
+    # Create the data object
+    result = []
+    fields_long = [utils.GOID, "count", "size", utils.LABEL, "function"]
     for goid, cnt, func in elems:
         if match and re.search(match, func) is None:
             continue
-        label = f"{cnt}/{size}"
-        write.writerow([goid, cnt, size, f"{label}", func])
+        label = f"{cnt}"
+        elem = dict(zip(fields_long, [goid, cnt, size, label, func]))
 
+        result.append(elem)
+
+    # The CSV file has fewer fields
+    fields_short = fields_long
+    write = csv.DictWriter(sys.stdout, fieldnames=fields_short)
+    write.writeheader()
+    write.writerows(result)
+
+    # Final notification if needed.
     if len(elems) != n_found:
-        utils.info(f"there are {n_found-len(elems)} additional terms not shown")
+        utils.info(f"{len(elems)} out of {n_found} shown")
 
 
 if __name__ == "__main__":

@@ -74,7 +74,7 @@ def build(inp, out):
     # click.echo(f"Running with parameter {inp} {out}")
     from genescape.gs_build import make_json
 
-    make_json(obo_name=inp, json_name=out)
+    make_json(obo=inp, json_name=out)
 
 
 @cli.command()

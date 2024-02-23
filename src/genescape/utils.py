@@ -7,7 +7,10 @@ from logging import DEBUG, ERROR, INFO, WARNING
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
 
 # Data file paths.
-OBO_JSON = os.path.join(CURR_DIR, "data", "go-basic.json.gz")
+INDEX = os.path.join(CURR_DIR, "data", "genescape.index.json.gz")
+
+# The OBO file.
+OBO_FILE = os.path.join(CURR_DIR, "data", "go-basic.obo")
 
 # Demo data.
 DEMO_CSV = os.path.join(CURR_DIR, "data", "gprofiler.csv")
@@ -15,21 +18,23 @@ DEMO_CSV = os.path.join(CURR_DIR, "data", "gprofiler.csv")
 # The GO ids to draw.
 DEMO_DATA = os.path.join(CURR_DIR, "data", "goids.txt")
 
-# The GOF demo data.
-GAF_REF_DATA = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
-GAF_GENE_LIST = os.path.join(CURR_DIR, "data", "genelist.txt")
+# The GAF demo data.
+GAF_FILE = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
+
+# The default gene list.
+GENE_LIST = os.path.join(CURR_DIR, "data", "genelist.txt")
 
 # The name of the columns in the annotation CSV file
 GOID, LABEL = "goid", "label"
+
+# Default background color
+BG_COLOR = "#FFFFFF"
 
 # Selection color
 FG_COLOR = "#90EE90"
 
 # Leaf color
 LF_COLOR = "#ADD8E6"
-
-# Background color
-BG_COLOR = "#FFFFFF"
 
 # Default shape
 SHAPE = "box"
@@ -47,6 +52,12 @@ NAMESPACE_MAP = {
     "cellular_component": "CC",
 }
 
+# The index names
+IDX_OBO = "obo"
+IDX_gene2go = "gene2go"
+IDX_prot2go = "prot2go"
+IDX_go2gene = "go2gene"
+IDX_go2prot = "go2prot"
 
 # A callable to initialize the logger
 def init_logger(logger):
@@ -62,6 +73,8 @@ logger = logging.getLogger(__name__)
 # Set the default loglevel.
 logger.setLevel(INFO)
 
+logging.addLevelName(logging.WARNING, "WARN")
+
 # Initialize the logger
 init_logger(logger)
 
@@ -70,12 +83,12 @@ info = logger.info
 warn = logger.warning
 error = logger.error
 
-
+# Stops the process with an error.
 def stop(msg):
     logger.error(msg)
     sys.exit(1)
 
-
+# Attempts to get a stream from a filename or the stdin.
 def get_stream(fname):
     stream = None
 
@@ -83,10 +96,12 @@ def get_stream(fname):
         debug(f"Reading: {fname}")
         stream = open(fname, encoding="utf-8-sig")
     elif not sys.stdin.isatty():
+        debug(f"Reading stdin")
         stream = sys.stdin
     else:
         stop("No input found. A filename or stream is required.")
 
+    # Filter strip the lines, filter out empty and commented lines.
     stream = map(lambda x: x.strip(), stream)
     stream = filter(lambda x: x, stream)
     stream = filter(lambda x: not x.startswith("#"), stream)

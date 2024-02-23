@@ -4,7 +4,7 @@ import json
 import os
 import textwrap
 from itertools import tee
-
+import pydot
 import networkx as nx
 
 from genescape import utils
@@ -36,6 +36,10 @@ def build_graph(json_obo):
                 utils.warn(f"# Missing parent: {parent} for {node}")
 
     return graph
+
+# Apply the quoting.
+def fix(text):
+    return f'"{text}"'
 
 def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None, verbose=False):
 
@@ -82,6 +86,8 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None, verbose=Fals
     utils.info(f"valid ids: {len(nodes)}")
     utils.debug(f"valid: {nodes}")
 
+    selection = set(nodes)
+
     # Get all ancestors and mark the ones that are terms.
     for node in nodes:
         graph.nodes[node]["fillcolor"] = utils.FG_COLOR
@@ -94,27 +100,25 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None, verbose=Fals
     tree = graph.subgraph(total)
 
     # Generate the expected and observed counts.
-    exp_counts = {node: count_descendants(graph, node) for node in graph.nodes()}
-
+    #exp_counts = {node: count_descendants(graph, node) for node in graph.nodes()}
     #obs_counts = {node: count_descendants(tree, node) for node in tree.nodes()}
 
     # Add the observed and expected counts to the labels.
     for node in tree.nodes():
-        exp_value = exp_counts[node]
-        value = f"{exp_value:,d}"
 
-        if ann:
-            # Annotations may be generated or pulled in from the file
-            annv = ann.get(node, "")
-            value = f"{value} ({annv})" if annv else value
+        # Get the annotations for the node.
+        annot = str(ann.get(node, ""))
 
-        # Fill in only if there is a value.
-        if value:
-            label = graph.nodes[node]["label"]
-            graph.nodes[node]["label"] = f"{label}\n{value}"
+        # Fill with additional information for the label
+        label = graph.nodes[node]["label"]
+        label = f"{label}\n{annot}" if annot else label
+        graph.nodes[node]["label"] = fix(label)
 
-        if graph.degree(node) == 1:
-            graph.nodes[node]["fillcolor"] = utils.LF_COLOR
+        # Insert additional information on each node
+        graph.nodes[node]["degree"] = graph.degree(node)
+        graph.nodes[node]["count_desc"] = count_descendants(graph, node)
+
+        #graph.nodes[node]["fillcolor"] = utils.LF_COLOR
 
     # Print information on the subgraph.
     utils.info(f"subgraph: {len(tree.nodes())} nodes and {len(tree.edges())} edges")
@@ -126,21 +130,42 @@ def run(fname, json_obo=utils.OBO_JSON, out="output.pdf", ann=None, verbose=Fals
         nx.nx_agraph.write_dot(tree, path=f"{out}")
         return
 
-    # Exit here on windows but continue on Linux
-    if os.name == "nt":
-        utils.stop("skipping plotting on Windows")
 
-    # Convert to AGraph
-    tree = nx.nx_agraph.to_agraph(tree)
 
-    # Set the plot orientation
-    # tree.graph_attr['rankdir'] = 'LR'
+    # Create the pydot graph.
+    pgraph = pydot.Dot("genescape", graph_type="digraph")
+    for node in tree.nodes():
 
-    # Layout the graph
-    tree.layout("dot")
+        # Fetch the label for the node.
+        label = tree.nodes[node]["label"]
 
-    # Render and save the graph
-    tree.draw(out)
+        # Fill the nodes with the appropriate color
+        if count_descendants(graph, node) == 1:
+            fillcolor = utils.LF_COLOR
+        elif  node in selection:
+            fillcolor = utils.FG_COLOR
+        else:
+            fillcolor = utils.BG_COLOR
+
+        # Need to quote the node name
+        nodex = fix(node)
+
+        # Add the node to the graph
+        pnode = pydot.Node(nodex, label=label, fillcolor=fillcolor, shape=utils.SHAPE, style="filled")
+        pgraph.add_node(pnode)
+
+    # Add the edges to the graph
+    for edge in tree.edges():
+        edge1 = fix(edge[0])
+        edge2 = fix(edge[1])
+        pedge = pydot.Edge(edge1, edge2)
+        pgraph.add_edge(pedge)
+
+    fname_dot = f"{out.split('.')[0]}.dot"
+    pgraph.write_raw(fname_dot)
+    pgraph.write_pdf(out, prog="dot")
+
+# dot -Tpdf output_raw.dot -o output.pdf
 
 if __name__ == "__main__":
     out = os.path.join("output.pdf")

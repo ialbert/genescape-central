@@ -26,6 +26,9 @@ lint:
 fix:
 	hatch run lint:fmt
 
+push:
+	git commit -am 'saving work' && git push
+
 demo:
 	#genescape tree --demo | genescape tree -o src/genescape/docs/images/demo.png	
 	genescape annotate --demo | genescape tree -o docs/images/genelist.png
