@@ -4,13 +4,10 @@ Annotates a list of genes with functions based on the GO graph
 import csv
 import gzip
 import sys,json,re
-from collections import Counter, OrderedDict
+from collections import Counter
 from itertools import *
-from pprint import pprint
 
 from genescape import utils
-from genescape.utils import GOID, LABEL
-
 
 def run(fname=utils.GENE_LIST, index=utils.INDEX, top=10, verbose=False, match='', minc=1, output=sys.stdout):
 
@@ -21,7 +18,7 @@ def run(fname=utils.GENE_LIST, index=utils.INDEX, top=10, verbose=False, match='
     data = json.load(idx_stream)
 
     # Read the genelist
-    names = utils.get_stream(fname)
+    names = utils.get_lines(fname)
     names = map(lambda x: x.upper(), names)
     names = list(names)
 
@@ -69,7 +66,7 @@ def run(fname=utils.GENE_LIST, index=utils.INDEX, top=10, verbose=False, match='
     counts = map(lambda x: (x[0], x[1], go2func(x[0])), counts)
 
     # Apply the regex filter
-    counts = filter(lambda x: re.search(match, x[2]), counts) if match else counts
+    counts = filter(lambda x: re.search(match, x[2], re.IGNORECASE), counts) if match else counts
 
     # Apply the minimum count filter
     counts = filter(lambda x: x[1] >= minc, counts)
@@ -97,18 +94,16 @@ def run(fname=utils.GENE_LIST, index=utils.INDEX, top=10, verbose=False, match='
 
     # The CSV file has fewer fields
     if output is not None:
-        csv_field = data_fields
-        write = csv.DictWriter(output, fieldnames=csv_field)
+        csv_field = data_fields[:-1]
+        write = csv.DictWriter(output, fieldnames=csv_field, extrasaction='ignore')
         write.writeheader()
         write.writerows(res)
 
     # Final notification if needed.
     if len(counts) != n_found:
-        utils.info(f"{len(counts)} out of {n_found} shown")
+        utils.info(f"showing top {len(counts)} out of {n_found}")
 
-    print (res)
-
-    return res, miss
+    return res, names, miss
 
 
 if __name__ == "__main__":

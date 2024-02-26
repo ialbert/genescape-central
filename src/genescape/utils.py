@@ -1,5 +1,5 @@
 import logging
-import os
+import os, gzip, json
 import sys
 from logging import DEBUG, ERROR, INFO, WARNING
 
@@ -16,13 +16,13 @@ OBO_FILE = os.path.join(CURR_DIR, "data", "go-basic.obo")
 DEMO_CSV = os.path.join(CURR_DIR, "data", "gprofiler.csv")
 
 # The GO ids to draw.
-DEMO_DATA = os.path.join(CURR_DIR, "data", "goids.txt")
-
-# The GAF demo data.
-GAF_FILE = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
+GO_LIST = os.path.join(CURR_DIR, "data", "goids.txt")
 
 # The default gene list.
 GENE_LIST = os.path.join(CURR_DIR, "data", "genelist.txt")
+
+# The GAF demo data.
+GAF_FILE = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
 
 # The name of the columns in the annotation CSV file
 GOID, LABEL = "goid", "label"
@@ -66,6 +66,22 @@ def init_logger(logger):
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
+def get_json(fname=INDEX):
+
+    # Check if the file exists.
+    if not os.path.isfile(fname):
+        stop(f"file not found: {fname}")
+
+    # Open JSON data
+    if fname.endswith(".gz"):
+        stream = gzip.open(fname, mode="rt", encoding="UTF-8")
+    else:
+        stream = open(fname, encoding="utf-8-sig")
+
+    # Load the  index.
+    data = json.load(stream)
+
+    return data
 
 # Get the logger.
 logger = logging.getLogger(__name__)
@@ -88,11 +104,14 @@ def stop(msg):
     logger.error(msg)
     sys.exit(1)
 
-# Attempts to get a stream from a filename or the stdin.
-def get_stream(fname):
+# Attempts to get a stream of lines from a filename or the stdin.
+def get_lines(fname):
     stream = None
 
-    if fname:
+    if fname and fname.endswith(".gz"):
+        debug(f"Reading gzip: {fname}")
+        stream = gzip.open(fname, mode="rt", encoding="UTF-8")
+    elif fname:
         debug(f"Reading: {fname}")
         stream = open(fname, encoding="utf-8-sig")
     elif not sys.stdin.isatty():
@@ -101,7 +120,7 @@ def get_stream(fname):
     else:
         stop("No input found. A filename or stream is required.")
 
-    # Filter strip the lines, filter out empty and commented lines.
+    # Strip the lines, filter out empty and commented lines.
     stream = map(lambda x: x.strip(), stream)
     stream = filter(lambda x: x, stream)
     stream = filter(lambda x: not x.startswith("#"), stream)

@@ -6,7 +6,7 @@ from genescape import utils
 
 
 def run(fname=None, mcol="term_id", pcol=None, pval=None, match=None, delim=","):
-    stream = utils.get_stream(fname)
+    stream = utils.get_lines(fname)
     header = next(stream)
 
     # Regex matches on the entire line.

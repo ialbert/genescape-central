@@ -2,16 +2,16 @@
 # Demo file listing GO terms
 #
 goid,label
-GO:0005488,A
-GO:0005515,B
-GO:0048029,C
-GO:0005537,D
-GO:0003824,E
-GO:0030246,F
-GO:0036094,G
-GO:0016787,H
-GO:0043167,I
-GO:0016788,J
-GO:0140375,K
-GO:0046872,Z
+GO:0005488, -- one --
+GO:0005515, -- two ---
+GO:0048029, -- three ---
+GO:0005537, -- four --
+GO:0003824, -- five --
+GO:0030246, -- six --
+GO:0036094, -- seven --
+GO:0016787, -- eight --
+GO:0043167, -- nine --
+GO:0016788, -- ten --
+GO:0140375, -- eleven --
+GO:0046872, -- twelve --
 
