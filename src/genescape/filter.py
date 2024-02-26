@@ -38,4 +38,4 @@ def run(fname=None, mcol="term_id", pcol=None, pval=None, match=None, delim=",")
 
 
 if __name__ == "__main__":
-    run(fname=utils.DEMO_DATA)
+    run(fname=utils.DEMO_CSV)

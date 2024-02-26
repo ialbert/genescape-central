@@ -71,34 +71,35 @@ def annotate(fname, index, verbose=False, demo=False, top=10, match="", minc=1):
 
 
 @cli.command()
-@click.option("-i", default="go-basic.obo", help="Input OBO file")
-@click.option("-o", default="genescape.json.gz", help="Output JSON file (gzipped)")
+@click.option("--obo", "obo", default="go-basic.obo", help="Input OBO file (go-basic.obo)")
+@click.option("--gaf", "gaf", default="goa_human.gaf.gz", help="Input GAF file (goa_human.gaf.gz)")
+@click.option("--ind", "index", default="genescape.json.gz", help="Output index file (genescape.json.gz)")
 @click.help_option("-h", "--help")
-def build(inp, out):
+def build(obo, gaf, index):
     """
     Builds a JSON index file from an OBO file.
     """
     # click.echo(f"Running with parameter {inp} {out}")
-    from genescape.gs_build import make_json
+    from genescape.build import make_index
 
-    make_json(obo=inp, index=out)
+    make_index(obo=obo, gaf=gaf, index=index)
 
 
 @cli.command()
 @click.argument("fname", default=None, required=False)
-@click.option("-c", "mcol", metavar="TEXT", default="term_id", help="column name to extract")
-@click.option("-p", "pcol", metavar="TEXT", help="p-value column name")
-@click.option("-v", "pval", default=0.05, type=float, metavar="TEXT", help="p-value treshold (0.05)")
+@click.option("-c", "mcol", metavar="TEXT", default="term_id", help="column name to extract", show_default=True)
+@click.option("-p", "pcol", metavar="TEXT", default='adjusted_p_value', help="p-value column name", show_default=True)
+@click.option("-v", "pval", default=0.05, type=float, metavar="TEXT", help="p-value treshold", show_default=True)
 @click.option("-m", "match", metavar="TEXT", help="regex match on line")
 @click.option("-t", "tab", is_flag=True, help="tab delimited file")
 @click.option("-d", "demo", is_flag=True, help="run with demo data")
 @click.help_option("-h", "--help")
-def filter(fname="", mcol="source", pcol="", pval="", match="", tab=False, demo=False):
+def filter(fname, mcol, pcol, pval="", match="", tab=False, demo=False):
     """
     Filters a CSV/TSV file by columns.
     """
 
-    from genescape import gs_filter
+    from genescape import filter as gs_filter
 
     # Override the fname if demo is set.
     if demo:

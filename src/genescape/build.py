@@ -1,7 +1,7 @@
 #
 # Parse an OBO and produces a GZIPed JSON file
 #
-import gzip
+import gzip, os
 import json
 import csv
 from itertools import *
@@ -49,8 +49,16 @@ def parse_gaf(fname):
     return stream
 
 
-def make_json(obo, gaf, index):
+def make_index(obo, gaf, index):
+
+    if not os.path.isfile(obo):
+        utils.stop(f"OBO file not found: {obo}")
+
+    if not os.path.isfile(gaf):
+        utils.stop(f"GAF file not found: {gaf}")
+
     utils.info(f"parsing: {gaf}")
+
     stream = parse_gaf(gaf)
 
     #stream = islice(stream, 10)
@@ -71,7 +79,6 @@ def make_json(obo, gaf, index):
     for term in terms:
         obo[term["id"]] = term
 
-
     # The complete data
     data = {
         utils.IDX_OBO: obo,
@@ -90,4 +97,4 @@ def make_json(obo, gaf, index):
 
 
 if __name__ == "__main__":
-    make_json(obo=utils.OBO_FILE, gaf=utils.GAF_FILE, index=utils.INDEX)
+    make_index(obo=utils.OBO_FILE, gaf=utils.GAF_FILE, index=utils.INDEX)

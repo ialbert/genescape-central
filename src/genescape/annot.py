@@ -87,7 +87,7 @@ def run(fname=utils.GENE_LIST, index=utils.INDEX, top=10, verbose=False, match='
     res = []
     data_fields = [utils.GOID, "count", "size", utils.LABEL, "function", "genes"]
     for goid, cnt, func in counts:
-        label = f"{cnt}"
+        label = f"({cnt}/{n_size})"
         funcs = func2name.get(goid, [])
         name = dict(zip(data_fields, [goid, cnt, n_size, label, func, funcs]))
         res.append(name)
