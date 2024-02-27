@@ -1,7 +1,8 @@
 import PySimpleGUI as sg
 import os, sys
 import webbrowser
-from genescape import server, bottle
+
+from genescape import server
 
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
 IMG_PATH = os.path.join(CURR_DIR, "data", "demo.png")
@@ -11,25 +12,19 @@ if not os.path.isfile(IMG_PATH):
 
 IMG_KEY = '-IMAGE-'
 
-from bottle import route, run, template
+# A global variable to control the server's loop
+RUNNING = False
 
+def run():
+    global RUNNING
 
-
-def main():
     import PySimpleGUI as sg
     import threading
-    import bottle
-    from bottle import route, run, request
-
-    # Define a global variable to control the server's loop
-    server_should_run = False
 
     # Function to start the server
     def start():
-        global server_should_run
-        server_should_run = True
         threading.Thread(target=server.run, daemon=True).start()
-        threading.Timer(1, lambda: webbrowser.open("http://localhost:8080")).start()
+        #threading.Timer(1, lambda: webbrowser.open("http://localhost:8080")).start()
 
     # Define the layout of the GUI
     font = ('Verdana', 20)
@@ -89,4 +84,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    run()

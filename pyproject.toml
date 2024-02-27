@@ -27,7 +27,6 @@ dependencies = [
   "click",
   "networkx",
   "pysimplegui<5.0",
-  "bottle",
   "pydot",
 ]
 
