@@ -1,5 +1,5 @@
 import sys, os
-from genescape.bottle import route, run, template
+from genescape.bottle import route, template
 
 from genescape.bottle import Bottle, static_file, template
 
@@ -15,24 +15,28 @@ HOME_DIR = os.path.expanduser("~")
 # Default genescape directory
 GENESCAPE_DIR = os.path.join(HOME_DIR, "genescape")
 
-app = Bottle()
 
-@app.route('/static/<filename:path>')
-def send_static(filename):
-    return static_file(filename, root='./static')
+def run(reloader=False):
 
-@app.route('/')
-def home():
-    return 'Welcome to the home page! Access static files at /static/<filename>'
+    print ("Making the server")
 
+    app = Bottle()
 
-def serve():
+    @app.route('/static/<filename:path>')
+    def send_static(filename):
+        return static_file(filename, root='./static')
+
+    @app.route('/')
+    def home():
+        return 'Welcome to the home page! Access static files at /static/<filename>'
+
     # You need to restart the server on each request to check the global variable
     # This is a workaround and might not be the most efficient way to handle this.
     try:
-        run(host='localhost', port=8080, reloader=True)
+        print ("Server running on http://localhost:8080")
+        app.run(host='localhost', port=8080, reloader=reloader)
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)
 
 if __name__ == "__main__":
-    serve()
+    run(reloader=True)
