@@ -167,18 +167,36 @@ def pydot_graph(annot, tree: DiGraph) -> pydot.Dot :
 
     return pg
 
-def write(pg, out):
+WIDTH = 16.9
+HEIGHT = 6.0
+
+def dpi(size):
+    value = size/WIDTH
+    return value
+
+def write(pg, out, imgsize=2048):
     """
     Save the tree to a file.
     """
+
+    pg.set_graph_defaults(size=f"{WIDTH},{HEIGHT}", dpi=dpi(imgsize))
+
+    pg.write_raw(f"{out}.dot")
+
+
     # Write the graph to a file.
     utils.info(f"output: {out}")
-    pg.write_pdf(out, prog="dot")
+    if out.endswith(".pdf"):
+        pg.write_pdf(out, prog="dot")
+    elif out.endswith(".png"):
+        pg.write_png(out, prog="dot")
+    elif out.endswith(".dot"):
+        pg.write_raw(out)
+    else:
+        utils.stop(f"Unknown output format: {out}")
 
-    # Write the dot file.
-    raw_dot = f"{out.split('.')[0]}.dot"
-    utils.info(f"output: {raw_dot}")
-    pg.write_raw(raw_dot)
+
+
 
 def run(fname, index=utils.INDEX, out="output.pdf", ann=None, verbose=False):
 

@@ -110,6 +110,15 @@ def filter(fname, mcol, pcol, pval="", match="", tab=False, demo=False):
     delim = "\t" if tab else ","
     gs_filter.run(fname=fname, mcol=mcol, pcol=pcol, pval=pval, match=match, delim=delim)
 
+@cli.command()
+@click.help_option("-h", "--help")
+def gui():
+    """
+    Run the GUI.
+    """
+    from genescape import gui
+    gui.run()
+
 
 if __name__ == "__main__":
     tree()

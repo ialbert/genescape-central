@@ -26,7 +26,8 @@ classifiers = [
 dependencies = [
   "click",
   "networkx",
-  "pygraphviz",
+  "pysimplegui<5.0",
+  "bottle",
   "pydot",
 ]
 
