@@ -3,49 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-
+    <link rel="stylesheet" href="/static/mini-default.css">
+    <script src="/static/htmx.min.js.gz"></script>
 </head>
 
-<body class="container">
-
-
-<div class="title">Genescape</div>
-
-
-<div class="field ">
-    <label class="label is-small">Label</label>
-    <div class="control">
-        <input class="input is-small" type="text" placeholder="Text input">
-        <button class="button is-primary is-small">Submit</button>
-    </div>
-    <p class="help">This is a help text</p>
-</div>
-
-
-<form>
-    <input class="input is-small" type="text" placeholder="genelist">
-
-</form>
-</div>
-
-<div class="result">
-    <img src="/img/result.png">
-</div>
-
-<h1 class="text-3xl font-bold underline">
-    Hello world!
-</h1>
+<body>
 
 <p>
-    <a href="/img/result.png">/img/result.png</a>
+<h2>
+    Genescape
+</h2>
 </p>
 
-</div>
-</section>
+
+<p>
+
+
+
+    <button hx-get="/image/" hx-target="#target" hx-swap="outerHTML" hx-indicator="#loading">
+        Swap
+    </button>
+
+    <!-- Loading  indicator -->
+    <span id="loading" class="htmx-indicator" class="spinner"><mark>Loading...</mark></span>
+
+    <!-- Error indicator -->
+    <span id="error" style="display:inline-block; margin-left: 20px;"></span>
+
+</p>
+
+<p>
+
+
+
+    <img id="target" src="static/img/800x600.png"></p>
+</p>
+
+<!-- <img id="demo" src="/static/img/demo.png"></p> -->
 
 </body>
+
+<script src="/static/genescape.js"></script>
+
 </html>
-
-
 

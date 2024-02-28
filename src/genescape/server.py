@@ -7,11 +7,16 @@ from genescape import bottle
 # The current directory.
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
 
-DEMO_PATH = os.path.join(CURR_DIR, "data")
-DEMO_IMG = os.path.join(CURR_DIR, "data", "demo.png")
 
+# Web related content.
 WEB_DIR = os.path.join(CURR_DIR, "web")
+
+# Static content directory.
 STATIC_DIR = os.path.join(WEB_DIR, "static")
+
+# The name of the demo image.
+DEMO_IMG = os.path.join(STATIC_DIR, "img", "demo.png")
+DEMO_PATH = os.path.dirname(DEMO_IMG)
 
 # The directory containing the templates.
 TEMPLATE_DIR = WEB_DIR
@@ -25,18 +30,27 @@ HOME_DIR = os.path.expanduser("~")
 # Default genescape directory
 GENESCAPE_DIR = os.path.join(HOME_DIR, "genescape")
 
+import time
 
-
-def run(reloader=False):
-
-    print ("Making the server")
+def run(reloader=False, debug=False):
 
     app = Bottle()
 
-    @app.route('/img/result.png')
-    def img():
-        print ("serve image", DEMO_IMG)
-        return static_file("demo.png", root=DEMO_PATH)
+    @app.route('/image/')
+    @view('htmx/image.html')
+    def image():
+        print ("generating image")
+        param = dict()
+        time.sleep(1)
+        return param
+
+    @app.route('/test/')
+    @view('htmx/test.html')
+    def test():
+        print ("test content")
+        param = dict(msg="Hello World")
+        time.sleep(1)
+        return param
 
     @app.route('/static/<name:path>')
     def send_static(name):
@@ -49,9 +63,10 @@ def run(reloader=False):
         param = dict(title="GeneScape")
         return param
 
-    # You need to restart the server on each request to check the global variable
-    # This is a workaround and might not be the most efficient way to handle this.
-    bottle.debug(True)
+    # Setting the debug mode.
+    if debug:
+        bottle.debug(True)
+
     try:
         print ("Server running on http://localhost:8080")
         app.run(host='localhost', port=8000, reloader=reloader)
@@ -59,4 +74,4 @@ def run(reloader=False):
         print(f"Server Error: {e}", sys.stderr)
 
 if __name__ == "__main__":
-    run(reloader=True)
+    run(reloader=True, debug=True)
