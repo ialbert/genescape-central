@@ -24,7 +24,7 @@ def run():
     # Function to start the server
     def start():
         threading.Thread(target=server.run, daemon=True).start()
-        threading.Timer(1, lambda: webbrowser.open("http://localhost:8080")).start()
+        threading.Timer(1, lambda: webbrowser.open("http://localhost:8000")).start()
 
     # Define the layout of the GUI
     font = ('Verdana', 20)
