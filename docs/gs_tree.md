@@ -32,8 +32,7 @@ The image displays the GO subtree that contains all the input GO terms. Here's w
 
 When labels are not explicitly provided, an automatic node labeling will take place using two numbers separated by a slash.
 
-1. The first number indicates the count of nodes in the subtree starting from that node.
-2. The second number is the total number of nodes in the complete annotation tree. 
+1. The number is the total number of nodes in the complete annotation tree. 
 
 For example, a node labeled `16/11235` indicates there are `16` nodes in the subtree beginning at that node. In the larger tree before filtering to your specific GO terms, this node's subtree had `11,235` nodes. 
 

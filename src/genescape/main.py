@@ -17,7 +17,7 @@ def cli():
 @click.argument("fname", default=None, required=False)
 @click.option("-o", "out", metavar="TEXT", default="output.pdf", help="output file")
 @click.option("-i", "obo", metavar="TEXT", default=utils.OBO_JSON, help="OBO index file")
-@click.option("-d", "demo", is_flag=True, help="run with demo data")
+@click.option("--demo", "demo", is_flag=True, help="run with demo data")
 @click.option( "-v", "verbose", is_flag=True, help="verbose output")
 @click.help_option("-h", "--help")
 def tree(fname, obo, out, verbose, demo=False):
@@ -47,7 +47,7 @@ def tree(fname, obo, out, verbose, demo=False):
 @click.option("-n", "top", metavar="TEXT", default=10, help="Limit to top N terms (default=10).")
 @click.option("-g", "gaf", metavar="TEXT", default=utils.GAF_REF_DATA, help="GAF file.")
 @click.option("-i", "obo", metavar="TEXT", default=utils.OBO_JSON, help="OBO index file.")
-@click.option("-d", "demo", is_flag=True, help="Run with demo data")
+@click.option("--demo", "demo", is_flag=True, help="Run with demo data")
 @click.option("-m", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "minc", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
 @click.option( "-v", "verbose", is_flag=True, help="Verbose output.")
@@ -84,7 +84,7 @@ def build(inp, out):
 @click.option("-v", "pval", default=0.05, type=float, metavar="TEXT", help="p-value treshold (0.05)")
 @click.option("-m", "match", metavar="TEXT", help="regex match on line")
 @click.option("-t", "tab", is_flag=True, help="tab delimited file")
-@click.option("-d", "demo", is_flag=True, help="run with demo data")
+@click.option("--demo", "demo", is_flag=True, help="run with demo data")
 @click.help_option("-h", "--help")
 def filter(fname="", mcol="source", pcol="", pval="", match="", tab=False, demo=False):
     """
