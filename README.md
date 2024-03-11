@@ -1,6 +1,6 @@
 # Genescape
 
-Note: the suite is under development and not yet mature. The docs below may not always be accurate.
+Note: **the suite is under development and not yet mature. The docs below may not always be accurate.**
 
 The `genescape` suite is a collection of tools used to visualize the results of functional genome analysis. Various new tools may be implemented in the future.
 
