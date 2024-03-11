@@ -3,6 +3,7 @@ import sys, os
 from genescape.bottle import Bottle, static_file, template, view
 from genescape.bottle import TEMPLATE_PATH
 from genescape import bottle
+from genescape.bottle import get, post, request, response, redirect
 
 # The current directory.
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -32,25 +33,52 @@ GENESCAPE_DIR = os.path.join(HOME_DIR, "genescape")
 
 import time
 
-def run(reloader=False, debug=False):
+app = Bottle()
 
-    app = Bottle()
+def runner(reloader=False, debug=False):
 
-    @app.route('/image/')
+    @app.route(path='/image/', method='POST')
     @view('htmx/image.html')
     def image():
         print ("generating image")
+        text = request.forms.get('input')
+        print (request.forms.keys())
+        print (f"input: {text}")
+        for key, value in request.forms.items():
+            print (f"{key}: {value}")
+
         param = dict()
         time.sleep(1)
         return param
 
-    @app.route('/test/')
+    @app.route(path='/test/', method='GET')
     @view('htmx/test.html')
     def test():
-        print ("test content")
+        print ("Incoming request ...")
+        print(request.forms.keys())
         param = dict(msg="Hello World")
-        time.sleep(1)
         return param
+
+    @app.route('/show/', method='POST')
+    def show():
+
+        textarea_content = request.forms.get('myTextarea')
+
+        # Process the content as needed
+        print(textarea_content)
+
+        print ("Query check...")
+        for key in request.query.keys():
+            print(f"{key}: {request.query.getall(key)}")
+
+        print ("Form check...")
+        for key in request.forms.keys():
+            print(f"{key}: {request.forms.getall(key)}")
+
+
+
+        msg = "OK"
+        return msg
 
     @app.route('/static/<name:path>')
     def send_static(name):
@@ -74,4 +102,4 @@ def run(reloader=False, debug=False):
         print(f"Server Error: {e}", sys.stderr)
 
 if __name__ == "__main__":
-    run(reloader=True, debug=True)
+    runner(reloader=True, debug=True)
