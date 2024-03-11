@@ -3,46 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- https://minicss.us/docs.htm#getting-started -->
     <link rel="stylesheet" href="/static/mini-default.css">
+
+    <!-- https://htmx.org/ -->
     <script src="/static/htmx.min.js.gz"></script>
+
+    <!-- Override styles locally -->
+    <link rel="stylesheet" href="/static/genescape.css">
+
 </head>
 
 <body>
 
-<p>
-<h2>
-    Genescape
-</h2>
-</p>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12">
 
 
-<p>
+            <!-- Error indicator -->
+            <span id="error" style="display:inline-block; margin-left: 20px;"></span>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-sm-12">
+            <span class="title">GeneScape</span>
 
+            <button>
+                Load File
+            </button>
 
-    <button hx-get="/image/" hx-target="#target" hx-swap="outerHTML" hx-indicator="#loading">
-        Swap
-    </button>
+            <button hx-get="/image/"
+                    hx-trigger="click"
+                    hx-target="#target"
+                    hx-swap="outerHTML"
+                    hx-indicator="#loading">
+                Draw Tree
+            </button>
 
-    <!-- Loading  indicator -->
-    <span id="loading" class="htmx-indicator" class="spinner"><mark>Loading...</mark></span>
+        </div>
+    </div>
 
-    <!-- Error indicator -->
-    <span id="error" style="display:inline-block; margin-left: 20px;"></span>
+    <div class="row">
+        <div class="col-sm-12">
+            <hr>
+        </div>
+    </div>
 
-</p>
+    <div class="row header">
+        <div class="col-sm-3">
+            Genes or GO Terms
+        </div>
+        <div class="col-sm-9">
+            Tree
+        </div>
+    </div>
 
-<p>
+    <div class="row">
+        <div class="col-sm-3">
+            <div id="loadingfile" class="htmx-indicator" class="spinner">
+                <mark>Loading...</mark>
+            </div>
+            <textarea class="doc" id="terms" style="width:100%;" rows="20" placeholder="Content" spellcheck="false">
+Cyp1a1
+Sphk2
+Sptlc2
+Smpd3
+            </textarea>
+        </div>
+        <div class="col-sm-9">
+            <!-- Loading  indicator -->
+            <div id="loading" class="htmx-indicator" class="spinner">
+                <mark>Generating the image...</mark>
+            </div>
 
+            <div id="target">
+                <img src="static/img/800x600.png">
+            </div>
 
-
-    <img id="target" src="static/img/800x600.png"></p>
-</p>
-
-<!-- <img id="demo" src="/static/img/demo.png"></p> -->
+        </div>
+    </div>
+</div>
 
 </body>
 
+<!-- Load local javascript tasks -->
 <script src="/static/genescape.js"></script>
 
 </html>
