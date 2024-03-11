@@ -30,11 +30,9 @@ The image displays the GO subtree that contains all the input GO terms. Here's w
 
 ### Default labels
 
-When labels are not explicitly provided, an automatic node labeling will take place using two numbers separated by a slash.
+When labels are not explicitly provided, an automatic node labeling will take place where the number is the total number of nodes in the complete annotation tree. 
 
-1. The number is the total number of nodes in the complete annotation tree. 
-
-For example, a node labeled `16/11235` indicates there are `16` nodes in the subtree beginning at that node. In the larger tree before filtering to your specific GO terms, this node's subtree had `11,235` nodes. 
+For example, a node labeled `51` indicates there are `51` nodes in the subtree beginning at that node even though it may only show you a few of its descendants. A blue node should have the number `1` indicating that it is a leaf node.
 
 The numbers and colors are meant to assist in understanding the level of detail and the specificity of the functional terms you visualize.
 

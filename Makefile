@@ -27,7 +27,7 @@ fix:
 	hatch run lint:fmt
 
 demo:
-	genescape annotate --demo | genescape tree -o docs/images/demo.png	
+	genescape tree --demo -o docs/images/demo.png	
 	genescape annotate names.txt -n 0  -m regulation | genescape tree -o docs/images/genelist.png
 
 build:

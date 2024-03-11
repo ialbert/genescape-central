@@ -1,5 +1,5 @@
 #
-# Demo file listing GO terms
+# Demo file with GO terms
 #
 GO:0005488
 GO:0005515
@@ -13,4 +13,3 @@ GO:0043167
 GO:0016788
 GO:0140375
 GO:0046872
-
