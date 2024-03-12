@@ -15,8 +15,9 @@ hr {
     background-image: none;
 }
 
-textarea{
+#input{
     margin:0px;
+    height:30ex;
 }
 
 .header {
@@ -27,4 +28,16 @@ textarea{
 
 #terms {
     height: 600px;
+}
+
+#error-div {
+    color: white;
+    background-color: red;
+    font-weight: bold;
+    padding: 2px;
+    margin-top: 3px;
+}
+
+.hide {
+    display: none;
 }

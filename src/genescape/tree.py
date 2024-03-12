@@ -1,9 +1,6 @@
-import csv
-import gzip
-import json
 import os
 import textwrap
-from itertools import tee
+
 import pydot
 import networkx as nx
 from networkx import DiGraph
@@ -90,32 +87,6 @@ def make(annot: dict[str, dict[str]], graph: DiGraph()) -> DiGraph():
     return tree
 
 
-def parse_terms(fname: str) -> dict[str, dict[str]]:
-    """
-    Reads a file and returns a dictionary of GO terms and their annotations.
-    """
-
-    # Get the stream from the file
-    stream1, stream2 = tee(utils.get_lines(fname), 2)
-
-    # Open stream as CSV file, tee off in case it is stdin.
-    stream1 = csv.reader(stream1)
-
-    # Detect whether the file is header delimiter CSV or not
-    headers = next(stream1)
-
-    if GOID in headers and LABEL in headers:
-        # Has headers, read the specified columns
-        utils.debug("reading CSV annotations")
-        stream2 = csv.DictReader(stream2)
-        terms = dict(map(lambda r: (r[GOID], r), stream2))
-    else:
-        # No headers, read the first column.
-        utils.debug("reading first column of file")
-        stream2 = csv.reader(stream2)
-        terms = dict(map(lambda r: (r[0], dict(elems=r)), stream2))
-
-    return terms
 
 # Count all nodes reachable from start, also counting start.
 def count_descendants(graph, start):
@@ -198,10 +169,9 @@ def write(pg, out, imgsize=2048):
 
 
 
-def run(fname, index=utils.INDEX, out="output.pdf", ann=None, verbose=False):
+def run(annot, index=utils.INDEX, out="output.pdf", ann=None, verbose=False):
 
-    # Read the terms.
-    annot = parse_terms(fname)
+
 
     # Build graph from JSON file
     graph = build_graph(index)

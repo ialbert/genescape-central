@@ -17,7 +17,7 @@ def cli():
 @click.argument("fname", default=None, required=False)
 @click.option("-o", "out", metavar="TEXT", default="genescape.pdf", help="output graph file")
 @click.option("-i", "index", metavar="FILE", default=utils.INDEX, help="OBO index file", )
-@click.option("-d", "demo", is_flag=True, help="run with demo data")
+@click.option("--demo", "demo", is_flag=True, help="run with demo data")
 @click.option( "-v", "verbose", is_flag=True, help="verbose output")
 @click.help_option("-h", "--help")
 def tree(fname, index, out, verbose, demo=False):
@@ -41,8 +41,12 @@ def tree(fname, index, out, verbose, demo=False):
         fname = utils.GO_LIST
         utils.info(f"input {fname}")
 
+    # Parse the input into a list
+    annot = utils.parse_terms(fname)
+
     # Run the tree command.
-    tree.run(index=utils.INDEX, fname=fname, out=out)
+    tree.run(annot=annot, index=utils.INDEX, out=out)
+
 
 @cli.command()
 @click.argument("fname", default=None, required=False)
@@ -50,7 +54,7 @@ def tree(fname, index, out, verbose, demo=False):
 @click.option("-i", "index", metavar="TEXT", default=utils.INDEX, help="OBO index file.")
 @click.option("-m", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "minc", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
-@click.option("-d", "demo", is_flag=True, help="Run with demo data")
+@click.option("--demo", "demo", is_flag=True, help="Run with demo data")
 @click.option( "-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
 def annotate(fname, index, verbose=False, demo=False, top=10, match="", minc=1):
@@ -92,7 +96,7 @@ def build(obo, gaf, index):
 @click.option("-v", "pval", default=0.05, type=float, metavar="TEXT", help="p-value treshold", show_default=True)
 @click.option("-m", "match", metavar="TEXT", help="regex match on line")
 @click.option("-t", "tab", is_flag=True, help="tab delimited file")
-@click.option("-d", "demo", is_flag=True, help="run with demo data")
+@click.option("--demo", "demo", is_flag=True, help="run with demo data")
 @click.help_option("-h", "--help")
 def filter(fname, mcol, pcol, pval="", match="", tab=False, demo=False):
     """

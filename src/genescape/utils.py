@@ -1,7 +1,8 @@
 import logging
-import os, gzip, json
+import os, gzip, json, csv
 import sys
 from logging import DEBUG, ERROR, INFO, WARNING
+from itertools import tee
 
 # Current directory.
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -94,21 +95,58 @@ logging.addLevelName(logging.WARNING, "WARN")
 # Initialize the logger
 init_logger(logger)
 
-debug = logger.debug
-info = logger.info
-warn = logger.warning
-error = logger.error
+# A wrapper with additional callback
+def wrapper(logfunc, callback=None):
+    def func(msg):
+        logfunc(msg)
+        if callback:
+            callback(msg)
+    return func
+
+debug = wrapper(logger.debug)
+info = wrapper(logger.info)
+warn = wrapper(logger.warning)
+error = wrapper(logger.error)
 
 # Stops the process with an error.
 def stop(msg):
     logger.error(msg)
     sys.exit(1)
 
+def parse_terms(fname: str) -> dict[str, dict[str]]:
+    """
+    Reads a file and returns a dictionary of GO terms and their annotations.
+    """
+
+    # Get the stream from the file
+    stream1, stream2 = tee(get_lines(fname), 2)
+
+    # Open stream as CSV file, tee off in case it is stdin.
+    stream1 = csv.reader(stream1)
+
+    # Detect whether the file is header delimiter CSV or not
+    headers = next(stream1)
+
+    if GOID in headers and LABEL in headers:
+        # Has headers, read the specified columns
+        debug("reading CSV annotations")
+        stream2 = csv.DictReader(stream2)
+        terms = dict(map(lambda r: (r[GOID], r), stream2))
+    else:
+        # No headers, read the first column.
+        debug("reading first column of file")
+        stream2 = csv.reader(stream2)
+        terms = dict(map(lambda r: (r[0], dict(elems=r)), stream2))
+
+    return terms
+
 # Attempts to get a stream of lines from a filename or the stdin.
-def get_lines(fname):
+def get_lines(fname=None):
     stream = None
 
-    if fname and fname.endswith(".gz"):
+    if type(fname) == list:
+        stream = iter(fname)
+    elif fname and fname.endswith(".gz"):
         debug(f"Reading gzip: {fname}")
         stream = gzip.open(fname, mode="rt", encoding="UTF-8")
     elif fname:

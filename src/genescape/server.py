@@ -1,5 +1,6 @@
 import sys, os
-
+import tempfile
+from genescape import tree
 from genescape.bottle import Bottle, static_file, template, view
 from genescape.bottle import TEMPLATE_PATH
 from genescape import bottle
@@ -18,6 +19,13 @@ STATIC_DIR = os.path.join(WEB_DIR, "static")
 # The name of the demo image.
 DEMO_IMG = os.path.join(STATIC_DIR, "img", "demo.png")
 DEMO_PATH = os.path.dirname(DEMO_IMG)
+
+# Temporary directory
+TMP_PATH = os.path.join(STATIC_DIR, "tmp")
+
+# Make the temporary directory if it does not exist.
+if not os.path.isdir(TMP_PATH):
+    os.makedirs(TMP_PATH)
 
 # The directory containing the templates.
 TEMPLATE_DIR = WEB_DIR
@@ -42,13 +50,20 @@ def runner(reloader=False, debug=False):
     def image():
         print ("generating image")
         text = request.forms.get('input')
-        print (request.forms.keys())
         print (f"input: {text}")
-        for key, value in request.forms.items():
-            print (f"{key}: {value}")
+        terms = text.split()
+        print(terms)
+        annot = tree.utils.parse_terms(terms)
 
-        param = dict()
-        time.sleep(1)
+        tmp = tempfile.NamedTemporaryFile(dir=TMP_PATH, prefix="image-", suffix=".png", delete=False).name
+
+        print (tmp)
+
+        tree.run(annot=annot, index=tree.utils.INDEX, out=tmp)
+
+        src =  f"/static/tmp/{os.path.basename(tmp)}"
+        param = dict(src=src)
+
         return param
 
     @app.route(path='/test/', method='GET')
@@ -75,7 +90,7 @@ def runner(reloader=False, debug=False):
         for key in request.forms.keys():
             print(f"{key}: {request.forms.getall(key)}")
 
-
+        time.sleep(1)
 
         msg = "OK"
         return msg

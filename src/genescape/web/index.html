@@ -19,11 +19,10 @@
 
 <div class="container">
 
-    <div class="row">
+    <div class="row hide" id="error-bar">
         <div class="col-sm-12">
-
             <!-- Error indicator -->
-            <span id="error" style="display:inline-block; margin-left: 20px;"></span>
+            <span id="error-div" style="display:inline-block;"></span>
         </div>
     </div>
 
@@ -35,11 +34,12 @@
                 Load File
             </button>
 
-            <button hx-post="/show/"
+            <button hx-post="/image/"
                     hx-trigger="click"
                     hx-indicator="#loadingFile"
+                    hx-swap="none"
                     hx-include="#input">
-                Submit
+                    Submit
             </button>
 
 
@@ -47,7 +47,8 @@
                     hx-trigger="click"
                     hx-target="#output"
                     hx-swap="outerHTML"
-                    hx-indicator="#loadingImage">
+                    hx-indicator="#loadingImage"
+                    hx-include="#input">
                 Draw Tree
             </button>
 
@@ -75,12 +76,12 @@
                 <mark>Loading the file...</mark>
             </div>
 
-
             <textarea class="doc" name="input" id="input" style="width:100%;" placeholder="Content" spellcheck="false" value="hey">
-Cyp1a1
-Sphk2
-Sptlc2
-Smpd3
+GO:0005488
+GO:0005515
+GO:0048029
+GO:0005537
+GO:0003824
             </textarea>
 
         </div>
