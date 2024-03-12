@@ -6,10 +6,8 @@ import networkx as nx
 from networkx import DiGraph
 
 from genescape import utils
-from genescape.utils import GOID, LABEL
+from genescape.utils import GOID, LABEL, DEGREE, COUNT_DESC, INPUT
 
-# A few handy constants
-DEGREE, COUNT_DESC = "degree", "count_desc"
 
 # Parse GO Ontology file from fname into a networkx graph
 def build_graph(index):
@@ -76,10 +74,19 @@ def make(annot: dict[str, dict[str]], graph: DiGraph()) -> DiGraph():
     # Subset the graph to the ancestors only.
     tree = graph.subgraph(anc)
 
+    # Input nodes
+    inp_nodes = set(nodes)
+
     # Decorate the tree with additional information.
     for node in tree.nodes():
+        # Keeps track of the degree of the node.
         tree.nodes[node][DEGREE] = graph.degree(node)
+
+        # Keeps track of the number of descendants of the node.
         tree.nodes[node][COUNT_DESC] = count_descendants(graph, node)
+
+        # Keeps track of wether the node was in the input list.
+        tree.nodes[node][INPUT] = node in inp_nodes
 
     # Print information messages.
     utils.info(f"subtree {len(tree.nodes())} nodes and {len(tree.edges())} edges")
@@ -167,11 +174,7 @@ def write(pg, out, imgsize=2048):
         utils.stop(f"Unknown output format: {out}")
 
 
-
-
 def run(annot, index=utils.INDEX, out="output.pdf", ann=None, verbose=False):
-
-
 
     # Build graph from JSON file
     graph = build_graph(index)
@@ -185,9 +188,11 @@ def run(annot, index=utils.INDEX, out="output.pdf", ann=None, verbose=False):
     # Write the tree to a file.
     write(pg, out)
 
+    return tree
 
 # dot -Tpdf output_raw.dot -o output.pdf
 
 if __name__ == "__main__":
     out = os.path.join("genescape.pdf")
-    run(fname=utils.GO_LIST, index=utils.INDEX, out=out)
+    annot = utils.parse_terms(utils.GO_LIST)
+    run(annot=annot, index=utils.INDEX, out=out)

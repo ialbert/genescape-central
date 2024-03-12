@@ -28,6 +28,9 @@ GAF_FILE = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
 # The name of the columns in the annotation CSV file
 GOID, LABEL = "goid", "label"
 
+# A few handy constants
+DEGREE, COUNT_DESC, INPUT = "degree", "count_desc", "input"
+
 # Default background color
 BG_COLOR = "#FFFFFF"
 

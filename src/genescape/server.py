@@ -1,6 +1,6 @@
 import sys, os
 import tempfile
-from genescape import tree
+from genescape import tree, utils
 from genescape.bottle import Bottle, static_file, template, view
 from genescape.bottle import TEMPLATE_PATH
 from genescape import bottle
@@ -59,10 +59,24 @@ def runner(reloader=False, debug=False):
 
         print (tmp)
 
-        tree.run(annot=annot, index=tree.utils.INDEX, out=tmp)
+        graph = tree.run(annot=annot, index=tree.utils.INDEX, out=tmp)
+
+        def get_node(node):
+            return f"{node},{graph.nodes[node].get('name')}"
+        def keep_node(node):
+            return graph.nodes[node].get(utils.INPUT)
+
+        nodes = filter(keep_node, graph.nodes)
+        goterms = map(get_node, nodes)
+        goterms = list(goterms)
+        goterms = "\n".join(goterms)
+
 
         src =  f"/static/tmp/{os.path.basename(tmp)}"
-        param = dict(src=src)
+
+        go = goterms
+
+        param = dict(src=src, go=go)
 
         return param
 

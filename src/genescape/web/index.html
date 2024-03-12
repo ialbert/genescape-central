@@ -71,12 +71,12 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div id="loadingFile" class="htmx-indicator">
                 <mark>Loading the file...</mark>
             </div>
 
-            <textarea class="doc" name="input" id="input" style="width:100%;" placeholder="Content" spellcheck="false" value="hey">
+            <textarea class="doc" name="input" id="input" hx-swap-oob="true" style="width:100%;" placeholder="Content" spellcheck="false" value="hey">
 GO:0005488
 GO:0005515
 GO:0048029
@@ -85,7 +85,7 @@ GO:0003824
             </textarea>
 
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-8">
             <!-- Loading  indicator -->
             <div id="loadingImage" class="htmx-indicator">
                 <mark>Generating the image...</mark>
