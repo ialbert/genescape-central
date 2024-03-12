@@ -42,3 +42,10 @@ hr {
 .hide {
     display: none;
 }
+
+.mark {
+    background-color: seagreen;
+    color: white;
+    padding: 1px 5px 1px 5px;
+    border-radius: 2px;
+}

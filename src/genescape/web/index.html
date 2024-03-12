@@ -11,7 +11,7 @@
     <script src="/static/htmx.min.js.gz"></script>
 
     <!-- Override styles locally -->
-    <link rel="stylesheet" href="/static/genescape.css">
+    <link rel="stylesheet" href="/static/genescape.css?param={{rand}}">
 
 </head>
 
@@ -39,7 +39,7 @@
                     hx-indicator="#loadingFile"
                     hx-swap="none"
                     hx-include="#input">
-                    Submit
+                    Check Input
             </button>
 
 
@@ -73,7 +73,7 @@
     <div class="row">
         <div class="col-sm-4">
             <div id="loadingFile" class="htmx-indicator">
-                <mark>Loading the file...</mark>
+                <span class="mark">Verifying the input ...</span>
             </div>
 
             <textarea class="doc" name="input" id="input" hx-swap-oob="true" style="width:100%;" placeholder="Content" spellcheck="false" value="hey">
@@ -88,7 +88,7 @@ GO:0003824
         <div class="col-sm-8">
             <!-- Loading  indicator -->
             <div id="loadingImage" class="htmx-indicator">
-                <mark>Generating the image...</mark>
+                <span class="mark">Generating the image...</span>
             </div>
 
             <div id="output">
@@ -102,7 +102,7 @@ GO:0003824
 </body>
 
 <!-- Load local javascript tasks -->
-<script src="/static/genescape.js"></script>
+<script src="/static/genescape.js?param={{rand}}"></script>
 
 </html>
 

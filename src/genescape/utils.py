@@ -167,3 +167,25 @@ def get_lines(fname=None):
     stream = filter(lambda x: not x.startswith("#"), stream)
 
     return stream
+
+def get_goterms(graph):
+    """
+    Returns a list of GO terms from a graph.
+    """
+    def get_node(node):
+        """
+        Returns a node, name pair
+        """
+        return (node, graph.nodes[node].get('name',''))
+
+    def keep_node(node):
+        """
+        Keep nodes marked as input.
+        """
+        return graph.nodes[node].get(INPUT)
+
+    nodes = filter(keep_node, graph.nodes)
+    goterms = map(get_node, nodes)
+    goterms = dict(goterms)
+
+    return goterms

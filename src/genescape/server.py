@@ -1,4 +1,5 @@
 import sys, os
+from random import random
 import tempfile
 from genescape import tree, utils
 from genescape.bottle import Bottle, static_file, template, view
@@ -43,6 +44,7 @@ import time
 
 app = Bottle()
 
+
 def runner(reloader=False, debug=False):
 
     @app.route(path='/image/', method='POST')
@@ -61,22 +63,14 @@ def runner(reloader=False, debug=False):
 
         graph = tree.run(annot=annot, index=tree.utils.INDEX, out=tmp)
 
-        def get_node(node):
-            return f"{node},{graph.nodes[node].get('name')}"
-        def keep_node(node):
-            return graph.nodes[node].get(utils.INPUT)
-
-        nodes = filter(keep_node, graph.nodes)
-        goterms = map(get_node, nodes)
-        goterms = list(goterms)
-        goterms = "\n".join(goterms)
-
+        goterms = utils.get_goterms(graph)
 
         src =  f"/static/tmp/{os.path.basename(tmp)}"
 
-        go = goterms
+        input = map(lambda x: f"{x[0]},{x[1]}", goterms.items())
+        input = "\n".join(input)
 
-        param = dict(src=src, go=go)
+        param = dict(src=src, input=input, rand=random())
 
         return param
 
@@ -117,7 +111,7 @@ def runner(reloader=False, debug=False):
     @app.route('/')
     @view('index.html')
     def home():
-        param = dict(title="GeneScape")
+        param = dict(title="GeneScape", rand=random())
         return param
 
     # Setting the debug mode.
