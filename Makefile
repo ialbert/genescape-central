@@ -33,6 +33,12 @@ demo:
 	#genescape tree --demo | genescape tree -o src/genescape/docs/images/demo.png	
 	genescape annotate --demo | genescape tree -o docs/images/genelist.png
 
+clean:
+	rm -f src/genescape/web/static/tmp/image*
+
+realclean: clean
+	rm -rf build dist
+
 build:
 	hatch build 
 
