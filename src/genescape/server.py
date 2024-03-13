@@ -44,59 +44,50 @@ import time
 
 app = Bottle()
 
+def textarea(request, name='input'):
+    text = request.forms.get(name, '')
+
+    # print(f"input: {text}")
+
+    terms = map(lambda x: x.strip(), text.splitlines())
+    terms = list(terms)
+    terms = utils.parse_terms(terms)
+
+    # print (terms)
+
+    return terms
+
+def temp_name(prefix="image-", suffix=".png"):
+    fname = tempfile.NamedTemporaryFile(dir=TMP_PATH, prefix=prefix, suffix=suffix, delete=False).name
+    sname = f"/static/tmp/{os.path.basename(fname)}"
+    return (fname, sname)
+
+def graph2text(graph):
+    nodes = filter(lambda x: graph.nodes[x].get(utils.INPUT), graph.nodes)
+    pairs = map(lambda x: (x, graph.nodes[x].get(utils.NAME, '')), nodes)
+    lines = map(lambda x: f"{x[0]}, {x[1]}", pairs)
+    text = "\n".join(lines)
+    return text
 
 def runner(reloader=False, debug=False):
 
     @app.route(path='/image/', method='POST')
     @view('htmx/image.html')
     def image():
-        print ("generating image")
-        text = request.forms.get('input')
-        print (f"input: {text}")
+        # Read the parameters from the request.
+        terms = textarea(request)
 
-        terms = map(lambda x: x.strip(), text.splitlines())
-        terms = filter(lambda x: x, terms)
-        terms = list(terms)
+        # Generate temporary names
+        fname, sname = temp_name()
 
-        def is_go(x):
-            return x.startswith("GO:")
+        # Generate the output.
+        graph = tree.run(terms=terms, index=tree.utils.INDEX, out=fname)
 
-            # Find the genes and the GO terms.
+        # Convert the graph to a list of terms.
+        text = graph2text(graph)
 
-        genes = filter(lambda x: not is_go(x), terms)
-        genes = list(genes)
-
-        # These are the GO terms.
-        terms = filter(lambda x: is_go(x), terms)
-        terms = list(terms)
-
-
-        print(f"Genes: {genes}")
-
-        # Annotate the gene name component.
-        if genes:
-            tt = annot.run(names=genes, index=utils.INDEX)
-            goids = [ x['goid'] for x in tt ]
-            terms = terms + goids
-
-        print(terms)
-
-        terms = tree.utils.parse_terms(terms)
-
-        tmp = tempfile.NamedTemporaryFile(dir=TMP_PATH, prefix="image-", suffix=".png", delete=False).name
-
-        print (tmp)
-
-        graph = tree.run(terms=terms, index=tree.utils.INDEX, out=tmp)
-
-        goterms = utils.get_goterms(graph)
-
-        src =  f"/static/tmp/{os.path.basename(tmp)}"
-
-        input = map(lambda x: f"{x[0]},{x[1]}", goterms.items())
-        input = "\n".join(input)
-
-        param = dict(src=src, input=input, rand=random())
+        # Fill in the parameters for the template.
+        param = dict(src=sname, input=text, rand=random())
 
         return param
 
@@ -130,7 +121,7 @@ def runner(reloader=False, debug=False):
         return msg
 
     @app.route('/static/<name:path>')
-    def send_static(name):
+    def static(name):
         print(f"serve static: {name}")
         return static_file(name, root=STATIC_DIR)
 
@@ -138,6 +129,31 @@ def runner(reloader=False, debug=False):
     @view('index.html')
     def home():
         param = dict(title="GeneScape", rand=random())
+        return param
+
+    @app.route('/dot/', method='POST')
+    @view('htmx/dot.html')
+    def dot():
+        # Read the parameters from the request.
+        terms = textarea(request)
+
+        print(f"terms: {terms}")
+
+        # Generate temporary names
+        fname, sname = temp_name(suffix=".dot")
+
+        # Generate the output.
+        graph = tree.run(terms=terms, index=tree.utils.INDEX, out=fname)
+
+        # Convert the graph to a list of terms.
+        text = graph2text(graph)
+
+        # Read the dot file.
+        with open(fname) as fp:
+            dot = fp.read()
+
+        param = dict(dot=dot, input=text)
+
         return param
 
     # Setting the debug mode.

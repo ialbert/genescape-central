@@ -1,16 +1,8 @@
 #
-# Demo file listing GO terms
+# Input may contain both genes and GO terms.
 #
 GO:0005488
 GO:0005515
 GO:0048029
 GO:0005537
-GO:0003824
-GO:0030246
-GO:0036094
-GO:0016787
-GO:0043167
-GO:0016788
-GO:0140375
-GO:0046872
-
+Cyp1a1

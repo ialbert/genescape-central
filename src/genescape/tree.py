@@ -5,7 +5,7 @@ import pydot
 import networkx as nx
 from networkx import DiGraph
 
-from genescape import utils
+from genescape import utils, annot
 from genescape.utils import GOID, LABEL, DEGREE, COUNT_DESC, INPUT
 
 
@@ -45,10 +45,10 @@ def fix(text):
 
 
 # Generates a tree from the graph.
-def make_tree(terms: dict[str, dict[str]], graph: DiGraph()) -> DiGraph():
+def make_tree(terms: list, info:dict, graph: DiGraph()) -> DiGraph():
 
     # The nodes in the graph.
-    nodes = set(terms.keys())
+    nodes = set(terms)
 
     # Get all the valid nodes.
     nodes = list(filter(lambda x: graph.has_node(x), nodes))
@@ -58,7 +58,7 @@ def make_tree(terms: dict[str, dict[str]], graph: DiGraph()) -> DiGraph():
     utils.debug(f"valid nodes: {nodes}")
 
     # Write information on missing nodes.
-    miss = list(set(terms.keys()) - set(nodes))
+    miss = list(set(terms) - set(nodes))
     if miss:
         utils.warn(f"missing {len(miss)} ids like: {', '.join(miss[:10])} ... ")
         utils.debug(f"missing nodes: {miss}")
@@ -156,30 +156,52 @@ def write(pg, out, imgsize=2048):
     Save the tree to a file.
     """
 
-    pg.set_graph_defaults(size=f"{WIDTH},{HEIGHT}", dpi=dpi(imgsize))
-
-    pg.write_raw(f"{out}.dot")
-
-
     # Write the graph to a file.
     utils.info(f"output: {out}")
-    if out.endswith(".pdf"):
-        pg.write_pdf(out, prog="dot")
+
+    pg.set_graph_defaults()
+
+    if out.endswith(".dot"):
+        print (f"writing to {out}")
+        pg.write_raw(f"{out}")
+    elif out.endswith(".pdf"):
+        pg.write_pdf(out, prog=utils.DOT_EXE)
     elif out.endswith(".png"):
-        pg.write_png(out, prog="dot")
-    elif out.endswith(".dot"):
-        pg.write_raw(out)
+        pg.set_graph_defaults(size=f"{WIDTH},{HEIGHT}", dpi=dpi(imgsize))
+        pg.write_png(out, prog=utils.DOT_EXE)
     else:
         utils.stop(f"Unknown output format: {out}")
 
-
 def run(terms, index=utils.INDEX, out="output.pdf", info={}, verbose=False):
+
+    # Additional information that may be passed to the tree.
+    info = info or dict(terms)
+
+    # The names to be processed
+    names = list(terms.keys())
+
+    def is_go(x):
+        return x.startswith("GO:")
+
+    # Words that seem like GO terms.
+    terms = filter(lambda x: is_go(x), names)
+    terms = list(terms)
+
+    # Words that do not seem like GO terms.
+    genes = filter(lambda x: not is_go(x), names)
+    genes = list(genes)
+
+    # Map genes to go terms
+    if genes:
+        objs = annot.run(names=genes, index=utils.INDEX)
+        goids = [x['goid'] for x in objs]
+        terms = terms + goids
 
     # Build graph from JSON file
     graph = build_graph(index)
 
     # Generate the tree from the graph.
-    tree = make_tree(terms=terms, graph=graph)
+    tree = make_tree(terms=terms, info=info, graph=graph)
 
     # Decorate the tree with additional information.
     pg = pydot_graph(info, tree)

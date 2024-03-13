@@ -15,6 +15,15 @@ hr {
     background-image: none;
 }
 
+svg text {
+    font-size:14px;
+}
+
+svg {
+  //width: 100%;
+}
+
+
 #input{
     margin:0px;
     height:30ex;

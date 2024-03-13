@@ -9,7 +9,7 @@ from itertools import *
 
 from genescape import utils
 
-def run(names, index=utils.INDEX, top=10, verbose=False, match='', minc=1, output=sys.stdout):
+def run(names, index=utils.INDEX, top=10, verbose=False, match='', minc=1, output=None):
 
     # Open the index stream
     idx_stream = gzip.open(index, mode="rt", encoding="UTF-8")
@@ -107,6 +107,6 @@ def run(names, index=utils.INDEX, top=10, verbose=False, match='', minc=1, outpu
 
 if __name__ == "__main__":
     # Read the genelist
-    names = utils.get_lines(fname=utils.GENE_LIST)
+    names = utils.get_lines(obj=utils.GENE_LIST)
     run(names=names)
 

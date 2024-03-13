@@ -3,9 +3,12 @@ import os, gzip, json, csv
 import sys
 from logging import DEBUG, ERROR, INFO, WARNING
 from itertools import tee
-
+import io
 # Current directory.
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
+
+# For Windows we package a prebuilt dot.exe
+DOT_EXE = os.path.join(CURR_DIR, "bin", "dot.exe" ) if os.name == "nt" else "dot"
 
 # Data file paths.
 INDEX = os.path.join(CURR_DIR, "data", "genescape.index.json.gz")
@@ -29,7 +32,7 @@ GAF_FILE = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
 GOID, LABEL = "goid", "label"
 
 # A few handy constants
-DEGREE, COUNT_DESC, INPUT = "degree", "count_desc", "input"
+DEGREE, COUNT_DESC, INPUT, NAME = "degree", "count_desc", "input", "name"
 
 # Default background color
 BG_COLOR = "#FFFFFF"
@@ -63,6 +66,7 @@ IDX_prot2go = "prot2go"
 IDX_go2gene = "go2gene"
 IDX_go2prot = "go2prot"
 
+
 # A callable to initialize the logger
 def init_logger(logger):
     formatter = logging.Formatter(LOG_FORMAT)
@@ -70,8 +74,8 @@ def init_logger(logger):
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
-def get_json(fname=INDEX):
 
+def get_json(fname=INDEX):
     # Check if the file exists.
     if not os.path.isfile(fname):
         stop(f"file not found: {fname}")
@@ -87,6 +91,7 @@ def get_json(fname=INDEX):
 
     return data
 
+
 # Get the logger.
 logger = logging.getLogger(__name__)
 
@@ -98,13 +103,16 @@ logging.addLevelName(logging.WARNING, "WARN")
 # Initialize the logger
 init_logger(logger)
 
+
 # A wrapper with additional callback
 def wrapper(logfunc, callback=None):
     def func(msg):
         logfunc(msg)
         if callback:
             callback(msg)
+
     return func
+
 
 debug = wrapper(logger.debug)
 info = wrapper(logger.info)
@@ -118,7 +126,7 @@ def stop(msg):
 
 def parse_terms(iter) -> dict[str, dict[str]]:
     """
-    Reads a file and returns a dictionary of GO terms and their annotations.
+    Reads an iterator and returns a list of dictionaries keyed by header.
     """
 
     # Get the stream from the file
@@ -132,29 +140,33 @@ def parse_terms(iter) -> dict[str, dict[str]]:
 
     if GOID in headers and LABEL in headers:
         # Has headers, read the specified columns
-        debug("reading CSV annotations")
+        debug("reading annotations as CSV")
         stream2 = csv.DictReader(stream2)
         terms = dict(map(lambda r: (r[GOID], r), stream2))
     else:
         # No headers, read the first column.
-        debug("reading first column of file")
+        debug("reading first column of the file")
         stream2 = csv.reader(stream2)
         terms = dict(map(lambda r: (r[0], dict(elems=r)), stream2))
 
     return terms
 
-# Attempts to get a stream of lines from a filename or the stdin.
-def get_lines(fname=None):
-    stream = None
 
-    if type(fname) == list:
-        stream = iter(fname)
-    elif fname and fname.endswith(".gz"):
-        debug(f"Reading gzip: {fname}")
-        stream = gzip.open(fname, mode="rt", encoding="UTF-8")
-    elif fname:
-        debug(f"Reading: {fname}")
-        stream = open(fname, encoding="utf-8-sig")
+# Attempts to get a stream of lines from a filename or the stdin.
+def get_lines(obj=None):
+    stream = []
+    if type(obj) == list:
+        text = "\n".join(obj)
+        stream = io.StringIO(text)
+    elif type(obj) == str:
+        if not os.path.isfile(obj):
+            stop(f"file not found: {obj}")
+        if obj.endswith(".gz"):
+            debug(f"Reading gzip: {obj}")
+            stream = gzip.open(obj, mode="rt", encoding="UTF-8")
+        else:
+            debug(f"Reading: {obj}")
+            stream = open(obj, encoding="utf-8-sig")
     elif not sys.stdin.isatty():
         debug(f"Reading stdin")
         stream = sys.stdin
@@ -168,15 +180,17 @@ def get_lines(fname=None):
 
     return stream
 
+
 def get_goterms(graph):
     """
     Returns a list of GO terms from a graph.
     """
+
     def get_node(node):
         """
         Returns a node, name pair
         """
-        return (node, graph.nodes[node].get('name',''))
+        return (node, graph.nodes[node].get('name', ''))
 
     def keep_node(node):
         """

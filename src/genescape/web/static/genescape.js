@@ -27,4 +27,18 @@ function handleHTMXError(event) {
 document.body.addEventListener('htmx:sendError', handleHTMXError);
 document.body.addEventListener('htmx:responseError', handleHTMXError);
 
-console.log('Genescape javascaript loaded OK');
+function render_graph(content) {
+	graph = document.getElementById('graph')
+    Viz.instance().then(function(viz) {
+        var svg = viz.renderSVGElement(content);
+        svg.setAttribute("width", "auto");
+        svg.setAttribute("height", "auto");
+        graph.innerHTML = '';
+        graph.appendChild(svg);
+    }).catch(
+        error => console.error("Error rendering Graphviz:", error)
+    );
+
+}
+
+console.log('Genescape javascript loaded OK');

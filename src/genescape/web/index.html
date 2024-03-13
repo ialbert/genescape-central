@@ -10,6 +10,9 @@
     <!-- https://htmx.org/ -->
     <script src="/static/htmx.min.js.gz"></script>
 
+    <!-- https://github.com/mdaines/viz-js -->
+    <script src="/static/viz-standalone.js"></script>
+
     <!-- Override styles locally -->
     <link rel="stylesheet" href="/static/genescape.css?param={{rand}}">
 
@@ -39,7 +42,7 @@
                     hx-indicator="#loadingFile"
                     hx-swap="none"
                     hx-include="#input">
-                    Check Input
+                Check Input
             </button>
 
 
@@ -50,6 +53,15 @@
                     hx-indicator="#loadingImage"
                     hx-include="#input">
                 Draw Tree
+            </button>
+
+            <button hx-post="/dot/"
+                    hx-trigger="click"
+                    hx-swap="outerHTML"
+                    hx-include="#input"
+                    hx-indicator="#loadingImage"
+                    hx-target="#dot">
+                Load Graph
             </button>
 
         </div>
@@ -71,31 +83,31 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div id="loadingFile" class="htmx-indicator">
                 <span class="mark">Verifying the input ...</span>
             </div>
 
-            <textarea class="doc" name="input" id="input" hx-swap-oob="true" style="width:100%;" placeholder="Content" spellcheck="false" value="hey">
+            <textarea class="doc" name="input" id="input" hx-swap-oob="true" style="width:100%;" placeholder="Content"
+                      spellcheck="false" value="hey">
 GO:0005488
 GO:0005515
 GO:0048029
-GO:0005537
-GO:0003824
-Cyp1a1
-Sphk2
             </textarea>
 
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-9">
+
             <!-- Loading  indicator -->
             <div id="loadingImage" class="htmx-indicator">
                 <span class="mark">Generating the image...</span>
             </div>
 
-            <div id="output">
-                <img src="static/img/800x600.png">
-            </div>
+            <!-- Graph placeholder -->
+            <div id="graph"></div>
+
+            <!-- Dot placeholder -->
+            <pre id="dot" style="display: block;"></pre>
 
         </div>
     </div>
@@ -105,6 +117,15 @@ Sphk2
 
 <!-- Load local javascript tasks -->
 <script src="/static/genescape.js?param={{rand}}"></script>
+
+<script>
+    document.addEventListener('htmx:afterSwap', function(event) {
+        if(event.target.id === "dot") {
+            const content = event.target.textContent;
+            render_graph(content);
+        }
+    });
+</script>
 
 </html>
 
