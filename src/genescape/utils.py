@@ -116,13 +116,13 @@ def stop(msg):
     logger.error(msg)
     sys.exit(1)
 
-def parse_terms(fname: str) -> dict[str, dict[str]]:
+def parse_terms(iter) -> dict[str, dict[str]]:
     """
     Reads a file and returns a dictionary of GO terms and their annotations.
     """
 
     # Get the stream from the file
-    stream1, stream2 = tee(get_lines(fname), 2)
+    stream1, stream2 = tee(get_lines(iter), 2)
 
     # Open stream as CSV file, tee off in case it is stdin.
     stream1 = csv.reader(stream1)

@@ -9,7 +9,7 @@ from itertools import *
 
 from genescape import utils
 
-def run(fname=utils.GENE_LIST, index=utils.INDEX, top=10, verbose=False, match='', minc=1, output=sys.stdout):
+def run(names, index=utils.INDEX, top=10, verbose=False, match='', minc=1, output=sys.stdout):
 
     # Open the index stream
     idx_stream = gzip.open(index, mode="rt", encoding="UTF-8")
@@ -17,8 +17,7 @@ def run(fname=utils.GENE_LIST, index=utils.INDEX, top=10, verbose=False, match='
     # Load the full index.
     data = json.load(idx_stream)
 
-    # Read the genelist
-    names = utils.get_lines(fname)
+    # Remap the names to upper case.
     names = map(lambda x: x.upper(), names)
     names = list(names)
 
@@ -103,10 +102,11 @@ def run(fname=utils.GENE_LIST, index=utils.INDEX, top=10, verbose=False, match='
     if len(counts) != n_found:
         utils.info(f"showing top {len(counts)} out of {n_found}")
 
-    return res, names, miss
+    return res
 
 
 if __name__ == "__main__":
-
-    run()
+    # Read the genelist
+    names = utils.get_lines(fname=utils.GENE_LIST)
+    run(names=names)
 

@@ -1,7 +1,7 @@
 import sys, os
 from random import random
 import tempfile
-from genescape import tree, utils
+from genescape import tree, annot, utils
 from genescape.bottle import Bottle, static_file, template, view
 from genescape.bottle import TEMPLATE_PATH
 from genescape import bottle
@@ -53,15 +53,41 @@ def runner(reloader=False, debug=False):
         print ("generating image")
         text = request.forms.get('input')
         print (f"input: {text}")
-        terms = text.split()
+
+        terms = map(lambda x: x.strip(), text.splitlines())
+        terms = filter(lambda x: x, terms)
+        terms = list(terms)
+
+        def is_go(x):
+            return x.startswith("GO:")
+
+            # Find the genes and the GO terms.
+
+        genes = filter(lambda x: not is_go(x), terms)
+        genes = list(genes)
+
+        # These are the GO terms.
+        terms = filter(lambda x: is_go(x), terms)
+        terms = list(terms)
+
+
+        print(f"Genes: {genes}")
+
+        # Annotate the gene name component.
+        if genes:
+            tt = annot.run(names=genes, index=utils.INDEX)
+            goids = [ x['goid'] for x in tt ]
+            terms = terms + goids
+
         print(terms)
-        annot = tree.utils.parse_terms(terms)
+
+        terms = tree.utils.parse_terms(terms)
 
         tmp = tempfile.NamedTemporaryFile(dir=TMP_PATH, prefix="image-", suffix=".png", delete=False).name
 
         print (tmp)
 
-        graph = tree.run(annot=annot, index=tree.utils.INDEX, out=tmp)
+        graph = tree.run(terms=terms, index=tree.utils.INDEX, out=tmp)
 
         goterms = utils.get_goterms(graph)
 

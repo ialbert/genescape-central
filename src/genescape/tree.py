@@ -45,10 +45,10 @@ def fix(text):
 
 
 # Generates a tree from the graph.
-def make(annot: dict[str, dict[str]], graph: DiGraph()) -> DiGraph():
+def make_tree(terms: dict[str, dict[str]], graph: DiGraph()) -> DiGraph():
 
     # The nodes in the graph.
-    nodes = set(annot.keys())
+    nodes = set(terms.keys())
 
     # Get all the valid nodes.
     nodes = list(filter(lambda x: graph.has_node(x), nodes))
@@ -58,7 +58,7 @@ def make(annot: dict[str, dict[str]], graph: DiGraph()) -> DiGraph():
     utils.debug(f"valid nodes: {nodes}")
 
     # Write information on missing nodes.
-    miss = list(set(annot.keys()) - set(nodes))
+    miss = list(set(terms.keys()) - set(nodes))
     if miss:
         utils.warn(f"missing {len(miss)} ids like: {', '.join(miss[:10])} ... ")
         utils.debug(f"missing nodes: {miss}")
@@ -94,12 +94,11 @@ def make(annot: dict[str, dict[str]], graph: DiGraph()) -> DiGraph():
     return tree
 
 
-
 # Count all nodes reachable from start, also counting start.
 def count_descendants(graph, start):
     return len(nx.descendants(graph, start)) + 1
 
-def pydot_graph(annot, tree: DiGraph) -> pydot.Dot :
+def pydot_graph(info, tree: DiGraph) -> pydot.Dot :
     """
     Adds additional information to the tree nodes.
     """
@@ -110,7 +109,7 @@ def pydot_graph(annot, tree: DiGraph) -> pydot.Dot :
     # Iterate over the nodes
     for node in tree.nodes():
         # Get the annotations for the node if these exist.
-        ann = annot.get(node, {}).get("label")
+        ann = info.get(node, {}).get("label")
 
         # Fetch the label for the node
         label = tree.nodes[node]["label"]
@@ -124,7 +123,7 @@ def pydot_graph(annot, tree: DiGraph) -> pydot.Dot :
         # Fill the nodes with the appropriate color
         if tree.nodes[node][COUNT_DESC] == 1:
             fillcolor = utils.LF_COLOR
-        elif node in annot:
+        elif tree.nodes[node][utils.INPUT]:
             fillcolor = utils.FG_COLOR
         else:
             fillcolor = utils.BG_COLOR
@@ -174,16 +173,16 @@ def write(pg, out, imgsize=2048):
         utils.stop(f"Unknown output format: {out}")
 
 
-def run(annot, index=utils.INDEX, out="output.pdf", ann=None, verbose=False):
+def run(terms, index=utils.INDEX, out="output.pdf", info={}, verbose=False):
 
     # Build graph from JSON file
     graph = build_graph(index)
 
     # Generate the tree from the graph.
-    tree = make(annot=annot, graph=graph)
+    tree = make_tree(terms=terms, graph=graph)
 
     # Decorate the tree with additional information.
-    pg = pydot_graph(annot, tree)
+    pg = pydot_graph(info, tree)
 
     # Write the tree to a file.
     write(pg, out)
@@ -194,5 +193,5 @@ def run(annot, index=utils.INDEX, out="output.pdf", ann=None, verbose=False):
 
 if __name__ == "__main__":
     out = os.path.join("genescape.pdf")
-    annot = utils.parse_terms(utils.GO_LIST)
-    run(annot=annot, index=utils.INDEX, out=out)
+    terms = utils.parse_terms(utils.GO_LIST)
+    run(terms=terms, index=utils.INDEX, out=out)

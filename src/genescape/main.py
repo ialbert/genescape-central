@@ -42,10 +42,10 @@ def tree(fname, index, out, verbose, demo=False):
         utils.info(f"input {fname}")
 
     # Parse the input into a list
-    annot = utils.parse_terms(fname)
+    terms = utils.parse_terms(fname)
 
     # Run the tree command.
-    tree.run(annot=annot, index=utils.INDEX, out=out)
+    tree.run(terms=terms, index=utils.INDEX, out=out)
 
 
 @cli.command()
