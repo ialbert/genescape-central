@@ -38,28 +38,20 @@
                 Load File
             </button>
 
-            <button hx-post="/check/"
-                    hx-trigger="click"
-                    hx-indicator="#loadingFile"
-                    hx-swap="innerHTML"
-                    hx-target="#input"
-                    hx-include="#input, #pattern">
-                Check Input
-            </button>
-
-            <input type="text" id="pattern" name="pattern" placeholder="Pattern"/>
+            Filter: <input type="text" id="pattern" name="pattern" placeholder="Pattern" value="membrane"/>
 
             <button hx-post="/dot/"
                     hx-trigger="click"
                     hx-swap="outerHTML"
-                    hx-include="#input"
+                    hx-include="#input, #pattern"
                     hx-indicator="#loadingImage"
                     hx-target="#dot">
                 Draw Tree
             </button>
 
-            <button data-action="zoom-in">Zoom In</button>
-            <button data-action="zoom-out">Zoom Out</button>
+            <button data-action="zoom-in">Zoom+</button>
+
+            <button data-action="zoom-out">Zoom-</button>
 
             <button
             hx-get="#"
@@ -67,8 +59,10 @@
             hx-swap="none"
             class="btn btn-primary"
             data-toggle-width="true">
-                Fullscreen
+                Full Screen
             </button>
+
+
 
 
         </div>
@@ -80,23 +74,16 @@
         </div>
     </div>
 
-    <div class="row header">
-        <div class="col-sm-3">
-            Genes or GO Terms
-        </div>
-        <div class="col-sm-9">
-            Tree
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-sm-3" id="sideBar">
 
-            <div id="loadingFile" class="htmx-indicator">
-                <span class="mark">Verifying the input ...</span>
+            <div class="header">
+                Input
             </div>
 
-            <textarea class="doc" name="input" id="input" hx-swap-oob="true" style="width:100%;" placeholder="Content"
+            <textarea class="input" name="input" id="input"
+                      hx-swap-oob="true"
                       spellcheck="false" value="hey">
 Cyp1a1
 Sphk2
@@ -104,13 +91,29 @@ Sptlc2
 Smpd3
             </textarea>
 
+            <div class="header">Functions
+                <span id="loadingFile" class="htmx-indicator">
+                    <span class="mark"> ... processing</span>
+                </span>
+            </div>
+
+            <textarea class="input" name="terms" id="terms"
+                      hx-swap-oob="true"
+                      readonly="readonly"
+                      spellcheck="false" value="hey" placeholder="Press generate to see functions">
+            </textarea>
+
         </div>
         <div class="col-sm-9" id="mainBar">
 
-            <!-- Loading  indicator -->
-            <div id="loadingImage" class="htmx-indicator">
-                <span class="mark">Drawing GO tree ...</span>
+            <div class="header">
+                Tree
+                <!-- Loading  indicator -->
+                <span id="loadingImage" class="htmx-indicator">
+                <span class="mark">... processing</span>
+            </span>
             </div>
+
 
             <!-- Graph placeholder -->
             <div id="graphContainer">

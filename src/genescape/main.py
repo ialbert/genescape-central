@@ -1,4 +1,4 @@
-import os
+import os, json
 
 import click
 
@@ -50,14 +50,14 @@ def tree(fname, index, out, verbose, demo=False):
 
 @cli.command()
 @click.argument("fname", default=None, required=False)
-@click.option("-n", "top", metavar="TEXT", default=10, help="Limit to top N terms (default=10).")
 @click.option("-i", "index", metavar="TEXT", default=utils.INDEX, help="OBO index file.")
 @click.option("-m", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "minc", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
+@click.option("--csv", "csvout", is_flag=True, help="Produce CSV output")
 @click.option("--demo", "demo", is_flag=True, help="Run with demo data")
 @click.option( "-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, index, verbose=False, demo=False, top=10, match="", minc=1):
+def annotate(fname, index, verbose=False, demo=False, csvout=False, match="", minc=1):
     """
     Generates the GO terms for a list of genes.
     """
@@ -70,8 +70,17 @@ def annotate(fname, index, verbose=False, demo=False, top=10, match="", minc=1):
     if verbose:
         utils.logger.setLevel(utils.DEBUG)
 
-    utils.debug(f"params n={top} c={minc} m={match}")
-    annot.run(fname=fname, index=index, top=top, verbose=verbose, match=match, minc=minc)
+    # Open the input file
+    iter = utils.get_stream(inp=fname)
+
+    # Parse the input into a list
+    data = utils.parse_terms(iter)
+
+    utils.debug(f"params c={minc} m={match}")
+
+    out = annot.run(data=data, index=index, verbose=verbose, pattern=match, minc=minc, csvout=csvout)
+
+    print (out)
 
 
 @cli.command()

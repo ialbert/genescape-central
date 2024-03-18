@@ -1,7 +1,7 @@
 """
 Annotates a list of genes with functions based on the GO graph
 """
-import csv
+import csv, io
 import gzip
 import sys,json,re
 from collections import Counter
@@ -9,24 +9,33 @@ from itertools import *
 
 from genescape import utils
 
-def run(names, index=utils.INDEX, top=10, verbose=False, match='', minc=1, output=None):
+def run(data, index=utils.INDEX, pattern='', minc=1, csvout=False, verbose=False,):
+
+    # Collect the run status into this list.
+    status = {
+        utils.CODE_FIELD:0,
+        utils.INVALID_FIELD:[]
+    }
 
     # Open the index stream
     idx_stream = gzip.open(index, mode="rt", encoding="UTF-8")
 
     # Load the full index.
-    data = json.load(idx_stream)
+    idx = json.load(idx_stream)
+
+    # Extract the gene names from the data
+    names = map(lambda x: x[utils.GID], data[utils.DATA_FIELD])
 
     # Remap the names to upper case.
     names = map(lambda x: x.upper(), names)
     names = list(names)
 
     # The valid ids are the unqiue gene and protein ids.
-    valid_ids = set(list(data[utils.IDX_gene2go].keys()) + list(data[utils.IDX_prot2go].keys()))
+    valid_ids = set(list(idx[utils.IDX_gene2go].keys()) + list(idx[utils.IDX_prot2go].keys()))
 
     # Fetch GO functions for a given gene or protein id.
     def get_func(name):
-        ids = set(data[utils.IDX_gene2go].get(name, []) + data[utils.IDX_prot2go].get(name, []))
+        ids = set(idx[utils.IDX_gene2go].get(name, []) + idx[utils.IDX_prot2go].get(name, []))
         return ids
 
     # The missing and collected gene names.
@@ -45,15 +54,13 @@ def run(names, index=utils.INDEX, top=10, verbose=False, match='', minc=1, outpu
 
     # The missing ids.
     if miss:
-        utils.warn(f"missing {len(miss)} ids: {','.join(miss[:10])} ... ")
-
-    # Print all missing elements if verbose.
-    if verbose:
-        utils.warn(f"all missing ids: {miss} ")
+        status[utils.CODE_FIELD] = 1
+        status[utils.INVALID_FIELD] = (list(miss))
+        utils.warn(f"{status}")
 
     # Get the elements for a go id.
     def go2func(goid):
-        return data[utils.IDX_OBO][goid]["name"]
+        return idx[utils.IDX_OBO][goid]["name"]
 
     # Build the counter.
     counter = Counter(coll)
@@ -65,7 +72,7 @@ def run(names, index=utils.INDEX, top=10, verbose=False, match='', minc=1, outpu
     counts = map(lambda x: (x[0], x[1], go2func(x[0])), counts)
 
     # Apply the regex filter
-    counts = filter(lambda x: re.search(match, x[2], re.IGNORECASE), counts) if match else counts
+    counts = filter(lambda x: re.search(pattern, x[2], re.IGNORECASE), counts) if pattern else counts
 
     # Apply the minimum count filter
     counts = filter(lambda x: x[1] >= minc, counts)
@@ -76,37 +83,46 @@ def run(names, index=utils.INDEX, top=10, verbose=False, match='', minc=1, outpu
     # The number of hits found.
     n_found = len(list(counts))
 
-    # Take the top N elements.
-    counts = counts[:top] if top > 0 else counts
-
     # The size of the original collection.
     n_size = len(names)
 
     # Create the data object
     res = []
-    data_fields = [utils.GOID, "count", "size", utils.LABEL, "function", "genes"]
+    data_fields = [utils.GID, "count", "size", utils.LABEL, "function", utils.GENES]
     for goid, cnt, func in counts:
         label = f"({cnt}/{n_size})"
         funcs = func2name.get(goid, [])
         name = dict(zip(data_fields, [goid, cnt, n_size, label, func, funcs]))
         res.append(name)
 
+    json_data = {utils.DATA_FIELD:res, utils.STATUS_FIELD:status}
+
     # The CSV file has fewer fields
-    if output is not None:
-        csv_field = data_fields[:-1]
-        write = csv.DictWriter(output, fieldnames=csv_field, extrasaction='ignore')
+    if csvout:
+        csv_field = data_fields
+        stream = io.StringIO()
+        write = csv.DictWriter(stream, fieldnames=csv_field, extrasaction='ignore')
         write.writeheader()
-        write.writerows(res)
+        for row in res:
+            row = dict(row)
+            row[utils.GENES] = ";".join(row[utils.GENES])
+            write.writerow(row)
+        out = stream.getvalue()
 
-    # Final notification if needed.
-    if len(counts) != n_found:
-        utils.info(f"showing top {len(counts)} out of {n_found}")
+    else:
+        out = json.dumps(json_data, indent=2)
 
-    return res
+    return out
 
 
 if __name__ == "__main__":
+
     # Read the genelist
-    names = utils.get_lines(obj=utils.GENE_LIST)
-    run(names=names)
+    iter = utils.get_stream(inp=utils.GENE_LIST)
+
+    data = utils.parse_terms(iter=iter)
+
+    out = run(data=data, csvout=True, minc=2)
+
+    print (out)
 

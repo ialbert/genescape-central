@@ -80,7 +80,7 @@ function adjustSVGZoom(zoomAction) {
 
     // Apply new zoom level to the SVG
     svg.style.transform = `scale(${zoomLevel})`;
-    svg.style.transformOrigin = 'top left';
+    svg.style.transformOrigin = '0 0';
 }
 
 // Bind click events to buttons

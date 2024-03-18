@@ -159,6 +159,7 @@ def runner(reloader=False, debug=False):
 
     @app.route('/dot/', method='POST')
     @view('htmx/dot.html')
+    @debugger
     def dot():
         # Read the parameters from the request.
         terms = textarea(request)

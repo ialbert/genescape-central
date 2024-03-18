@@ -28,8 +28,11 @@ GENE_LIST = os.path.join(CURR_DIR, "data", "genelist.txt")
 # The GAF demo data.
 GAF_FILE = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
 
+# The keys in the data annotation object.
+STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "data", "exitcode", "errors", "invalid_input"
+
 # The name of the columns in the annotation CSV file
-GOID, LABEL = "goid", "label"
+GID, LABEL, GENES = "gid", "label", "genes"
 
 # A few handy constants
 DEGREE, COUNT_DESC, INPUT, NAME = "degree", "count_desc", "input", "name"
@@ -124,49 +127,69 @@ def stop(msg):
     logger.error(msg)
     sys.exit(1)
 
-def parse_terms(iter) -> dict[str, dict[str]]:
+def parse_terms(iter):
     """
     Reads an iterator and returns a list of dictionaries keyed by header.
     """
 
     # Get the stream from the file
-    stream1, stream2 = tee(get_lines(iter), 2)
+    stream1, stream2, stream3 = tee(iter, 3)
 
-    # Open stream as CSV file, tee off in case it is stdin.
-    stream1 = csv.reader(stream1)
+    # Try to parse the input as JSON.
+    try:
+        terms = json.loads("".join(stream1))
+        return terms
+    except json.JSONDecodeError:
+        debug("Input is not JSON")
+        pass
+
+    # The resulting data dictionary.
+    data = dict()
+
+    # Open stream as CSV file
+    reader2 = csv.reader(stream2)
 
     # Detect whether the file is header delimiter CSV or not
-    headers = next(stream1)
+    headers = next(reader2)
 
-    if GOID in headers and LABEL in headers:
+    if GID in headers and LABEL in headers:
         # Has headers, read the specified columns
         debug("reading annotations as CSV")
-        stream2 = csv.DictReader(stream2)
-        terms = dict(map(lambda r: (r[GOID], r), stream2))
+        reader3 = csv.DictReader(stream3)
+        def build(x):
+            return {GID: x[GID], LABEL: x[LABEL]}
+        terms = list( map(build, reader3))
+
+
     else:
         # No headers, read the first column.
         debug("reading first column of the file")
-        stream2 = csv.reader(stream2)
-        terms = dict(map(lambda r: (r[0], dict(elems=r)), stream2))
+        def build(x):
+            return {GID: x[0]}
+        terms = list(map(build, reader2))
 
-    return terms
+    data[DATA_FIELD] = terms
+
+    return data
 
 
 # Attempts to get a stream of lines from a filename or the stdin.
-def get_lines(obj=None):
+def get_stream(inp=None):
+
     stream = []
-    if type(obj) == list:
-        text = "\n".join(obj)
+
+    if type(inp) == list:
+        text = "\n".join(inp)
         stream = io.StringIO(text)
-    elif type(obj) == str:
-        if not os.path.isfile(obj):
-            stop(f"file not found: {obj}")
-        if obj.endswith(".gz"):
-            debug(f"Reading gzip: {obj}")
-            stream = gzip.open(obj, mode="rt", encoding="UTF-8")
+    elif type(inp) == str:
+        if not os.path.isfile(inp):
+            stop(f"file not found: {inp}")
+        if inp.endswith(".gz"):
+            debug(f"Reading gzip: {inp}")
+            stream = gzip.open(inp, mode="rt", encoding="UTF-8")
         else:
-            debug(f"Reading: {obj}")
-            stream = open(obj, encoding="utf-8-sig")
+            debug(f"Reading: {inp}")
+            stream = open(inp, encoding="utf-8-sig")
     elif not sys.stdin.isatty():
         debug(f"Reading stdin")
         stream = sys.stdin

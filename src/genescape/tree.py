@@ -6,7 +6,7 @@ import networkx as nx
 from networkx import DiGraph
 
 from genescape import utils, annot
-from genescape.utils import GOID, LABEL, DEGREE, COUNT_DESC, INPUT
+from genescape.utils import GID, LABEL, DEGREE, COUNT_DESC, INPUT
 
 
 # Parse GO Ontology file from fname into a networkx graph
@@ -176,7 +176,7 @@ def write(pg, out=None, imgsize=2048):
     else:
         utils.stop(f"Unknown output format: {out}")
 
-def run(terms, index=utils.INDEX, out="output.pdf", info={}, verbose=False):
+def run(terms, index=utils.INDEX, out="output.pdf", info={}, pattern=None, verbose=False):
 
     # Additional information that may be passed to the tree.
     info = info or dict(terms)
@@ -197,7 +197,7 @@ def run(terms, index=utils.INDEX, out="output.pdf", info={}, verbose=False):
 
     # Map genes to go terms
     if genes:
-        objs = annot.run(names=genes, index=utils.INDEX)
+        objs = annot.run(names=genes, index=utils.INDEX, pattern=pattern)
         goids = [x['goid'] for x in objs]
         terms = terms + goids
 
