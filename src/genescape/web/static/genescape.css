@@ -16,19 +16,32 @@ hr {
 }
 
 svg text {
-    font-size:14px;
+    font-size: 13px;
 }
 
 svg {
-  //width: 100%;
+/ / width: 100 %;
 }
 
 
-#input{
-    margin:0px;
-    height:30ex;
-    width:100%;
+#input {
+    margin: 0px;
+    height: 30ex;
+    width: 100%;
+    white-space: pre; /* This will prevent text from wrapping */
+    overflow-x: auto; /* This ensures that a horizontal scrollbar appears if the text exceeds the width */
 }
+
+#graphContainer {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.col-sm-0 {
+    display: none;
+}
+
 
 .header {
     padding-top: 16px;

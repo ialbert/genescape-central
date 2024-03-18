@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, functools
 from random import random
 import tempfile
 from genescape import tree, annot, utils
@@ -7,9 +7,11 @@ from genescape.bottle import TEMPLATE_PATH
 from genescape import bottle
 from genescape.bottle import get, post, request, response, redirect
 
+# Debug mode.
+DEBUG = True
+
 # The current directory.
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
-
 
 # Web related content.
 WEB_DIR = os.path.join(CURR_DIR, "web")
@@ -44,6 +46,30 @@ import time
 
 app = Bottle()
 
+
+def debugger(func):
+    """
+    Decorator that prints the execution time of the function it decorates.
+    """
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        if DEBUG:
+
+            #print(f"# method: {request.method}")
+
+            #for header, value in request.headers.items():
+            #    print(f"# header: {header}: {value}")
+
+            for key in request.query.keys():
+                print(f"# query.key {key}: {request.query.getall(key)}")
+
+            for key in request.forms.keys():
+                print(f"# form.key {key}: {request.forms.getall(key)}")
+
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
+
 def textarea(request, name='input'):
     text = request.forms.get(name, '')
 
@@ -71,23 +97,21 @@ def graph2text(graph):
 
 def runner(reloader=False, debug=False):
 
-    @app.route(path='/image/', method='POST')
-    @view('htmx/image.html')
-    def image():
+    @app.route(path='/check/', method='POST')
+    @view('htmx/check.html')
+    @debugger
+    def check():
         # Read the parameters from the request.
         terms = textarea(request)
 
-        # Generate temporary names
-        fname, sname = temp_name()
-
         # Generate the output.
-        graph = tree.run(terms=terms, index=tree.utils.INDEX, out=fname)
+        graph = tree.run(terms=terms, index=tree.utils.INDEX, out=None)
 
         # Convert the graph to a list of terms.
         text = graph2text(graph)
 
         # Fill in the parameters for the template.
-        param = dict(src=sname, input=text, rand=random())
+        param = dict(text=text)
 
         return param
 
@@ -127,7 +151,9 @@ def runner(reloader=False, debug=False):
 
     @app.route('/')
     @view('index.html')
-    def home():
+    @utils.timer
+    @debugger
+    def index():
         param = dict(title="GeneScape", rand=random())
         return param
 

@@ -151,10 +151,14 @@ def dpi(size):
     value = size/WIDTH
     return value
 
-def write(pg, out, imgsize=2048):
+def write(pg, out=None, imgsize=2048):
     """
     Save the tree to a file.
     """
+
+    # No output requested
+    if out is None:
+        return
 
     # Write the graph to a file.
     utils.info(f"output: {out}")

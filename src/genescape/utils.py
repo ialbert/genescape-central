@@ -1,4 +1,4 @@
-import logging
+import logging, functools, time
 import os, gzip, json, csv
 import sys
 from logging import DEBUG, ERROR, INFO, WARNING
@@ -203,3 +203,17 @@ def get_goterms(graph):
     goterms = dict(goterms)
 
     return goterms
+
+def timer(func):
+    """
+    Decorator that prints the execution time of the function it decorates.
+    """
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        elapsed = end_time - start_time
+        print(f"# Timer: {func.__name__}: took {elapsed:.2f} seconds")
+        return result
+    return wrapper

@@ -30,30 +30,24 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12" id="#form">
+
             <span class="title">GeneScape</span>
 
             <button>
                 Load File
             </button>
 
-            <button hx-post="/image/"
+            <button hx-post="/check/"
                     hx-trigger="click"
                     hx-indicator="#loadingFile"
-                    hx-swap="none"
-                    hx-include="#input">
+                    hx-swap="innerHTML"
+                    hx-target="#input"
+                    hx-include="#input, #pattern">
                 Check Input
             </button>
 
-
-            <button hx-post="/image/"
-                    hx-trigger="click"
-                    hx-target="#output"
-                    hx-swap="outerHTML"
-                    hx-indicator="#loadingImage"
-                    hx-include="#input">
-                Draw Tree
-            </button>
+            <input type="text" id="pattern" name="pattern" placeholder="Pattern"/>
 
             <button hx-post="/dot/"
                     hx-trigger="click"
@@ -61,8 +55,21 @@
                     hx-include="#input"
                     hx-indicator="#loadingImage"
                     hx-target="#dot">
-                Load Graph
+                Draw Tree
             </button>
+
+            <button data-action="zoom-in">Zoom In</button>
+            <button data-action="zoom-out">Zoom Out</button>
+
+            <button
+            hx-get="#"
+            hx-trigger="click"
+            hx-swap="none"
+            class="btn btn-primary"
+            data-toggle-width="true">
+                Fullscreen
+            </button>
+
 
         </div>
     </div>
@@ -83,31 +90,37 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3" id="sideBar">
+
             <div id="loadingFile" class="htmx-indicator">
                 <span class="mark">Verifying the input ...</span>
             </div>
 
             <textarea class="doc" name="input" id="input" hx-swap-oob="true" style="width:100%;" placeholder="Content"
                       spellcheck="false" value="hey">
-GO:0005488
-GO:0005515
-GO:0048029
+Cyp1a1
+Sphk2
+Sptlc2
+Smpd3
             </textarea>
 
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-9" id="mainBar">
 
             <!-- Loading  indicator -->
             <div id="loadingImage" class="htmx-indicator">
-                <span class="mark">Generating the image...</span>
+                <span class="mark">Drawing GO tree ...</span>
             </div>
 
             <!-- Graph placeholder -->
-            <div id="graph"></div>
+            <div id="graphContainer">
+                <div id="graph">
+                    <img src="/static/img/placeholder.png">
+                </div>
+            </div>
 
             <!-- Dot placeholder -->
-            <pre id="dot" style="display: block;"></pre>
+            <pre id="dot" style="display: none;"></pre>
 
         </div>
     </div>

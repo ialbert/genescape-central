@@ -27,6 +27,25 @@ function handleHTMXError(event) {
 document.body.addEventListener('htmx:sendError', handleHTMXError);
 document.body.addEventListener('htmx:responseError', handleHTMXError);
 
+// Add event listener for the `data-toggle-width` attribute.
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.dataset.toggleWidth === 'true') {
+        var leftDiv = document.getElementById('sideBar');
+        var rightDiv = document.getElementById('mainBar');
+        if (leftDiv.classList.contains('col-sm-3')) {
+            leftDiv.classList.remove('col-sm-3');
+            leftDiv.classList.add('col-sm-0');
+            rightDiv.classList.remove('col-sm-9');
+            rightDiv.classList.add('col-sm-12');
+        } else {
+            leftDiv.classList.remove('col-sm-0');
+            leftDiv.classList.add('col-sm-3');
+            rightDiv.classList.remove('col-sm-12');
+            rightDiv.classList.add('col-sm-9');
+        }
+    }
+});
+
 function render_graph(content) {
 	graph = document.getElementById('graph')
     Viz.instance().then(function(viz) {
@@ -40,5 +59,37 @@ function render_graph(content) {
     );
 
 }
+
+var zoomLevel = 1; // Initial zoom level
+
+// Function to adjust SVG zoom based on action
+function adjustSVGZoom(zoomAction) {
+    var svg = document.querySelector('#graph svg');
+    if (!svg) return;
+
+	console.log('Adjusting SVG zoom:', zoomAction);
+
+    // Adjust zoom level based on the action
+    if (zoomAction === 'zoom-in') {
+        zoomLevel *= 1.1; // Zoom in by 10%
+    } else if (zoomAction === 'zoom-out') {
+        zoomLevel /= 1.1; // Zoom out by 10%
+    } else {
+        consol.log("invalid zoom level")
+    }
+
+    // Apply new zoom level to the SVG
+    svg.style.transform = `scale(${zoomLevel})`;
+    svg.style.transformOrigin = 'top left';
+}
+
+// Bind click events to buttons
+document.querySelectorAll('button[data-action]').forEach(button => {
+    button.addEventListener('click', function() {
+        var action = this.getAttribute('data-action');
+        adjustSVGZoom(action);
+    });
+});
+
 
 console.log('Genescape javascript loaded OK');

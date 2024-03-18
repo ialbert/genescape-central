@@ -15,6 +15,10 @@ usage:
 	@echo "#"
 
 # Performs the testing.
+serve:
+	python src/genescape/server.py
+
+# Performs the testing.
 test:
 	hatch run test
 
