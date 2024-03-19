@@ -16,24 +16,20 @@ INDEX = os.path.join(CURR_DIR, "data", "genescape.index.json.gz")
 # The OBO file.
 OBO_FILE = os.path.join(CURR_DIR, "data", "go-basic.obo")
 
-# GProfiler test data
-TEST_GPROFILER = os.path.join(CURR_DIR, "data", "gprofiler.csv")
+# Test data directory
+TEST_INP_DIR = os.path.join(CURR_DIR, "data")
 
-# The GO ids to draw.
-TEST_GOIDS = os.path.join(CURR_DIR, "data", "test_goids.txt")
-
-# The default gene list.
-TEST_GENES = os.path.join(CURR_DIR, "data", "test_genes.txt")
-
-# Input datasets.
-TEST_INPUT_CSV = os.path.join(CURR_DIR, "data", "test_input.csv")
-TEST_INPUT_JSON = os.path.join(CURR_DIR, "data", "test_input.json")
+# Test data files.
+TEST_GOIDS = os.path.join(TEST_INP_DIR, "test_goids.txt")
+TEST_GENES = os.path.join(TEST_INP_DIR, "test_genes.txt")
+TEST_INPUT_CSV = os.path.join(TEST_INP_DIR, "test_input.csv")
+TEST_INPUT_JSON = os.path.join(TEST_INP_DIR, "test_input.json")
 
 # The GAF demo data.
 GAF_FILE = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
 
 # The keys in the data annotation object.
-STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "data", "exitcode", "errors", "invalid_input"
+STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "data", "code", "errors", "unknown_terms"
 
 # The name of the columns in the annotation CSV file
 GID, LABEL, SOURCE = "gid", "label", "source"

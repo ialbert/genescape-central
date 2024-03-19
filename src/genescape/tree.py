@@ -166,7 +166,7 @@ def write(pg, out=None, imgsize=2048):
     pg.set_graph_defaults()
 
     if out.endswith(".dot"):
-        print (f"writing to {out}")
+        utils.debug(f"writing to {out}")
         pg.write_raw(f"{out}")
     elif out.endswith(".pdf"):
         pg.write_pdf(out, prog=utils.DOT_EXE)
@@ -194,7 +194,7 @@ def draw(ann, index=utils.INDEX, out="output.pdf"):
     return tree
 
 
-def run(inp, index=utils.INDEX, pattern=None, minc=0, out=None):
+def run(inp, index=utils.INDEX, pattern=None, mincount=1, out=None):
     """
     Run the tree drawing command on an input.
     """
@@ -206,7 +206,7 @@ def run(inp, index=utils.INDEX, pattern=None, minc=0, out=None):
     data = utils.parse_terms(iter=iter)
 
     # Run the annotation command
-    ann = annot.run(data, index=index, minc=minc, pattern=pattern)
+    ann = annot.run(data, index=index, mincount=mincount, pattern=pattern)
 
     # Turn the JSON string into an object.
     ann = json.loads(ann)
@@ -220,6 +220,6 @@ def run(inp, index=utils.INDEX, pattern=None, minc=0, out=None):
 if __name__ == "__main__":
     out = os.path.join("genescape.pdf")
     inp = utils.TEST_GENES
-    run(inp=inp, out=out)
+    run(inp=inp, out=out, mincount=2)
 
 

@@ -20,9 +20,7 @@ serve:
 
 # Performs the testing.
 test:
-	#hatch run test
-	genescape annotate --test > test/out/test1.json
-	genescape annotate --test --csv > test/out/test1.csv
+	(cd test && make test)
 
 # Runs a linter.
 lint:
@@ -35,9 +33,6 @@ fix:
 push:
 	git commit -am 'saving work' && git push
 
-demo:
-	#genescape tree --demo | genescape tree -o src/genescape/docs/images/demo.png	
-	genescape annotate --demo | genescape tree -o docs/images/genelist.png
 
 clean:
 	rm -f src/genescape/web/static/tmp/image*

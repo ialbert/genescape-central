@@ -9,7 +9,7 @@ from itertools import *
 
 from genescape import utils
 
-def run(data, index=utils.INDEX, pattern='', minc=1, csvout=False, verbose=False,):
+def run(data, index=utils.INDEX, pattern='', mincount=1, csvout=False, verbose=False, ):
 
     # Collect the run status into this list.
     status = {
@@ -83,7 +83,7 @@ def run(data, index=utils.INDEX, pattern='', minc=1, csvout=False, verbose=False
     counts = filter(lambda x: re.search(pattern, x[2], re.IGNORECASE), counts) if pattern else counts
 
     # Apply the minimum count filter
-    counts = filter(lambda x: x[1] >= minc, counts)
+    counts = filter(lambda x: x[1] >= mincount, counts)
 
     # Sort the remaining elements by count.
     counts = sorted(counts, key=lambda x: (x[1], x[0]), reverse=True)

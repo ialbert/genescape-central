@@ -15,14 +15,14 @@ def cli():
 
 @cli.command()
 @click.argument("fname", default=None, required=False)
-@click.option("-o", "out", metavar="TEXT", default="genescape.pdf", help="output graph file")
-@click.option("-i", "index", metavar="FILE", default=utils.INDEX, help="OBO index file", )
-@click.option("-m", "match", metavar="REGEX", default='', help="Regular expression match on function")
-@click.option("-c", "minc", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
-@click.option("--test", "test", is_flag=True, help="run with demo data")
+@click.option("-o", "--out", "out", metavar="TEXT", default="genescape.pdf", help="output graph file")
+@click.option("-i", "--index", "index", metavar="FILE", default=utils.INDEX, help="OBO index file", )
+@click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
+@click.option("-c", "--count", "count", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
+@click.option("-t", "--test", "test", is_flag=True, help="run with demo data")
 @click.option( "-v", "verbose", is_flag=True, help="verbose output")
 @click.help_option("-h", "--help")
-def tree(fname, index, out, match=None, minc=1, verbose=False, test=False):
+def tree(fname, index, out, match=None, count=1, verbose=False, test=False):
     """
     Draws a tree from GO terms.
     """
@@ -44,19 +44,19 @@ def tree(fname, index, out, match=None, minc=1, verbose=False, test=False):
         utils.info(f"input {fname}")
 
     # Run the tree command.
-    tree.run(inp=fname, index=utils.INDEX, pattern=match, minc=minc, out=out)
+    tree.run(inp=fname, index=utils.INDEX, pattern=match, mincount=count, out=out)
 
 
 @cli.command()
 @click.argument("fname", default=None, required=False)
-@click.option("-i", "index", metavar="TEXT", default=utils.INDEX, help="OBO index file.")
-@click.option("-m", "match", metavar="REGEX", default='', help="Regular expression match on function")
-@click.option("-c", "minc", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
-@click.option("--csv", "csvout", is_flag=True, help="Produce CSV output")
-@click.option("--test", "test", is_flag=True, help="Run with test data")
+@click.option("-i", "--index", "index", metavar="TEXT", default=utils.INDEX, help="OBO index file.")
+@click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
+@click.option("-c", "--count", "count", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
+@click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
+@click.option("--csv", "csvout", is_flag=True, help="Produce CSV output instead of JSON")
 @click.option( "-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, index, verbose=False, test=False, csvout=False, match="", minc=1):
+def annotate(fname, index, verbose=False, test=False, csvout=False, match="", count=1):
     """
     Generates the GO terms for a list of genes.
     """
@@ -75,9 +75,9 @@ def annotate(fname, index, verbose=False, test=False, csvout=False, match="", mi
     # Parse the input into a list
     data = utils.parse_terms(iter)
 
-    utils.debug(f"params c={minc} m={match}")
+    utils.debug(f"params c={count} m={match}")
 
-    out = annot.run(data=data, index=index, verbose=verbose, pattern=match, minc=minc, csvout=csvout)
+    out = annot.run(data=data, index=index, verbose=verbose, pattern=match, mincount=count, csvout=csvout)
 
     print (out)
 
