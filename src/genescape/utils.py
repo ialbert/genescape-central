@@ -32,7 +32,7 @@ GAF_FILE = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
 STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "data", "exitcode", "errors", "invalid_input"
 
 # The name of the columns in the annotation CSV file
-GID, LABEL, GENES = "gid", "label", "genes"
+GID, LABEL, SOURCE = "gid", "label", "source"
 
 # A few handy constants
 DEGREE, COUNT_DESC, INPUT, NAME = "degree", "count_desc", "input", "name"
@@ -160,13 +160,14 @@ def parse_terms(iter):
             return {GID: x[GID], LABEL: x[LABEL]}
         terms = list( map(build, reader3))
 
-
     else:
         # No headers, read the first column.
         debug("reading first column of the file")
+        reader3 = csv.reader(stream3)
         def build(x):
             return {GID: x[0]}
-        terms = list(map(build, reader2))
+        terms = list(map(build, reader3))
+
 
     data[DATA_FIELD] = terms
 

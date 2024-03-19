@@ -30,12 +30,20 @@ def run(data, index=utils.INDEX, pattern='', minc=1, csvout=False, verbose=False
     names = map(lambda x: x.upper(), names)
     names = list(names)
 
+    # The known and valid inputs
+    gene2go = idx[utils.IDX_gene2go]
+    prot2go = idx[utils.IDX_prot2go]
+    go = idx[utils.IDX_OBO]
+
     # The valid ids are the unqiue gene and protein ids.
-    valid_ids = set(list(idx[utils.IDX_gene2go].keys()) + list(idx[utils.IDX_prot2go].keys()))
+    valid_ids = set(gene2go) | set(prot2go) | set(go)
 
     # Fetch GO functions for a given gene or protein id.
     def get_func(name):
-        ids = set(idx[utils.IDX_gene2go].get(name, []) + idx[utils.IDX_prot2go].get(name, []))
+        if name in go:
+            ids = [ name ]
+        else:
+            ids = set(gene2go.get(name, []) + prot2go.get(name, []))
         return ids
 
     # The missing and collected gene names.
@@ -81,14 +89,11 @@ def run(data, index=utils.INDEX, pattern='', minc=1, csvout=False, verbose=False
     counts = sorted(counts, key=lambda x: (x[1], x[0]), reverse=True)
 
     # The number of hits found.
-    n_found = len(list(counts))
-
-    # The size of the original collection.
-    n_size = len(names)
+    n_size = len(list(names)) - len(miss)
 
     # Create the data object
     res = []
-    data_fields = [utils.GID, "count", "size", utils.LABEL, "function", utils.GENES]
+    data_fields = [utils.GID, "count", "size", utils.LABEL, "function", utils.SOURCE]
     for goid, cnt, func in counts:
         label = f"({cnt}/{n_size})"
         funcs = func2name.get(goid, [])
@@ -105,7 +110,7 @@ def run(data, index=utils.INDEX, pattern='', minc=1, csvout=False, verbose=False
         write.writeheader()
         for row in res:
             row = dict(row)
-            row[utils.GENES] = ";".join(row[utils.GENES])
+            row[utils.SOURCE] = ";".join(row[utils.SOURCE])
             write.writerow(row)
         out = stream.getvalue()
 
@@ -122,7 +127,7 @@ if __name__ == "__main__":
 
     data = utils.parse_terms(iter=iter)
 
-    out = run(data=data, csvout=True, minc=2)
+    out = run(data=data, csvout=True)
 
     print (out)
 

@@ -1,4 +1,4 @@
-import os
+import os, json
 import textwrap
 
 import pydot
@@ -176,30 +176,33 @@ def write(pg, out=None, imgsize=2048):
     else:
         utils.stop(f"Unknown output format: {out}")
 
-def run(terms, index=utils.INDEX, out="output.pdf", info={}, pattern=None, verbose=False):
+def run(data, index=utils.INDEX, out="output.pdf",  pattern=None, verbose=False):
 
-    # Additional information that may be passed to the tree.
-    info = info or dict(terms)
+    # The field that contains the data
+    DF = utils.DATA_FIELD
 
-    # The names to be processed
-    names = list(terms.keys())
+    # GO ids and Gene ids
+    go_data = {DF: []}
+    gn_data = {DF: []}
 
-    def is_go(x):
-        return x.startswith("GO:")
+    # Split the data into GO and Gene ids
+    for row in data[DF]:
+        if row[utils.GID].startswith("GO:"):
+            go_data[DF].append(row)
+        else:
+            gn_data[DF].append(row)
 
-    # Words that seem like GO terms.
-    terms = filter(lambda x: is_go(x), names)
-    terms = list(terms)
 
-    # Words that do not seem like GO terms.
-    genes = filter(lambda x: not is_go(x), names)
-    genes = list(genes)
 
-    # Map genes to go terms
-    if genes:
-        objs = annot.run(names=genes, index=utils.INDEX, pattern=pattern)
-        goids = [x['goid'] for x in objs]
-        terms = terms + goids
+    # Fill in the GO terms obtained from Genes.
+    if gn_data[DF]:
+        gn_res = annot.run(data=gn_data, index=utils.INDEX, pattern=pattern)
+        gn_res = json.loads(gn_res)
+        go_data[DF].extend(gn_res[DF])
+
+    print(go_data)
+    print(gn_data)
+    1 / 0
 
     # Build graph from JSON file
     graph = build_graph(index)
@@ -219,5 +222,11 @@ def run(terms, index=utils.INDEX, out="output.pdf", info={}, pattern=None, verbo
 
 if __name__ == "__main__":
     out = os.path.join("genescape.pdf")
-    terms = utils.parse_terms(utils.GO_LIST)
-    run(terms=terms, index=utils.INDEX, out=out)
+
+    iter = utils.get_stream(inp=utils.GO_LIST)
+
+    data = utils.parse_terms(iter=iter)
+
+    print(data)
+
+    run(data=data, index=utils.INDEX, out=out)
