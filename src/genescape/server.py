@@ -77,6 +77,11 @@ def textarea(request, name='input'):
     terms = list(terms)
     return terms
 
+def get_param(request, name='param'):
+    value = request.forms.get(name, '')
+    value = value.strip()
+    return value
+
 def temp_name(prefix="image-", suffix=".png"):
     fname = tempfile.NamedTemporaryFile(dir=TMP_PATH, prefix=prefix, suffix=suffix, delete=False).name
     sname = f"/static/tmp/{os.path.basename(fname)}"
@@ -151,12 +156,13 @@ def runner(reloader=False, debug=False):
         param = dict(title="GeneScape", rand=random())
         return param
 
-    @app.route('/dot/', method='POST')
-    @view('htmx/dot.html')
+    @app.route('/draw/', method='POST')
+    @view('htmx/draw.html')
     @debugger
-    def dot():
+    def draw():
         # Read the parameters from the request.
         inp = textarea(request)
+        patt = get_param(request, name='pattern')
 
         print(f"terms: {inp}")
 
@@ -164,7 +170,7 @@ def runner(reloader=False, debug=False):
         fname, sname = temp_name(suffix=".dot")
 
         # Generate the output.
-        graph = tree.run(inp=inp, index=tree.utils.INDEX, out=fname)
+        graph = tree.run(inp=inp, index=tree.utils.INDEX, pattern=patt, out=fname)
 
         # Convert the graph to a list of terms.
         text = graph2text(graph)

@@ -46,14 +46,27 @@ document.addEventListener('click', function(e) {
     }
 });
 
+function resize_container(svg){
+	var height = svg.getBoundingClientRect().height;
+	var contr = document.getElementById('graphContainer');
+	contr.style.height = height + 'px';
+
+	console.log('height:', height);
+}
+
 function render_graph(content) {
 	graph = document.getElementById('graph')
+	contr = document.getElementById('graphContainer')
     Viz.instance().then(function(viz) {
         var svg = viz.renderSVGElement(content);
-        svg.setAttribute("width", "auto");
-        svg.setAttribute("height", "auto");
+        //svg.setAttribute("width", "100%");
+        //svg.setAttribute("height", "1200px");
         graph.innerHTML = '';
         graph.appendChild(svg);
+
+        resize_container(svg);
+
+
     }).catch(
         error => console.error("Error rendering Graphviz:", error)
     );
@@ -80,7 +93,10 @@ function adjustSVGZoom(zoomAction) {
 
     // Apply new zoom level to the SVG
     svg.style.transform = `scale(${zoomLevel})`;
-    svg.style.transformOrigin = '0 0';
+    svg.style.transformOrigin = 'top left';
+
+    var height = svg.getBoundingClientRect().height;
+
 }
 
 // Bind click events to buttons
