@@ -16,14 +16,18 @@ INDEX = os.path.join(CURR_DIR, "data", "genescape.index.json.gz")
 # The OBO file.
 OBO_FILE = os.path.join(CURR_DIR, "data", "go-basic.obo")
 
-# Demo data.
-DEMO_CSV = os.path.join(CURR_DIR, "data", "gprofiler.csv")
+# GProfiler test data
+TEST_GPROFILER = os.path.join(CURR_DIR, "data", "gprofiler.csv")
 
 # The GO ids to draw.
-GO_LIST = os.path.join(CURR_DIR, "data", "goids.txt")
+TEST_GOIDS = os.path.join(CURR_DIR, "data", "test_goids.txt")
 
 # The default gene list.
-GENE_LIST = os.path.join(CURR_DIR, "data", "genelist.txt")
+TEST_GENES = os.path.join(CURR_DIR, "data", "test_genes.txt")
+
+# Input datasets.
+TEST_INPUT_CSV = os.path.join(CURR_DIR, "data", "test_input.csv")
+TEST_INPUT_JSON = os.path.join(CURR_DIR, "data", "test_input.json")
 
 # The GAF demo data.
 GAF_FILE = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")

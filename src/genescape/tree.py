@@ -10,9 +10,12 @@ from genescape.utils import GID, LABEL, DEGREE, COUNT_DESC, INPUT
 
 
 # Parse GO Ontology file from fname into a networkx graph
-def build_graph(index):
+def build_onto_graph(index):
+
+    # The complete ontology graph
     graph = nx.DiGraph()
 
+    # Gets the JSON data from the index file.
     data = utils.get_json(index)
 
     # The term section of the index.
@@ -45,23 +48,17 @@ def fix(text):
 
 
 # Generates a tree from the graph.
-def make_tree(terms: list, info:dict, graph: DiGraph()) -> DiGraph():
+def make_tree(ann, graph):
+
+    terms = dict()
+    for key in ann[utils.DATA_FIELD]:
+        terms[key[utils.GID]] = key
 
     # The nodes in the graph.
     nodes = set(terms)
 
-    # Get all the valid nodes.
+    # Keep only valid nodes.
     nodes = list(filter(lambda x: graph.has_node(x), nodes))
-
-    # Print information messages.
-    utils.info(f"valid ids: {len(nodes)}")
-    utils.debug(f"valid nodes: {nodes}")
-
-    # Write information on missing nodes.
-    miss = list(set(terms) - set(nodes))
-    if miss:
-        utils.warn(f"missing {len(miss)} ids like: {', '.join(miss[:10])} ... ")
-        utils.debug(f"missing nodes: {miss}")
 
     # Collect the ancestors for each node.
     anc = set()
@@ -85,7 +82,7 @@ def make_tree(terms: list, info:dict, graph: DiGraph()) -> DiGraph():
         # Keeps track of the number of descendants of the node.
         tree.nodes[node][COUNT_DESC] = count_descendants(graph, node)
 
-        # Keeps track of wether the node was in the input list.
+        # Keeps track of whether the node was in the input list.
         tree.nodes[node][INPUT] = node in inp_nodes
 
     # Print information messages.
@@ -98,10 +95,13 @@ def make_tree(terms: list, info:dict, graph: DiGraph()) -> DiGraph():
 def count_descendants(graph, start):
     return len(nx.descendants(graph, start)) + 1
 
-def pydot_graph(info, tree: DiGraph) -> pydot.Dot :
+def pydot_graph(extra, tree: DiGraph) -> pydot.Dot :
     """
     Adds additional information to the tree nodes.
     """
+
+    # Create a dictionary of the annotations.
+    info = dict(map(lambda x: (x[utils.GID], x), extra[utils.DATA_FIELD]))
 
     # Create the pydot graph.
     pg = pydot.Dot("genescape", graph_type="digraph")
@@ -109,13 +109,13 @@ def pydot_graph(info, tree: DiGraph) -> pydot.Dot :
     # Iterate over the nodes
     for node in tree.nodes():
         # Get the annotations for the node if these exist.
-        ann = info.get(node, {}).get("label")
+        extra = info.get(node, {}).get("label")
 
         # Fetch the label for the node
         label = tree.nodes[node]["label"]
 
         # Fill with additional information for the label
-        label = f"{label}\n{ann}" if ann else label
+        label = f"{label}\n{extra}" if extra else label
 
         # Properly quote the label
         label = fix(label)
@@ -176,57 +176,50 @@ def write(pg, out=None, imgsize=2048):
     else:
         utils.stop(f"Unknown output format: {out}")
 
-def run(data, index=utils.INDEX, out="output.pdf",  pattern=None, verbose=False):
+def draw(ann, index=utils.INDEX, out="output.pdf"):
 
-    # The field that contains the data
-    DF = utils.DATA_FIELD
-
-    # GO ids and Gene ids
-    go_data = {DF: []}
-    gn_data = {DF: []}
-
-    # Split the data into GO and Gene ids
-    for row in data[DF]:
-        if row[utils.GID].startswith("GO:"):
-            go_data[DF].append(row)
-        else:
-            gn_data[DF].append(row)
-
-
-
-    # Fill in the GO terms obtained from Genes.
-    if gn_data[DF]:
-        gn_res = annot.run(data=gn_data, index=utils.INDEX, pattern=pattern)
-        gn_res = json.loads(gn_res)
-        go_data[DF].extend(gn_res[DF])
-
-    print(go_data)
-    print(gn_data)
-    1 / 0
 
     # Build graph from JSON file
-    graph = build_graph(index)
+    graph = build_onto_graph(index)
 
     # Generate the tree from the graph.
-    tree = make_tree(terms=terms, info=info, graph=graph)
+    tree = make_tree(ann=ann,  graph=graph)
 
     # Decorate the tree with additional information.
-    pg = pydot_graph(info, tree)
+    pg = pydot_graph(extra=ann, tree=tree)
 
     # Write the tree to a file.
     write(pg, out)
 
     return tree
 
-# dot -Tpdf output_raw.dot -o output.pdf
+
+def run(inp, index=utils.INDEX, pattern=None, minc=0, out=None):
+    """
+    Run the tree drawing command on an input.
+    """
+
+    # Get the input stream.
+    iter = utils.get_stream(inp=inp)
+
+    # Parse the input into a dictionary.
+    data = utils.parse_terms(iter=iter)
+
+    # Run the annotation command
+    ann = annot.run(data, index=index, minc=minc, pattern=pattern)
+
+    # Turn the JSON string into an object.
+    ann = json.loads(ann)
+
+    # Run the tree command.
+    tree = draw (ann=ann, index=index, out=out)
+
+    # Return the tree
+    return tree
 
 if __name__ == "__main__":
     out = os.path.join("genescape.pdf")
+    inp = utils.TEST_GENES
+    run(inp=inp, out=out)
 
-    iter = utils.get_stream(inp=utils.GO_LIST)
 
-    data = utils.parse_terms(iter=iter)
-
-    print(data)
-
-    run(data=data, index=utils.INDEX, out=out)

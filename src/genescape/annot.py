@@ -123,11 +123,11 @@ def run(data, index=utils.INDEX, pattern='', minc=1, csvout=False, verbose=False
 if __name__ == "__main__":
 
     # Read the genelist
-    iter = utils.get_stream(inp=utils.GENE_LIST)
+    iter = utils.get_stream(inp=utils.TEST_GENES)
 
     data = utils.parse_terms(iter=iter)
 
-    out = run(data=data, csvout=True)
+    out = run(data=data)
 
     print (out)
 

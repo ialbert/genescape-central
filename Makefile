@@ -20,7 +20,9 @@ serve:
 
 # Performs the testing.
 test:
-	hatch run test
+	#hatch run test
+	genescape annotate --test > test/out/test1.json
+	genescape annotate --test --csv > test/out/test1.csv
 
 # Runs a linter.
 lint:
@@ -55,3 +57,5 @@ $(OBO):
 
 get: $(OBO)
 	@ls -l $(OBO)
+
+.PHONY: test lint fix push demo clean realclean build pypi get

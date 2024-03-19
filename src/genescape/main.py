@@ -17,10 +17,12 @@ def cli():
 @click.argument("fname", default=None, required=False)
 @click.option("-o", "out", metavar="TEXT", default="genescape.pdf", help="output graph file")
 @click.option("-i", "index", metavar="FILE", default=utils.INDEX, help="OBO index file", )
-@click.option("--demo", "demo", is_flag=True, help="run with demo data")
+@click.option("-m", "match", metavar="REGEX", default='', help="Regular expression match on function")
+@click.option("-c", "minc", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
+@click.option("--test", "test", is_flag=True, help="run with demo data")
 @click.option( "-v", "verbose", is_flag=True, help="verbose output")
 @click.help_option("-h", "--help")
-def tree(fname, index, out, verbose, demo=False):
+def tree(fname, index, out, match=None, minc=1, verbose=False, test=False):
     """
     Draws a tree from GO terms.
     """
@@ -37,15 +39,12 @@ def tree(fname, index, out, verbose, demo=False):
         utils.logger.setLevel(utils.DEBUG)
 
     # Override the fname if demo is set.
-    if demo:
-        fname = utils.GO_LIST
+    if test:
+        fname = utils.TEST_GOIDS
         utils.info(f"input {fname}")
 
-    # Parse the input into a list
-    terms = utils.parse_terms(fname)
-
     # Run the tree command.
-    tree.run(terms=terms, index=utils.INDEX, out=out)
+    tree.run(inp=fname, index=utils.INDEX, pattern=match, minc=minc, out=out)
 
 
 @cli.command()
@@ -54,16 +53,16 @@ def tree(fname, index, out, verbose, demo=False):
 @click.option("-m", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "minc", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
 @click.option("--csv", "csvout", is_flag=True, help="Produce CSV output")
-@click.option("--demo", "demo", is_flag=True, help="Run with demo data")
+@click.option("--test", "test", is_flag=True, help="Run with test data")
 @click.option( "-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, index, verbose=False, demo=False, csvout=False, match="", minc=1):
+def annotate(fname, index, verbose=False, test=False, csvout=False, match="", minc=1):
     """
     Generates the GO terms for a list of genes.
     """
     from genescape import annot
-    if demo:
-        fname = utils.GENE_LIST
+    if test:
+        fname = utils.TEST_GENES
         utils.info(f"input {fname}")
 
     # Set the verbosity level.
@@ -116,7 +115,7 @@ def filter(fname, mcol, pcol, pval="", match="", tab=False, demo=False):
 
     # Override the fname if demo is set.
     if demo:
-        fname = utils.DEMO_CSV
+        fname = utils.TEST_GPROFILER
         match = "BP"
         utils.info(f"input {fname}")
 
