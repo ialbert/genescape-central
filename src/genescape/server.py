@@ -72,15 +72,9 @@ def debugger(func):
 
 def textarea(request, name='input'):
     text = request.forms.get(name, '')
-
-    # print(f"input: {text}")
-
     terms = map(lambda x: x.strip(), text.splitlines())
+    terms = filter(None, terms)
     terms = list(terms)
-    terms = utils.parse_terms(terms)
-
-    # print (terms)
-
     return terms
 
 def temp_name(prefix="image-", suffix=".png"):
@@ -162,15 +156,15 @@ def runner(reloader=False, debug=False):
     @debugger
     def dot():
         # Read the parameters from the request.
-        terms = textarea(request)
+        inp = textarea(request)
 
-        print(f"terms: {terms}")
+        print(f"terms: {inp}")
 
         # Generate temporary names
         fname, sname = temp_name(suffix=".dot")
 
         # Generate the output.
-        graph = tree.run(terms=terms, index=tree.utils.INDEX, out=fname)
+        graph = tree.run(inp=inp, index=tree.utils.INDEX, out=fname)
 
         # Convert the graph to a list of terms.
         text = graph2text(graph)
