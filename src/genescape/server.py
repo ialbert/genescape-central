@@ -98,11 +98,17 @@ def webapp(reloader=False, debug=False):
 
     @app.route('/')
     @view('index.html')
-    @utils.timer
     @debugger
     def index():
         param = dict(title="GeneScape", rand=random())
         return param
+
+    @app.route('/upload/', method='POST')
+    @debugger
+    def upload():
+        stream = request.files.get('file')
+        content = stream.file.read().decode('utf-8', errors="ingore")
+        return content
 
     @app.route(path='/check/', method='POST')
     @view('htmx/check.html')

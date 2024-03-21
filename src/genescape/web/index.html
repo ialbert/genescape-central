@@ -23,6 +23,8 @@
 
 <body>
 
+
+
 <div class="container" style="min-height:80%">
 
     <div class="row hide" id="error-bar">
@@ -38,9 +40,9 @@
 
             <span class="title">GeneScape</span>
 
-            <button>
-                Load File
-            </button>
+            <input type="file" id="file-input" style="display:none" onchange="uploadFile()"/>
+            <label for="file-input" class="button">Load file</label>
+
 
             Filter: <input type="text" id="pattern" name="pattern" placeholder="Pattern" value="vitamin"/>
 

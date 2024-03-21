@@ -117,4 +117,31 @@ document.querySelectorAll('button[data-action]').forEach(button => {
 });
 
 
+
+function uploadFile() {
+  var input = document.getElementById('file-input');
+  if (input.files.length > 0) {
+    var file = input.files[0];
+    var formData = new FormData();
+    formData.append('file', file);
+	fetch('/upload/', {
+	      method: 'POST',
+	      body: formData,
+	    })
+	    .then(response => {
+	      if (response.ok) {
+	        return response.text();
+	      }
+	      throw new Error('Network response was not ok.');
+	    })
+	    .then(data => {
+	      var input = document.getElementById('input');
+	      input.value = data;
+	    })
+	    .catch(error => {
+	      console.error('There has been a problem with your fetch operation:', error);
+	    });
+	  }
+}
+
 console.log('Genescape javascript loaded OK');
