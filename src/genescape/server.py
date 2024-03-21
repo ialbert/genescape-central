@@ -94,7 +94,15 @@ def graph2text(graph):
     text = "\n".join(lines)
     return text
 
-def runner(reloader=False, debug=False):
+def webapp(reloader=False, debug=False):
+
+    @app.route('/')
+    @view('index.html')
+    @utils.timer
+    @debugger
+    def index():
+        param = dict(title="GeneScape", rand=random())
+        return param
 
     @app.route(path='/check/', method='POST')
     @view('htmx/check.html')
@@ -148,13 +156,7 @@ def runner(reloader=False, debug=False):
         print(f"serve static: {name}")
         return static_file(name, root=STATIC_DIR)
 
-    @app.route('/')
-    @view('index.html')
-    @utils.timer
-    @debugger
-    def index():
-        param = dict(title="GeneScape", rand=random())
-        return param
+
 
     @app.route('/draw/', method='POST')
     @view('htmx/draw.html')
@@ -194,4 +196,4 @@ def runner(reloader=False, debug=False):
         print(f"Server Error: {e}", sys.stderr)
 
 if __name__ == "__main__":
-    runner(reloader=True, debug=True)
+    webapp(reloader=True, debug=True)

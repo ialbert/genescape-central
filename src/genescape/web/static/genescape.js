@@ -30,18 +30,19 @@ document.body.addEventListener('htmx:responseError', handleHTMXError);
 // Add event listener for the `data-toggle-width` attribute.
 document.addEventListener('click', function(e) {
     if (e.target && e.target.dataset.toggleWidth === 'true') {
-        var leftDiv = document.getElementById('sideBar');
-        var rightDiv = document.getElementById('mainBar');
-        if (leftDiv.classList.contains('col-sm-3')) {
-            leftDiv.classList.remove('col-sm-3');
-            leftDiv.classList.add('col-sm-0');
-            rightDiv.classList.remove('col-sm-9');
-            rightDiv.classList.add('col-sm-12');
+        var side = document.getElementById('sideBar');
+        var main = document.getElementById('mainBar');
+
+        if (side.classList.contains('col-sm-3')) {
+            side.classList.remove('col-sm-3');
+            side.classList.add('col-sm-1');
+            main.classList.remove('col-sm-9');
+            main.classList.add('col-sm-11');
         } else {
-            leftDiv.classList.remove('col-sm-0');
-            leftDiv.classList.add('col-sm-3');
-            rightDiv.classList.remove('col-sm-12');
-            rightDiv.classList.add('col-sm-9');
+            side.classList.remove('col-sm-1');
+            side.classList.add('col-sm-3');
+            main.classList.remove('col-sm-11');
+            main.classList.add('col-sm-9');
         }
     }
 });
@@ -84,9 +85,9 @@ function adjustSVGZoom(zoomAction) {
 
     // Adjust zoom level based on the action
     if (zoomAction === 'zoom-in') {
-        zoomLevel *= 1.1; // Zoom in by 10%
+        zoomLevel *= 1.2; // Zoom in by 10%
     } else if (zoomAction === 'zoom-out') {
-        zoomLevel /= 1.1; // Zoom out by 10%
+        zoomLevel /= 1.2; // Zoom out by 10%
     } else {
         consol.log("invalid zoom level")
     }
@@ -96,6 +97,14 @@ function adjustSVGZoom(zoomAction) {
     svg.style.transformOrigin = 'top left';
 
     var height = svg.getBoundingClientRect().height;
+    var width = svg.getBoundingClientRect().width;
+
+	var contr = document.getElementById('graphContainer');
+	contr.style.height = 1.01 * height + 'px';
+	contr.style.width = 1.01 * width + 'px';
+
+	console.log('height:', height);
+	console.log('width:', width);
 
 }
 

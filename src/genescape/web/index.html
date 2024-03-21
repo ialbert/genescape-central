@@ -10,6 +10,9 @@
     <!-- https://htmx.org/ -->
     <script src="/static/htmx.min.js.gz"></script>
 
+    <!-- https://alpinejs.dev/start-here -->
+    <script defer src="/static/alpine.min.js"></script>
+
     <!-- https://github.com/mdaines/viz-js -->
     <script src="/static/viz-standalone.js"></script>
 
@@ -20,7 +23,7 @@
 
 <body>
 
-<div class="container">
+<div class="container" style="min-height:80%">
 
     <div class="row hide" id="error-bar">
         <div class="col-sm-12">
@@ -30,6 +33,7 @@
     </div>
 
     <div class="row">
+
         <div class="col-sm-12" id="#form">
 
             <span class="title">GeneScape</span>
@@ -54,9 +58,6 @@
             <button data-action="zoom-out">Zoom-</button>
 
             <button
-            hx-get="#"
-            hx-trigger="click"
-            hx-swap="none"
             class="btn btn-primary"
             data-toggle-width="true">
                 Full Screen
@@ -76,58 +77,61 @@
     <div class="row">
         <div class="col-sm-3" id="sideBar">
 
-            <div class="header">
-                Input
-            </div>
+            <div class="grow">
 
-            <textarea class="input" name="input" id="input"
-                      hx-swap-oob="true"
-                      spellcheck="false" value="hey">
+                <div class="header">
+                    Input List
+                </div>
+
+                <textarea class="input" name="input" id="input"
+                          hx-swap-oob="true"
+                          spellcheck="false">
 Cyp1a1
 Sphk2
 Sptlc2
 Smpd3
             </textarea>
 
-            <div class="header">Functions
-                <span id="loadingFile" class="htmx-indicator">
+                <div class="header">Function Annotations
+                    <span id="loadingFile" class="htmx-indicator">
                     <span class="mark"> ... processing</span>
                 </span>
-            </div>
+                </div>
 
-            <textarea class="input" name="terms" id="terms"
-                      hx-swap-oob="true"
-                      readonly="readonly"
-                      spellcheck="false" value="hey" placeholder="Press generate to see functions">
+                <textarea class="input" name="terms" id="terms"
+                          hx-swap-oob="true">
             </textarea>
-
+            </div>
         </div>
         <div class="col-sm-9" id="mainBar">
 
-            <div class="header">
-                Tree
-                <!-- Loading  indicator -->
-                <span id="loadingImage" class="htmx-indicator">
+            <div class="grow">
+                <div class="header">
+                    Function Tree
+                    <!-- Loading  indicator -->
+                    <span id="loadingImage" class="htmx-indicator">
                 <span class="mark">... processing</span>
             </span>
-            </div>
-
-
-            <!-- Graph placeholder -->
-            <div id="graphContainer">
-                <div id="graph">
-                   <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                       <rect x="2" y="2" width="98%" height="98%"
-                             style="fill:#DEDEDE;stroke:#555555;stroke-width:2"/>
-                             <text x="50%" y="50%" font-size="18" text-anchor="middle"
-                                   alignment-baseline="middle"
-                                   font-family="monospace, sans-serif" fill="#555555">Press "Draw Tree" to generate an image</text></svg>
                 </div>
+
+
+                <!-- Graph placeholder -->
+                <div id="graphContainer" style="height:100%; flex-grow:1">
+                    <div id="graph">
+                        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="2" width="100%" height="100%" fill="none"/>
+                            <text x="50%" y="50%" font-size="24" text-anchor="middle"
+                                  alignment-baseline="middle"
+                                  font-family="monospace, sans-serif" >Press "Draw Tree" to generate an
+                                image
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Dot placeholder -->
+                <pre id="dot" style="display: none;"></pre>
             </div>
-
-            <!-- Dot placeholder -->
-            <pre id="dot" style="display: none;"></pre>
-
         </div>
     </div>
 </div>
