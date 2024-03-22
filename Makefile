@@ -34,6 +34,9 @@ push:
 	git commit -am 'saving work' && git push
 
 
+exe:
+	pyinstaller src/genescape/server.py --add-data=src/genescape/data:genescape/data -y --onefile
+
 clean:
 	rm -f src/genescape/web/static/tmp/image*
 
