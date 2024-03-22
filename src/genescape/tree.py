@@ -181,8 +181,7 @@ def write(pg, out=None, imgsize=2048):
 
     return text
 
-def draw(ann, index=utils.INDEX, out="output.pdf"):
-
+def build_tree(ann, index=utils.INDEX):
 
     # Build graph from JSON file
     graph = build_onto_graph(index)
@@ -190,18 +189,22 @@ def draw(ann, index=utils.INDEX, out="output.pdf"):
     # Generate the tree from the graph.
     tree = make_tree(ann=ann,  graph=graph)
 
-    # Decorate the tree with additional information.
+    return tree
+
+def write_tree(tree, ann, out=None):
+
+    # Transform the tree into a pydot graph.
     pg = pydot_graph(extra=ann, tree=tree)
 
     # Write the tree to a file.
-    write(pg, out)
+    text = write(pg, out)
 
-    return tree
+    return text
 
 
-def run(inp, index=utils.INDEX, pattern=None, mincount=1, out=None):
+def parse_input(inp, index=utils.INDEX, pattern=None, mincount=1):
     """
-    Run the tree drawing command on an input.
+    Parses an input and generates a tree and an annotation object.
     """
 
     # Get the input stream.
@@ -217,14 +220,15 @@ def run(inp, index=utils.INDEX, pattern=None, mincount=1, out=None):
     ann = json.loads(ann)
 
     # Run the tree command.
-    tree = draw (ann=ann, index=index, out=out)
+    tree = build_tree (ann=ann, index=index)
 
     # Return the tree
-    return tree
+    return tree, ann
 
 if __name__ == "__main__":
     out = os.path.join("genescape.pdf")
     inp = utils.TEST_GENES
-    run(inp=inp, out=out, mincount=2)
+    tree, ann = parse_input(inp=inp, mincount=2)
+    text = write_tree(tree, ann, out=out)
 
 

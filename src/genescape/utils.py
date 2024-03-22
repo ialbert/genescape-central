@@ -50,21 +50,23 @@ def stop(msg):
     logger.error(msg)
     sys.exit(1)
 
-def init_resource(package, resource, tag='v1', parent=".genescape"):
+def init_resource(package=None, resource='', tag='v1', dirname=".genescape", path='', overwrite=False):
 
     # The filesystem directory
-    dest = Path.home() / parent / tag / resource
+    dest = Path.home() / dirname / tag / path / resource
 
     # Ensure the target directory exists
     dest.parent.mkdir(parents=True, exist_ok=True)
 
-    # Create the resource if it does not exist.
-    if not os.path.isfile(dest):
+    # Get the path to a resource
+    if not package or not resource:
+        return dest
 
+    # Create the resource if it does not exist.
+    if not os.path.isfile(dest) or overwrite:
         with resources.path(package, resource) as src:
             # Copy the resource to the target directory
             shutil.copy(src, dest)
-
             info(f'# init resource: {dest}')
 
     return dest
@@ -72,13 +74,12 @@ def init_resource(package, resource, tag='v1', parent=".genescape"):
 # For Windows we package a prebuilt dot.exe
 DOT_EXE = init_resource(package='genescape.bin', resource="dot.exe") if os.name == "nt" else "dot"
 
-INDEX = init_resource(package='genescape.data', resource='genescape.index.json.gz')
+INDEX = init_resource(package='genescape.data', resource='genescape.hs.index.json.gz')
 
 OBO_FILE = init_resource(package='genescape.data', resource='go-basic.obo.gz')
 
-# Test data files.
+# Initialize test data files.
 TEST_GOIDS = init_resource(package='genescape.data', resource="test_goids.txt")
-
 TEST_GENES = init_resource(package='genescape.data', resource="test_genes.txt")
 TEST_INPUT_CSV = init_resource(package='genescape.data', resource="test_input.csv")
 TEST_INPUT_JSON = init_resource(package='genescape.data', resource="test_input.json")

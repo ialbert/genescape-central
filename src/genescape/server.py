@@ -1,4 +1,4 @@
-import sys, os, functools
+import sys, os, functools, webbrowser, threading
 from random import random
 import tempfile
 from genescape import tree, annot, utils
@@ -7,45 +7,34 @@ from genescape.bottle import TEMPLATE_PATH
 from genescape import bottle
 from genescape.bottle import get, post, request, response, redirect
 
+# WEB related resources
+WEB_RES = [
+    ("genescape.data.web", "index.html"),
+    ("genescape.data.web", "draw.html"),
+    ("genescape.data.web.static", "genescape.css"),
+    ("genescape.data.web.static", "genescape.js"),
+    ("genescape.data.web.static", "genescape.js"),
+    ("genescape.data.web.static", "htmx.min.js.gz"),
+    ("genescape.data.web.static", "viz-standalone.js"),
+    ("genescape.data.web.static", "mini-default.css"),
+]
+
+# Initialize web related resources.
+for pack, res in WEB_RES:
+    path = utils.init_resource(package=pack, resource=res, path="web", overwrite=True)
+
 # Debug mode.
 DEBUG = True
 
-# The current directory.
-CURR_DIR = os.path.dirname(os.path.realpath(__file__))
-
-# Web related content.
-WEB_DIR = os.path.join(CURR_DIR, "web")
-
-# Static content directory.
-STATIC_DIR = os.path.join(WEB_DIR, "static")
-
-# The name of the demo image.
-DEMO_IMG = os.path.join(STATIC_DIR, "img", "demo.png")
-DEMO_PATH = os.path.dirname(DEMO_IMG)
-
-# Temporary directory
-TMP_PATH = os.path.join(STATIC_DIR, "tmp")
-
-# Make the temporary directory if it does not exist.
-if not os.path.isdir(TMP_PATH):
-    os.makedirs(TMP_PATH)
-
-# The directory containing the templates.
-TEMPLATE_DIR = WEB_DIR
+# The webserver directory.
+WEB_DIR = utils.init_resource(path="web")
 
 # Add the template directory to the template path.
-TEMPLATE_PATH.insert(0, TEMPLATE_DIR)
-
-# The user's home directory.
-HOME_DIR = os.path.expanduser("~")
-
-# Default genescape directory
-GENESCAPE_DIR = os.path.join(HOME_DIR, "genescape")
+TEMPLATE_PATH.insert(0, WEB_DIR)
 
 import time
 
 app = Bottle()
-
 
 def debugger(func):
     """
@@ -82,10 +71,6 @@ def get_param(request, name='param'):
     value = value.strip()
     return value
 
-def temp_name(prefix="image-", suffix=".png"):
-    fname = tempfile.NamedTemporaryFile(dir=TMP_PATH, prefix=prefix, suffix=suffix, delete=False).name
-    sname = f"/static/tmp/{os.path.basename(fname)}"
-    return (fname, sname)
 
 def graph2text(graph):
     nodes = filter(lambda x: graph.nodes[x].get(utils.INPUT), graph.nodes)
@@ -160,9 +145,7 @@ def webapp(reloader=False, debug=False):
     @app.route('/static/<name:path>')
     def static(name):
         print(f"serve static: {name}")
-        return static_file(name, root=STATIC_DIR)
-
-
+        return static_file(name, root=WEB_DIR)
 
     @app.route('/draw/', method='POST')
     @view('htmx/draw.html')
@@ -201,5 +184,13 @@ def webapp(reloader=False, debug=False):
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)
 
+def open_browser():
+    # Wait for the server to start before opening the browser
+    webbrowser.open_new('http://127.0.0.1:8000/')
+
+def start_server():
+    threading.Thread(target=lambda: webapp(reloader=True, debug=True)).start()
+    open_browser()
+
 if __name__ == "__main__":
-    webapp(reloader=True, debug=True)
+    start_server()

@@ -44,7 +44,10 @@ def tree(fname, index, out, match=None, count=1, verbose=False, test=False):
         utils.info(f"input {fname}")
 
     # Run the tree command.
-    tree.run(inp=fname, index=utils.INDEX, pattern=match, mincount=count, out=out)
+    graph, ann = tree.parse_input(inp=fname, index=utils.INDEX, pattern=match, mincount=count)
+
+    # Write the tree to a file.
+    tree.write_tree(graph, ann, out=out)
 
 
 @cli.command()
