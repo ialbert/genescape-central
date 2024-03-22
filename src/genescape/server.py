@@ -148,7 +148,7 @@ def webapp(reloader=False, debug=False):
         return static_file(name, root=WEB_DIR)
 
     @app.route('/draw/', method='POST')
-    @view('htmx/draw.html')
+    @view('draw.html')
     @debugger
     def draw():
         # Read the parameters from the request.
@@ -157,18 +157,14 @@ def webapp(reloader=False, debug=False):
 
         print(f"terms: {inp}")
 
-        # Generate temporary names
-        fname, sname = temp_name(suffix=".dot")
-
         # Generate the output.
-        graph = tree.run(inp=inp, index=tree.utils.INDEX, pattern=patt, out=fname)
+        graph, ann = tree.parse_input(inp=inp, index=tree.utils.INDEX, pattern=patt)
+
+        # The dot string
+        dot = tree.write_tree(graph, ann, out=None)
 
         # Convert the graph to a list of terms.
         text = graph2text(graph)
-
-        # Read the dot file.
-        with open(fname) as fp:
-            dot = fp.read()
 
         param = dict(dot=dot, input=text)
 
@@ -184,13 +180,14 @@ def webapp(reloader=False, debug=False):
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)
 
-def open_browser():
-    # Wait for the server to start before opening the browser
-    webbrowser.open_new('http://127.0.0.1:8000/')
+def open_browser(host="127.0.0.1", port=8000, proto="http"):
+    url = f"{proto}://{host}:{port}/"
+    threading.Timer(interval=1, function=lambda: webbrowser.open_new(url)).start()
+
 
 def start_server():
-    threading.Thread(target=lambda: webapp(reloader=True, debug=True)).start()
-    open_browser()
+    threading.Thread(target=open_browser).start()
+    webapp(reloader=True, debug=True)
 
 if __name__ == "__main__":
     start_server()
