@@ -156,9 +156,12 @@ def write(pg, out=None, imgsize=2048):
     Save the tree to a file.
     """
 
+    # Turn the graph into a DOT string.
+    text = pg.to_string()
+
     # No output requested
     if out is None:
-        return
+        return text
 
     # Write the graph to a file.
     utils.info(f"output: {out}")
@@ -175,6 +178,8 @@ def write(pg, out=None, imgsize=2048):
         pg.write_png(out, prog=utils.DOT_EXE)
     else:
         utils.stop(f"Unknown output format: {out}")
+
+    return text
 
 def draw(ann, index=utils.INDEX, out="output.pdf"):
 
