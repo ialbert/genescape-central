@@ -7,24 +7,25 @@ from genescape.bottle import TEMPLATE_PATH
 from genescape import bottle
 from genescape.bottle import get, post, request, response, redirect
 
-# WEB related resources
-WEB_RES = [
-    ("genescape.data.web", "index.html"),
-    ("genescape.data.web", "draw.html"),
-    ("genescape.data.web.static", "genescape.css"),
-    ("genescape.data.web.static", "genescape.js"),
-    ("genescape.data.web.static", "genescape.js"),
-    ("genescape.data.web.static", "htmx.min.js.gz"),
-    ("genescape.data.web.static", "viz-standalone.js"),
-    ("genescape.data.web.static", "mini-default.css"),
-]
-
-# Initialize web related resources.
-for pack, res in WEB_RES:
-    path = utils.init_resource(package=pack, resource=res, path="web", overwrite=True)
-
-# Debug mode.
 DEBUG = True
+
+def init_server(devmode=False):
+
+    # WEB related resources
+    WEB_RES = [
+        ("genescape.data.web", "index.html"),
+        ("genescape.data.web", "draw.html"),
+        ("genescape.data.web.static", "genescape.css"),
+        ("genescape.data.web.static", "genescape.js"),
+        ("genescape.data.web.static", "genescape.js"),
+        ("genescape.data.web.static", "htmx.min.js.gz"),
+        ("genescape.data.web.static", "viz-standalone.js"),
+        ("genescape.data.web.static", "mini-default.css"),
+    ]
+
+    # Initialize web related resources.
+    for pack, res in WEB_RES:
+        utils.init_resource(package=pack, resource=res, path="web", overwrite=devmode)
 
 # The webserver directory.
 WEB_DIR = utils.init_resource(path="web")
@@ -184,10 +185,10 @@ def open_browser(host="127.0.0.1", port=8000, proto="http"):
     url = f"{proto}://{host}:{port}/"
     threading.Timer(interval=1, function=lambda: webbrowser.open_new(url)).start()
 
-
-def start_server():
+def start(devmode=False):
+    init_server(devmode)
     threading.Thread(target=open_browser).start()
-    webapp(reloader=True, debug=True)
+    webapp(reloader=devmode, debug=devmode)
 
 if __name__ == "__main__":
-    start_server()
+    start()

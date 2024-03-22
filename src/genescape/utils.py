@@ -17,6 +17,9 @@ logger.setLevel(INFO)
 # Rename the log levels.
 logging.addLevelName(logging.WARNING, "WARN")
 
+# Data format version.
+TAG= 'v1'
+
 # Loggin format
 LOG_FORMAT = "# %(levelname)s\t%(module)s.%(funcName)s\t%(message)s"
 
@@ -50,7 +53,7 @@ def stop(msg):
     logger.error(msg)
     sys.exit(1)
 
-def init_resource(package=None, resource='', tag='v1', dirname=".genescape", path='', overwrite=False):
+def init_resource(package=None, resource='', tag=TAG, dirname=".genescape", path='', overwrite=False):
 
     # The filesystem directory
     dest = Path.home() / dirname / tag / path / resource

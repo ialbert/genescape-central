@@ -127,12 +127,13 @@ def filter(fname, mcol, pcol, pval="", match="", tab=False, demo=False):
 
 @cli.command()
 @click.help_option("-h", "--help")
-def gui():
+@click.option("--devmode", "devmode", is_flag=True, help="run in development mode")
+def web(devmode):
     """
-    Run the GUI.
+    Run the web interface.
     """
-    from genescape import gui
-    gui.run()
+    from genescape import server
+    server.start(devmode=devmode)
 
 
 if __name__ == "__main__":
