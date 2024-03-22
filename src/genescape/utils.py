@@ -1,32 +1,90 @@
 import logging, functools, time
 import os, gzip, json, csv
-import sys
+import sys, pathlib
 from logging import DEBUG, ERROR, INFO, WARNING
 from itertools import tee
-import io
-# Current directory.
-CURR_DIR = os.path.dirname(os.path.realpath(__file__))
+import io, shutil
+
+from importlib import resources
+from pathlib import Path
+
+# Get the logger.
+logger = logging.getLogger(__name__)
+
+# Set the default loglevel.
+logger.setLevel(INFO)
+
+# Rename the log levels.
+logging.addLevelName(logging.WARNING, "WARN")
+
+# Loggin format
+LOG_FORMAT = "# %(levelname)s\t%(module)s.%(funcName)s\t%(message)s"
+
+# A callable to initialize the logger
+def init_logger(logger):
+    formatter = logging.Formatter(LOG_FORMAT)
+    handler = logging.StreamHandler()
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
+# Initialize the logger
+init_logger(logger)
+
+# A wrapper with additional callback
+def wrapper(logfunc, callback=None):
+    def func(msg):
+        logfunc(msg)
+        if callback:
+            callback(msg)
+
+    return func
+
+
+debug = wrapper(logger.debug)
+info = wrapper(logger.info)
+warn = wrapper(logger.warning)
+error = wrapper(logger.error)
+
+# Stops the process with an error.
+def stop(msg):
+    logger.error(msg)
+    sys.exit(1)
+
+def init_resource(package, resource, tag='v1', parent=".genescape"):
+
+    # The filesystem directory
+    dest = Path.home() / parent / tag / resource
+
+    # Ensure the target directory exists
+    dest.parent.mkdir(parents=True, exist_ok=True)
+
+    # Create the resource if it does not exist.
+    if not os.path.isfile(dest):
+
+        with resources.path(package, resource) as src:
+            # Copy the resource to the target directory
+            shutil.copy(src, dest)
+
+            info(f'# init resource: {dest}')
+
+    return dest
 
 # For Windows we package a prebuilt dot.exe
-DOT_EXE = os.path.join(CURR_DIR, "bin", "dot.exe" ) if os.name == "nt" else "dot"
+DOT_EXE = init_resource(package='genescape.bin', resource="dot.exe") if os.name == "nt" else "dot"
 
-# Data file paths.
-INDEX = os.path.join(CURR_DIR, "data", "genescape.index.json.gz")
+INDEX = init_resource(package='genescape.data', resource='genescape.index.json.gz')
 
-# The OBO file.
-OBO_FILE = os.path.join(CURR_DIR, "data", "go-basic.obo")
-
-# Test data directory
-TEST_INP_DIR = os.path.join(CURR_DIR, "data")
+OBO_FILE = init_resource(package='genescape.data', resource='go-basic.obo.gz')
 
 # Test data files.
-TEST_GOIDS = os.path.join(TEST_INP_DIR, "test_goids.txt")
-TEST_GENES = os.path.join(TEST_INP_DIR, "test_genes.txt")
-TEST_INPUT_CSV = os.path.join(TEST_INP_DIR, "test_input.csv")
-TEST_INPUT_JSON = os.path.join(TEST_INP_DIR, "test_input.json")
+TEST_GOIDS = init_resource(package='genescape.data', resource="test_goids.txt")
+
+TEST_GENES = init_resource(package='genescape.data', resource="test_genes.txt")
+TEST_INPUT_CSV = init_resource(package='genescape.data', resource="test_input.csv")
+TEST_INPUT_JSON = init_resource(package='genescape.data', resource="test_input.json")
 
 # The GAF demo data.
-GAF_FILE = os.path.join(CURR_DIR, "data", "goa_human.gaf.gz")
+GAF_FILE = init_resource(package='genescape.data', resource="goa_human.gaf.gz")
 
 # The keys in the data annotation object.
 STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "data", "code", "errors", "unknown_terms"
@@ -52,9 +110,6 @@ SHAPE = "box"
 # Set the default attributes for the nodes
 NODE_ATTRS = dict(fillcolor=BG_COLOR, shape=SHAPE, style="filled")
 
-# Loggin format
-LOG_FORMAT = "# %(levelname)s\t%(module)s.%(funcName)s\t%(message)s"
-
 # Map the GO categories to the short names
 NAMESPACE_MAP = {
     "biological_process": "BP",
@@ -69,63 +124,18 @@ IDX_prot2go = "prot2go"
 IDX_go2gene = "go2gene"
 IDX_go2prot = "go2prot"
 
-
-# A callable to initialize the logger
-def init_logger(logger):
-    formatter = logging.Formatter(LOG_FORMAT)
-    handler = logging.StreamHandler()
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
-
-
-def get_json(fname=INDEX):
-    # Check if the file exists.
-    if not os.path.isfile(fname):
-        stop(f"file not found: {fname}")
+def get_json(path=INDEX):
 
     # Open JSON data
-    if fname.endswith(".gz"):
-        stream = gzip.open(fname, mode="rt", encoding="UTF-8")
+    if path.name.endswith(".gz"):
+        stream = gzip.open(path, mode="rt", encoding="UTF-8")
     else:
-        stream = open(fname, encoding="utf-8-sig")
+        stream = open(path, encoding="utf-8-sig")
 
     # Load the  index.
     data = json.load(stream)
 
     return data
-
-
-# Get the logger.
-logger = logging.getLogger(__name__)
-
-# Set the default loglevel.
-logger.setLevel(INFO)
-
-logging.addLevelName(logging.WARNING, "WARN")
-
-# Initialize the logger
-init_logger(logger)
-
-
-# A wrapper with additional callback
-def wrapper(logfunc, callback=None):
-    def func(msg):
-        logfunc(msg)
-        if callback:
-            callback(msg)
-
-    return func
-
-
-debug = wrapper(logger.debug)
-info = wrapper(logger.info)
-warn = wrapper(logger.warning)
-error = wrapper(logger.error)
-
-# Stops the process with an error.
-def stop(msg):
-    logger.error(msg)
-    sys.exit(1)
 
 def parse_terms(iter):
     """
@@ -156,18 +166,21 @@ def parse_terms(iter):
         # Has headers, read the specified columns
         debug("reading annotations as CSV")
         reader3 = csv.DictReader(stream3)
+
         def build(x):
             return {GID: x[GID], LABEL: x[LABEL]}
-        terms = list( map(build, reader3))
+
+        terms = list(map(build, reader3))
 
     else:
         # No headers, read the first column.
         debug("reading first column of the file")
         reader3 = csv.reader(stream3)
+
         def build(x):
             return {GID: x[0]}
-        terms = list(map(build, reader3))
 
+        terms = list(map(build, reader3))
 
     data[DATA_FIELD] = terms
 
@@ -176,8 +189,11 @@ def parse_terms(iter):
 
 # Attempts to get a stream of lines from a filename or the stdin.
 def get_stream(inp=None):
-
     stream = []
+
+    # Turn paths into strings.
+    if isinstance(inp, pathlib.Path):
+        inp = str(inp)
 
     if type(inp) == list:
         text = "\n".join(inp)
@@ -228,10 +244,12 @@ def get_goterms(graph):
 
     return goterms
 
+
 def timer(func):
     """
     Decorator that prints the execution time of the function it decorates.
     """
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         start_time = time.time()
@@ -240,4 +258,5 @@ def timer(func):
         elapsed = end_time - start_time
         print(f"# Timer: {func.__name__}: took {elapsed:.2f} seconds")
         return result
+
     return wrapper

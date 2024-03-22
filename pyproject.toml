@@ -26,7 +26,6 @@ classifiers = [
 dependencies = [
   "click",
   "networkx",
-  "pysimplegui<5.0",
   "pydot",
 ]
 

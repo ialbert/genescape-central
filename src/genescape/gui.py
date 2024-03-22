@@ -5,12 +5,6 @@ import webbrowser
 from genescape import server
 
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
-IMG_PATH = os.path.join(CURR_DIR, "data", "demo.png")
-
-if not os.path.isfile(IMG_PATH):
-    raise ValueError(f"Image file not found: {IMG_PATH}")
-
-IMG_KEY = '-IMAGE-'
 
 # A global variable to control the server's loop
 RUNNING = False
@@ -23,7 +17,7 @@ def run():
 
     # Function to start the server
     def start():
-        threading.Thread(target=server.run, daemon=True).start()
+        threading.Thread(target=server.webapp, daemon=True).start()
         threading.Timer(1, lambda: webbrowser.open("http://localhost:8000")).start()
 
     # Define the layout of the GUI
@@ -48,14 +42,13 @@ def run():
     # Create the Window
     window = sg.Window('GeneScape', layout)
 
-
     def print_message(message):
         window['-MESSAGES-'].update(message, append=True)
 
     class Capture:
         def __init__(self, window, key):
             self.window, self.key = window, key
-            self.stdout = sys.stdout  # Save a reference to the original stdout
+            self.stdout = sys.stdout
 
         def write(self, message):
             # Redirect stdout to both the text area and the original stdout
@@ -72,7 +65,9 @@ def run():
 
     # Event Loop to process "events"
     while True:
+
         event, values = window.read()
+        print_message(os.getcwd())
         if event == sg.WIN_CLOSED:  # if user closes window or clicks cancel
             break
         elif event == '-START-':
