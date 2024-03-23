@@ -7,6 +7,11 @@
     font-weight: bold;
 }
 
+.row.align-center {
+    display: flex;
+    align-items: center; /* This centers the items vertically */
+}
+
 hr {
     height: auto;
     border: none;

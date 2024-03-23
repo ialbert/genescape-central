@@ -11,6 +11,7 @@ DEBUG = True
 
 def init_server(devmode=False):
 
+
     # WEB related resources
     WEB_RES = [
         ("genescape.data.web", "index.html"),
@@ -21,6 +22,7 @@ def init_server(devmode=False):
         ("genescape.data.web.static", "htmx.min.js.gz"),
         ("genescape.data.web.static", "viz-standalone.js"),
         ("genescape.data.web.static", "mini-default.css"),
+        ("genescape.data.web.static", "sailboat.png"),
     ]
 
     # Initialize web related resources.

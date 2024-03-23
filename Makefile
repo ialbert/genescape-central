@@ -35,7 +35,10 @@ push:
 
 
 exe:
-	pyinstaller src/genescape/server.py --add-data=src/genescape/data:genescape/data -y --onefile
+	pyinstaller src/genescape/server.py \
+		--add-data=src/genescape/data:genescape/data \
+		--hide-console=minimize-late -i docs\sailboat.ico -n GeneScape
+		-y --onefile
 
 clean:
 	rm -f src/genescape/web/static/tmp/image*
