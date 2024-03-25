@@ -6,16 +6,20 @@ import gzip
 import sys,json,re
 from collections import Counter
 from itertools import *
+from pathlib import Path
+from genescape import utils, resources
 
-from genescape import utils
-
-def run(data, index=utils.INDEX, pattern='', mincount=1, csvout=False, verbose=False, ):
+def run(data, index, pattern='', mincount=1, csvout=False):
 
     # Collect the run status into this list.
     status = {
         utils.CODE_FIELD:0,
         utils.INVALID_FIELD:[]
     }
+
+    # Checking the input
+    if not index:
+        utils.stop(f"Index file is not set index={index}")
 
     # Open the index stream
     idx_stream = gzip.open(index, mode="rt", encoding="UTF-8")
@@ -122,12 +126,18 @@ def run(data, index=utils.INDEX, pattern='', mincount=1, csvout=False, verbose=F
 
 if __name__ == "__main__":
 
+    # Initialize the resources
+    res = resources.init()
+
+    inp = res.TEST_GENES
+    index = res.INDEX
+
     # Read the genelist
-    iter = utils.get_stream(inp=utils.TEST_GENES)
+    stream = utils.get_stream(inp=inp)
 
-    data = utils.parse_terms(iter=iter)
+    data = utils.parse_terms(iterable=stream)
 
-    out = run(data=data)
+    out = run(data=data, index=index)
 
     print (out)
 

@@ -1,8 +1,8 @@
-import os, json
-
+import os
+from pathlib import Path
 import click
 
-from genescape import utils
+from genescape import utils, resources
 
 
 @click.group()
@@ -16,35 +16,40 @@ def cli():
 @cli.command()
 @click.argument("fname", default=None, required=False)
 @click.option("-o", "--out", "out", metavar="TEXT", default="genescape.pdf", help="output graph file")
-@click.option("-i", "--index", "index", metavar="FILE", default=utils.INDEX, help="OBO index file", )
+@click.option("-i", "--index", "index", metavar="FILE", help="OBO index file", )
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "--count", "count", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
 @click.option("-t", "--test", "test", is_flag=True, help="run with demo data")
 @click.option( "-v", "verbose", is_flag=True, help="verbose output")
 @click.help_option("-h", "--help")
-def tree(fname, index, out, match=None, count=1, verbose=False, test=False):
+def tree(fname,  out=None, index=None, match=None, count=1, verbose=False, test=False):
     """
     Draws a tree from GO terms.
     """
 
+    # Initialize the resources.
+    res = resources.init()
+
+    # The name of the index.
+    index = Path(index) if index else res.INDEX
+
     # Check if the input file exists.if
-    if not os.path.exists(index):
+    if not index or not os.path.exists(index):
         utils.stop(f"OBO file {index} not found!")
 
     # Import the tree module.
     from genescape import tree
 
     # Set the verbosity level.
-    if verbose:
-        utils.logger.setLevel(utils.DEBUG)
+    utils.verbosity(verbose)
 
     # Override the fname if demo is set.
     if test:
-        fname = utils.TEST_GOIDS
+        fname = res.TEST_GOIDS
         utils.info(f"input {fname}")
 
     # Run the tree command.
-    graph, ann = tree.parse_input(inp=fname, index=utils.INDEX, pattern=match, mincount=count)
+    graph, ann = tree.parse_input(inp=fname, index=res.INDEX, pattern=match, mincount=count)
 
     # Write the tree to a file.
     tree.write_tree(graph, ann, out=out)
@@ -52,36 +57,42 @@ def tree(fname, index, out, match=None, count=1, verbose=False, test=False):
 
 @cli.command()
 @click.argument("fname", default=None, required=False)
-@click.option("-i", "--index", "index", metavar="TEXT", default=utils.INDEX, help="OBO index file.")
+@click.option("-i", "--index", "index", metavar="TEXT",  help="OBO index file.")
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "--count", "count", metavar="INT", default=1,  type=int, help="The minimal count for a GO term (1)")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
 @click.option("--csv", "csvout", is_flag=True, help="Produce CSV output instead of JSON")
 @click.option( "-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, index, verbose=False, test=False, csvout=False, match="", count=1):
+def annotate(fname, index=None, verbose=False, test=False, csvout=False, match="", count=1):
     """
     Generates the GO terms for a list of genes.
     """
     from genescape import annot
+
+    # Initialize the resources.
+    res = resources.init()
+
     if test:
-        fname = utils.TEST_GENES
+        fname = res.TEST_GENES
         utils.info(f"input {fname}")
 
     # Set the verbosity level.
-    if verbose:
-        utils.logger.setLevel(utils.DEBUG)
+    utils.verbosity(verbose)
 
     # Open the input file
-    iter = utils.get_stream(inp=fname)
+    stream = utils.get_stream(inp=fname)
 
     # Parse the input into a list
-    data = utils.parse_terms(iter)
+    data = utils.parse_terms(stream)
 
+    # Print the input parameters.
     utils.debug(f"params c={count} m={match}")
 
-    out = annot.run(data=data, index=index, verbose=verbose, pattern=match, mincount=count, csvout=csvout)
+    # Get the annotation output
+    out = annot.run(data=data, index=res.INDEX, pattern=match, mincount=count, csvout=csvout)
 
+    # Print the annotation aoutput.
     print (out)
 
 
@@ -99,31 +110,6 @@ def build(obo, gaf, index):
 
     make_index(obo=obo, gaf=gaf, index=index)
 
-
-@cli.command()
-@click.argument("fname", default=None, required=False)
-@click.option("-c", "mcol", metavar="TEXT", default="term_id", help="column name to extract", show_default=True)
-@click.option("-p", "pcol", metavar="TEXT", default='adjusted_p_value', help="p-value column name", show_default=True)
-@click.option("-v", "pval", default=0.05, type=float, metavar="TEXT", help="p-value treshold", show_default=True)
-@click.option("-m", "match", metavar="TEXT", help="regex match on line")
-@click.option("-t", "tab", is_flag=True, help="tab delimited file")
-@click.option("--demo", "demo", is_flag=True, help="run with demo data")
-@click.help_option("-h", "--help")
-def filter(fname, mcol, pcol, pval="", match="", tab=False, demo=False):
-    """
-    Filters a CSV/TSV file by columns.
-    """
-
-    from genescape import filter as gs_filter
-
-    # Override the fname if demo is set.
-    if demo:
-        fname = utils.TEST_GPROFILER
-        match = "BP"
-        utils.info(f"input {fname}")
-
-    delim = "\t" if tab else ","
-    gs_filter.run(fname=fname, mcol=mcol, pcol=pcol, pval=pval, match=match, delim=delim)
 
 @cli.command()
 @click.help_option("-h", "--help")

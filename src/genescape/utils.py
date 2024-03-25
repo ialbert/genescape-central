@@ -30,6 +30,14 @@ def init_logger(logger):
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
+# Set the log level
+def verbosity(flag=False):
+    global logger
+    if flag:
+        logger.setLevel(DEBUG)
+    else:
+        logger.setLevel(INFO)
+
 # Initialize the logger
 init_logger(logger)
 
@@ -92,13 +100,13 @@ IDX_go2gene = "go2gene"
 IDX_go2prot = "go2prot"
 
 
-def parse_terms(iter):
+def parse_terms(iterable):
     """
     Reads an iterator and returns a list of dictionaries keyed by header.
     """
 
     # Get the stream from the file
-    stream1, stream2, stream3 = tee(iter, 3)
+    stream1, stream2, stream3 = tee(iterable, 3)
 
     # Try to parse the input as JSON.
     try:

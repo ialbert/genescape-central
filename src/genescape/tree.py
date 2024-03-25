@@ -5,7 +5,7 @@ import pydot
 import networkx as nx
 from networkx import DiGraph
 
-from genescape import utils, annot
+from genescape import utils, annot, resources
 from genescape.utils import GID, LABEL, DEGREE, COUNT_DESC, INPUT
 
 
@@ -16,7 +16,7 @@ def build_onto_graph(index):
     graph = nx.DiGraph()
 
     # Gets the JSON data from the index file.
-    data = utils.get_json(index)
+    data = resources.get_json(index)
 
     # The term section of the index.
     terms = data[utils.IDX_OBO]
@@ -39,7 +39,6 @@ def build_onto_graph(index):
                 utils.warn(f"# Missing parent: {parent} for {node}")
 
     return graph
-
 
 
 # Apply the quoting.
@@ -172,16 +171,16 @@ def write(pg, out=None, imgsize=2048):
         utils.debug(f"writing to {out}")
         pg.write_raw(f"{out}")
     elif out.endswith(".pdf"):
-        pg.write_pdf(out, prog=utils.DOT_EXE)
+        pg.write_pdf(out)
     elif out.endswith(".png"):
         pg.set_graph_defaults(size=f"{WIDTH},{HEIGHT}", dpi=dpi(imgsize))
-        pg.write_png(out, prog=utils.DOT_EXE)
+        pg.write_png(out)
     else:
         utils.stop(f"Unknown output format: {out}")
 
     return text
 
-def build_tree(ann, index=utils.INDEX):
+def build_tree(ann, index):
 
     # Build graph from JSON file
     graph = build_onto_graph(index)
@@ -202,7 +201,7 @@ def write_tree(tree, ann, out=None):
     return text
 
 
-def parse_input(inp, index=utils.INDEX, pattern=None, mincount=1):
+def parse_input(inp, index, pattern=None, mincount=1):
     """
     Parses an input and generates a tree and an annotation object.
     """
@@ -211,7 +210,7 @@ def parse_input(inp, index=utils.INDEX, pattern=None, mincount=1):
     iter = utils.get_stream(inp=inp)
 
     # Parse the input into a dictionary.
-    data = utils.parse_terms(iter=iter)
+    data = utils.parse_terms(iterable=iter)
 
     # Run the annotation command
     ann = annot.run(data, index=index, mincount=mincount, pattern=pattern)
@@ -226,9 +225,11 @@ def parse_input(inp, index=utils.INDEX, pattern=None, mincount=1):
     return tree, ann
 
 if __name__ == "__main__":
+    res = resources.init()
+    ind = res.INDEX
+    inp = res.TEST_GENES
     out = os.path.join("genescape.pdf")
-    inp = utils.TEST_GENES
-    tree, ann = parse_input(inp=inp, mincount=2)
+    tree, ann = parse_input(inp=inp, index=ind, mincount=2)
     text = write_tree(tree, ann, out=out)
 
 

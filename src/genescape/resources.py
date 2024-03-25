@@ -5,20 +5,19 @@ from importlib import resources as rsc
 
 CURR_DIR = Path(os.path.dirname(__file__))
 
+class Resource(object):
+    def __init__(self):
+        self.INDEX = None
+        self.OBO_FILE = None
 
-# For Windows we package a prebuilt dot.exe
-DOT_EXE = None
-INDEX = None
-OBO_FILE = None
+        # Initialize test data files.
+        self.TEST_GOIDS = None
+        self.TEST_GENES = None
+        self.TEST_INPUT_CSV = None
+        self.TEST_INPUT_JSON = None
 
-# Initialize test data files.
-TEST_GOIDS = None
-TEST_GENES = None
-TEST_INPUT_CSV = None
-TEST_INPUT_JSON = None
-
-# The GAF demo data.
-GAF_FILE = None
+        # The GAF demo data.
+        self.GAF_FILE = None
 
 # WEB related resources
 RESOURCES = [
@@ -44,15 +43,19 @@ RESOURCES = [
     (None,"genescape.data.web.static", "sailboat.png"),
 ]
 
+# Reset the resource directory
+def reset_dir(dirname=".genescape", tag=utils.TAG):
+    path = resource_dir(dirname=dirname, tag=tag)
+
+    if os.path.isdir(path):
+        utils.info(f"deleting path: {path}")
+        shutil.rmtree(path)
+
+
 # Get the resource directory
 def resource_dir(dirname=".genescape", tag=utils.TAG):
     path = Path.home() / dirname / tag
     return path
-
-# Reset the resource directory
-def reset_resource(dirname=".genescape", tag=utils.TAG):
-    path = resource_dir(dirname=dirname, tag=tag)
-    shutil.rmtree(path)
 
 # Initialize a resource that may be in home directory.
 def init_resource(package=None, target='', tag=utils.TAG, dirname=".genescape", path='', devmode=False):
@@ -61,13 +64,19 @@ def init_resource(package=None, target='', tag=utils.TAG, dirname=".genescape", 
     if devmode:
         parts = package.split('.')[1:]
         dest = Path(CURR_DIR, *parts) / target
+        if not os.path.isfile(dest):
+            utils.warn(f"missing devmode resource: {dest}")
         return dest
 
     # The filesystem directory
     dest = resource_dir(dirname=dirname, tag=tag) / path / target
 
-    # Ensure the target directory exists
-    dest.parent.mkdir(parents=True, exist_ok=True)
+    if not os.path.isdir(dest.parent):
+        # Creates local directory.
+        utils.info(f"creating path: {dest}")
+
+        # Ensure the target directory exists
+        dest.parent.mkdir(parents=True, exist_ok=True)
 
     # Get the path to a resource
     if not package or not target:
@@ -78,29 +87,35 @@ def init_resource(package=None, target='', tag=utils.TAG, dirname=".genescape", 
         with rsc.path(package, target) as src:
             # Copy the resource to the target directory
             shutil.copy(src, dest)
-            utils.info(f'# init resource: {dest}')
+            utils.info(f'copy resource: {dest}')
 
     return dest
 
-def init_all(devmode=False, path="web", tag=utils.TAG):
+# Initialize all resources
+def init(devmode=False, path="web", tag=utils.TAG):
+
+    res = Resource()
+
     for name, package, target in RESOURCES:
-        respath = init_resource(package=package,
+        value = init_resource(package=package,
                              target=target,
                              tag=tag, path=path, devmode=devmode)
         if name is not None:
-            if name not in globals():
+            if not hasattr(res, name):
                 utils.warn(f"possibly undefined resource {name}")
-            globals()[name] = respath
+            setattr(res, name, value)
 
-        utils.debug(f"init resource: {respath}")
+        utils.debug(f"init resource {value}")
 
-def get_json(path=INDEX):
+    return res
+
+def get_json(path):
 
     # Open JSON data
     if path.name.endswith(".gz"):
-        stream = gzip.open(path, mode="rt", encoding="UTF-8")
+        stream = gzip.open(str(path), mode="rt", encoding="UTF-8")
     else:
-        stream = open(path, encoding="utf-8-sig")
+        stream = open(str(path), encoding="utf-8-sig")
 
     # Load the  index.
     data = json.load(stream)
@@ -109,5 +124,10 @@ def get_json(path=INDEX):
 
 
 if __name__ == "__main__":
-    init_all()
+    #utils.verbosity(True)
+    #reset_dir()
+    init()
+
+    print ("-" * 80)
+
 
