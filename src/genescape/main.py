@@ -119,13 +119,13 @@ def build(index=None, obo=None, gaf=None, ):
 @cli.command()
 @click.help_option("-h", "--help")
 @click.option("--devmode", "devmode", is_flag=True, help="run in development mode")
-@click.option("--redeploy", "redeploy", is_flag=True, help="redeploy the resources")
-def web(devmode, redeploy):
+@click.option("--reset", "reset", is_flag=True, help="reset the resources")
+def web(devmode=False, reset=False):
     """
     Run the web interface.
     """
     from genescape import server
-    server.start(devmode=devmode, redeploy=redeploy)
+    server.start(devmode=devmode, reset=reset)
 
 
 if __name__ == "__main__":

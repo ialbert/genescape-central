@@ -13,15 +13,18 @@ CURR_DIR = os.path.dirname(os.path.realpath(__file__))
 
 def init_server(devmode=False):
 
-    res = resources.init()
+    res = resources.init(devmode=devmode)
 
     if devmode:
         utils.info("running in development mode.")
         res.WEB_DIR = str(os.path.join(CURR_DIR, "data", "web"))
         TEMPLATE_PATH.insert(0, res.WEB_DIR)
+        utils.info(f"web dir: {res.WEB_DIR}")
+        utils.info(f"template path: {TEMPLATE_PATH}")
     else:
         res.WEB_DIR = str(res.HOME.parent)
         TEMPLATE_PATH.insert(0, res.WEB_DIR)
+
     return res
 
 
@@ -88,11 +91,11 @@ def webapp(res, devmode=False, host="localhost", port=8000):
         content = stream.file.read().decode('utf-8', errors="ingore")
         return content
 
-
     @app.route('/static/<name:path>')
     def static(name):
         print(f"serve static: {name}")
-        return static_file(name, root=res.WEB_DIR)
+        print(f"web dir: {res.WEB_DIR}")
+        return static_file(name, root=f"{res.WEB_DIR}/static/")
 
     @app.route('/draw/', method='POST')
     @view('draw.html')
@@ -141,7 +144,7 @@ def start(devmode=False, reset=False, host="127.0.0.1", port=8000, proto="http")
     def open_browser():
         threading.Timer(interval=1, function=lambda: webbrowser.open_new(url)).start()
 
-    #threading.Thread(target=open_browser).start()
+    threading.Thread(target=open_browser).start()
 
     utils.info(f"url: {url}")
     webapp(res=res, devmode=devmode, host=host, port=port)

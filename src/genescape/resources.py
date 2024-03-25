@@ -99,8 +99,7 @@ def init(devmode=False, path="web", tag=utils.TAG):
     res = Resource()
 
     for name, package, target in RESOURCES:
-        value = init_resource(package=package,
-                             target=target,
+        value = init_resource(package=package, target=target,
                              tag=tag, path=path, devmode=devmode)
         if name is not None:
             if not hasattr(res, name):
@@ -126,10 +125,9 @@ def get_json(path):
 
 
 if __name__ == "__main__":
-    #utils.verbosity(True)
-    #reset_dir()
-    init()
-
+    utils.verbosity(True)
+    reset_dir()
+    init(devmode=True)
     print ("-" * 80)
 
 

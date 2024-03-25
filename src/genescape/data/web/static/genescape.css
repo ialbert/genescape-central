@@ -7,6 +7,16 @@
     font-weight: bold;
 }
 
+.logo {
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height:64px;
+}
+.cnt {
+        display: flex;
+    align-items: center;
+}
 .row.align-center {
     display: flex;
     align-items: center; /* This centers the items vertically */

@@ -36,38 +36,38 @@
 
         <div class="col-sm-12">
 
-            <span>
-                <img src="/static/sailboat.png" style="height:32px; margin-top:5px" alt="GeneScape" class="logo">
-            </span>
-
-            <span class="title">GeneScape</span>
-
-            <input type="file" id="file-input" style="display:none" onchange="uploadFile()"/>
-            <label for="file-input" class="button">Load file</label>
+            <div class="cnt">
 
 
-            Filter: <input type="text" id="pattern" name="pattern" placeholder="Pattern" value="vitamin"/>
 
-            <button hx-post="/draw/"
-                    hx-trigger="click"
-                    hx-swap="outerHTML"
-                    hx-include="#input, #pattern"
-                    hx-indicator="#loadingImage"
-                    hx-target="#dot">
-                Draw Tree
-            </button>
+                <span class="title">GeneScape</span>
 
-            <button data-action="zoom-in">Zoom+</button>
-
-            <button data-action="zoom-out">Zoom-</button>
-
-            <button
-            class="btn btn-primary"
-            data-toggle-width="true">
-                Full Screen
-            </button>
+                <input type="file" id="file-input" style="display:none" onchange="uploadFile()"/>
+                <label for="file-input" class="button">Load file</label>
 
 
+                Filter: <input type="text" id="pattern" name="pattern" placeholder="Pattern" value="vitamin"/>
+
+                <button hx-post="/draw/"
+                        hx-trigger="click"
+                        hx-swap="outerHTML"
+                        hx-include="#input, #pattern"
+                        hx-indicator="#loadingImage"
+                        hx-target="#dot">
+                    Draw Tree
+                </button>
+
+                <button data-action="zoom-in">Zoom+</button>
+
+                <button data-action="zoom-out">Zoom-</button>
+
+                <button
+                class="btn btn-primary"
+                data-toggle-width="true">
+                    Full Screen
+                </button>
+
+            </div>
         </div>
     </div>
 
@@ -126,7 +126,7 @@ Smpd3
                             <rect x="2" y="2" width="100%" height="100%" fill="none"/>
                             <text x="50%" y="50%" font-size="24" text-anchor="middle"
                                   alignment-baseline="middle"
-                                  font-family="monospace, sans-serif" >Press "Draw Tree" to generate an
+                                  font-family="monospace, sans-serif">Press "Draw Tree" to generate an
                                 image
                             </text>
                         </svg>
