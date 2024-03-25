@@ -18,6 +18,8 @@ class Resource(object):
 
         # The GAF demo data.
         self.GAF_FILE = None
+        self.HOME = None
+        self.WEB_DIR  = None
 
 # WEB related resources
 RESOURCES = [
@@ -25,14 +27,14 @@ RESOURCES = [
     # Default files needed for operations.
     ("INDEX", "genescape.data", "genescape.hs.index.json.gz", ),
     ("OBO_FILE", "genescape.data", "go-basic.obo.gz"),
-    ("GAF_FILE", "genescape.data", "genescape.hs.index.json.gz"),
+    ("GAF_FILE", "genescape.data", "goa_human.gaf.gz"),
     ("TEST_GOIDS",  "genescape.data", "test_goids.txt"),
     ("TEST_GENES", "genescape.data", "test_genes.txt"),
     ("TEST_INPUT_CSV", "genescape.data", "test_input.csv"),
     ("TEST_INPUT_JSON", "genescape.data", "test_input.json"),
 
     # Web related resources
-    (None, "genescape.data.web", "index.html"),
+    ("HOME", "genescape.data.web", "index.html"),
     (None, "genescape.data.web", "draw.html"),
     (None, "genescape.data.web.static", "genescape.css"),
     (None,"genescape.data.web.static", "genescape.js"),

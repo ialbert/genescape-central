@@ -5,8 +5,8 @@ import gzip, os
 import json
 import csv
 from itertools import *
-
-from genescape import utils
+from pathlib import Path
+from genescape import utils, resources
 
 def parse_line(text, sep):
     text = text.strip()
@@ -44,7 +44,7 @@ def parse_gaf(fname):
     stream = gzip.open(fname, mode="rt", encoding="UTF-8")
     stream = filter(lambda x: not x.startswith("!"), stream)
     stream = map(lambda x: x.strip(), stream)
-    #stream = map(lambda x: x.split("\t"), stream)
+
     stream = csv.reader(stream, delimiter="\t")
     return stream
 
@@ -71,7 +71,7 @@ def make_index(obo, gaf, index):
         go2prot.setdefault(row[4], []).append(row[1])
 
     utils.info(f"parsing: {obo}")
-    stream = open(obo)
+    stream = gzip.open(obo, mode="rt", encoding="utf-8") if obo.name.endswith(".gz") else open(obo)
     terms = parse_obo(stream)
     terms = filter(lambda x: not x.get("is_obsolete"), terms)
     terms = list(terms)
@@ -97,4 +97,8 @@ def make_index(obo, gaf, index):
 
 
 if __name__ == "__main__":
-    make_index(obo=utils.OBO_FILE, gaf=utils.GAF_FILE, index=utils.INDEX)
+    res = resources.init()
+    obo = res.OBO_FILE
+    gaf = res.GAF_FILE
+    ind = Path("genescape.json.gz")
+    make_index(obo=obo, gaf=gaf, index=ind)

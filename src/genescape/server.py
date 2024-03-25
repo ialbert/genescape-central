@@ -1,7 +1,7 @@
 import sys, os, functools, webbrowser, threading
 from random import random
 import tempfile
-from genescape import tree, annot, utils
+from genescape import tree, annot, utils, resources
 from genescape.bottle import Bottle, static_file, template, view
 from genescape.bottle import TEMPLATE_PATH
 from genescape import bottle
@@ -12,36 +12,18 @@ DEBUG = True
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
 
 def init_server(devmode=False):
-    global WEB_DIR, TEMPLATE_PATH
+
+    res = resources.init()
 
     if devmode:
         utils.info("running in development mode.")
-        WEB_DIR = os.path.join(CURR_DIR, "data", "web")
-        TEMPLATE_PATH.insert(0, WEB_DIR)
-        return
+        res.WEB_DIR = str(os.path.join(CURR_DIR, "data", "web"))
+        TEMPLATE_PATH.insert(0, res.WEB_DIR)
+    else:
+        res.WEB_DIR = str(res.HOME.parent)
+        TEMPLATE_PATH.insert(0, res.WEB_DIR)
+    return res
 
-    # WEB related resources
-    WEB_RES = [
-        ("genescape.data.web", "index.html"),
-        ("genescape.data.web", "draw.html"),
-        ("genescape.data.web.static", "genescape.css"),
-        ("genescape.data.web.static", "genescape.js"),
-        ("genescape.data.web.static", "genescape.js"),
-        ("genescape.data.web.static", "htmx.min.js.gz"),
-        ("genescape.data.web.static", "viz-standalone.js"),
-        ("genescape.data.web.static", "mini-default.css"),
-        ("genescape.data.web.static", "sailboat.png"),
-    ]
-
-    # Initialize web related resources.
-    for pack, res in WEB_RES:
-        utils.init_resource(package=pack, resource=res, path="web")
-
-    # The webserver directory.
-    WEB_DIR = utils.init_resource(path="web")
-
-    # Add the template directory to the template path.
-    TEMPLATE_PATH.insert(0, WEB_DIR)
 
 import time
 
@@ -90,7 +72,7 @@ def graph2text(graph):
     text = "\n".join(lines)
     return text
 
-def webapp(host="localhost", port=8000, reloader=False, debug=False):
+def webapp(res, devmode=False, host="localhost", port=8000):
 
     @app.route('/')
     @view('index.html')
@@ -106,57 +88,11 @@ def webapp(host="localhost", port=8000, reloader=False, debug=False):
         content = stream.file.read().decode('utf-8', errors="ingore")
         return content
 
-    @app.route(path='/check/', method='POST')
-    @view('htmx/check.html')
-    @debugger
-    def check():
-        # Read the parameters from the request.
-        terms = textarea(request)
-
-        # Generate the output.
-        graph = tree.run(terms=terms, index=tree.utils.INDEX, out=None)
-
-        # Convert the graph to a list of terms.
-        text = graph2text(graph)
-
-        # Fill in the parameters for the template.
-        param = dict(text=text)
-
-        return param
-
-    @app.route(path='/test/', method='GET')
-    @view('htmx/test.html')
-    def test():
-        print ("Incoming request ...")
-        print(request.forms.keys())
-        param = dict(msg="Hello World")
-        return param
-
-    @app.route('/show/', method='POST')
-    def show():
-
-        textarea_content = request.forms.get('myTextarea')
-
-        # Process the content as needed
-        print(textarea_content)
-
-        print ("Query check...")
-        for key in request.query.keys():
-            print(f"{key}: {request.query.getall(key)}")
-
-        print ("Form check...")
-        for key in request.forms.keys():
-            print(f"{key}: {request.forms.getall(key)}")
-
-        time.sleep(1)
-
-        msg = "OK"
-        return msg
 
     @app.route('/static/<name:path>')
     def static(name):
         print(f"serve static: {name}")
-        return static_file(name, root=WEB_DIR)
+        return static_file(name, root=res.WEB_DIR)
 
     @app.route('/draw/', method='POST')
     @view('draw.html')
@@ -169,7 +105,7 @@ def webapp(host="localhost", port=8000, reloader=False, debug=False):
         print(f"terms: {inp}")
 
         # Generate the output.
-        graph, ann = tree.parse_input(inp=inp, index=tree.utils.INDEX, pattern=patt)
+        graph, ann = tree.parse_input(inp=inp, index=res.INDEX, pattern=patt)
 
         # The dot string
         dot = tree.write_tree(graph, ann, out=None)
@@ -182,19 +118,22 @@ def webapp(host="localhost", port=8000, reloader=False, debug=False):
         return param
 
     # Setting the debug mode.
-    if debug:
+    if devmode:
         bottle.debug(True)
 
     try:
-        app.run(host=host, port=port, reloader=reloader)
+        app.run(host=host, port=port, reloader=devmode)
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)
 
-def start(devmode=False, redeploy=False, host="127.0.0.1", port=8000, proto="http"):
+def start(devmode=False, reset=False, host="127.0.0.1", port=8000, proto="http"):
 
     # Resets the resources.
-    if redeploy:
-        utils.reset_resource()
+    if reset:
+        resources.reset_dir()
+
+    # Initialize the server.
+    res = init_server(devmode=devmode)
 
     # The URL of the server.
     url = f"{proto}://{host}:{port}/"
@@ -202,11 +141,10 @@ def start(devmode=False, redeploy=False, host="127.0.0.1", port=8000, proto="htt
     def open_browser():
         threading.Timer(interval=1, function=lambda: webbrowser.open_new(url)).start()
 
-    init_server(devmode=devmode)
-    threading.Thread(target=open_browser).start()
+    #threading.Thread(target=open_browser).start()
 
     utils.info(f"url: {url}")
-    webapp(reloader=devmode, debug=devmode, host=host, port=port)
+    webapp(res=res, devmode=devmode, host=host, port=port)
 
 if __name__ == "__main__":
     start()

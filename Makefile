@@ -15,7 +15,7 @@ usage:
 	@echo "#"
 
 # Performs the testing.
-serve:
+web:
 	python src/genescape/server.py
 
 # Performs the testing.
