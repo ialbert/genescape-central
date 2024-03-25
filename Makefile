@@ -15,8 +15,12 @@ usage:
 	@echo "#"
 
 # Performs the testing.
+web:
+	python src/genescape/server.py
+
+# Performs the testing.
 test:
-	hatch run test
+	(cd test && make test)
 
 # Runs a linter.
 lint:
@@ -26,9 +30,21 @@ lint:
 fix:
 	hatch run lint:fmt
 
-demo:
-	genescape tree --demo -o docs/images/demo.png	
-	genescape annotate names.txt -n 0  -m regulation | genescape tree -o docs/images/genelist.png
+push:
+	git commit -am 'saving work' && git push
+
+
+exe:
+	pyinstaller src/genescape/server.py \
+		--add-data=src/genescape/data:genescape/data \
+		--hide-console=minimize-late -i docs\sailboat.ico -n GeneScape
+		-y --onefile
+
+clean:
+	rm -f src/genescape/web/static/tmp/image*
+
+realclean: clean
+	rm -rf build dist
 
 build:
 	hatch build 
@@ -42,3 +58,5 @@ $(OBO):
 
 get: $(OBO)
 	@ls -l $(OBO)
+
+.PHONY: test lint fix push demo clean realclean build pypi get

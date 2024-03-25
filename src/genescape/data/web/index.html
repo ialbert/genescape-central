@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- https://minicss.us/docs.htm#getting-started -->
+    <link rel="stylesheet" href="/static/mini-default.css">
+
+    <!-- https://htmx.org/ -->
+    <script src="/static/htmx.min.js.gz"></script>
+
+    <!-- https://alpinejs.dev/start-here -->
+    <script defer src="/static/alpine.min.js"></script>
+
+    <!-- https://github.com/mdaines/viz-js -->
+    <script src="/static/viz-standalone.js"></script>
+
+    <!-- Override styles locally -->
+    <link rel="stylesheet" href="/static/genescape.css?param={{rand}}">
+
+</head>
+
+<body>
+
+<div class="container" style="min-height:80%">
+
+    <div class="row hide" id="error-bar">
+        <div class="col-sm-12">
+            <!-- Error indicator -->
+            <span id="error-div" style="display:inline-block;"></span>
+        </div>
+    </div>
+
+    <div class="row align-center">
+
+        <div class="col-sm-12">
+
+            <div class="cnt">
+
+
+
+                <span class="title">GeneScape</span>
+
+                <input type="file" id="file-input" style="display:none" onchange="uploadFile()"/>
+                <label for="file-input" class="button">Load file</label>
+
+
+                Filter: <input type="text" id="pattern" name="pattern" placeholder="Pattern" value="vitamin"/>
+
+                <button hx-post="/draw/"
+                        hx-trigger="click"
+                        hx-swap="outerHTML"
+                        hx-include="#input, #pattern"
+                        hx-indicator="#loadingImage"
+                        hx-target="#dot">
+                    Draw Tree
+                </button>
+
+                <button data-action="zoom-in">Zoom+</button>
+
+                <button data-action="zoom-out">Zoom-</button>
+
+                <button
+                class="btn btn-primary"
+                data-toggle-width="true">
+                    Full Screen
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <hr>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-3" id="sideBar">
+
+            <div class="grow">
+
+                <div class="header">
+                    Input List
+                </div>
+
+                <textarea class="input" name="input" id="input"
+                          hx-swap-oob="true"
+                          spellcheck="false">
+Cyp1a1
+Sphk2
+Sptlc2
+Smpd3
+            </textarea>
+
+                <div class="header">Function Annotations
+                    <span id="loadingFile" class="htmx-indicator">
+                    <span class="mark"> ... processing</span>
+                </span>
+                </div>
+
+                <textarea class="input" name="terms" id="terms"
+                          hx-swap-oob="true">
+            </textarea>
+            </div>
+        </div>
+        <div class="col-sm-9" id="mainBar">
+
+            <div class="grow">
+                <div class="header">
+                    Function Tree
+                    <!-- Loading  indicator -->
+                    <span id="loadingImage" class="htmx-indicator">
+                <span class="mark">... processing</span>
+            </span>
+                </div>
+
+
+                <!-- Graph placeholder -->
+                <div id="graphContainer" style="height:100%; flex-grow:1">
+                    <div id="graph">
+                        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="2" width="100%" height="100%" fill="none"/>
+                            <text x="50%" y="50%" font-size="24" text-anchor="middle"
+                                  alignment-baseline="middle"
+                                  font-family="monospace, sans-serif">Press "Draw Tree" to generate an
+                                image
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Dot placeholder -->
+                <pre id="dot" style="display: none;"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- Load local javascript tasks -->
+<script src="/static/genescape.js?param={{rand}}"></script>
+
+<script>
+    document.addEventListener('htmx:afterSwap', function(event) {
+        if(event.target.id === "dot") {
+            const content = event.target.textContent;
+            render_graph(content);
+        }
+    });
+</script>
+
+</html>
+

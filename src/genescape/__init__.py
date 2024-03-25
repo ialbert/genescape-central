@@ -1,1 +1,2 @@
-VERSION = "0.5.0"
+
+from genescape.__about__ import __version__

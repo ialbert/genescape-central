@@ -1,0 +1,160 @@
+gid,count,size,label,function,source
+GO:0005515,3,5,(3/5),protein binding,CYP1A1;SPHK2;SMPD3
+GO:0046512,2,5,(2/5),sphingosine biosynthetic process,SPHK2;SPTLC2
+GO:0043231,2,5,(2/5),intracellular membrane-bounded organelle,CYP1A1;SPHK2
+GO:0030148,2,5,(2/5),sphingolipid biosynthetic process,SPHK2;SPTLC2
+GO:0005789,2,5,(2/5),endoplasmic reticulum membrane,CYP1A1;SPTLC2
+GO:0005743,2,5,(2/5),mitochondrial inner membrane,CYP1A1;SPHK2
+GO:0005737,2,5,(2/5),cytoplasm,SPHK2;SMPD3
+GO:2001169,1,5,(1/5),regulation of ATP biosynthetic process,SPHK2
+GO:2000304,1,5,(1/5),positive regulation of ceramide biosynthetic process,SPHK2
+GO:1904959,1,5,(1/5),regulation of cytochrome-c oxidase activity,SPHK2
+GO:1904628,1,5,(1/5),cellular response to phorbol 13-acetate 12-myristate,SPHK2
+GO:1904504,1,5,(1/5),positive regulation of lipophagy,SPTLC2
+GO:1903543,1,5,(1/5),positive regulation of exosomal secretion,SMPD3
+GO:1903426,1,5,(1/5),regulation of reactive oxygen species biosynthetic process,SPHK2
+GO:1901653,1,5,(1/5),cellular response to peptide,SMPD3
+GO:1900126,1,5,(1/5),negative regulation of hyaluronan biosynthetic process,SMPD3
+GO:1900087,1,5,(1/5),positive regulation of G1/S transition of mitotic cell cycle,CYP1A1
+GO:0140052,1,5,(1/5),cellular response to oxidised low-density lipoprotein particle stimulus,SMPD3
+GO:0140014,1,5,(1/5),mitotic nuclear division,SMPD3
+GO:0120319,1,5,(1/5),long-chain fatty acid omega-1 hydroxylase activity,CYP1A1
+GO:0106256,1,5,(1/5),hydroperoxy icosatetraenoate dehydratase activity,CYP1A1
+GO:0102033,1,5,(1/5),long-chain fatty acid omega-hydroxylase activity,CYP1A1
+GO:0101021,1,5,(1/5),estrogen 2-hydroxylase activity,CYP1A1
+GO:0101020,1,5,(1/5),estrogen 16-alpha-hydroxylase activity,CYP1A1
+GO:0098868,1,5,(1/5),bone growth,SMPD3
+GO:0097267,1,5,(1/5),omega-hydroxylase P450 pathway,CYP1A1
+GO:0097187,1,5,(1/5),dentinogenesis,SMPD3
+GO:0090520,1,5,(1/5),sphingolipid mediated signaling pathway,SMPD3
+GO:0090280,1,5,(1/5),positive regulation of calcium ion import,SPHK2
+GO:0090037,1,5,(1/5),positive regulation of protein kinase C signaling,SPHK2
+GO:0085029,1,5,(1/5),extracellular matrix assembly,SMPD3
+GO:0071897,1,5,(1/5),DNA biosynthetic process,SMPD3
+GO:0071461,1,5,(1/5),cellular response to redox state,SMPD3
+GO:0071407,1,5,(1/5),cellular response to organic cyclic compound,CYP1A1
+GO:0071356,1,5,(1/5),cellular response to tumor necrosis factor,SMPD3
+GO:0071286,1,5,(1/5),cellular response to magnesium ion,SMPD3
+GO:0071280,1,5,(1/5),cellular response to copper ion,CYP1A1
+GO:0070576,1,5,(1/5),vitamin D 24-hydroxylase activity,CYP1A1
+GO:0070365,1,5,(1/5),hepatocyte differentiation,CYP1A1
+GO:0070330,1,5,(1/5),aromatase activity,CYP1A1
+GO:0070314,1,5,(1/5),G1 to G0 transition,SMPD3
+GO:0070301,1,5,(1/5),cellular response to hydrogen peroxide,SMPD3
+GO:0070300,1,5,(1/5),phosphatidic acid binding,SMPD3
+GO:0061751,1,5,(1/5),neutral sphingomyelin phosphodiesterase activity,SMPD3
+GO:0061035,1,5,(1/5),regulation of cartilage development,SMPD3
+GO:0060612,1,5,(1/5),adipose tissue development,SPTLC2
+GO:0060137,1,5,(1/5),maternal process involved in parturition,CYP1A1
+GO:0055093,1,5,(1/5),response to hyperoxia,CYP1A1
+GO:0051879,1,5,(1/5),Hsp90 protein binding,CYP1A1
+GO:0050665,1,5,(1/5),hydrogen peroxide biosynthetic process,CYP1A1
+GO:0048661,1,5,(1/5),positive regulation of smooth muscle cell proliferation,SMPD3
+GO:0048565,1,5,(1/5),digestive tract development,CYP1A1
+GO:0048286,1,5,(1/5),lung alveolus development,SMPD3
+GO:0048008,1,5,(1/5),platelet-derived growth factor receptor signaling pathway,SMPD3
+GO:0046872,1,5,(1/5),metal ion binding,SMPD3
+GO:0046685,1,5,(1/5),response to arsenic-containing substance,CYP1A1
+GO:0046513,1,5,(1/5),ceramide biosynthetic process,SPTLC2
+GO:0046511,1,5,(1/5),sphinganine biosynthetic process,SPTLC2
+GO:0045840,1,5,(1/5),positive regulation of mitotic nuclear division,SMPD3
+GO:0045815,1,5,(1/5),transcription initiation-coupled chromatin remodeling,SPHK2
+GO:0043491,1,5,(1/5),phosphatidylinositol 3-kinase/protein kinase B signal transduction,SMPD3
+GO:0043306,1,5,(1/5),positive regulation of mast cell degranulation,SPHK2
+GO:0043122,1,5,(1/5),regulation of canonical NF-kappaB signal transduction,SPHK2
+GO:0043065,1,5,(1/5),positive regulation of apoptotic process,SPHK2
+GO:0043010,1,5,(1/5),camera-type eye development,CYP1A1
+GO:0042904,1,5,(1/5),9-cis-retinoic acid biosynthetic process,CYP1A1
+GO:0042802,1,5,(1/5),identical protein binding,SMPD3
+GO:0042759,1,5,(1/5),long-chain fatty acid biosynthetic process,CYP1A1
+GO:0042572,1,5,(1/5),retinol metabolic process,CYP1A1
+GO:0042393,1,5,(1/5),histone binding,SPHK2
+GO:0042359,1,5,(1/5),vitamin D metabolic process,CYP1A1
+GO:0038036,1,5,(1/5),sphingosine-1-phosphate receptor activity,SPHK2
+GO:0035902,1,5,(1/5),response to immobilization stress,CYP1A1
+GO:0035264,1,5,(1/5),multicellular organism growth,SMPD3
+GO:0033189,1,5,(1/5),response to vitamin A,CYP1A1
+GO:0033008,1,5,(1/5),positive regulation of mast cell activation involved in immune response,SPHK2
+GO:0032963,1,5,(1/5),collagen metabolic process,SMPD3
+GO:0032760,1,5,(1/5),positive regulation of tumor necrosis factor production,SPHK2
+GO:0032755,1,5,(1/5),positive regulation of interleukin-6 production,SPHK2
+GO:0032736,1,5,(1/5),positive regulation of interleukin-13 production,SPHK2
+GO:0032496,1,5,(1/5),response to lipopolysaccharide,CYP1A1
+GO:0032451,1,5,(1/5),demethylase activity,CYP1A1
+GO:0032094,1,5,(1/5),response to food,CYP1A1
+GO:0031267,1,5,(1/5),small GTPase binding,SPHK2
+GO:0030544,1,5,(1/5),Hsp70 protein binding,CYP1A1
+GO:0030509,1,5,(1/5),BMP signaling pathway,SMPD3
+GO:0030308,1,5,(1/5),negative regulation of cell growth,SPHK2
+GO:0030282,1,5,(1/5),bone mineralization,SMPD3
+GO:0030170,1,5,(1/5),pyridoxal phosphate binding,SPTLC2
+GO:0030072,1,5,(1/5),peptide hormone secretion,SMPD3
+GO:0020037,1,5,(1/5),heme binding,CYP1A1
+GO:0019899,1,5,(1/5),enzyme binding,CYP1A1
+GO:0019825,1,5,(1/5),oxygen binding,CYP1A1
+GO:0019373,1,5,(1/5),epoxygenase P450 pathway,CYP1A1
+GO:0019341,1,5,(1/5),dibenzo-p-dioxin catabolic process,CYP1A1
+GO:0017143,1,5,(1/5),insecticide metabolic process,CYP1A1
+GO:0017059,1,5,(1/5),serine C-palmitoyltransferase complex,SPTLC2
+GO:0017050,1,5,(1/5),D-erythro-sphingosine kinase activity,SPHK2
+GO:0016711,1,5,(1/5),flavonoid 3'-monooxygenase activity,CYP1A1
+GO:0016679,1,5,(1/5),"oxidoreductase activity, acting on diphenols and related substances as donors",CYP1A1
+GO:0016491,1,5,(1/5),oxidoreductase activity,CYP1A1
+GO:0016310,1,5,(1/5),phosphorylation,SPHK2
+GO:0016020,1,5,(1/5),membrane,SPHK2
+GO:0015774,1,5,(1/5),polysaccharide transport,SMPD3
+GO:0010041,1,5,(1/5),response to iron(III) ion,CYP1A1
+GO:0009812,1,5,(1/5),flavonoid metabolic process,CYP1A1
+GO:0009804,1,5,(1/5),coumarin metabolic process,CYP1A1
+GO:0009692,1,5,(1/5),ethylene metabolic process,CYP1A1
+GO:0009635,1,5,(1/5),response to herbicide,CYP1A1
+GO:0009624,1,5,(1/5),response to nematode,CYP1A1
+GO:0009308,1,5,(1/5),amine metabolic process,CYP1A1
+GO:0008481,1,5,(1/5),sphinganine kinase activity,SPHK2
+GO:0008391,1,5,(1/5),arachidonic acid monooxygenase activity,CYP1A1
+GO:0008284,1,5,(1/5),positive regulation of cell population proliferation,SPHK2
+GO:0008283,1,5,(1/5),cell population proliferation,SPHK2
+GO:0008210,1,5,(1/5),estrogen metabolic process,CYP1A1
+GO:0008202,1,5,(1/5),steroid metabolic process,CYP1A1
+GO:0008081,1,5,(1/5),phosphoric diester hydrolase activity,SMPD3
+GO:0007420,1,5,(1/5),brain development,SPHK2
+GO:0006805,1,5,(1/5),xenobiotic metabolic process,CYP1A1
+GO:0006778,1,5,(1/5),porphyrin-containing compound metabolic process,CYP1A1
+GO:0006694,1,5,(1/5),steroid biosynthetic process,CYP1A1
+GO:0006686,1,5,(1/5),sphingomyelin biosynthetic process,SPTLC2
+GO:0006685,1,5,(1/5),sphingomyelin catabolic process,SMPD3
+GO:0006684,1,5,(1/5),sphingomyelin metabolic process,SMPD3
+GO:0006672,1,5,(1/5),ceramide metabolic process,SMPD3
+GO:0006670,1,5,(1/5),sphingosine metabolic process,SPHK2
+GO:0006669,1,5,(1/5),sphinganine-1-phosphate biosynthetic process,SPHK2
+GO:0006631,1,5,(1/5),fatty acid metabolic process,CYP1A1
+GO:0005886,1,5,(1/5),plasma membrane,SMPD3
+GO:0005829,1,5,(1/5),cytosol,SPHK2
+GO:0005783,1,5,(1/5),endoplasmic reticulum,SPHK2
+GO:0005765,1,5,(1/5),lysosomal membrane,SPHK2
+GO:0005739,1,5,(1/5),mitochondrion,SPHK2
+GO:0005654,1,5,(1/5),nucleoplasm,SPHK2
+GO:0005634,1,5,(1/5),nucleus,SPHK2
+GO:0005576,1,5,(1/5),extracellular region,SMPD3
+GO:0005537,1,5,(1/5),mannose binding,GO:0005537
+GO:0005524,1,5,(1/5),ATP binding,SPHK2
+GO:0005506,1,5,(1/5),iron ion binding,CYP1A1
+GO:0004767,1,5,(1/5),sphingomyelin phosphodiesterase activity,SMPD3
+GO:0004758,1,5,(1/5),serine C-palmitoyltransferase activity,SPTLC2
+GO:0004497,1,5,(1/5),monooxygenase activity,CYP1A1
+GO:0003433,1,5,(1/5),chondrocyte development involved in endochondral bone morphogenesis,SMPD3
+GO:0003376,1,5,(1/5),sphingosine-1-phosphate receptor signaling pathway,SPHK2
+GO:0002933,1,5,(1/5),lipid hydroxylation,CYP1A1
+GO:0002720,1,5,(1/5),positive regulation of cytokine production involved in immune response,SPHK2
+GO:0002685,1,5,(1/5),regulation of leukocyte migration,SMPD3
+GO:0002244,1,5,(1/5),hematopoietic progenitor cell differentiation,SMPD3
+GO:0001958,1,5,(1/5),endochondral ossification,SMPD3
+GO:0001932,1,5,(1/5),regulation of protein phosphorylation,SMPD3
+GO:0001786,1,5,(1/5),phosphatidylserine binding,SMPD3
+GO:0001676,1,5,(1/5),long-chain fatty acid metabolic process,CYP1A1
+GO:0001666,1,5,(1/5),response to hypoxia,CYP1A1
+GO:0001568,1,5,(1/5),blood vessel development,SPHK2
+GO:0000786,1,5,(1/5),nucleosome,SPHK2
+GO:0000139,1,5,(1/5),Golgi membrane,SMPD3
+GO:0000137,1,5,(1/5),Golgi cis cisterna,SMPD3
+
