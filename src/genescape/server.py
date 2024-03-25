@@ -9,8 +9,16 @@ from genescape.bottle import get, post, request, response, redirect
 
 DEBUG = True
 
-def init_server(devmode=False):
+CURR_DIR = os.path.dirname(os.path.realpath(__file__))
 
+def init_server(devmode=False):
+    global WEB_DIR, TEMPLATE_PATH
+
+    if devmode:
+        utils.info("running in development mode.")
+        WEB_DIR = os.path.join(CURR_DIR, "data", "web")
+        TEMPLATE_PATH.insert(0, WEB_DIR)
+        return
 
     # WEB related resources
     WEB_RES = [
@@ -27,13 +35,13 @@ def init_server(devmode=False):
 
     # Initialize web related resources.
     for pack, res in WEB_RES:
-        utils.init_resource(package=pack, resource=res, path="web", overwrite=devmode)
+        utils.init_resource(package=pack, resource=res, path="web")
 
-# The webserver directory.
-WEB_DIR = utils.init_resource(path="web")
+    # The webserver directory.
+    WEB_DIR = utils.init_resource(path="web")
 
-# Add the template directory to the template path.
-TEMPLATE_PATH.insert(0, WEB_DIR)
+    # Add the template directory to the template path.
+    TEMPLATE_PATH.insert(0, WEB_DIR)
 
 import time
 
@@ -82,7 +90,7 @@ def graph2text(graph):
     text = "\n".join(lines)
     return text
 
-def webapp(reloader=False, debug=False):
+def webapp(host="localhost", port=8000, reloader=False, debug=False):
 
     @app.route('/')
     @view('index.html')
@@ -178,19 +186,27 @@ def webapp(reloader=False, debug=False):
         bottle.debug(True)
 
     try:
-        print ("Server running on http://localhost:8080")
-        app.run(host='localhost', port=8000, reloader=reloader)
+        app.run(host=host, port=port, reloader=reloader)
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)
 
-def open_browser(host="127.0.0.1", port=8000, proto="http"):
-    url = f"{proto}://{host}:{port}/"
-    threading.Timer(interval=1, function=lambda: webbrowser.open_new(url)).start()
+def start(devmode=False, redeploy=False, host="127.0.0.1", port=8000, proto="http"):
 
-def start(devmode=False):
-    init_server(devmode)
+    # Resets the resources.
+    if redeploy:
+        utils.reset_resource()
+
+    # The URL of the server.
+    url = f"{proto}://{host}:{port}/"
+
+    def open_browser():
+        threading.Timer(interval=1, function=lambda: webbrowser.open_new(url)).start()
+
+    init_server(devmode=devmode)
     threading.Thread(target=open_browser).start()
-    webapp(reloader=devmode, debug=devmode)
+
+    utils.info(f"url: {url}")
+    webapp(reloader=devmode, debug=devmode, host=host, port=port)
 
 if __name__ == "__main__":
     start()

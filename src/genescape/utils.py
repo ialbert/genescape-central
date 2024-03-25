@@ -5,7 +5,7 @@ from logging import DEBUG, ERROR, INFO, WARNING
 from itertools import tee
 import io, shutil
 
-from importlib import resources
+
 from pathlib import Path
 
 # Get the logger.
@@ -53,43 +53,6 @@ def stop(msg):
     logger.error(msg)
     sys.exit(1)
 
-def init_resource(package=None, resource='', tag=TAG, dirname=".genescape", path='', overwrite=False):
-
-    # The filesystem directory
-    dest = Path.home() / dirname / tag / path / resource
-
-    # Ensure the target directory exists
-    dest.parent.mkdir(parents=True, exist_ok=True)
-
-    # Get the path to a resource
-    if not package or not resource:
-        return dest
-
-    # Create the resource if it does not exist.
-    if not os.path.isfile(dest) or overwrite:
-        with resources.path(package, resource) as src:
-            # Copy the resource to the target directory
-            shutil.copy(src, dest)
-            info(f'# init resource: {dest}')
-
-    return dest
-
-# For Windows we package a prebuilt dot.exe
-DOT_EXE = init_resource(package='genescape.bin', resource="dot.exe") if os.name == "nt" else "dot"
-
-INDEX = init_resource(package='genescape.data', resource='genescape.hs.index.json.gz')
-
-OBO_FILE = init_resource(package='genescape.data', resource='go-basic.obo.gz')
-
-# Initialize test data files.
-TEST_GOIDS = init_resource(package='genescape.data', resource="test_goids.txt")
-TEST_GENES = init_resource(package='genescape.data', resource="test_genes.txt")
-TEST_INPUT_CSV = init_resource(package='genescape.data', resource="test_input.csv")
-TEST_INPUT_JSON = init_resource(package='genescape.data', resource="test_input.json")
-
-# The GAF demo data.
-GAF_FILE = init_resource(package='genescape.data', resource="goa_human.gaf.gz")
-
 # The keys in the data annotation object.
 STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "data", "code", "errors", "unknown_terms"
 
@@ -128,18 +91,6 @@ IDX_prot2go = "prot2go"
 IDX_go2gene = "go2gene"
 IDX_go2prot = "go2prot"
 
-def get_json(path=INDEX):
-
-    # Open JSON data
-    if path.name.endswith(".gz"):
-        stream = gzip.open(path, mode="rt", encoding="UTF-8")
-    else:
-        stream = open(path, encoding="utf-8-sig")
-
-    # Load the  index.
-    data = json.load(stream)
-
-    return data
 
 def parse_terms(iter):
     """

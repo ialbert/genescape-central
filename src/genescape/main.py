@@ -128,12 +128,14 @@ def filter(fname, mcol, pcol, pval="", match="", tab=False, demo=False):
 @cli.command()
 @click.help_option("-h", "--help")
 @click.option("--devmode", "devmode", is_flag=True, help="run in development mode")
-def web(devmode):
+@click.option("--redeploy", "redeploy", is_flag=True, help="redeploy the resources")
+
+def web(devmode, redeploy):
     """
     Run the web interface.
     """
     from genescape import server
-    server.start(devmode=devmode)
+    server.start(devmode=devmode, redeploy=redeploy)
 
 
 if __name__ == "__main__":
