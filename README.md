@@ -10,7 +10,17 @@ We provide standalone executables for GeneScape that can be run  without any ins
 
 ## Quick start
 
-Doubleclick the executable to start the program. You will get an interface that looks like this:
+Download the latest binary release for your platform
+
+* [Binary Releases]
+
+[release]: https://github.com/ialbert/genescape-central/releases
+
+**Windows**: unzip then double-click the executable to start the program.
+
+**MacOS** The first time you run the tool on MacOS you have to unzip, right-click and select **open**. You then again have to agree to run the software. Once you do so the program runs, and in the future you can double-click the executable to start the program.
+
+After a few seconds, a new browser window will pop and you will get an interface that looks like this:
 
 ![GeneScape interface](docs/images/interface-empty.png)
 
