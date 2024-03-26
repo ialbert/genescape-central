@@ -61,7 +61,7 @@ packages = [
 ]
 
 [tool.hatch.version]
-path = "src/genescape/__init__.py"
+path = "src/genescape/__about__.py"
 
 [tool.hatch.envs.default]
 dependencies = [

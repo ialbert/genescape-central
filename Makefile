@@ -54,10 +54,12 @@ realclean: clean
 	rm -rf build dist
 
 build:
+	rm -rf build dist
 	hatch build 
+	ls -lh dist
 
-pypi:
-	hatch run publish
+pypi: build
+	hatch publish
 
 $(OBO):
 	mkdir -p $(dir $(OBO))
