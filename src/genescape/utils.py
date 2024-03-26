@@ -68,16 +68,16 @@ STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "da
 GID, LABEL, SOURCE = "gid", "label", "source"
 
 # A few handy constants
-DEGREE, COUNT_DESC, INPUT, NAME = "degree", "count_desc", "input", "name"
+DEGREE, COUNT_DESC, INPUT, NAME, NAMESPACE = "degree", "count_desc", "input", "name", "namespace"
 
 # Default background color
 BG_COLOR = "#FFFFFF"
 
 # Selection color
-FG_COLOR = "#90EE90"
+INPUT_COLOR = "#A3F6A2"
 
 # Leaf color
-LF_COLOR = "#ADD8E6"
+LEAF_COLOR = "#31CE43"
 
 # Default shape
 SHAPE = "box"
@@ -90,6 +90,12 @@ NAMESPACE_MAP = {
     "biological_process": "BP",
     "molecular_function": "MF",
     "cellular_component": "CC",
+}
+
+NAMESPACE_COLORS = {
+    "BP": "#F6CBA2",
+    "MF": "#A2CDF6",
+    "CC": "#F5A2F6",
 }
 
 # The index names

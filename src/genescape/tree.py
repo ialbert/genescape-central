@@ -6,7 +6,7 @@ import networkx as nx
 from networkx import DiGraph
 
 from genescape import utils, annot, resources
-from genescape.utils import GID, LABEL, DEGREE, COUNT_DESC, INPUT
+from genescape.utils import GID, LABEL, DEGREE, COUNT_DESC, INPUT, NAMESPACE
 
 
 # Parse GO Ontology file from fname into a networkx graph
@@ -75,6 +75,7 @@ def make_tree(ann, graph):
 
     # Decorate the tree with additional information.
     for node in tree.nodes():
+
         # Keeps track of the degree of the node.
         tree.nodes[node][DEGREE] = graph.degree(node)
 
@@ -83,6 +84,9 @@ def make_tree(ann, graph):
 
         # Keeps track of whether the node was in the input list.
         tree.nodes[node][INPUT] = node in inp_nodes
+
+        # Set the namespace for the node.
+        tree.nodes[node][NAMESPACE] = tree.nodes[node].get("namespace", "?")
 
     # Print information messages.
     utils.info(f"subtree {len(tree.nodes())} nodes and {len(tree.edges())} edges")
@@ -121,11 +125,12 @@ def pydot_graph(extra, tree: DiGraph) -> pydot.Dot :
 
         # Fill the nodes with the appropriate color
         if tree.nodes[node][COUNT_DESC] == 1:
-            fillcolor = utils.LF_COLOR
+            fillcolor = utils.LEAF_COLOR
         elif tree.nodes[node][utils.INPUT]:
-            fillcolor = utils.FG_COLOR
+            fillcolor = utils.INPUT_COLOR
         else:
-            fillcolor = utils.BG_COLOR
+            key = tree.nodes[node][NAMESPACE]
+            fillcolor = utils.NAMESPACE_COLORS.get(key, utils.BG_COLOR)
 
         # Need to quote the node name
         nodex = fix(node)
