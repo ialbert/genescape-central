@@ -32,9 +32,11 @@ Fill in the text box with a list of genes names or GO terms or gene names and cl
 
 [iface2]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-help.png
 
-The program will generate a tree visualization.
+The program will generate a tree visualization of the functional elements of the gene names you provided.
 
-![GeneScape tree]
+Note the processs that takes place, first the tool extracts the GO terms associated with the genes you provided, then it builds a tree out of these GO terms and finally it visualizes the tree.
+
+![GeneScape][tree]
 
 [tree]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-tree.png
 
@@ -59,6 +61,12 @@ Each subtree in a different GO category has a different color:
 The subtree coloring is meant to help you understand the level of detail and the specificity of the functional terms you visualize.
 
 Numbers such as 1/4 mean how many genes in the input carry that function.
+
+## Reducing the tree size
+
+The tree can get huge, even for a small number of genes. 
+
+You can reduce the size of the tree by filtering for a pattern in the functions or by visualizing functions that occur in a minimum number of genes.
 
 ## Command line usage
 
