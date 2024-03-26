@@ -37,14 +37,15 @@ fix:
 push:
 	git commit -am 'saving work' && git push
 
-VERSION = 0.6.0
-NAME = GeneScape
+VERSION ?= 060
+NAME ?= GeneScape-${VERSION}
 
 mac:
+	rm -rf build dist
 	pyinstaller src/genescape/server.py \
 		--add-data=src/genescape/data:genescape/data \
 		--hide-console=minimize-late -i docs/images/logo.ico -n ${NAME} -y --onefile
-	(cd dist && zip ${NAME}-${VERSION}-MacOS.zip ${NAME} && rm -f ${NAME})
+	(cd dist && zip ${NAME}-MacOS.zip ${NAME} && rm -f ${NAME})
 
 
 clean:
