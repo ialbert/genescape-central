@@ -47,6 +47,23 @@ document.addEventListener('click', function(e) {
     }
 });
 
+function submit(elemId, buttonId, eventName) {
+    const element = document.getElementById(elemId);
+    if (!element) return; // Exit if element does not exist
+
+    element.addEventListener(eventName, function(e) {
+        if (eventName === 'keydown' && e.key !== 'Enter') return;
+        e.preventDefault();
+        document.getElementById(buttonId).click();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    submit('pattern', 'drawTree', 'keydown')
+    submit('count', 'drawTree', 'keydown')
+    submit('root', 'drawTree', 'change')
+});
+
 function resize_container(svg){
 	var height = svg.getBoundingClientRect().height;
 	var contr = document.getElementById('graphContainer');

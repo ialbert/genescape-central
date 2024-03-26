@@ -44,7 +44,7 @@ def tree(fname, out=None, index=None, root=utils.NS_ALL, match=None, count=1, ve
 
     # Override the fname if demo is set.
     if test:
-        fname = res.TEST_GOIDS
+        fname = res.TEST_GENES
         utils.info(f"input {fname}")
 
     # Run the tree command.
@@ -123,10 +123,9 @@ def build(index=None, obo=None, gaf=None, ):
 @click.option("--devmode", "devmode", is_flag=True, help="run in development mode")
 @click.option("--reset", "reset", is_flag=True, help="reset the resources")
 @click.option("-i", "--index", "index",  help="Genescape index file")
-@click.option("-n", "--nopop", "nopop", is_flag=True, help="Don't pop a browser window.")
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def web(devmode=False, reset=False, verbose=False, index=None, nopop=False):
+def web(devmode=False, reset=False, verbose=False, index=None):
     """
     Run the web interface.
     """
@@ -136,7 +135,7 @@ def web(devmode=False, reset=False, verbose=False, index=None, nopop=False):
     utils.verbosity(verbose)
 
     # Start the server.
-    server.start(devmode=devmode, reset=reset, index=index, popwin=not nopop)
+    server.start(devmode=devmode, reset=reset, index=index)
 
 
 if __name__ == "__main__":

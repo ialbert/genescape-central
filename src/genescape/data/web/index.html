@@ -11,7 +11,7 @@
     <script src="/static/htmx.min.js.gz"></script>
 
     <!-- https://alpinejs.dev/start-here -->
-    <script defer src="/static/alpine.min.js"></script>
+    <!-- <script defer src="/static/alpine.min.js"></script> -->
 
     <!-- https://github.com/mdaines/viz-js -->
     <script src="/static/viz-standalone.js"></script>
@@ -57,10 +57,10 @@
                     <option value="CC">Cellular Component</option>
                 </select>
 
-                <button class="primary" hx-post="/draw/"
+                <button class="primary" hx-post="/draw/" id="drawTree"
                         hx-trigger="click"
                         hx-swap="outerHTML"
-                        hx-include="#input, #pattern, #root"
+                        hx-include="#input, #pattern, #root, #count"
                         hx-indicator="#loadingImage"
                         hx-target="#dot">
                     Draw&nbsp;Tree

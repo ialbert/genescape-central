@@ -5,6 +5,8 @@ from importlib import resources as rsc
 
 CURR_DIR = Path(os.path.dirname(__file__))
 
+CACHE = {}
+
 class Resource(object):
     def __init__(self):
         self.INDEX = None
@@ -98,6 +100,18 @@ def init_resource(package=None, target='', tag=utils.TAG, dirname=".genescape", 
             utils.info(f'copy resource: {dest}')
 
     return dest
+
+def cache(key, func):
+    global CACHE
+
+    if key not in CACHE:
+        CACHE[key] = func()
+
+    return CACHE[key]
+
+def clear_cache():
+    global CACHE
+    CACHE = {}
 
 # Initialize all resources
 def init(devmode=False, path="web", tag=utils.TAG):

@@ -128,7 +128,7 @@ def webapp(res, devmode=False, host="localhost", port=8000):
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)
 
-def start(devmode=False, reset=False, index=None, popwin=True, host="127.0.0.1", port=8000, proto="http"):
+def start(devmode=False, reset=False, index=None, host="localhost", port=8000, proto="http"):
 
     # Resets the resources.
     if reset:
@@ -143,16 +143,10 @@ def start(devmode=False, reset=False, index=None, popwin=True, host="127.0.0.1",
     # The URL of the server.
     url = f"{proto}://{host}:{port}/"
 
-    def open_browser():
-        threading.Timer(interval=1, function=lambda: webbrowser.open_new(url)).start()
-
-    # Open the browser.
-    if popwin:
-        threading.Thread(target=open_browser).start()
-
     # Start the server.
     utils.info(f"server url: {url}")
     utils.info(f"server dir: {res.WEB_DIR}")
+
     webapp(res=res, devmode=devmode, host=host, port=port)
 
 if __name__ == "__main__":

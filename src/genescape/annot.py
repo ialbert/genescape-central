@@ -11,6 +11,7 @@ from genescape import utils, resources
 
 
 def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
+
     # Collect the run status into this list.
     status = {
         utils.CODE_FIELD: 0,
@@ -22,10 +23,13 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
         utils.stop(f"Index file is not set index={index}")
 
     # Open the index stream
-    idx_stream = gzip.open(index, mode="rt", encoding="UTF-8")
+    def build():
+        idx_stream = gzip.open(index, mode="rt", encoding="UTF-8")
+        idx = json.load(idx_stream)
+        return idx
 
-    # Load the full index.
-    idx = json.load(idx_stream)
+    # Cache the index
+    idx = resources.cache("index", func=build)
 
     # Extract the gene names from the data
     names = map(lambda x: x[utils.GID], data[utils.DATA_FIELD])
@@ -101,8 +105,6 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
     # Create the data object
     res = []
     data_fields = [utils.GID, "root", "count", "function", utils.SOURCE, "count", "size", utils.LABEL]
-
-
 
     for goid, cnt, func in counts:
         label = f"({cnt}/{n_size})"

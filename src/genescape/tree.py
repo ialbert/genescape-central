@@ -187,8 +187,12 @@ def write(pg, out=None, imgsize=2048):
 
 def build_tree(ann, index):
 
-    # Build graph from JSON file
-    graph = build_onto_graph(index)
+    # Speed up the process by caching the graph.
+    def build():
+        graph = build_onto_graph(index)
+        return graph
+
+    graph = resources.cache("graph", func=build)
 
     # Generate the tree from the graph.
     tree = make_tree(ann=ann,  graph=graph)
