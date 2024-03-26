@@ -93,8 +93,7 @@ def webapp(res, devmode=False, host="localhost", port=8000):
 
     @app.route('/static/<name:path>')
     def static(name):
-        print(f"serve static: {name}")
-        print(f"web dir: {res.WEB_DIR}")
+        utils.debug(f"loading {name}")
         return static_file(name, root=f"{res.WEB_DIR}/static/")
 
     @app.route('/draw/', method='POST')
@@ -129,7 +128,7 @@ def webapp(res, devmode=False, host="localhost", port=8000):
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)
 
-def start(devmode=False, reset=False, host="127.0.0.1", port=8000, proto="http"):
+def start(devmode=False, reset=False, index=None, host="127.0.0.1", port=8000, proto="http"):
 
     # Resets the resources.
     if reset:
@@ -137,6 +136,9 @@ def start(devmode=False, reset=False, host="127.0.0.1", port=8000, proto="http")
 
     # Initialize the server.
     res = init_server(devmode=devmode)
+
+    # Override the default INDEX file.
+    res.INDEX = resources.get_index(index=index, res=res)
 
     # The URL of the server.
     url = f"{proto}://{host}:{port}/"
@@ -146,7 +148,8 @@ def start(devmode=False, reset=False, host="127.0.0.1", port=8000, proto="http")
 
     threading.Thread(target=open_browser).start()
 
-    utils.info(f"url: {url}")
+    utils.info(f"server url: {url}")
+    utils.info(f"server dir: {res.WEB_DIR}")
     webapp(res=res, devmode=devmode, host=host, port=port)
 
 if __name__ == "__main__":

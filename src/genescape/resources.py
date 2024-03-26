@@ -60,7 +60,7 @@ def resource_dir(dirname=".genescape", tag=utils.TAG):
     return path
 
 # Initialize a resource that may be in home directory.
-def init_resource(package=None, target='', tag=utils.TAG, dirname=".genescape", path='', devmode=False):
+def init_resource(package=None, target='', tag=utils.TAG, dirname=".genescape", devmode=False):
 
     # The path during devmode are the local files
     if devmode:
@@ -70,12 +70,16 @@ def init_resource(package=None, target='', tag=utils.TAG, dirname=".genescape", 
             utils.warn(f"missing devmode resource: {dest}")
         return dest
 
-    # The filesystem directory
-    dest = resource_dir(dirname=dirname, tag=tag) / path / target
+    # Static files need to be in a separate directory.
+    parts = package.split('.')
+    if parts[-1] == "static":
+        dest = resource_dir(dirname=dirname, tag=tag) / "static" / target
+    else:
+        dest = resource_dir(dirname=dirname, tag=tag) / target
 
     if not os.path.isdir(dest.parent):
         # Creates local directory.
-        utils.info(f"creating path: {dest}")
+        utils.info(f"creating path: {dest.parent}")
 
         # Ensure the target directory exists
         dest.parent.mkdir(parents=True, exist_ok=True)
@@ -100,7 +104,7 @@ def init(devmode=False, path="web", tag=utils.TAG):
 
     for name, package, target in RESOURCES:
         value = init_resource(package=package, target=target,
-                             tag=tag, path=path, devmode=devmode)
+                             tag=tag, devmode=devmode)
         if name is not None:
             if not hasattr(res, name):
                 utils.warn(f"possibly undefined resource {name}")
@@ -124,10 +128,19 @@ def get_json(path):
     return data
 
 
+def get_index(index, res):
+    index = Path(index) if index else res.INDEX
+
+    if not index or not os.path.exists(index):
+        utils.stop(f"Index not found: {index}")
+
+    return index
+
+
 if __name__ == "__main__":
     utils.verbosity(True)
     reset_dir()
-    init(devmode=True)
+    init(devmode=False)
     print ("-" * 80)
 
 
