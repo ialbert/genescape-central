@@ -67,6 +67,11 @@ def get_param(request, name='param'):
     value = value.strip()
     return value
 
+def safe_int(value, default=1):
+    try:
+        return int(value)
+    except:
+        return default
 
 def webapp(res, devmode=False, host="localhost", port=8000):
 
@@ -97,9 +102,11 @@ def webapp(res, devmode=False, host="localhost", port=8000):
         inp = textarea(request)
         patt = get_param(request, name='pattern')
         root = get_param(request, name='root')
+        count = get_param(request, name='count')
+        count = safe_int(count, default=1)
 
         # Generate the output.
-        graph, ann = tree.parse_input(inp=inp, index=res.INDEX, pattern=patt, root=root)
+        graph, ann = tree.parse_input(inp=inp, index=res.INDEX, pattern=patt, root=root, mincount=count)
 
         # The dot string
         dot = tree.write_tree(graph, ann, out=None)

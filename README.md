@@ -22,19 +22,27 @@ Download the latest binary release for your platform
 
 After a few seconds, a new browser window will pop and you will get an interface that looks like this:
 
-![GeneScape interface](docs/images/interface-empty.png)
+![GeneScape interface][iface1]
+
+[iface1]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-empty.png
 
 Fill in the text box with a list of genes names or GO terms or gene names and click the `Draw Tree` button to visualize the relationships between the GO terms.
 
-![GeneScape interface](docs/images/interface-help.png)
+![GeneScape interface][iface2]
+
+[iface2]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-help.png
 
 The program will generate a tree visualization.
 
-![GeneScape tree](docs/images/interface-tree.png)
+![GeneScape tree]
+
+[tree]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-tree.png
 
 Note all the options available in the interface:
 
-![GeneScape bar](docs/images/interface-bar.png)
+![GeneScape bar][bar]
+
+[bar]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-bar.png
 
 ## Color scheme
 
@@ -76,7 +84,9 @@ genescape tree --test
 
 Which will generate a tree visualization of the test data.
 
-![GeneScape output](docs/images/genescape-output1.png)
+![GeneScape output][out1]
+
+[out1]: https://github.com/ialbert/genescape-central/blob/main/docs/images/genescape-output1.png
 
 You can pass to the tree visualizer a list of genes or a list of GO ids, or even a mix of both. Here is an example.
 
@@ -94,7 +104,9 @@ genescape tree genes.txt -o output.pdf
 
 You only had three genes in the input yet even that produces a large tree of terms.
 
-![GeneScape output](docs/images/genescape-output2.png)
+![GeneScape output]
+
+[out2]: https://github.com/ialbert/genescape-central/blob/main/docs/images/genescape-output2.png
 
 You can narrow down the visualization in multiple ways, for example, you can select only terms that match the word `lipid` :
 
@@ -104,9 +116,9 @@ genescape tree -m lipid genes.txt -o output.pdf
 
 When filtered as shown above the output is much more manageable:
 
-![GeneScape output](docs/images/genescape-output3.png)
+![GeneScape output][out3]
 
-
+[out3]: https://github.com/ialbert/genescape-central/blob/main/docs/images/genescape-output3.png
 
 ## genetrack annotation
 
@@ -143,9 +155,7 @@ GO:0004866,MF,1,endopeptidase inhibitor activity,C3P1,4,(1/4)
 #
 ## Installation
 
-For a standalone executable, download the latest release from the [releases page][release]. We offer executables for Windows and MacOS.
-
-[release]: ...
+For a standalone executable, download the latest release from the [releases page][releases]. We offer executables for Windows and MacOS.
 
 When installed from the command line, the software requires Python 3.10 or above. 
 
@@ -179,8 +189,10 @@ If you are unable to install the `dot` package you can save the output as `.dot`
 genescape tree -o graph.dot --demo
 ```
 
-Then use an online tool like [viz-js](http://viz-js.com/) to visualize the graph.
+Then use an online tool like [viz-js][viz] to visualize the graph.
+
+[viz]: https://viz-js.com/ 
 
 ## License
 
-`genescape` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+`genescape` is distributed under the terms of the MIT license. 
