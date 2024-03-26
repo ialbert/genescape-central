@@ -77,7 +77,7 @@ BG_COLOR = "#FFFFFF"
 INPUT_COLOR = "#A3F6A2"
 
 # Leaf color
-LEAF_COLOR = "#31CE43"
+LEAF_COLOR = "#17DA15"
 
 # Default shape
 SHAPE = "box"
