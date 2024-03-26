@@ -12,7 +12,7 @@ We provide standalone executables for GeneScape that can be run  without any ins
 
 Download the latest binary release for your platform
 
-* [Binary Releases]
+* [GeneScape Releases][releases]
 
 [release]: https://github.com/ialbert/genescape-central/releases
 
