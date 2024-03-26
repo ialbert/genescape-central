@@ -98,8 +98,6 @@ def webapp(res, devmode=False, host="localhost", port=8000):
         patt = get_param(request, name='pattern')
         root = get_param(request, name='root')
 
-        print (root)
-
         # Generate the output.
         graph, ann = tree.parse_input(inp=inp, index=res.INDEX, pattern=patt, root=root)
 

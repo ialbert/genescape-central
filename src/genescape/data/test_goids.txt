@@ -1,11 +1,8 @@
 #
 # Input may contain both genes and GO terms.
 #
-GO:0046982, protein heterodimerization activity
-GO:0005615, extracellular space
-GO:0016020, membrane
-GO:0004866, endopeptidase inhibitor activity
-GO:0090630, activation of GTPase activity
-GO:0005737, cytoplasm
-GO:0031083, BLOC-1 complex
-GO:0005096, GTPase activator activity
+GO:0005488
+GO:0005515
+Cyp1a1
+Sphk2
+Sptlc2

@@ -26,13 +26,16 @@ test:
 lint:
 	hatch run lint:style
 
+docs:
+	genescape tree -t -o docs/images/genescape-output1.png
+	genescape tree -o docs/images/genescape-output2.png src/genescape/data/test_goids.txt 
+	genescape tree -m lipid -o docs/images/genescape-output3.png src/genescape/data/test_goids.txt 
 # Fix linting errors.
 fix:
 	hatch run lint:fmt
 
 push:
 	git commit -am 'saving work' && git push
-
 
 exe:
 	pyinstaller src/genescape/server.py \
@@ -58,4 +61,4 @@ $(OBO):
 get: $(OBO)
 	@ls -l $(OBO)
 
-.PHONY: test lint fix push demo clean realclean build pypi get
+.PHONY: test docs lint fix push demo clean realclean build pypi get

@@ -57,13 +57,13 @@
                     <option value="CC">Cellular Component</option>
                 </select>
 
-                <button hx-post="/draw/"
+                <button class="primary" hx-post="/draw/"
                         hx-trigger="click"
                         hx-swap="outerHTML"
                         hx-include="#input, #pattern, #root"
                         hx-indicator="#loadingImage"
                         hx-target="#dot">
-                    Draw Tree
+                    Draw&nbsp;Tree
                 </button>
 
                 <button data-action="zoom-in">Zoom+</button>
