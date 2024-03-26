@@ -27,7 +27,7 @@ lint:
 	hatch run lint:style
 
 docs:
-	genescape tree -t -o docs/images/genescape-output1.png
+	genescape tree -o docs/images/genescape-output1.png src/genescape/data/test_genes.txt 
 	genescape tree -o docs/images/genescape-output2.png src/genescape/data/test_goids.txt 
 	genescape tree -m lipid -o docs/images/genescape-output3.png src/genescape/data/test_goids.txt 
 # Fix linting errors.
@@ -37,10 +37,15 @@ fix:
 push:
 	git commit -am 'saving work' && git push
 
-exe:
+VERSION = 0.6.0
+NAME = GeneScape
+
+mac:
 	pyinstaller src/genescape/server.py \
 		--add-data=src/genescape/data:genescape/data \
-		--hide-console=minimize-late -i docs/images/logo.ico -n GeneScape -y --onefile
+		--hide-console=minimize-late -i docs/images/logo.ico -n ${NAME} -y --onefile
+	(cd dist && zip ${NAME}-${VERSION}-MacOS.zip ${NAME} && rm -f ${NAME})
+
 
 clean:
 	rm -f src/genescape/web/static/tmp/image*

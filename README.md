@@ -26,6 +26,22 @@ Note all the options available in the interface:
 
 ![GeneScape bar](docs/images/interface-bar.png)
 
+## Color scheme
+
+The colors in the tree carry additional meaning:
+
+- Light Green nodes represent functions that are in the input list.
+- Dark green nodes are functions present in the input and are leaf nodes in the terminology, the most granular annotation possible 
+
+Each subtree in a different GO category has a different color:
+  - Biological Process (BP)
+  - Molecular Function (MF)
+  - Cellular Component (CC)
+
+The subtree coloring is meant to help you understand the level of detail and the specificity of the functional terms you visualize.
+
+Numbers such as 1/4 mean how many genes in the input carry that function.
+
 ## Command line usage
 
 See the installation below on how to get the command line version.
@@ -52,7 +68,7 @@ Which will generate a tree visualization of the test data.
 
 ![GeneScape output](docs/images/genescape-output1.png)
 
-You can pass to the tree visualizer a list of genes or a list of GO ids, or even a mix of both:
+You can pass to the tree visualizer a list of genes or a list of GO ids, or even a mix of both. Here is an example.
 
 ```
 Cyp1a1
@@ -66,22 +82,21 @@ run the `tree` command to visualize the relationships between the GO terms
 genescape tree genes.txt -o output.pdf
 ```
 
-The command generates the following output that shows a huge tree of terms.
+You only had three genes in the input yet even that produces a large tree of terms.
 
 ![GeneScape output](docs/images/genescape-output2.png)
 
-You can narrow down the visualization to terms that only contain the word lipid via:
+You can narrow down the visualization in multiple ways, for example, you can select only terms that match the word `lipid` :
 
 ```console
 genescape tree -m lipid genes.txt -o output.pdf
 ```
 
+When filtered as shown above the output is much more manageable:
+
 ![GeneScape output](docs/images/genescape-output3.png)
 
-```console
-genescape tree -h
-```
-Read more about how [genescape tree](docs/gs_tree.md) works.
+
 
 ## genetrack annotation
 
@@ -118,11 +133,11 @@ GO:0004866,MF,1,endopeptidase inhibitor activity,C3P1,4,(1/4)
 #
 ## Installation
 
-For a standalone executable, download the latest release from the [releases page][release]
+For a standalone executable, download the latest release from the [releases page][release]. We offer executables for Windows and MacOS.
 
 [release]: ...
 
-When isntalled from the command line the software requires Python 3.10 or above. 
+When installed from the command line, the software requires Python 3.10 or above. 
 
 You can install `genescape` via `pip` or `pipx`.
 
@@ -136,9 +151,9 @@ Since the software is meant to be used as a command line tool, [pipx][pipx] is p
 pipx install genescape
 ```
 
-If only use the web interface aka `genescape web` no other software installation is needed.
+If you only use the web interface via `genescape web` no other software installation is needed.
 
-If you want to generate images from the command line, you will also need to have the `dot` software from [Graphviz](https://graphviz.org/) installed and available on your `PATH`. 
+If you want to generate images from the command line without a web browser, you will also need to have the `dot` software from [Graphviz](https://graphviz.org/) installed and available on your `PATH`. 
 
 You can install Graphviz via your package manager or via `conda` with:
 
