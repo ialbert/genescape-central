@@ -42,7 +42,7 @@ RESOURCES = [
     (None,"genescape.data.web.static", "htmx.min.js.gz"),
     (None,"genescape.data.web.static", "viz-standalone.js"),
     (None,"genescape.data.web.static", "mini-default.css"),
-    (None,"genescape.data.web.static", "sailboat.png"),
+    (None,"genescape.data.web.static", "logo.png"),
 ]
 
 # Reset the resource directory
@@ -89,8 +89,10 @@ def init_resource(package=None, target='', tag=utils.TAG, dirname=".genescape", 
         return dest
 
     # Create the resource if it does not exist.
-    if not os.path.isfile(dest):
-        with rsc.path(package, target) as src:
+    with rsc.path(package, target) as src:
+        # The condition to copy the resource
+        cond = not os.path.isfile(dest) or os.path.getmtime(src) > os.path.getmtime(dest)
+        if cond:
             # Copy the resource to the target directory
             shutil.copy(src, dest)
             utils.info(f'copy resource: {dest}')

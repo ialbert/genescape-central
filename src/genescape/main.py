@@ -119,9 +119,10 @@ def build(index=None, obo=None, gaf=None, ):
 @click.option("--devmode", "devmode", is_flag=True, help="run in development mode")
 @click.option("--reset", "reset", is_flag=True, help="reset the resources")
 @click.option("-i", "--index", "index",  help="Genescape index file")
+@click.option("-n", "--nobrowser", "nopop", is_flag=True, help="Don't pop a browser window.")
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def web(devmode=False, reset=False, verbose=False, index=None):
+def web(devmode=False, reset=False, verbose=False, index=None, nopop=False):
     """
     Run the web interface.
     """
@@ -130,9 +131,8 @@ def web(devmode=False, reset=False, verbose=False, index=None):
     # Set the verbosity level.
     utils.verbosity(verbose)
 
-
     # Start the server.
-    server.start(devmode=devmode, reset=reset, index=index)
+    server.start(devmode=devmode, reset=reset, index=index, popwin=not nopop)
 
 
 if __name__ == "__main__":
