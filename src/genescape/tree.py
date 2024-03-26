@@ -206,7 +206,7 @@ def write_tree(tree, ann, out=None):
     return text
 
 
-def parse_input(inp, index, pattern=None, mincount=1):
+def parse_input(inp, index, pattern=None, root=utils.NS_ALL, mincount=1):
     """
     Parses an input and generates a tree and an annotation object.
     """
@@ -218,7 +218,7 @@ def parse_input(inp, index, pattern=None, mincount=1):
     data = utils.parse_terms(iterable=iter)
 
     # Run the annotation command
-    ann = annot.run(data, index=index, mincount=mincount, pattern=pattern)
+    ann = annot.run(data, index=index, mincount=mincount, pattern=pattern, root=root)
 
     # Turn the JSON string into an object.
     ann = json.loads(ann)
@@ -233,8 +233,8 @@ if __name__ == "__main__":
     res = resources.init()
     ind = res.INDEX
     inp = res.TEST_GENES
-    out = os.path.join("../genescape.pdf")
-    tree, ann = parse_input(inp=inp, index=ind, mincount=1)
+    out = os.path.join("genescape.pdf")
+    tree, ann = parse_input(inp=inp, index=ind, mincount=1, root=utils.NS_CC)
     text = write_tree(tree, ann, out=out)
 
 

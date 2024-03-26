@@ -12,6 +12,7 @@ def cli():
     """
     pass
 
+ROOT_CHOICES = [utils.NS_BP, utils.NS_MF, utils.NS_CC, utils.NS_ALL]
 
 
 @cli.command()
@@ -20,10 +21,12 @@ def cli():
 @click.option("-i", "--index", "index", metavar="FILE", help="OBO index file", )
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal count for a GO term (1)")
+@click.option('-r', '--root', type=click.Choice(ROOT_CHOICES, case_sensitive=False), default=utils.NS_ALL, help='Select a category: BP, MF, CC, or ALL.')
+
 @click.option("-t", "--test", "test", is_flag=True, help="run with demo data")
 @click.option("-v", "verbose", is_flag=True, help="verbose output")
 @click.help_option("-h", "--help")
-def tree(fname, out=None, index=None, match=None, count=1, verbose=False, test=False):
+def tree(fname, out=None, index=None, root=utils.NS_ALL, match=None, count=1, verbose=False, test=False):
     """
     Draws a tree from GO terms.
     """
@@ -45,7 +48,7 @@ def tree(fname, out=None, index=None, match=None, count=1, verbose=False, test=F
         utils.info(f"input {fname}")
 
     # Run the tree command.
-    graph, ann = tree.parse_input(inp=fname, index=index, pattern=match, mincount=count)
+    graph, ann = tree.parse_input(inp=fname, index=index, pattern=match, mincount=count, root=root)
 
     # Write the tree to a file.
     tree.write_tree(graph, ann, out=out)
@@ -57,10 +60,11 @@ def tree(fname, out=None, index=None, match=None, count=1, verbose=False, test=F
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal count for a GO term (1)")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
+@click.option('-r', '--root', type=click.Choice(ROOT_CHOICES, case_sensitive=False), default=utils.NS_ALL, help='Select a category: BP, MF, CC, or ALL.')
 @click.option("--csv", "csvout", is_flag=True, help="Produce CSV output instead of JSON")
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, index=None, verbose=False, test=False, csvout=False, match="", count=1):
+def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, csvout=False, match="", count=1):
     """
     Generates the GO terms for a list of genes.
     """
@@ -89,7 +93,7 @@ def annotate(fname, index=None, verbose=False, test=False, csvout=False, match="
     utils.debug(f"params c={count} m={match}")
 
     # Get the annotation output
-    out = annot.run(data=data, index=index, pattern=match, mincount=count, csvout=csvout)
+    out = annot.run(data=data, index=index, pattern=match, mincount=count, csvout=csvout, root=root)
 
     # Print the annotation aoutput.
     print(out)
@@ -119,7 +123,7 @@ def build(index=None, obo=None, gaf=None, ):
 @click.option("--devmode", "devmode", is_flag=True, help="run in development mode")
 @click.option("--reset", "reset", is_flag=True, help="reset the resources")
 @click.option("-i", "--index", "index",  help="Genescape index file")
-@click.option("-n", "--nobrowser", "nopop", is_flag=True, help="Don't pop a browser window.")
+@click.option("-n", "--nopop", "nopop", is_flag=True, help="Don't pop a browser window.")
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
 def web(devmode=False, reset=False, verbose=False, index=None, nopop=False):

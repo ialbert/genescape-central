@@ -86,7 +86,7 @@ SHAPE = "box"
 NODE_ATTRS = dict(fillcolor=BG_COLOR, shape=SHAPE, style="filled")
 
 # Namespace categories
-NS_BP, NS_MF, NS_CC = "BP", "MF", "CC"
+NS_BP, NS_MF, NS_CC, NS_ALL = "BP", "MF", "CC", "ALL"
 
 # Map the GO categories namespaces.
 NAMESPACE_MAP = {

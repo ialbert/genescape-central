@@ -10,7 +10,7 @@ from pathlib import Path
 from genescape import utils, resources
 
 
-def run(data, index, pattern='', mincount=1, ns=utils.NS_BP, csvout=False):
+def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
     # Collect the run status into this list.
     status = {
         utils.CODE_FIELD: 0,
@@ -38,11 +38,6 @@ def run(data, index, pattern='', mincount=1, ns=utils.NS_BP, csvout=False):
     gene2go = idx[utils.IDX_gene2go]
     prot2go = idx[utils.IDX_prot2go]
     go = idx[utils.IDX_OBO]
-
-    # ns_value = utils.NAMESPACE_MAP_REV.get(ns, None)
-    # if ns_value:
-    #    pairs = filter(lambda x: x[1].get("namespace", '') == ns_value,  go.items() )
-    # go = dict(pairs)
 
     # The valid ids are the unqiue gene and protein ids.
     valid_ids = set(gene2go) | set(prot2go) | set(go)
@@ -105,13 +100,23 @@ def run(data, index, pattern='', mincount=1, ns=utils.NS_BP, csvout=False):
 
     # Create the data object
     res = []
-    data_fields = [utils.GID, "root", "function", utils.SOURCE, "count", "size", utils.LABEL]
+    data_fields = [utils.GID, "root", "count", "function", utils.SOURCE, "count", "size", utils.LABEL]
+
+
+
     for goid, cnt, func in counts:
         label = f"({cnt}/{n_size})"
         funcs = func2name.get(goid, [])
-        name_space = utils.NAMESPACE_MAP.get(go2ns(goid), "?")
+        name_space = go2ns(goid)
 
-        name = dict(zip(data_fields, [goid, name_space, func, funcs, cnt, n_size, label]))
+        root_code = utils.NAMESPACE_MAP.get(name_space, "?")
+
+        # Filter by root codes
+        if root != utils.NS_ALL and root != root_code:
+            continue
+
+        name = dict(zip(data_fields, [goid, root_code, cnt,func, funcs, cnt, n_size, label]))
+
         res.append(name)
 
     json_data = {utils.DATA_FIELD: res, utils.STATUS_FIELD: status}
