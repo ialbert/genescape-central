@@ -85,17 +85,24 @@ SHAPE = "box"
 # Set the default attributes for the nodes
 NODE_ATTRS = dict(fillcolor=BG_COLOR, shape=SHAPE, style="filled")
 
-# Map the GO categories to the short names
+# Namespace categories
+NS_BP, NS_MF, NS_CC = "BP", "MF", "CC"
+
+# Map the GO categories namespaces.
 NAMESPACE_MAP = {
-    "biological_process": "BP",
-    "molecular_function": "MF",
-    "cellular_component": "CC",
+    "biological_process": NS_BP,
+    "molecular_function": NS_MF,
+    "cellular_component": NS_CC,
 }
 
+# Revers namespace map
+NAMESPACE_MAP_REV = dict( (y, x) for x,y in NAMESPACE_MAP.items() )
+
+# Map colors to the namespaces.
 NAMESPACE_COLORS = {
-    "BP": "#F6CBA2",
-    "MF": "#A2CDF6",
-    "CC": "#F5A2F6",
+     NS_BP: "#F6CBA2",
+     NS_MF: "#A2CDF6",
+     NS_CC: "#F5A2F6",
 }
 
 # The index names

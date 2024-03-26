@@ -1,4 +1,4 @@
-import os, json
+import os, json, io, csv
 import textwrap
 
 import pydot
@@ -98,7 +98,7 @@ def make_tree(ann, graph):
 def count_descendants(graph, start):
     return len(nx.descendants(graph, start)) + 1
 
-def pydot_graph(extra, tree: DiGraph) -> pydot.Dot :
+def pydot_graph(extra, tree):
     """
     Adds additional information to the tree nodes.
     """
@@ -233,8 +233,8 @@ if __name__ == "__main__":
     res = resources.init()
     ind = res.INDEX
     inp = res.TEST_GENES
-    out = os.path.join("genescape.pdf")
-    tree, ann = parse_input(inp=inp, index=ind, mincount=2)
+    out = os.path.join("../genescape.pdf")
+    tree, ann = parse_input(inp=inp, index=ind, mincount=1)
     text = write_tree(tree, ann, out=out)
 
 

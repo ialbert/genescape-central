@@ -68,13 +68,6 @@ def get_param(request, name='param'):
     return value
 
 
-def graph2text(graph):
-    nodes = filter(lambda x: graph.nodes[x].get(utils.INPUT), graph.nodes)
-    pairs = map(lambda x: (x, graph.nodes[x].get(utils.NAME, '')), nodes)
-    lines = map(lambda x: f"{x[0]}, {x[1]}", pairs)
-    text = "\n".join(lines)
-    return text
-
 def webapp(res, devmode=False, host="localhost", port=8000):
 
     @app.route('/')
@@ -113,8 +106,9 @@ def webapp(res, devmode=False, host="localhost", port=8000):
         dot = tree.write_tree(graph, ann, out=None)
 
         # Convert the graph to a list of terms.
-        text = graph2text(graph)
+        text = annot.ann2csv(ann)
 
+        # The parameters for the template.
         param = dict(dot=dot, input=text)
 
         return param

@@ -3,18 +3,18 @@ Annotates a list of genes with functions based on the GO graph
 """
 import csv, io
 import gzip
-import sys,json,re
+import sys, json, re
 from collections import Counter
 from itertools import *
 from pathlib import Path
 from genescape import utils, resources
 
-def run(data, index, pattern='', mincount=1, csvout=False):
 
+def run(data, index, pattern='', mincount=1, ns=utils.NS_BP, csvout=False):
     # Collect the run status into this list.
     status = {
-        utils.CODE_FIELD:0,
-        utils.INVALID_FIELD:[]
+        utils.CODE_FIELD: 0,
+        utils.INVALID_FIELD: []
     }
 
     # Checking the input
@@ -39,13 +39,18 @@ def run(data, index, pattern='', mincount=1, csvout=False):
     prot2go = idx[utils.IDX_prot2go]
     go = idx[utils.IDX_OBO]
 
+    # ns_value = utils.NAMESPACE_MAP_REV.get(ns, None)
+    # if ns_value:
+    #    pairs = filter(lambda x: x[1].get("namespace", '') == ns_value,  go.items() )
+    # go = dict(pairs)
+
     # The valid ids are the unqiue gene and protein ids.
     valid_ids = set(gene2go) | set(prot2go) | set(go)
 
     # Fetch GO functions for a given gene or protein id.
     def get_func(name):
         if name in go:
-            ids = [ name ]
+            ids = [name]
         else:
             ids = set(gene2go.get(name, []) + prot2go.get(name, []))
         return ids
@@ -74,6 +79,9 @@ def run(data, index, pattern='', mincount=1, csvout=False):
     def go2func(goid):
         return idx[utils.IDX_OBO][goid]["name"]
 
+    def go2ns(goid):
+        return idx[utils.IDX_OBO][goid]["namespace"]
+
     # Build the counter.
     counter = Counter(coll)
 
@@ -97,35 +105,43 @@ def run(data, index, pattern='', mincount=1, csvout=False):
 
     # Create the data object
     res = []
-    data_fields = [utils.GID, "count", "size", utils.LABEL, "function", utils.SOURCE]
+    data_fields = [utils.GID, "root", "function", utils.SOURCE, "count", "size", utils.LABEL]
     for goid, cnt, func in counts:
         label = f"({cnt}/{n_size})"
         funcs = func2name.get(goid, [])
-        name = dict(zip(data_fields, [goid, cnt, n_size, label, func, funcs]))
+        name_space = utils.NAMESPACE_MAP.get(go2ns(goid), "?")
+
+        name = dict(zip(data_fields, [goid, name_space, func, funcs, cnt, n_size, label]))
         res.append(name)
 
-    json_data = {utils.DATA_FIELD:res, utils.STATUS_FIELD:status}
+    json_data = {utils.DATA_FIELD: res, utils.STATUS_FIELD: status}
 
-    # The CSV file has fewer fields
     if csvout:
-        csv_field = data_fields
-        stream = io.StringIO()
-        write = csv.DictWriter(stream, fieldnames=csv_field, extrasaction='ignore')
-        write.writeheader()
-        for row in res:
-            row = dict(row)
-            row[utils.SOURCE] = ";".join(row[utils.SOURCE])
-            write.writerow(row)
-        out = stream.getvalue()
-
+        out = ann2csv(json_data)
     else:
         out = json.dumps(json_data, indent=2)
 
     return out
 
 
-if __name__ == "__main__":
+def ann2csv(ann):
+    text = ''
+    data = ann.get(utils.DATA_FIELD, [])
+    if data:
+        fields = data[0].keys()
+        stream = io.StringIO()
+        write = csv.DictWriter(stream, fieldnames=fields, extrasaction='ignore')
+        write.writeheader()
+        for row in data:
+            row = dict(row)
+            row[utils.SOURCE] = ";".join(row.get(utils.SOURCE, []))
+            write.writerow(row)
+        text = stream.getvalue()
 
+    return text
+
+
+if __name__ == "__main__":
     # Initialize the resources
     res = resources.init()
 
@@ -137,7 +153,6 @@ if __name__ == "__main__":
 
     data = utils.parse_terms(iterable=stream)
 
-    out = run(data=data, index=index)
+    out = run(data=data, index=index, csvout=True)
 
-    print (out)
-
+    print(out)
