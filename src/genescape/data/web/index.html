@@ -48,10 +48,19 @@
 
                 Filter: <input type="text" id="pattern" name="pattern" placeholder="Pattern" value=""/>
 
+                &nbsp; Count >= <input type="text" id="count" name="count" value="1"/>
+
+                &nbsp;Root: <select name="root" id="root">
+                    <option value="ALL" selected>Show all</option>
+                    <option value="BP">Biological Process</option>
+                    <option value="MF">Molecular Function</option>
+                    <option value="CC">Cellular Component</option>
+                </select>
+
                 <button hx-post="/draw/"
                         hx-trigger="click"
                         hx-swap="outerHTML"
-                        hx-include="#input, #pattern"
+                        hx-include="#input, #pattern, #root"
                         hx-indicator="#loadingImage"
                         hx-target="#dot">
                     Draw Tree
@@ -64,7 +73,7 @@
                 <button
                 class="btn btn-primary"
                 data-toggle-width="true">
-                    Full Screen
+                    Wide Screen
                 </button>
 
             </div>

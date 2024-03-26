@@ -96,11 +96,12 @@ def webapp(res, devmode=False, host="localhost", port=8000):
         # Read the parameters from the request.
         inp = textarea(request)
         patt = get_param(request, name='pattern')
+        root = get_param(request, name='root')
 
-        print(f"terms: {inp}")
+        print (root)
 
         # Generate the output.
-        graph, ann = tree.parse_input(inp=inp, index=res.INDEX, pattern=patt)
+        graph, ann = tree.parse_input(inp=inp, index=res.INDEX, pattern=patt, root=root)
 
         # The dot string
         dot = tree.write_tree(graph, ann, out=None)

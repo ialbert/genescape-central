@@ -22,6 +22,10 @@
     align-items: center; /* This centers the items vertically */
 }
 
+#count {
+    width:2rem;
+}
+
 hr {
     height: auto;
     border: none;
