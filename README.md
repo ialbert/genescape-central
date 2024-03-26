@@ -14,7 +14,7 @@ Download the latest binary release for your platform
 
 * [GeneScape Releases][releases]
 
-[release]: https://github.com/ialbert/genescape-central/releases
+[releases]: https://github.com/ialbert/genescape-central/releases
 
 **Windows**: unzip then double-click the executable to start the program.
 
