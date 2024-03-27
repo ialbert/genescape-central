@@ -4,14 +4,13 @@
 
 [tree]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-tree.png
 
-The `genescape` is a tool for visualizing gene functions. 
-
+**GeneScape** is a software tool for visualizing gene functions. 
 
 * `tree` draws informative Gene Ontology (GO) subgraphs
 * `annotate` annotates a list of genes with GO functions
 * `web` provides a web interface for the `tree` command
 
-We provide standalone executables for GeneScape that can be run  without any installation. The software can also operate in command line mode.
+**GeneScape** comes as a standalone executable that can be run on  Windows or MacOS without installation. The software can also operate in command line mode on any platform where Python 3.10 or above is available.
 
 ## Quick start
 
@@ -37,14 +36,15 @@ Fill in the text box with a list of genes names or GO terms or gene names and cl
 
 [iface2]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-help.png
 
-The program will generate a tree visualization of the functional elements of the gene names you provided.
-
-Note the processs that takes place:
-
-1. First we extract the GO terms associated with the input genes 
-2. Then we build and visualize the tree based on these GO terms 
+The program will generate a tree visualization of the functional elements of the gene names that are inputted.
 
 ![GeneScape][tree]
+
+**GeneScape** does the following:
+
+1. Reads genes from an **Input list** 
+1. Extracts the **Functional Annotations** associated with the input genes 
+1. Builds and visualizes a tree based on these GO terms 
 
 ## Color scheme
 
