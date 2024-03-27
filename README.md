@@ -1,10 +1,11 @@
 # Genescape
 
-The `genescape` is a tool for visualizing gene functions. 
-
-![GeneScape][tree]
+![GeneScape Tree][tree]
 
 [tree]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-tree.png
+
+The `genescape` is a tool for visualizing gene functions. 
+
 
 * `tree` draws informative Gene Ontology (GO) subgraphs
 * `annotate` annotates a list of genes with GO functions
@@ -44,8 +45,6 @@ Note the processs that takes place:
 2. Then we build and visualize the tree based on these GO terms 
 
 ![GeneScape][tree]
-
-[tree]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-tree.png
 
 ## Color scheme
 
