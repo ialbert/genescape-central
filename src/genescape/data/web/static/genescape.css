@@ -58,11 +58,11 @@ svg {
 }
 
 #graph {
-    //padding: 10px;
+    //padding: 1em;
 }
 
 #graphContainer {
-    //padding: 1em;
+    padding: 1ex;
     //overflow: auto;
     border: var(--border-color) solid 1px;
 }
