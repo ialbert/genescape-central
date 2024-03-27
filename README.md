@@ -174,23 +174,15 @@ GO:0004866,MF,1,endopeptidase inhibitor activity,C3P1,4,(1/4)
 
 ## Installation
 
-For a standalone executable, download the latest release from the [releases page][releases]. We offer executables for Windows and MacOS.
+For a standalone executable Windows or MacOS executable, download the latest release from the [releases page][releases]. 
 
-When installed from the command line, the software requires Python 3.10 or above. 
-
-You can install `genescape` via `pip` or `pipx`.
+When installed from the command line, the software requires Python 3.10 or above.  You can install `genescape` via `pip` or `pipx`.
 
 ```console
 pip install genescape
 ```
 
-Since the software is meant to be used as a command line tool, [pipx][pipx] is perhaps an even better choice:
-
-```console
-pipx install genescape
-```
-
-If you only use the web interface via `genescape web` no other software installation is needed.
+If you only want to make use of the web interface via `genescape web` no other software installation is needed.
 
 If you want to generate images from the command line without a web browser, you will also need to have the `dot` software from [Graphviz](https://graphviz.org/) installed and available on your `PATH`. 
 
@@ -199,8 +191,6 @@ You can install Graphviz via your package manager or via `conda` with:
 ```console  
 conda install graphviz
 ```
-
-[pipx]: https://pipx.pypa.io/stable/
 
 If you are unable to install the `dot` package you can save the output as `.dot` files 
 
