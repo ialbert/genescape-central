@@ -215,6 +215,8 @@ def parse_input(inp, index, pattern=None, root=utils.NS_ALL, mincount=1):
     Parses an input and generates a tree and an annotation object.
     """
 
+    utils.info(f"index: {index}")
+
     # Get the input stream.
     iter = utils.get_stream(inp=inp)
 

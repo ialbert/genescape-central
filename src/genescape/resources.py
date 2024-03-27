@@ -7,6 +7,19 @@ CURR_DIR = Path(os.path.dirname(__file__))
 
 CACHE = {}
 
+def cache(key, func):
+    global CACHE
+
+    if key not in CACHE:
+        CACHE[key] = func()
+
+    return CACHE[key]
+
+def clear_cache():
+    global CACHE
+    CACHE = {}
+
+
 class Resource(object):
 
     def __init__(self, config):
@@ -40,6 +53,13 @@ class Resource(object):
         # Webserver related directories
         self.WEB_DIR  = get("index.html").parent
         self.STATIC_DIR = self.WEB_DIR / "static"
+
+    def get_index(self, code):
+        for value in self.config.get("index", []):
+            if value["code"] == code:
+                return value["path"]
+        utils.error(f"index code not found: {{code}}")
+        return self.INDEX
 
 # Reset the resource directory
 def reset_dir(config):
@@ -139,17 +159,7 @@ def init(config, devmode=False):
 
     return res
 
-def cache(key, func):
-    global CACHE
 
-    if key not in CACHE:
-        CACHE[key] = func()
-
-    return CACHE[key]
-
-def clear_cache():
-    global CACHE
-    CACHE = {}
 
 def get_json(path):
 
@@ -177,14 +187,17 @@ def get_index(index, res):
 if __name__ == "__main__":
     utils.verbosity(True)
 
-    config = get_config()
+    cnf = get_config()
 
     #reset_dir(config)
 
-    res = init(config= config, devmode=False)
+    res = init(config= cnf, devmode=False)
 
 
     print (res.WEB_DIR)
+
+    print (res.get_index("mm"))
+
 
 
     print ("-" * 80)

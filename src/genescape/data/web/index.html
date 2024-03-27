@@ -45,8 +45,12 @@
                 <span class="title">GeneScape</span>
 
                 <select name="db" id="db">
-                    %for code, name in dbs:
-                        <option value="{{code}}" selected>{{name}}</option>
+                    %for code, name, sel in dbs:
+                        % if sel:
+                            <option value="{{code}}" selected>{{name}}</option>
+                        % else:
+                            <option value="{{code}}">{{name}}</option>
+                        %end
                     %end
                 </select>
 
@@ -67,7 +71,7 @@
                 <button class="primary" hx-post="/draw/" id="drawTree"
                         hx-trigger="click"
                         hx-swap="outerHTML"
-                        hx-include="#input, #pattern, #root, #count"
+                        hx-include="#input, #pattern, #root, #count, #db"
                         hx-indicator="#loadingImage"
                         hx-target="#dot">
                     Draw&nbsp;Tree

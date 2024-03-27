@@ -171,7 +171,7 @@ def depr(major, minor, cause, fix):
     text = "Warning: Use of deprecated feature or API. (Deprecated in Bottle-%d.%d)\n"\
            "Cause: %s\n"\
            "Fix: %s\n" % (major, minor, cause, fix)
-    if DEBUG == 'strict':
+    if DEVMODE == 'strict':
         raise DeprecationWarning(text)
     warnings.warn(text, DeprecationWarning, stacklevel=3)
     return DeprecationWarning(text)
@@ -414,7 +414,7 @@ class Router(object):
         whole_rule = (rule, flatpat, target, getargs)
 
         if (flatpat, method) in self._groups:
-            if DEBUG:
+            if DEVMODE:
                 msg = 'Route <%s %s> overwrites a previously defined route'
                 warnings.warn(msg % (method, rule), RuntimeWarning)
             self.dyna_routes[method][
@@ -834,7 +834,7 @@ class Bottle(object):
         else: routes = [self.routes[route]]
         for route in routes:
             route.reset()
-        if DEBUG:
+        if DEVMODE:
             for route in routes:
                 route.prepare()
         self.trigger_hook('app_reset')
@@ -865,7 +865,7 @@ class Bottle(object):
             attribute."""
         self.routes.append(route)
         self.router.add(route.rule, route.method, route, name=route.name)
-        if DEBUG: route.prepare()
+        if DEVMODE: route.prepare()
 
     def route(self,
               path=None,
@@ -1105,7 +1105,7 @@ class Bottle(object):
             if not self.catchall: raise
             err = '<h1>Critical error while processing request: %s</h1>' \
                   % html_escape(environ.get('PATH_INFO', '/'))
-            if DEBUG:
+            if DEVMODE:
                 err += '<h2>Error:</h2>\n<pre>\n%s\n</pre>\n' \
                        '<h2>Traceback:</h2>\n<pre>\n%s\n</pre>\n' \
                        % (html_escape(repr(E)), html_escape(format_exc()))
@@ -2709,7 +2709,7 @@ class ResourceManager(object):
             The :attr:`path` list is searched in order. The first match is
             returned. Symlinks are followed. The result is cached to speed up
             future lookups. """
-        if name not in self.cache or DEBUG:
+        if name not in self.cache or DEVMODE:
             for path in self.path:
                 fpath = os.path.join(path, name)
                 if os.path.isfile(fpath):
@@ -2942,7 +2942,7 @@ def static_file(filename, root,
 def debug(mode=True):
     """ Change the debug level.
     There is only one debug level supported at the moment."""
-    global DEBUG
+    global DEVMODE
     if mode: warnings.simplefilter('default')
     DEBUG = bool(mode)
 
@@ -3872,7 +3872,7 @@ class MakoTemplate(BaseTemplate):
         from mako.template import Template
         from mako.lookup import TemplateLookup
         options.update({'input_encoding': self.encoding})
-        options.setdefault('format_exceptions', bool(DEBUG))
+        options.setdefault('format_exceptions', bool(DEVMODE))
         lookup = TemplateLookup(directories=self.lookup, **options)
         if self.source:
             self.tpl = Template(self.source, lookup=lookup, **options)
@@ -4223,7 +4223,7 @@ def template(*args, **kwargs):
     adapter = kwargs.pop('template_adapter', SimpleTemplate)
     lookup = kwargs.pop('template_lookup', TEMPLATE_PATH)
     tplid = (id(lookup), tpl)
-    if tplid not in TEMPLATES or DEBUG:
+    if tplid not in TEMPLATES or DEVMODE:
         settings = kwargs.pop('template_settings', {})
         if isinstance(tpl, adapter):
             TEMPLATES[tplid] = tpl
@@ -4282,7 +4282,7 @@ jinja2_view = functools.partial(view, template_adapter=Jinja2Template)
 
 TEMPLATE_PATH = ['./', './views/']
 TEMPLATES = {}
-DEBUG = False
+DEVMODE = False
 NORUN = False  # If set, run() does nothing. Used by load_app()
 
 #: A dict to map HTTP status codes (e.g. 404) to phrases (e.g. 'Not Found')

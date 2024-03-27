@@ -8,7 +8,7 @@ from genescape import bottle
 from genescape.bottle import get, post, request, response, redirect
 from genescape import __version__ as VERSION
 
-DEBUG = True
+DEVMODE = True
 
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -37,7 +37,7 @@ def debugger(func):
     """
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        if DEBUG:
+        if DEVMODE:
 
             #print(f"# method: {request.method}")
 
@@ -78,7 +78,7 @@ def webapp(res, config, devmode=False, host="localhost", port=8000):
     @view('index.html')
     @debugger
     def index():
-        dbs = []
+        dbs = get_dbs(res.config)
         param = dict(title="GeneScape", version=VERSION, rand=random(), dbs=dbs)
         return param
 
@@ -104,9 +104,19 @@ def webapp(res, config, devmode=False, host="localhost", port=8000):
         root = get_param(request, name='root')
         count = get_param(request, name='count')
         count = safe_int(count, default=1)
+        db = get_param(request, name='db')
+
+        # Choose a different index
+        index = res.get_index(db)
+
+        print (type(index), index)
+
+        #index = res.INDEX
+
+        print (type(index), index)
 
         # Generate the output.
-        graph, ann = tree.parse_input(inp=inp, index=res.INDEX, pattern=patt, root=root, mincount=count)
+        graph, ann = tree.parse_input(inp=inp, index=index, pattern=patt, root=root, mincount=count)
 
         # The dot string
         dot = tree.write_tree(graph, ann, out=None)
@@ -119,6 +129,7 @@ def webapp(res, config, devmode=False, host="localhost", port=8000):
 
         return param
 
+
     # Setting the debug mode.
     if devmode:
         bottle.debug(True)
@@ -129,23 +140,27 @@ def webapp(res, config, devmode=False, host="localhost", port=8000):
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)
 
-def parse_dbs(config):
+def get_dbs(config):
     dbs = []
-    for key, value in config.get("data", {}).items():
+    for value in config.get("index", []):
         code = value.get("code", "?")
         name = value.get("name", "?")
-        dbs.append((code, name))
+        selected = value.get("selected", '')
+        dbs.append((code, name, selected))
     return dbs
 
 def start(devmode=False, reset=False, index=None, host="localhost", port=8000, proto="http", config=None):
-    global TEMPLATE_PATH
+    global TEMPLATE_PATH, DEVMODE
 
-    # Resets the resources.
-    if reset:
-        resources.reset_dir()
+    # Update the global debug flag.
+    DEVMODE = devmode
 
     # Get the configuration file
     cnf = resources.get_config()
+
+    # Resets the resources.
+    if reset:
+        resources.reset_dir(cnf)
 
     # Initialize the resources.
     res = resources.init(config=cnf, devmode=devmode)
