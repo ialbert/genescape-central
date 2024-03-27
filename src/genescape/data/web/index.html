@@ -51,11 +51,11 @@
                 &nbsp; Count >= <input type="text" id="count" name="count" value="1" size="3"/>
 
                 &nbsp;Root: <select name="root" id="root">
-                    <option value="ALL" selected>Show all</option>
-                    <option value="BP">Biological Process</option>
-                    <option value="MF">Molecular Function</option>
-                    <option value="CC">Cellular Component</option>
-                </select>
+                <option value="ALL" selected>Show all</option>
+                <option value="BP">Biological Process</option>
+                <option value="MF">Molecular Function</option>
+                <option value="CC">Cellular Component</option>
+            </select>
 
                 <button class="primary" hx-post="/draw/" id="drawTree"
                         hx-trigger="click"
@@ -118,20 +118,22 @@ GRTP1
         </div>
         <div class="col-sm-9" id="mainBar">
 
-            <div class="grow">
+            <div class="growX">
+
                 <div class="header">
                     Function Tree
                     <!-- Loading  indicator -->
                     <span id="loadingImage" class="htmx-indicator">
-                <span class="mark">... processing</span>
-            </span>
+                        <span class="mark">... processing</span>
+                    </span>
                 </div>
 
-
                 <!-- Graph placeholder -->
-                <div id="graphContainer" style="height:100%; flex-grow:1">
+                <div id="graphContainer">
+
                     <div id="graph">
-                        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+
+                        <svg id="svgtree" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                             <rect x="2" y="2" width="100%" height="100%" fill="none"/>
                             <text x="50%" y="50%" font-size="24" text-anchor="middle"
                                   alignment-baseline="middle"
@@ -139,7 +141,9 @@ GRTP1
                                 image
                             </text>
                         </svg>
+
                     </div>
+
                 </div>
 
                 <!-- Dot placeholder -->

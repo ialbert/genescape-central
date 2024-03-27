@@ -13,13 +13,14 @@
     margin-bottom: 5px;
     height:48px;
 }
+
 .cnt {
-        display: flex;
+    display: flex;
     align-items: center;
 }
 .row.align-center {
     display: flex;
-    align-items: center; /* This centers the items vertically */
+    align-items: center;
 }
 
 #count {
@@ -43,22 +44,25 @@ svg text {
 }
 
 svg {
-/ / width: 100 %;
+    //width: 100 %;
+    //border: blue solid 1px;
 }
-
 
 .input {
     margin: 0px;
     height: 30ex;
     width: 100%;
-    white-space: pre; /* This will prevent text from wrapping */
-    overflow-x: auto; /* This ensures that a horizontal scrollbar appears if the text exceeds the width */
+    white-space: pre;
+    overflow-x: auto;
+}
+
+#graph {
+    //padding: 10px;
 }
 
 #graphContainer {
-    //width: 100%;
-    //min-height: 100%;
-    overflow: scroll;
+    //padding: 1em;
+    //overflow: auto;
     border: var(--border-color) solid 1px;
 }
 
@@ -82,9 +86,14 @@ svg {
     border: red solid 1px;
 }
 
+.blue {
+    border: blue solid 1px;
+}
+
 .grow {
     flex-grow: 1;
 }
+
 
 #terms {
     height: 50%;

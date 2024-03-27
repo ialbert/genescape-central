@@ -65,11 +65,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function resize_container(svg){
-	var height = svg.getBoundingClientRect().height;
-	var contr = document.getElementById('graphContainer');
-	contr.style.height = height + 'px';
 
-	console.log('height:', height);
+	var svg = document.getElementById('svgtree')
+
+	var h = svg.getBoundingClientRect().height;
+	var w = svg.getBoundingClientRect().width;
+
+	var cn = document.getElementById('graphContainer');
+
+	cn.style.height = h + 'px';
+	cn.style.width  = w + 'px';
+
+	//console.log('cn:', cn.style.height, cn.style.width);
 }
 
 function render_graph(content) {
@@ -77,13 +84,13 @@ function render_graph(content) {
 	contr = document.getElementById('graphContainer')
     Viz.instance().then(function(viz) {
         var svg = viz.renderSVGElement(content);
+        svg.setAttribute("id", "svgtree");
         //svg.setAttribute("width", "100%");
         //svg.setAttribute("height", "1200px");
         graph.innerHTML = '';
         graph.appendChild(svg);
 
-        resize_container(svg);
-
+        resize_container();
 
     }).catch(
         error => console.error("Error rendering Graphviz:", error)
@@ -98,7 +105,7 @@ function adjustSVGZoom(zoomAction) {
     var svg = document.querySelector('#graph svg');
     if (!svg) return;
 
-	console.log('Adjusting SVG zoom:', zoomAction);
+	//console.log('Adjusting SVG zoom:', zoomAction);
 
     // Adjust zoom level based on the action
     if (zoomAction === 'zoom-in') {
@@ -113,15 +120,18 @@ function adjustSVGZoom(zoomAction) {
     svg.style.transform = `scale(${zoomLevel})`;
     svg.style.transformOrigin = 'top left';
 
-    var height = svg.getBoundingClientRect().height;
-    var width = svg.getBoundingClientRect().width;
+	resize_container();
 
-	var contr = document.getElementById('graphContainer');
-	contr.style.height = 1.01 * height + 'px';
-	contr.style.width = 1.01 * width + 'px';
+    //var height = svg.getBoundingClientRect().height;
+    //var width = svg.getBoundingClientRect().width;
 
-	console.log('height:', height);
-	console.log('width:', width);
+	//var contr = document.getElementById('graphContainer');
+
+	//contr.style.height = 1.01 * height + 'px';
+	//contr.style.width = 1.01 * width + 'px';
+
+	//console.log('height:', height);
+	//console.log('width:', width);
 
 }
 
@@ -132,8 +142,6 @@ document.querySelectorAll('button[data-action]').forEach(button => {
         adjustSVGZoom(action);
     });
 });
-
-
 
 function uploadFile() {
   var input = document.getElementById('file-input');
