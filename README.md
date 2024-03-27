@@ -6,11 +6,15 @@
 
 **GeneScape** is a software tool for visualizing gene functions. 
 
-* `tree` draws informative Gene Ontology (GO) subgraphs
-* `annotate` annotates a list of genes with GO functions
-* `web` provides a web interface for the `tree` command
+**GeneScape** is distributed as a standalone executable that can be run on Windows or MacOS.
 
-**GeneScape** comes as a standalone executable that can be run on  Windows or MacOS without installation. The software can also operate in command line mode on any platform where Python 3.10 or above is available.
+The software can also operate in command line mode on any platform where Python 3.10 or above is available and can be installed with `pip install genescape` When executed from the command line:
+
+* `genescape tree` draws informative Gene Ontology (GO) subgraphs
+* `genescape annotate` annotates a list of genes with GO functions
+* `genescape web` provides a web interface for the `tree` command
+
+See more detailes in [Install](#installation) section below.
 
 ## Quick start
 
@@ -168,8 +172,6 @@ GO:0005096,MF,1,GTPase activator activity,GRTP1,4,(1/4)
 GO:0004866,MF,1,endopeptidase inhibitor activity,C3P1,4,(1/4)
 ```
 
-
-#
 ## Installation
 
 For a standalone executable, download the latest release from the [releases page][releases]. We offer executables for Windows and MacOS.
