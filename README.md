@@ -1,4 +1,4 @@
-# Genescape
+# GeneScape: gene function visualization
 
 ![GeneScape Tree][tree]
 
