@@ -6,6 +6,7 @@ from genescape.bottle import Bottle, static_file, template, view
 from genescape.bottle import TEMPLATE_PATH
 from genescape import bottle
 from genescape.bottle import get, post, request, response, redirect
+from genescape import __version__ as VERSION
 
 DEBUG = True
 
@@ -79,7 +80,7 @@ def webapp(res, devmode=False, host="localhost", port=8000):
     @view('index.html')
     @debugger
     def index():
-        param = dict(title="GeneScape", rand=random())
+        param = dict(title="GeneScape", version=VERSION, rand=random())
         return param
 
     @app.route('/upload/', method='POST')
@@ -124,6 +125,7 @@ def webapp(res, devmode=False, host="localhost", port=8000):
         bottle.debug(True)
 
     try:
+        print(f"#\n# GeneScape version: {VERSION}")
         app.run(host=host, port=port, reloader=devmode)
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)

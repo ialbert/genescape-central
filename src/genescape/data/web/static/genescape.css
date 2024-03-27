@@ -28,6 +28,17 @@
     //width:2rem;
 }
 
+.centered {
+    display: flex;
+    justify-content: center; /* Aligns horizontally */
+    align-items: center; /* Aligns vertically */
+    padding:5px;
+}
+
+.footer {
+    text-align: center;
+}
+
 hr {
     height: auto;
     border: none;
