@@ -42,15 +42,19 @@
 
                 <span class="title">GeneScape</span>
 
-                <input type="file" id="file-input" style="display:none" onchange="uploadFile()"/>
-                <label for="file-input" class="button">Load file</label>
+                <select name="db" id="db">
+                    <option value="hs" selected>Human</option>
+                    <option value="db">Mouse</option>
+                </select>
 
+                <!-- <input type="file" id="file-input" style="display:none" onchange="uploadFile()"/> -->
+                <!-- <label for="file-input" class="button">Load file</label> -->
 
                 Filter: <input type="text" id="pattern" name="pattern" placeholder="Pattern" value=""/>
 
-                &nbsp; Count >= <input type="text" id="count" name="count" value="1" size="3"/>
+                Count >= <input type="text" id="count" name="count" value="1" size="2"/>
 
-                &nbsp;Root: <select name="root" id="root">
+                Root: <select name="root" id="root">
                 <option value="ALL" selected>Show all</option>
                 <option value="BP">Biological Process</option>
                 <option value="MF">Molecular Function</option>
@@ -75,6 +79,7 @@
                 data-toggle-width="true">
                     Wide Screen
                 </button>
+
 
             </div>
         </div>

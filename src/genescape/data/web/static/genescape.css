@@ -1,5 +1,6 @@
 :root {
---border-color: #77ddaa;
+    --border-color: #77ddaa;
+    --input-back-color: #fcfcfc;
 }
 
 .title {

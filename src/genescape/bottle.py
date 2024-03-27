@@ -3705,14 +3705,14 @@ def run(app=None,
 
         server.quiet = server.quiet or quiet
         if not server.quiet:
-            _stderr("#\n# Bottle v%s server starting up (using %s)..." %
-                    (__version__, repr(server)))
+            # _stderr("#\n# Bottle v%s server starting up (using %s)..." % (__version__, repr(server)))
             if server.host.startswith("unix:"):
                 _stderr("#\n# Listening on %s" % server.host)
             else:
-                _stderr("#\n# Web URL: http://%s:%d/" %
-                        (server.host, server.port))
-            _stderr("#\n# Hit Ctrl-C to quit.\n#\n")
+                _stderr("#\n# GeneScape server is running.")
+                _stderr("#\n# Visit: http://%s:%d/" % (server.host, server.port))
+                _stderr("#\n")
+                #_stderr("#\n# Hit Ctrl-C to quit.\n#\n")
 
         if reloader:
             lockfile = os.environ.get('BOTTLE_LOCKFILE')
