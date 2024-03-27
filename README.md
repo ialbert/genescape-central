@@ -2,6 +2,10 @@
 
 The `genescape` is a tool for visualizing gene functions. 
 
+![GeneScape][tree]
+
+[tree]: https://github.com/ialbert/genescape-central/blob/main/docs/images/interface-tree.png
+
 * `tree` draws informative Gene Ontology (GO) subgraphs
 * `annotate` annotates a list of genes with GO functions
 * `web` provides a web interface for the `tree` command
