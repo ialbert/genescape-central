@@ -33,8 +33,11 @@ def tree(fname, out=None, index=None, root=utils.NS_ALL, match=None, count=1, ve
     # Import the tree module.
     from genescape import tree
 
+    # Get the configuration file
+    cnf = resources.get_config()
+
     # Initialize the resources.
-    res = resources.init()
+    res = resources.init(cnf)
 
     # Get the index
     index = resources.get_index(index=index, res=res)
@@ -70,8 +73,11 @@ def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, cs
     """
     from genescape import annot
 
+    # Get the configuration file
+    cnf = resources.get_config()
+
     # Initialize the resources.
-    res = resources.init()
+    res = resources.init(cnf)
 
     # Get the index
     index = resources.get_index(index=index, res=res)

@@ -45,8 +45,9 @@
                 <span class="title">GeneScape</span>
 
                 <select name="db" id="db">
-                    <option value="hs" selected>Human</option>
-                    <option value="db">Mouse</option>
+                    %for code, name in dbs:
+                        <option value="{{code}}" selected>{{name}}</option>
+                    %end
                 </select>
 
                 <!-- <input type="file" id="file-input" style="display:none" onchange="uploadFile()"/> -->
@@ -162,9 +163,8 @@ GRTP1
 
         <div class="col-sm-12 centered">
             <img src="/static/shield.svg" alt="GeneScape Badge">
-            &nbsp;version&nbsp;{{version}}
+            &nbsp;{{version}}
         </div>
-
 
     </div>
 </div>

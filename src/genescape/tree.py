@@ -234,7 +234,9 @@ def parse_input(inp, index, pattern=None, root=utils.NS_ALL, mincount=1):
     return tree, ann
 
 if __name__ == "__main__":
-    res = resources.init()
+    cnf = resources.get_config()
+    res = resources.init(cnf)
+
     ind = res.INDEX
     inp = res.TEST_GENES
     out = os.path.join("genescape.pdf")

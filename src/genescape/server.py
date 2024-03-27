@@ -1,6 +1,6 @@
 import sys, os, functools, webbrowser, threading
 from random import random
-import tempfile
+import time, toml, pprint
 from genescape import tree, annot, utils, resources
 from genescape.bottle import Bottle, static_file, template, view
 from genescape.bottle import TEMPLATE_PATH
@@ -23,13 +23,11 @@ def init_server(devmode=False):
         utils.info(f"web dir: {res.WEB_DIR}")
         utils.info(f"template path: {TEMPLATE_PATH}")
     else:
-        res.WEB_DIR = str(res.HOME.parent)
         TEMPLATE_PATH.insert(0, res.WEB_DIR)
 
     return res
 
 
-import time
 
 app = Bottle()
 
@@ -74,13 +72,14 @@ def safe_int(value, default=1):
     except:
         return default
 
-def webapp(res, devmode=False, host="localhost", port=8000):
+def webapp(res, config, devmode=False, host="localhost", port=8000):
 
     @app.route('/')
     @view('index.html')
     @debugger
     def index():
-        param = dict(title="GeneScape", version=VERSION, rand=random())
+        dbs = []
+        param = dict(title="GeneScape", version=VERSION, rand=random(), dbs=dbs)
         return param
 
     @app.route('/upload/', method='POST')
@@ -130,17 +129,29 @@ def webapp(res, devmode=False, host="localhost", port=8000):
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)
 
-def start(devmode=False, reset=False, index=None, host="localhost", port=8000, proto="http"):
+def parse_dbs(config):
+    dbs = []
+    for key, value in config.get("data", {}).items():
+        code = value.get("code", "?")
+        name = value.get("name", "?")
+        dbs.append((code, name))
+    return dbs
+
+def start(devmode=False, reset=False, index=None, host="localhost", port=8000, proto="http", config=None):
+    global TEMPLATE_PATH
 
     # Resets the resources.
     if reset:
         resources.reset_dir()
 
-    # Initialize the server.
-    res = init_server(devmode=devmode)
+    # Get the configuration file
+    cnf = resources.get_config()
 
-    # Override the default INDEX file.
-    res.INDEX = resources.get_index(index=index, res=res)
+    # Initialize the resources.
+    res = resources.init(config=cnf, devmode=devmode)
+
+    # Insert template path.
+    TEMPLATE_PATH.insert(0, res.WEB_DIR)
 
     # The URL of the server.
     url = f"{proto}://{host}:{port}/"
@@ -149,7 +160,7 @@ def start(devmode=False, reset=False, index=None, host="localhost", port=8000, p
     utils.info(f"server url: {url}")
     utils.info(f"server dir: {res.WEB_DIR}")
 
-    webapp(res=res, devmode=devmode, host=host, port=port)
+    webapp(res=res, devmode=devmode, host=host, port=port, config=config)
 
 if __name__ == "__main__":
     start()

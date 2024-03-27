@@ -25,6 +25,7 @@ classifiers = [
 ]
 dependencies = [
   "click",
+  "toml" ,
   "networkx",
   "pydot",
 ]

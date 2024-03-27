@@ -24,6 +24,8 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
 
     # Open the index stream
     def build():
+        if not Path(index).exists():
+            utils.stop(f"index file not found: {index}")
         idx_stream = gzip.open(index, mode="rt", encoding="UTF-8")
         idx = json.load(idx_stream)
         return idx
