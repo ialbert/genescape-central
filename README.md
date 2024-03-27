@@ -182,20 +182,22 @@ When installed from the command line, the software requires Python 3.10 or above
 pip install genescape
 ```
 
-If you only want to make use of the web interface via `genescape web` no other software installation is needed.
+No other software installation is needed if you want to use of the web interface via 
 
-If you want to generate images from the command line without a web browser, you will also need to have the `dot` software from [Graphviz](https://graphviz.org/) installed and available on your `PATH`. 
+```console
+genescape web
+```
 
-You can install Graphviz via your package manager or via `conda` with:
+If you want to generate PDF or PNG images from the command line without a web browser, you will need to have the `graphviz` software from [Graphviz](https://graphviz.org/) installed and available on your `PATH`. The simplest way to install Graphviz via your package manager `apt`, `brew` or via `conda`:
 
 ```console  
 conda install graphviz
 ```
 
-If you are unable to install the `dot` package you can save the output as `.dot` files 
+If you are unable to install the `graphviz` package you can save the output as a `.dot` file. 
 
 ```console
-genescape tree -o graph.dot --demo
+genescape tree --test -o output.dot 
 ```
 
 Then use an online tool like [viz-js][viz] to visualize the graph.
