@@ -72,7 +72,7 @@ Numbers such as 1/4 mean how many genes in the input carry that function.
 
 ## Reducing the tree size
 
-The tree can get huge, even for a small number of genes. 
+The trees can get huge, even for a small number of genes. 
 
 Note the information in the box titles **Function Annotations" you can filter the terms in that box by:
 
