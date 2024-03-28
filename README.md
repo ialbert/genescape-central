@@ -2,7 +2,7 @@
 
 ![GeneScape Tree][tree]
 
-[tree]: https://raw.githubusercontent.com/ialbert/genescape-central/blob/main/docs/images/interface-tree.png
+[tree]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-tree.png
 
 **GeneScape** is a software tool for visualizing gene functions. 
 
@@ -22,7 +22,7 @@ Download the latest binary release for your platform
 
 * [GeneScape Releases][releases]
 
-[releases]: https://raw.githubusercontent.com/ialbert/genescape-central/releases
+[releases]: https://www.github.com/ialbert/genescape-central/releases
 
 **Windows**: unzip then double-click the executable to start the program.
 
@@ -36,13 +36,13 @@ the page you see should look like this:
 
 ![GeneScape interface][iface1]
 
-[iface1]: https://raw.githubusercontent.com/ialbert/genescape-central/blob/main/docs/images/interface-empty.png
+[iface1]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-empty.png
 
 Fill in the text box with a list of genes names or GO terms or gene names and click the `Draw Tree` button to visualize the relationships between the GO terms.
 
 ![GeneScape interface][iface2]
 
-[iface2]: https://raw.githubusercontent.com/ialbert/genescape-central/blob/main/docs/images/interface-help.png
+[iface2]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-help.png
 
 The program will generate a tree visualization of the functional elements of the gene names that are inputted.
 
@@ -81,7 +81,8 @@ Note all the options available in the interface:
 
 ![GeneScape bar][bar]
 
-[bar]: https://raw.githubusercontent.com/ialbert/genescape-central/blob/main/docs/images/interface-bar.png
+[bar]: 
+https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-bar.png
 
 All of these elements are applied during the first and will filter the GO terms derived from the gene list.
 
@@ -111,7 +112,7 @@ Which will generate a tree visualization of the test data.
 
 ![GeneScape output][out1]
 
-[out1]: https://raw.githubusercontent.com/ialbert/genescape-central/blob/main/docs/images/genescape-output1.png
+[out1]: https://raw.githubusercontent.com/ialbert/genescape-central\main/docs/images/genescape-output1.png
 
 You can pass to the tree visualizer a list of genes or a list of GO ids, or even a mix of both. Here is an example.
 
@@ -131,7 +132,7 @@ You only had three genes in the input yet even that produces a large tree of ter
 
 ![GeneScape output]
 
-[out2]: https://raw.githubusercontent.com/ialbert/genescape-central/blob/main/docs/images/genescape-output2.png
+[out2]: https://raw.githubusercontent.com/ialbert/genescape-central\main/docs/images/genescape-output2.png
 
 You can narrow down the visualization in multiple ways, for example, you can select only terms that match the word `lipid` :
 
@@ -143,7 +144,7 @@ When filtered as shown above the output is much more manageable:
 
 ![GeneScape output][out3]
 
-[out3]: https://raw.githubusercontent.com/ialbert/genescape-central/blob/main/docs/images/genescape-output3.png
+[out3]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/genescape-output3.png
 
 ## genetrack annotation
 
