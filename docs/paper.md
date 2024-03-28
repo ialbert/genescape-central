@@ -27,9 +27,9 @@ The Gene Ontology (GO)  [@Ashburner2000], [@GO2023] is a structured vocabulary t
 
 For example, in the GO data, `GO:0090630` defines *activation of GTPase activity* and is a child of `GO:0043547`, which is a *positive regulation of GTPase activity* that in turn is a child of `GO:0051345` representing a *positive regulation of hydrolase activity*. 
 
-Gene association files (GAF) are text files used to annotate an organism's gene products with Gene Ontology terms, thereby associating a function with a gene product. For example, a GAF file connects a gene product label such as `ZC3H11B` with multiple GO terms, such as `GO:0046872` or `GO:0016973`. As an example the human genome GAF representation contains 288,575 associations of 19,606 gene symbols over 18,680 GO terms.
+Gene association files (GAF) are text files used to annotate an organism's gene products with Gene Ontology terms, thereby associating a function with a gene product. For example, a GAF file connects a gene product label such as `ZC3H11B` with multiple GO terms, such as `GO:0046872` or `GO:0016973`. The complete human genome GAF representation contains 288,575 associations of 19,606 gene symbols over 18,680 GO terms.
 
-The [Gene Ontology Consortium]GO] maintains GAF files for various organisms. These GO and GAF datasets are used by all processes that interpret genomic data in a functional context.  Typical data genomic analysis protocols generate gene lists that must be placed into a functional context. 
+The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. These GO and GAF datasets are used by all processes that interpret genomic data in a functional context.  Typical data genomic analysis protocols generate gene lists that must be placed into a functional context. 
 
 [GO]: https://geneontology.org/
 
