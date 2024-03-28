@@ -35,7 +35,7 @@ The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. Th
 
 # Statement of need
 
-The most annotated gene for the human genome (`HTT1` had 1098 annotations at the time of writing this document). Thus, even small lists of genes may a have large number annotations and that are challenging to interpret. There is a need to visualize shared gene functions in an informative manner. 
+Currently, the most annotated gene in the human genome, `HTT1`, has 1098 annotations. Thus, evidently, even small lists of genes may have a large number of annotations and that are extraordinarily challenging to interpret. There is a need to visualize shared gene functions in an informative manner. 
 
 GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context as represented by the Gene Ontology. The package provides both a graphical user interface and a command-line interface to assist users with different levels of computational expertise. 
 
