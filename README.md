@@ -14,7 +14,7 @@ The software can also operate in command line mode on any platform where Python 
 * `genescape annotate` annotates a list of genes with GO functions
 * `genescape web` provides a web interface for the `tree` command
 
-See more detailes in [Install](#installation) section below.
+More details in [Install](#installation) section below.
 
 ## Quick start
 
