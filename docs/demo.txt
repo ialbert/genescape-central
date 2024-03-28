@@ -1,0 +1,15 @@
+
+gid         root  count  function                                                                     source  size  label
+GO:0090630  BP    1      activation of GTPase activity                                                GRTP1   5     (1/5)
+GO:0046982  MF    1      protein heterodimerization activity                                          ABTB3   5     (1/5)
+GO:0031083  CC    1      BLOC-1 complex                                                               BCAS4   5     (1/5)
+GO:0016020  CC    1      membrane                                                                     ABTB3   5     (1/5)
+GO:0009986  CC    1      cell surface                                                                 PSG5    5     (1/5)
+GO:0007565  BP    1      female pregnancy                                                             PSG5    5     (1/5)
+GO:0007157  BP    1      heterophilic cell-cell adhesion via plasma membrane cell adhesion molecules  PSG5    5     (1/5)
+GO:0005737  CC    1      cytoplasm                                                                    BCAS4   5     (1/5)
+GO:0005615  CC    1      extracellular space                                                          C3P1    5     (1/5)
+GO:0005576  CC    1      extracellular region                                                         PSG5    5     (1/5)
+GO:0005515  MF    1      protein binding                                                              PSG5    5     (1/5)
+GO:0005096  MF    1      GTPase activator activity                                                    GRTP1   5     (1/5)
+GO:0004866  MF    1      endopeptidase inhibitor activity                                             C3P1    5     (1/5)

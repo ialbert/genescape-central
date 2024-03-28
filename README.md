@@ -58,7 +58,7 @@ The program will generate a tree visualization of the functional elements of the
 
 The colors in the tree carry additional meaning:
 
-- Light Green nodes represent functions that are in the input list.
+- Light green nodes represent functions that are in the input list.
 - Dark green nodes are functions present in the input and are leaf nodes in the terminology, the most granular annotation possible 
 
 Each subtree in a different GO category has a different color:
@@ -70,25 +70,26 @@ The subtree coloring is meant to help you understand the level of detail and the
 
 Numbers such as 1/4 mean how many genes in the input carry that function.
 
-
 ## Reducing the tree size
 
 The tree can get huge, even for a small number of genes. 
 
-You can reduce the size of the tree by filtering for a pattern in the functions or by visualizing functions that occur in a minimum number of genes.
+Note the information in the box titles **Function Annotations" you can filter the terms in that box by:
 
-Note all the options available in the interface:
+1. a pattern that matches the **function** columns
+2. a minimum number of genes that carry that function shown in the **count** column
+3. the GO subtree shown in the **root** column
+
+Note the options available in the interface:
 
 ![GeneScape bar][bar]
 
 [bar]: 
 https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-bar.png
 
-All of these elements are applied during the first and will filter the GO terms derived from the gene list.
+All of these elements are applied during the annotation step and will filter the GO terms derived from the gene list.
 
 ## Command line usage
-
-See the installation below on how to get the command line version.
 
 To start the web interface type:
 
@@ -176,6 +177,22 @@ GO:0005615,CC,1,extracellular space,C3P1,4,(1/4)
 GO:0005096,MF,1,GTPase activator activity,GRTP1,4,(1/4)
 GO:0004866,MF,1,endopeptidase inhibitor activity,C3P1,4,(1/4)
 ```
+
+## genescape build
+
+The software is currently packaged with a human and a mouse genome derived data index.
+
+To build an index for a different organism, download the GAF association file from the Gene Ontology website. 
+
+* https://geneontology.org/docs/download-go-annotations/
+
+To build the new index use:
+
+```console
+genescape build --gaf mydata.gaf -i mydata.index.gz 
+```
+
+You can also load up a different version of the OBO ontology. See the `--help` for more options.
 
 ## Installation
 
