@@ -109,11 +109,7 @@ def webapp(res, config, devmode=False, host="localhost", port=8000):
         # Choose a different index
         index = res.get_index(db)
 
-        print (type(index), index)
-
-        #index = res.INDEX
-
-        print (type(index), index)
+        utils.info(f"code={db}, file={str(index)}")
 
         # Generate the output.
         graph, ann = tree.parse_input(inp=inp, index=index, pattern=patt, root=root, mincount=count)

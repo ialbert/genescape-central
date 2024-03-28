@@ -110,9 +110,9 @@ def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, cs
 @click.option("-g", "--gaf", "gaf", help="Input GAF file (goa_human.gaf.gz)")
 @click.option("-i", "--index", "index", default="genescape.json.gz", help="Output index file (genescape.json.gz)")
 @click.option("-s", "--synonms", "synon", is_flag=True,  help="Include synonyms in the index")
-
+@click.option("-d", "--dump", "dump", is_flag=True,  help="Print the index to stdout")
 @click.help_option("-h", "--help")
-def build(index=None, obo=None, gaf=None, synon=False ):
+def build(index=None, obo=None, gaf=None, synon=False, dump=False ):
     """
     Builds a JSON index file from an OBO file.
     """
@@ -130,8 +130,22 @@ def build(index=None, obo=None, gaf=None, synon=False ):
     gaf = Path(gaf) if gaf else res.GAF_FILE
     ind = Path(index)
 
-    # Run the build command.
-    build.make_index(obo=obo, gaf=gaf, index=ind, with_synonyms=synon)
+    if dump:
+        @utils.timer
+        def load_index():
+            retval = resources.get_json(ind)
+            return retval
+        obj = load_index()
+        meta = obj[utils.IDX_META_DATA]
+        print (f"# {meta}")
+        sym2go = obj[utils.IDX_SYM2GO]
+        for key, value in sym2go.items():
+            row = [ key] + value
+            print("\t".join(row))
+
+    else:
+        # Run the build command.
+        build.make_index(obo=obo, gaf=gaf, index=ind, with_synonyms=synon)
 
 @cli.command()
 @click.option("--devmode", "devmode", is_flag=True, help="run in development mode")

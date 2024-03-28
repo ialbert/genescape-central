@@ -1,0 +1,11 @@
+# Genes present only in human
+IL6R
+H3-5
+HBG2
+HBG1
+H3-4
+PSG5
+MT1B
+DAZ3
+HES4
+H1-0

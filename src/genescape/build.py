@@ -78,6 +78,9 @@ def make_index(obo, gaf, index, with_synonyms=False):
         else:
             symbols = [db_sym]
 
+        # Convert all symbols to uppercase
+        symbols = map(lambda x: x.upper(), symbols)
+
         # Add all elements into the mapping
         for sym in symbols:
             sym2go.setdefault(sym, []).append(go_id)

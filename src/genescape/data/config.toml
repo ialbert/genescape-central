@@ -55,6 +55,11 @@ subdir = [ "web", "static" ]
 package = "genescape.data.web.static"
 
 [[files]]
+target = "favicon.ico"
+subdir = [ "web", "static" ]
+package = "genescape.data.web.static"
+
+[[files]]
 target = "genescape.css"
 subdir = [ "web", "static" ]
 package = "genescape.data.web.static"

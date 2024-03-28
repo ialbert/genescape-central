@@ -1,0 +1,12 @@
+# Genes present only in mouse
+DUX
+AOX4
+OFA
+TESB
+SBPL
+ARF2
+C1RB
+H19
+FTX
+SVS6
+
