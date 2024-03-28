@@ -28,7 +28,11 @@ Download the latest binary release for your platform
 
 **MacOS** The first time you run the tool on MacOS you have to unzip, right-click and select **open**. You then again have to agree to run the software. Once you do so the program runs, and in the future you can double-click the executable to start the program.
 
-After a few seconds, a new browser window will pop and you will get an interface that looks like this:
+Visit the localhost address in your browser:
+
+* [http://localhost:8000](http://localhost:8000)
+
+the page you see should look like this:
 
 ![GeneScape interface][iface1]
 
