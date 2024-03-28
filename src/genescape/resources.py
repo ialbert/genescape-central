@@ -134,7 +134,7 @@ def get_path(package, target, subdir=None, config=None, devmode=False):
         if cond:
             # Copy the resource to the target directory
             shutil.copy(src, path)
-            utils.info(f'copy resource: {path}')
+            utils.info(f'copy: {path}')
 
     return path
 

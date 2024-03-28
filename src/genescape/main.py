@@ -48,7 +48,7 @@ def tree(fname, out=None, index=None, root=utils.NS_ALL, match=None, count=1, ve
     # Override the fname if demo is set.
     if test:
         fname = res.TEST_GENES
-        utils.info(f"input {fname}")
+        utils.info(f"input: {fname}")
 
     # Run the tree command.
     graph, ann = tree.parse_input(inp=fname, index=index, pattern=match, mincount=count, root=root)
@@ -84,7 +84,7 @@ def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, cs
 
     if test:
         fname = res.TEST_GENES
-        utils.info(f"input {fname}")
+        utils.info(f"input: {fname}")
 
     # Set the verbosity level.
     utils.verbosity(verbose)
@@ -106,24 +106,32 @@ def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, cs
 
 
 @cli.command()
-@click.option("--obo", "obo", help="Input OBO file (go-basic.obo)")
-@click.option("--gaf", "gaf", help="Input GAF file (goa_human.gaf.gz)")
+@click.option("-b", "--obo", "obo", help="Input OBO file (go-basic.obo)")
+@click.option("-g", "--gaf", "gaf", help="Input GAF file (goa_human.gaf.gz)")
 @click.option("-i", "--index", "index", default="genescape.json.gz", help="Output index file (genescape.json.gz)")
+@click.option("-s", "--synonms", "synon", is_flag=True,  help="Include synonyms in the index")
+
 @click.help_option("-h", "--help")
-def build(index=None, obo=None, gaf=None, ):
+def build(index=None, obo=None, gaf=None, synon=False ):
     """
     Builds a JSON index file from an OBO file.
     """
     # click.echo(f"Running with parameter {inp} {out}")
     from genescape import build
 
-    res = resources.init()
+    # Get the configuration file
+    cnf = resources.get_config()
 
+    # Initialize the resources.
+    res = resources.init(cnf)
+
+    # Set the input files.
     obo = Path(obo) if obo else res.OBO_FILE
     gaf = Path(gaf) if gaf else res.GAF_FILE
+    ind = Path(index)
 
-    build.make_index(obo=obo, gaf=gaf, index=index)
-
+    # Run the build command.
+    build.make_index(obo=obo, gaf=gaf, index=ind, with_synonyms=synon)
 
 @cli.command()
 @click.option("--devmode", "devmode", is_flag=True, help="run in development mode")

@@ -1,4 +1,4 @@
-import logging, functools, time
+import logging, functools, time, functools
 import os, gzip, json, csv
 import sys, pathlib
 from logging import DEBUG, ERROR, INFO, WARNING
@@ -21,7 +21,7 @@ logging.addLevelName(logging.WARNING, "WARN")
 TAG= 'v1'
 
 # Loggin format
-LOG_FORMAT = "# %(levelname)s\t%(module)s.%(funcName)s\t%(message)s"
+LOG_FORMAT = "# %(levelname)s\t%(module)s.%(funcName)-12s\t%(message)s"
 
 # A callable to initialize the logger
 def init_logger(logger):
@@ -41,20 +41,11 @@ def verbosity(flag=False):
 # Initialize the logger
 init_logger(logger)
 
-# A wrapper with additional callback
-def wrapper(logfunc, callback=None):
-    def func(msg):
-        logfunc(msg)
-        if callback:
-            callback(msg)
-
-    return func
-
-
-debug = wrapper(logger.debug)
-info = wrapper(logger.info)
-warn = wrapper(logger.warning)
-error = wrapper(logger.error)
+# Shortcuts for logging
+debug = logger.debug
+info = logger.info
+warn = logger.warning
+error = logger.error
 
 # Stops the process with an error.
 def stop(msg):
@@ -107,11 +98,15 @@ NAMESPACE_COLORS = {
 
 # The index names
 IDX_OBO = "obo"
-IDX_gene2go = "gene2go"
-IDX_prot2go = "prot2go"
-IDX_go2gene = "go2gene"
-IDX_go2prot = "go2prot"
+IDX_GO2SYM = "GO2SYM"
+IDX_SYM2GO = "SYM2GO"
+IDX_META_DATA = "metadata"
 
+def get_date():
+    # Current time with hours
+    curr = time.localtime()
+    text = time.strftime("%Y-%m-%d %H:%M:%S", curr)
+    return text
 
 def parse_terms(iterable):
     """
@@ -228,11 +223,32 @@ def timer(func):
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        start_time = time.time()
+        start = time.time()
         result = func(*args, **kwargs)
-        end_time = time.time()
-        elapsed = end_time - start_time
-        print(f"# Timer: {func.__name__}: took {elapsed:.2f} seconds")
+        end = time.time()
+        elapsed = end - start
+        info(f"{func.__name__}:  {elapsed:.2f} seconds")
         return result
 
     return wrapper
+
+def index_stats(index, verbose=False):
+    """
+    Returns the number of mappings, symbols and terms in the index.
+    """
+    go2sym = index[IDX_GO2SYM]
+    sym2go = index[IDX_SYM2GO]
+
+    map_count = 0
+    for key, value in go2sym.items():
+        map_count += len(list(set(value)))
+    sym_count = len(sym2go)
+    go_count = len(go2sym)
+
+    if verbose:
+        info(f"index: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms,")
+
+    return map_count, sym_count, go_count
+
+if __name__ == "__main__":
+    print(get_date())

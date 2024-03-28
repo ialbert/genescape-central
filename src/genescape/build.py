@@ -1,12 +1,13 @@
 #
 # Parse an OBO and produces a GZIPed JSON file
 #
-import gzip, os
+import gzip, os, sys
 import json
 import csv
 from itertools import *
 from pathlib import Path
 from genescape import utils, resources
+from genescape.__about__ import __version__
 
 def parse_line(text, sep):
     text = text.strip()
@@ -40,6 +41,7 @@ def parse_obo(stream):
 
     yield term
 
+
 def parse_gaf(fname):
     stream = gzip.open(fname, mode="rt", encoding="UTF-8")
     stream = filter(lambda x: not x.startswith("!"), stream)
@@ -48,8 +50,7 @@ def parse_gaf(fname):
     stream = csv.reader(stream, delimiter="\t")
     return stream
 
-
-def make_index(obo, gaf, index):
+def make_index(obo, gaf, index, with_synonyms=False):
 
     if not os.path.isfile(obo):
         utils.stop(f"OBO file not found: {obo}")
@@ -57,48 +58,94 @@ def make_index(obo, gaf, index):
     if not os.path.isfile(gaf):
         utils.stop(f"GAF file not found: {gaf}")
 
-    utils.info(f"parsing: {gaf}")
+    utils.info(f"reading: {gaf}")
 
     stream = parse_gaf(gaf)
 
-    #stream = islice(stream, 10)
+    # stream = islice(stream, 10)
     # Set up mapping dictionaries
-    gene2go, prot2go, go2gene, go2prot = {}, {}, {}, {}
-    for row in stream:
-        gene2go.setdefault(row[2], []).append(row[4])
-        prot2go.setdefault(row[1], []).append(row[4])
-        go2gene.setdefault(row[4], []).append(row[2])
-        go2prot.setdefault(row[4], []).append(row[1])
 
-    utils.info(f"parsing: {obo}")
+    sym2go, go2sym = {}, {}
+
+    # Set up a forward and a reverse mapping.
+    for row in stream:
+        db_id, db_sym, go_id, db_other = row[1], row[2], row[4], row[10]
+
+        # Decide which symbols to use.
+        if with_synonyms:
+            synons = list(filter(None, db_other.strip().split("|")))
+            symbols = [db_id, db_sym] + synons
+        else:
+            symbols = [db_sym]
+
+        # Add all elements into the mapping
+        for sym in symbols:
+            sym2go.setdefault(sym, []).append(go_id)
+            go2sym.setdefault(go_id, []).append(sym)
+
+    utils.info(f"reading: {obo}")
     stream = gzip.open(obo, mode="rt", encoding="utf-8") if obo.name.endswith(".gz") else open(obo)
     terms = parse_obo(stream)
     terms = filter(lambda x: not x.get("is_obsolete"), terms)
     terms = list(terms)
-    obo = {}
+
+    # Create a dictionary of GO terms
+    obo_dict = {}
     for term in terms:
-        obo[term["id"]] = term
+        obo_dict[term["id"]] = term
+
+    # Database metadata
+    meta = dict(
+        version=__version__, date=utils.get_date(),
+        gaf=gaf.name, obo=obo.name, index=index.name, synonyms=with_synonyms)
 
     # The complete data
     data = {
-        utils.IDX_OBO: obo,
-        utils.IDX_gene2go: gene2go,
-        utils.IDX_prot2go: prot2go,
-        utils.IDX_go2gene: go2gene,
-        utils.IDX_go2prot: go2prot,
+        utils.IDX_META_DATA: meta,
+        utils.IDX_OBO: obo_dict,
+        utils.IDX_GO2SYM: go2sym,
+        utils.IDX_SYM2GO: sym2go,
     }
 
     # Save the index
-    stream = gzip.open(index,  mode="wt", encoding="UTF-8")
+    stream = gzip.open(index, mode="wt", encoding="UTF-8")
+
+    # Get index statistics
+    utils.index_stats(data, verbose=True)
+
+    # Print progress information
     utils.info(f"writing: {index}")
+
+    # Write the index to a file
     json.dump(data, stream, indent=4)
 
     return data
 
 
 if __name__ == "__main__":
-    res = resources.init()
+    cnf = resources.get_config()
+    res = resources.init(cnf)
     obo = res.OBO_FILE
     gaf = res.GAF_FILE
     ind = Path("genescape.json.gz")
-    make_index(obo=obo, gaf=gaf, index=ind)
+
+
+    @utils.timer
+    def test_make_index():
+        retval = make_index(obo=obo, gaf=gaf, index=ind, with_synonyms=False)
+        return retval
+
+
+    @utils.timer
+    def test_load_json():
+        retval = resources.get_json(ind)
+        return retval
+
+    vals = test_make_index()
+    obj = test_load_json()
+
+    #data = obj[utils.IDX_SYM2GO]
+    #print (json.dumps(data, indent=4))
+
+
+

@@ -1,0 +1,9 @@
+#
+# This input has goids only
+#
+GO:0005488
+GO:0005515
+GO:0048029
+GO:0005537
+GO:0005654
+GO:0004767

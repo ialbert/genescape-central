@@ -28,6 +28,7 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
             utils.stop(f"index file not found: {index}")
         idx_stream = gzip.open(index, mode="rt", encoding="UTF-8")
         idx = json.load(idx_stream)
+        utils.index_stats(idx, verbose=True)
         return idx
 
     # Cache the index
@@ -40,20 +41,19 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
     names = map(lambda x: x.upper(), names)
     names = list(names)
 
-    # The known and valid inputs
-    gene2go = idx[utils.IDX_gene2go]
-    prot2go = idx[utils.IDX_prot2go]
+    # Subselect the data from the index.
+    sym2go = idx[utils.IDX_SYM2GO]
     go = idx[utils.IDX_OBO]
 
     # The valid ids are the unqiue gene and protein ids.
-    valid_ids = set(gene2go) | set(prot2go) | set(go)
+    valid_ids = set(sym2go) |set(go)
 
     # Fetch GO functions for a given gene or protein id.
     def get_func(name):
         if name in go:
             ids = [name]
         else:
-            ids = set(gene2go.get(name, []) + prot2go.get(name, []))
+            ids = set(sym2go.get(name, []))
         return ids
 
     # The missing and collected gene names.

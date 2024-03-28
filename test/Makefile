@@ -16,27 +16,28 @@ usage:
 
 # Generates various outputs
 test:
-	# Link the test data into this directory
-	ln -sf ../src/genescape/data inp
+	# Make the output directory.
+	mkdir -p out
 
-	genescape annotate --test > out/test1.json
-	genescape annotate --test --csv > out/test1.csv
+	genescape annotate --test > out/test.json
+	genescape annotate --test --csv > out/test.csv
 	
-	genescape tree --test -o out/test1.pdf
-	genescape tree --test -o out/test1.png
-	genescape tree --test -o out/test1.dot
+	genescape tree --test -o out/test.pdf
+	genescape tree --test -o out/test.png
+	genescape tree --test -o out/test.dot
 	
-	genescape annotate inp/test_goids.txt | genescape tree -o out/test2.pdf
-	genescape annotate inp/test_goids.txt --csv | genescape tree -o out/test3.pdf
-	
-	genescape annotate inp/test_genes.txt | genescape tree -c 2 -o out/test4.pdf
-	genescape tree -c 2 -o out/test5.pdf inp/test_genes.txt
-	
-	genescape tree inp/test_genes.txt -o out/test6.pdf
-	genescape tree inp/test_goids.txt -o out/test7.pdf
+	genescape annotate files/hs_genes1.txt | genescape tree -o out/hs_genes1.pdf
+	genescape annotate files/hs_goids1.txt --csv | genescape tree -o out/hs_goids1.pdf
 
-	genescape annotate --test --csv  -m golgi | genescape tree -o out/test8.pdf
-	genescape tree -m golgi inp/test_genes.txt -o out/test9.pdf
+	genescape tree -c 2 -o out/hs_gene1-mincount-2.pdf files/hs_genes1.txt
+
+	genescape annotate --csv -m golgi files/hs_genes1.txt > out/hs_gene1-golgi.json
+
+	genescape tree -m golgi files/hs_genes1.txt -o out/hs_gene1-golgi.pdf
+
+	genescape tree files/hs_genes2.txt > out/hs_genes2.pdf
+
+	genescape build -i out/genescape.json.gz
 
 
 clean:
