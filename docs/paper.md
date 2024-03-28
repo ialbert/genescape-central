@@ -24,11 +24,11 @@ bibliography: paper.bib
 
 Gene Ontologies (GOs)  [@go:2000], [@gp2023] are standardized and structured vocabulary that describes gene products in the context of their associated biological processes, cellular components, and molecular functions. The ontologies take the form of a graph structure in the form of a directed tree, where each node defines a term, and each edge represents a hierarchical relationship between the words of the vocabulary.
 
-For example, in the GO data, `GO:0090630` is a word defined as *activation of GTPase activity* and is a child of `GO:0043547`, which is defined as *positive regulation of GTPase activity* that in turn is a child of `GO:0051345` *positive regulation of hydrolase activity* and so on. The `GO:0090630 subtree is seven levels deep and contains ten additional nodes. The vocabulary has almost 20 thousand terms in total.
+For example, in the GO data, `GO:0090630` is a word defined as *activation of GTPase activity* and is a child of `GO:0043547`, which is defined as *positive regulation of GTPase activity* that in turn is a child of `GO:0051345` *positive regulation of hydrolase activity* and so on. 
 
 Gene association files (GAF) are text files used to annotate an organism's gene products with Gene Ontology terms, thereby associating a function with a gene product. Scientists may obtain gene association files from the Gene Ontology Consortium or from other sources. For example, a GAF file connects a gene product label such as `ZC3H11B` with typically multiple GO terms, such as `GO:0046872` or `GO:0016973`. 
 
-The Gene Ontology Consortium maintains GAF files for various organisms. These GO and GAF datasets are used by all processes that interpret genomic data in a functional context.  Typical data analysis steps generate gene lists, gene enrichment tools such as g:profiler, and enrichr output lists of GO terms that must be placed into a functional context.
+The Gene Ontology Consortium maintains GAF files for various organisms. These GO and GAF datasets are used by all processes that interpret genomic data in a functional context.  Typical data analysis steps generate gene lists, gene enrichment tools such as `g:profiler`, and `enrichr` output lists of GO terms that must be placed into a functional context.
 
 # Statement of need
 
