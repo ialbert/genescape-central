@@ -112,7 +112,7 @@ Which will generate a tree visualization of the test data.
 
 ![GeneScape output][out1]
 
-[out1]: https://raw.githubusercontent.com/ialbert/genescape-central\main/docs/images/genescape-output1.png
+[out1]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/genescape-output1.png
 
 You can pass to the tree visualizer a list of genes or a list of GO ids, or even a mix of both. Here is an example.
 
@@ -132,7 +132,7 @@ You only had three genes in the input yet even that produces a large tree of ter
 
 ![GeneScape output]
 
-[out2]: https://raw.githubusercontent.com/ialbert/genescape-central\main/docs/images/genescape-output2.png
+[out2]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/genescape-output2.png
 
 You can narrow down the visualization in multiple ways, for example, you can select only terms that match the word `lipid` :
 
