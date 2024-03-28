@@ -1,10 +1,4 @@
-on:
-  push:
-    paths:
-      - 'docs/paper.md'
-  pull_request:
-    paths:
-      - 'docs/paper.md'
+on: [push]
 
 jobs:
   paper:
