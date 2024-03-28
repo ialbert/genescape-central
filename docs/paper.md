@@ -16,13 +16,12 @@ affiliations:
    index: 1
 
 date: 30 March 2024
-bibliography: paper.bib
-
+bibliography: docs/paper.bib
 ---
 
 # Summary
 
-Gene Ontologies (GOs)  [@go:2000], [@gp2023] are standardized and structured vocabulary that describes gene products in the context of their associated biological processes, cellular components, and molecular functions. The ontologies take the form of a graph structure in the form of a directed tree, where each node defines a term, and each edge represents a hierarchical relationship between the words of the vocabulary.
+Gene Ontologies (GOs)  [@Asburner2000], [@GO2023] are standardized and structured vocabulary that describes gene products in the context of their associated biological processes, cellular components, and molecular functions. The ontologies take the form of a graph structure in the form of a directed tree, where each node defines a term, and each edge represents a hierarchical relationship between the words of the vocabulary.
 
 For example, in the GO data, `GO:0090630` is a word defined as *activation of GTPase activity* and is a child of `GO:0043547`, which is defined as *positive regulation of GTPase activity* that in turn is a child of `GO:0051345` *positive regulation of hydrolase activity* and so on. 
 
@@ -34,9 +33,7 @@ The Gene Ontology Consortium maintains GAF files for various organisms. These GO
 
 The most annotated gene for the human genome (`HTT1` had 1098 annotations at the time of writing this document). Typically, even small lists of genes will have many annotations and represent large subtrees of functions. There is a need to visualize these subtrees in an informative and relatively easy way.
 
-GeneScape is a Python package that allows end users to visualize a list of gene products in terms of the functional context as represented by the Gene Ontology. The package provides both a browser-based visual interface and a command-line interface to assist users with different levels of computational expertise.
-
-From a gene list such as: 
+GeneScape is a Python package that allows end users to visualize a list of gene products in terms of the functional context as represented by the Gene Ontology. The package provides both a browser-based visual interface and a command-line interface to assist users with different levels of computational expertise. From a gene list such as: 
 
 ```
 ABTB3 
@@ -62,22 +59,18 @@ Then, the GO term list is visualized as a graph structure that represents the fu
 
 ![GeneScape interface \label{fig:interface}](images/interface-tree.png)
 
-The resulting trees can get huge, even for a few genes. 
-
 GeneScape provides reactive interface elements that allow users to filter the resulting outputs by:
 
-1. word patterns that match the function definitions
-2. a minimum number of genes share the function 
-3. a specific GO subtree: Biological Process, Molecular Function, Cellular Component
+1. Word patterns that match the function definitions
+2. A minimum number of genes share the function 
+3. A specific GO subtree: Biological Process, Molecular Function, Cellular Component
 
 In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG.
 
-The software's utility is that it allows users to assess the functional depth of genes and to identify commonalities and differences in the functional context of these genes.
+The software's main purpose is to allows users to assess the functional depth of genes and to identify commonalities and differences in the functional context of these genes.
 
 # Acknowledgements
 
 We acknowledge support from the Huck Institutes for the Life Sciences at the Pennsylvania State University.
 
 # References
-
-
