@@ -27,19 +27,19 @@ The Gene Ontology (GO)  [@Ashburner2000], [@GO2023] is a structured vocabulary t
 
 For example, in the GO data, `GO:0090630` defines *activation of GTPase activity* and is a child of `GO:0043547`, which is a *positive regulation of GTPase activity* that in turn is a child of `GO:0051345` representing a *positive regulation of hydrolase activity*. 
 
-Gene association files (GAF) are text files used to annotate an organism's gene products with Gene Ontology terms, thereby associating a function with a gene product. For example, a GAF file connects a gene product label such as `ZC3H11B` with multiple GO terms, such as `GO:0046872` or `GO:0016973`. The complete human genome GAF representation contains 288,575 associations of 19,606 gene symbols over 18,680 GO terms.
+Gene association files (GAF) are text files used to annotate an organism's gene products with Gene Ontology terms, associating a function with a gene product. For example, a GAF file connects a gene product label, such as `ZC3H11B`, with multiple GO terms, such as `GO:0046872` or `GO:0016973`. The complete human genome GAF representation contains 288,575 associations of 19,606 gene symbols over 18,680 GO terms.
 
-The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. These GO and GAF datasets are used by all processes that interpret genomic data in a functional context.  Typical data genomic analysis protocols generate gene lists that must be placed into a functional context. 
+The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. Typical data genomic analysis protocols generate gene lists that must be placed in a functional context. 
 
 [GO]: https://geneontology.org/
 
 # Statement of need
 
-Currently, the most annotated gene in the human genome, `HTT1`, has 1098 annotations. Thus, evidently, even small lists of genes may have a large number of annotations and that are extraordinarily challenging to interpret. There is a need to visualize shared gene functions in an informative manner. 
+The most annotated gene in the human genome, `HTT1`, currently has 1098 annotations. Thus, even small lists of genes may have a large number of annotations that are extraordinarily challenging to interpret. There is a need to visualize shared gene functions in an informative manner. 
 
-GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context as represented by the Gene Ontology. The package provides both a graphical user interface and a command-line interface to assist users with different levels of computational expertise. 
+GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. The package provides both a graphical user interface and a command-line interface to assist users with different levels of computational expertise. 
 
-A typical usage strart with a gene list such as: 
+A typical usage starts with a gene list such as: 
 
 ```
 ABTB3 
@@ -61,11 +61,11 @@ GO:0005096,MF,1,GTPase activator activity,GRTP1,4,(1/4)
 GO:0004866,MF,1,endopeptidase inhibitor activity,C3P1,4,(1/4)
 ```
 
-In the next step GeneScape visualizes the GO terms as the graph structure that represents the functional context of the genes relative to the larger Gene Ontology.
+In the next step, GeneScape visualizes the GO terms as the graph structure that represents the functional context of the genes relative to the larger Gene Ontology.
 
 ![GeneScape interface \label{fig:interface}](images/interface-tree.png)
 
-Various colors are used to provide additional context to the nodes in the graph. Green nodes are the functions that the input genes were annotated by. The intermediate nodes are colored by their category. Since the resulting grapsh may also be large, with thousands of nodes, the main interface provides reactive interface elements to allow users to filter the graph by:
+Various colors are used to provide additional context to the nodes in the graph, for example, functions present in the input genes are colored green. The intermediate nodes are colored by their category. Since the resulting graphs may also be large, with thousands of nodes, the main interface provides reactive interface elements to allow users to filter the graph by:
 
 1. Word patterns that match the function definitions
 2. A minimum number of genes share the function 
@@ -73,9 +73,9 @@ Various colors are used to provide additional context to the nodes in the graph.
 
 In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG.
 
-The software's main purpose is to allows users to assess the functional depth of genes and to identify commonalities and differences in the functional context of these genes.
+The software's primary purpose is to allow users to assess the functional depth of genes and to identify commonalities and differences in the functional context of these genes.
 
-# Acknowledgements
+# Acknowledgments
 
 We acknowledge support from the Huck Institutes for the Life Sciences at the Pennsylvania State University.
 
