@@ -39,7 +39,9 @@ The most annotated gene in the human genome, `HTT1`, currently has 1098 annotati
 
 Web-based tools designed to visualize gene ontology data include `AmiGO` [@AmiGO]. Command line tools like `goatools` [@goatools] support GO term lineage visualization. R packages like `topGO` [@topGO] implement GO structure visualizations of enriched GO terms. To our knowledge, no standalone software package specifically designed to filter and visualize gene ontology data derived from lists of genes exists at this time.
 
-GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. The package provides both a graphical user interface and a command-line interface to assist users with different levels of computational expertise. 
+GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. 
+
+GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software that does not require Python to be installed on the user's computer, thus making it accessible to a wide range of users.
 
 [genescape]: https://github.com/ialbert/genescape-central
 
@@ -79,8 +81,6 @@ reduce the subgraph to nodes for which:
 3. Nodes are within a specific GO subtree: Biological Process, Molecular Function, Cellular Component
 
 In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
-
-GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software that does not require Python to be installed on the user's computer, making it accessible to a wide range of users.
 
 The software's primary purpose is to allow users to assess the functional depth of genes and to identify commonalities and differences in the functional context of these genes.
 
