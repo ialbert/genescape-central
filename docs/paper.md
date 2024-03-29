@@ -23,19 +23,19 @@ bibliography: paper.bib
 
 # Summary
 
-The Gene Ontology (GO)  [@Ashburner2000], [@GO2023] is a structured vocabulary that describes gene products in the context of their associated functions. The ontology takes the form of a directed graph, where each node defines a term, and each edge represents a hierarchical relationship between the words of the vocabulary.
+The Gene Ontology (GO)  [@Ashburner2000], [@GO2023] is a structured vocabulary that describes gene products in the context of their associated functions. The ontology takes the form of a directed graph, where each node defines a term, and each edge represents a hierarchical relationship between the terms (the words of the vocabulary).
 
-For example, in the GO data, `GO:0090630` defines *activation of GTPase activity* and is a child of `GO:0043547`, which is a *positive regulation of GTPase activity* that in turn is a child of `GO:0051345` representing a *positive regulation of hydrolase activity*. 
+For example, in the GO data, `GO:0090630` defines *activation of GTPase activity* and is a child of `GO:0043547`, which is a *positive regulation of GTPase activity* which in turn is a child of `GO:0051345` representing a *positive regulation of hydrolase activity*. 
 
-Gene association files (GAF) are text files used to annotate an organism's gene products with Gene Ontology terms, associating a function with a gene product. For example, a GAF file connects a gene product label, such as `ZC3H11B`, with multiple GO terms, such as `GO:0046872` or `GO:0016973`. The complete human genome GAF representation contains 288,575 associations of 19,606 gene symbols over 18,680 GO terms.
+Gene association files (GAF) are text files used to annotate an organism's gene products with Gene Ontology terms, associating a function to a gene product. For example, a GAF file connects a gene product label, such as `ZC3H11B`, with multiple GO terms, such as `GO:0046872` or `GO:0016973`. The complete human genome GAF representation contains 288,575 associations of 19,606 gene symbols over 18,680 GO terms.
 
-The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. Typical data genomic analysis protocols generate gene lists that must be placed in a functional context. 
+The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. Typical genomic analysis protocols generate gene lists that must be placed in a functional context. 
 
 [GO]: https://geneontology.org/
 
 # Statement of need
 
-The most annotated gene in the human genome, `HTT1`, currently has 1098 annotations. Thus, even small lists of genes may have a large number of annotations that are extraordinarily challenging to interpret. There is a need to visualize shared gene functions in an informative manner. 
+The most annotated gene in the human genome, `HTT1`, currently has 1098 annotations. Thus, even small lists of genes may have a large number of annotations presenting an extraordinary challenge for interpretation. There is a clear need to visualize shared gene functions in an informative manner. 
 
 GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. The package provides both a graphical user interface and a command-line interface to assist users with different levels of computational expertise. 
 
@@ -65,11 +65,14 @@ In the next step, GeneScape visualizes the GO terms as the graph structure that 
 
 ![GeneScape interface \label{fig:interface}](images/interface-tree.png)
 
-Various colors are used to provide additional context to the nodes in the graph, for example, functions present in the input genes are colored green. The intermediate nodes are colored by their category. Since the resulting graphs may also be large, with thousands of nodes, the main interface provides reactive interface elements to allow users to filter the graph by:
+Various colors are used to provide additional context to the nodes in the graph, for example, functions derived from the input genes are colored green. The intermediate nodes are colored by their category. 
 
-1. Word patterns that match the function definitions
-2. A minimum number of genes share the function 
-3. A specific GO subtree: Biological Process, Molecular Function, Cellular Component
+Since the resulting graphs may also be large, with thousands of nodes, the main interface provides reactive interface elements to allow users to 
+reduce the display only the nodes where:
+
+1. The function definitions match word patterns
+2. A minimum number of genes share the same function, 
+3. Are within a specific GO subtree: Biological Process, Molecular Function, Cellular Component
 
 In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG.
 
