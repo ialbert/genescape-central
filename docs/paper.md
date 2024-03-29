@@ -65,7 +65,7 @@ GO:0004866,MF,1,endopeptidase inhibitor activity,C3P1,4,(1/4)
 
 In the next step, GeneScape visualizes the GO terms as the graph structure that represents the functional context of the genes relative to the larger Gene Ontology.
 
-![GeneScape interface \label{fig:interface}](images/interface-tree.png)
+![GeneScape interface \label{fig:interface}](images/genescape-output1.png)
 
 Various colors are used to provide additional context to the nodes in the graph, for example, functions derived from the input genes are colored green. The intermediate nodes are colored by their category. 
 
@@ -77,6 +77,8 @@ reduce the subgraph to nodes for which:
 3. Nodes are within a specific GO subtree: Biological Process, Molecular Function, Cellular Component
 
 In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
+
+GeneScape is distributed both as a command line tool and as a GUI enabled standalone software that does not require Python to be installed on the user's computer thus making it accessible to a wide range of users.
 
 The software's primary purpose is to allow users to assess the functional depth of genes and to identify commonalities and differences in the functional context of these genes.
 
