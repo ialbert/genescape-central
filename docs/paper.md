@@ -73,12 +73,12 @@ In the next step, GeneScape visualizes the GO terms as the graph structure that 
 
 Various colors are used to provide additional context to the nodes in the graph; for example, functions derived from the input genes are colored green. The intermediate nodes are colored by their category. 
 
-Since the resulting graphs may also be large, with thousands of nodes, the main interface provides reactive interface elements to allow users to 
+Since the resulting graphs may also be large, with thousands of nodes, the main interface provides input widgets that allow users to interactively 
 reduce the subgraph to nodes for which:
 
-1. The function definitions match word patterns
-2. A minimum number of genes share the function, 
-3. Nodes are within a specific GO subtree: Biological Process, Molecular Function, Cellular Component
+1. The function definitions match certain patterns
+2. A minimum number of genes share a function, 
+3. Nodes belong to a specific GO subtree: Biological Process (BP), Molecular Function (MF), Cellular Component (CC)
 
 In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
 
