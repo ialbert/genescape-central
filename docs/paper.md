@@ -35,7 +35,9 @@ The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. Ty
 
 # Statement of need
 
-The most annotated gene in the human genome, `HTT1`, currently has 1098 annotations. Thus, even small lists of genes may have a large number of annotations presenting an extraordinary challenge for interpretation. There is a clear need to visualize shared gene functions in an informative manner. Several web based tools exist to navigate gene ontology data [@AmiGO2008] but to our knowledge no standalone software package exists that could be used to visualize gene ontology data for lists of genes in a local environment.
+The most annotated gene in the human genome, `HTT1`, currently has 1098 annotations. Thus, even small lists of genes may have a large number of annotations presenting an extraordinary challenge for interpretation. There is a clear need to visualize shared gene functions in an informative manner. 
+
+Web-based tools designed to visualize gene ontology data include [@AmiGO2008]. Command line tools like [@GoaTools2018] support GO term lineage visualization. R packages like [@TopGO] implement GO structure visualizations of enriched GO terms. To our knowledge, no standalone software package specifically designed to filter and visualize gene ontology data derived from lists of genes exists at this time.
 
 GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. The package provides both a graphical user interface and a command-line interface to assist users with different levels of computational expertise. 
 
@@ -65,9 +67,9 @@ GO:0004866,MF,1,endopeptidase inhibitor activity,C3P1,4,(1/4)
 
 In the next step, GeneScape visualizes the GO terms as the graph structure that represents the functional context of the genes relative to the larger Gene Ontology.
 
-![GeneScape interface \label{fig:interface}](images/genescape-output1.png)
+![GeneScape subgraph for a gene list \label{fig:interface}](images/genescape-output1.png)
 
-Various colors are used to provide additional context to the nodes in the graph, for example, functions derived from the input genes are colored green. The intermediate nodes are colored by their category. 
+Various colors are used to provide additional context to the nodes in the graph; for example, functions derived from the input genes are colored green. The intermediate nodes are colored by their category. 
 
 Since the resulting graphs may also be large, with thousands of nodes, the main interface provides reactive interface elements to allow users to 
 reduce the subgraph to nodes for which:
@@ -78,7 +80,7 @@ reduce the subgraph to nodes for which:
 
 In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
 
-GeneScape is distributed both as a command line tool and as a GUI enabled standalone software that does not require Python to be installed on the user's computer thus making it accessible to a wide range of users.
+GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software that does not require Python to be installed on the user's computer, making it accessible to a wide range of users.
 
 The software's primary purpose is to allow users to assess the functional depth of genes and to identify commonalities and differences in the functional context of these genes.
 
