@@ -35,9 +35,11 @@ The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. Ty
 
 # Statement of need
 
-The most annotated gene in the human genome, `HTT1`, currently has 1098 annotations. Thus, even small lists of genes may have a large number of annotations presenting an extraordinary challenge for interpretation. There is a clear need to visualize shared gene functions in an informative manner. 
+The most annotated gene in the human genome, `HTT1`, currently has 1098 annotations. Thus, even small lists of genes may have a large number of annotations presenting an extraordinary challenge for interpretation. There is a clear need to visualize shared gene functions in an informative manner. Several web based tools exist to navigate gene ontology data [@Amigo2008] but to our knowledge no standalone software package exists that could be used to visualize gene ontology data for lists of genes in a local environment.
 
 GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. The package provides both a graphical user interface and a command-line interface to assist users with different levels of computational expertise. 
+
+[genescape]: https://github.com/ialbert/genescape-central
 
 A typical usage starts with a gene list such as: 
 
@@ -68,13 +70,13 @@ In the next step, GeneScape visualizes the GO terms as the graph structure that 
 Various colors are used to provide additional context to the nodes in the graph, for example, functions derived from the input genes are colored green. The intermediate nodes are colored by their category. 
 
 Since the resulting graphs may also be large, with thousands of nodes, the main interface provides reactive interface elements to allow users to 
-reduce the display only the nodes where:
+reduce the subgraph to nodes for which:
 
 1. The function definitions match word patterns
-2. A minimum number of genes share the same function, 
-3. Are within a specific GO subtree: Biological Process, Molecular Function, Cellular Component
+2. A minimum number of genes share the function, 
+3. Nodes are within a specific GO subtree: Biological Process, Molecular Function, Cellular Component
 
-In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG.
+In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
 
 The software's primary purpose is to allow users to assess the functional depth of genes and to identify commonalities and differences in the functional context of these genes.
 
