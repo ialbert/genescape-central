@@ -23,7 +23,7 @@ bibliography: paper.bib
 
 # Summary
 
-The Gene Ontology (GO)  [@Ashburner2000], [@GO2023] is a structured vocabulary that describes gene products in the context of their associated functions. The ontology takes the form of a directed graph, where each node defines a term, and each edge represents a hierarchical relationship between the terms (the words of the vocabulary).
+The Gene Ontology (GO)  [@Ashburner2000; @GO2023] is a structured vocabulary that describes gene products in the context of their associated functions. The ontology takes the form of a directed graph, where each node defines a term, and each edge represents a hierarchical relationship between the terms (the words of the vocabulary).
 
 For example, in the GO data, `GO:0090630` defines *activation of GTPase activity* and is a child of `GO:0043547`, which is a *positive regulation of GTPase activity* which in turn is a child of `GO:0051345` representing a *positive regulation of hydrolase activity*. 
 
@@ -37,7 +37,7 @@ The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. Ty
 
 The most annotated gene in the human genome, `HTT1`, currently has 1098 annotations. Thus, even small lists of genes may have a large number of annotations presenting an extraordinary challenge for interpretation. There is a clear need to visualize shared gene functions in an informative manner. 
 
-Web-based tools designed to visualize gene ontology data include [@AmiGO2008]. Command line tools like [@GoaTools2018] support GO term lineage visualization. R packages like [@TopGO] implement GO structure visualizations of enriched GO terms. To our knowledge, no standalone software package specifically designed to filter and visualize gene ontology data derived from lists of genes exists at this time.
+Web-based tools designed to visualize gene ontology data include `AmiGO` [@AmiGO]. Command line tools like `goatools` [@goatools] support GO term lineage visualization. R packages like `topGO` [@topGO] implement GO structure visualizations of enriched GO terms. To our knowledge, no standalone software package specifically designed to filter and visualize gene ontology data derived from lists of genes exists at this time.
 
 GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. The package provides both a graphical user interface and a command-line interface to assist users with different levels of computational expertise. 
 
