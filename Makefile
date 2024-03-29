@@ -30,6 +30,7 @@ docs:
 	genescape tree -o docs/images/genescape-output1.png src/genescape/data/test_genes.txt 
 	genescape tree -o docs/images/genescape-output2.png src/genescape/data/test_goids.txt 
 	genescape tree -m lipid -o docs/images/genescape-output3.png src/genescape/data/test_goids.txt 
+
 # Fix linting errors.
 fix:
 	hatch run lint:fmt
@@ -37,9 +38,9 @@ fix:
 push:
 	git commit -am 'saving work' && git push
 
-VERSION ?= $(shell grep '__version__' src/genescape/__about__.py | sed "s/__version__ = \"\\(.*\\)\"/\1/" | tr -d '.')
+VERSION ?= $(shell grep '__version__' src/genescape/__about__.py | sed "s/__version__ = \"\\(.*\\)\"/\1/" )
 
-NAME ?= GeneScape-${VERSION}
+NAME = GeneScape
 
 mac:
 
@@ -50,8 +51,11 @@ mac:
 	pyinstaller src/genescape/server.py \
 		--add-data=src/genescape/data:genescape/data \
 		-i docs/images/logo.ico -n ${NAME} -y --onefile
-	(cd dist && zip ${NAME}-MacOS.zip ${NAME} && rm -f ${NAME})
 
+	(cd dist && zip ${NAME}-${VERSION}-MacOS.zip ${NAME})
+
+win:
+	(cd dist && zip ${NAME}-${VERSION}-Window.zip ${NAME}.exe)
 
 clean:
 	rm -f src/genescape/web/static/tmp/image*
