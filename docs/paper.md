@@ -57,14 +57,14 @@ GRTP1
 GeneScape first transforms the above gene input list into a GO term list, where additional information is added to each term:
 
 ```
+gid,root,count,function,source,size,label
 GO:0090630,BP,1,activation of GTPase activity,GRTP1,4,(1/4)
 GO:0046982,MF,1,protein heterodimerization activity,ABTB3,4,(1/4)
 GO:0031083,CC,1,BLOC-1 complex,BCAS4,4,(1/4)
 GO:0016020,CC,1,membrane,ABTB3,4,(1/4)
 GO:0005737,CC,1,cytoplasm,BCAS4,4,(1/4)
 GO:0005615,CC,1,extracellular space,C3P1,4,(1/4)
-GO:0005096,MF,1,GTPase activator activity,GRTP1,4,(1/4)
-GO:0004866,MF,1,endopeptidase inhibitor activity,C3P1,4,(1/4)
+...
 ```
 
 In the next step, GeneScape visualizes the GO terms as the graph structure that represents the functional context of the genes relative to the larger Gene Ontology.
