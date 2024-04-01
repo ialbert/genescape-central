@@ -115,7 +115,9 @@ Which will generate a tree visualization of the test data.
 
 [out1]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/genescape-output1.png
 
-You can pass to the tree visualizer a list of genes or a list of GO ids, or even a mix of both. Here is an example.
+## Reducing the graph size
+
+We can pass the tree visualizer a list of genes or a list of GO ids, or even a mix of both. Here is an example.
 
 ```
 Cyp1a1
@@ -123,19 +125,19 @@ Sphk2
 Sptlc2
 ```
 
-run the `tree` command to visualize the relationships between the GO terms 
+We run the `tree` command to visualize the relationships between the GO terms 
 
 ```console
 genescape tree genes.txt -o output.pdf
 ```
 
-You only had three genes in the input yet even that produces a large tree of terms.
+Note that we had only three genes in the input yet even that produces a huge tree of terms.
 
 ![GeneScape output][out2]
 
 [out2]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/genescape-output2.png
 
-You can narrow down the visualization in multiple ways, for example, you can select only terms that match the word `lipid` :
+We can narrow down the visualization in multiple ways, for example, we can select only terms that match the word `lipid` :
 
 ```console
 genescape tree -m lipid genes.txt -o output.pdf
