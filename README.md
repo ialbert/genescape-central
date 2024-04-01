@@ -74,7 +74,7 @@ Numbers such as 1/4 mean how many genes in the input carry that function.
 
 The trees can get huge, even for a small number of genes. 
 
-Note the information in the box titles **Function Annotations" you can filter the terms in that box by:
+Note the information in the box titles **Function Annotations** you can filter the terms in that box by:
 
 1. a pattern that matches the **function** columns
 2. a minimum number of genes that carry that function shown in the **count** column
@@ -131,7 +131,7 @@ genescape tree genes.txt -o output.pdf
 
 You only had three genes in the input yet even that produces a large tree of terms.
 
-![GeneScape output]
+![GeneScape output][out2]
 
 [out2]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/genescape-output2.png
 
@@ -141,7 +141,7 @@ You can narrow down the visualization in multiple ways, for example, you can sel
 genescape tree -m lipid genes.txt -o output.pdf
 ```
 
-When filtered as shown above the output is much more manageable:
+When filtered as shown above, the output is much more manageable:
 
 ![GeneScape output][out3]
 
