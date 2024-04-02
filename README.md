@@ -240,6 +240,10 @@ Tests require that `graphviz` is installed and available on the `PATH`.
 
 Due to the nondeterministic way that the images are created, we are unable to test for exact outputs the tests are limited to running the software and checking for runtime errors.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the development of GeneScape.
+
 ## License
 
 `genescape` is distributed under the terms of the MIT license. 
