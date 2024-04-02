@@ -98,7 +98,7 @@ Smpd3
 
 the resulting funcitonal ontology graph is huge:
 
-![GeneScape subgraph for a gene list \label{fig:interface}](images/genescape-output2.png)
+![Ontology graphs can be unexpectedly large \label{fig:interface}](images/genescape-output2.png)
 
 Users can reduce the tree to show only terms that match the word `lipid` via the graphical user interface or the command line:
 
@@ -108,7 +108,7 @@ genescape tree -m lipid genes.txt -o output.pdf
 
 The filtering process will result in a smaller tree focused on the lipid-related terms:
 
-![GeneScape subgraph for a gene list \label{fig:interface}](images/genescape-output3.png)
+![Filtering a large graph for specific terms \label{fig:interface}](images/genescape-output3.png)
 
 In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
 
