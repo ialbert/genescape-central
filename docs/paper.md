@@ -76,7 +76,7 @@ GO:0005615,CC,1,extracellular space,C3P1,4,(1/4)
 
 In the next step, GeneScape visualizes the GO terms as the graph structure that represents the functional context of the genes relative to the larger Gene Ontology.
 
-![GeneScape subgraph for a gene list \label{fig:interface}](images/genescape-output1.png)
+![GeneScape subgraph for a gene list \label{fig:interface}](images/genescape-output1.png){height="400px"}
 
 Various colors are used to provide additional context to the nodes in the graph; for example, functions derived from the input genes are colored green. The intermediate nodes are colored by their category. 
 
@@ -98,7 +98,7 @@ Smpd3
 
 the resulting functional ontology graph is huge:
 
-![Very few genes can produce a large ontology tree \label{fig:interface}](images/genescape-output2.png)
+![Very few genes can produce a large ontology tree \label{fig:huge}](images/genescape-output2.png)
 
 Users can reduce the tree to show only terms that match the word `lipid` via the graphical user interface or the command line:
 
@@ -108,7 +108,7 @@ genescape tree -m lipid genes.txt -o output.pdf
 
 The filtering process will result in a smaller tree focused on the lipid-related terms:
 
-![Filtering a large graph for a specific term \label{fig:interface}](images/genescape-output3.png)
+![Filtering a large graph for a specific term \label{fig:filter}](images/genescape-output3.png){height="400px"}
 
 In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
 
