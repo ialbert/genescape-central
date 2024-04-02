@@ -26,6 +26,10 @@ test:
 testall: test
 	(cd test && make test)
 
+# A full test with file generation.
+testall: test
+	(cd test && make test)
+
 # Runs a linter.
 lint:
 	hatch run lint:style
