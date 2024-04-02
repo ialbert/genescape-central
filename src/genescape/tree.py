@@ -22,7 +22,7 @@ def build_onto_graph(index):
     terms = data[utils.IDX_OBO]
 
     # Add all nodes to Graph
-    for name, node in terms.items():
+    for key, node in terms.items():
         oid = node["id"]
         name = node["name"]
         text = textwrap.fill(name, width=20)

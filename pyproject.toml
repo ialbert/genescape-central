@@ -117,6 +117,10 @@ skip-string-normalization = true
 [tool.ruff]
 target-version = "py39"
 line-length = 120
+exclude = [
+    # This a vendored third-party library.
+    "src/genescape/bottle.py",
+]
 select = [
   "A",
   "ARG",
@@ -153,6 +157,9 @@ ignore = [
   "S105", "S106", "S107",
   # Ignore complexity
   "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
+
+  # Pet peevees
+  "Q000", "C402",  "F401", "E401",  "T201",
 ]
 unfixable = [
   # Don't touch unused imports

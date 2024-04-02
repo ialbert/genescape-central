@@ -1,4 +1,4 @@
-import logging, functools, time, functools
+import logging, time, functools
 import os, gzip, json, csv
 import sys, pathlib
 from logging import DEBUG, ERROR, INFO, WARNING
