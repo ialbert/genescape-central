@@ -9,7 +9,7 @@ from random import random
 
 import toml
 
-from genescape import __version__ as VERSION
+from genescape import __VERSION__ as VERSION
 from genescape import annot, bottle, resources, tree, utils
 from genescape.bottle import TEMPLATE_PATH, Bottle, get, post, redirect, request, response, static_file, template, view
 
