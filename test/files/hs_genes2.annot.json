@@ -1,0 +1,98 @@
+{
+  "data": [
+    {
+      "gid": "GO:0090630",
+      "root": "BP",
+      "count": 1,
+      "function": "activation of GTPase activity",
+      "source": [
+        "GRTP1"
+      ],
+      "size": 4,
+      "label": "(1/4)"
+    },
+    {
+      "gid": "GO:0046982",
+      "root": "MF",
+      "count": 1,
+      "function": "protein heterodimerization activity",
+      "source": [
+        "ABTB3"
+      ],
+      "size": 4,
+      "label": "(1/4)"
+    },
+    {
+      "gid": "GO:0031083",
+      "root": "CC",
+      "count": 1,
+      "function": "BLOC-1 complex",
+      "source": [
+        "BCAS4"
+      ],
+      "size": 4,
+      "label": "(1/4)"
+    },
+    {
+      "gid": "GO:0016020",
+      "root": "CC",
+      "count": 1,
+      "function": "membrane",
+      "source": [
+        "ABTB3"
+      ],
+      "size": 4,
+      "label": "(1/4)"
+    },
+    {
+      "gid": "GO:0005737",
+      "root": "CC",
+      "count": 1,
+      "function": "cytoplasm",
+      "source": [
+        "BCAS4"
+      ],
+      "size": 4,
+      "label": "(1/4)"
+    },
+    {
+      "gid": "GO:0005615",
+      "root": "CC",
+      "count": 1,
+      "function": "extracellular space",
+      "source": [
+        "C3P1"
+      ],
+      "size": 4,
+      "label": "(1/4)"
+    },
+    {
+      "gid": "GO:0005096",
+      "root": "MF",
+      "count": 1,
+      "function": "GTPase activator activity",
+      "source": [
+        "GRTP1"
+      ],
+      "size": 4,
+      "label": "(1/4)"
+    },
+    {
+      "gid": "GO:0004866",
+      "root": "MF",
+      "count": 1,
+      "function": "endopeptidase inhibitor activity",
+      "source": [
+        "C3P1"
+      ],
+      "size": 4,
+      "label": "(1/4)"
+    }
+  ],
+  "status": {
+    "code": 1,
+    "unknown_terms": [
+      "OFA"
+    ]
+  }
+}

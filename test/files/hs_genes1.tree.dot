@@ -1,0 +1,3316 @@
+digraph genescape {
+"GO:0000137" [fillcolor="#17DA15", label="GO:0000137
+Golgi cis cisterna
+(1/5)", shape=box, style=filled];
+"GO:0000139" [fillcolor="#17DA15", label="GO:0000139
+Golgi membrane
+(1/5)", shape=box, style=filled];
+"GO:0000166" [fillcolor="#A2CDF6", label="GO:0000166
+nucleotide binding", shape=box, style=filled];
+"GO:0000280" [fillcolor="#F6CBA2", label="GO:0000280
+nuclear division", shape=box, style=filled];
+"GO:0000302" [fillcolor="#F6CBA2", label="GO:0000302
+response to reactive
+oxygen species", shape=box, style=filled];
+"GO:0000786" [fillcolor="#A3F6A2", label="GO:0000786
+nucleosome
+(1/5)", shape=box, style=filled];
+"GO:0001503" [fillcolor="#F6CBA2", label="GO:0001503
+ossification", shape=box, style=filled];
+"GO:0001523" [fillcolor="#F6CBA2", label="GO:0001523
+retinoid metabolic
+process", shape=box, style=filled];
+"GO:0001558" [fillcolor="#F6CBA2", label="GO:0001558
+regulation of cell
+growth", shape=box, style=filled];
+"GO:0001568" [fillcolor="#A3F6A2", label="GO:0001568
+blood vessel
+development
+(1/5)", shape=box, style=filled];
+"GO:0001654" [fillcolor="#F6CBA2", label="GO:0001654
+eye development", shape=box, style=filled];
+"GO:0001666" [fillcolor="#A3F6A2", label="GO:0001666
+response to hypoxia
+(1/5)", shape=box, style=filled];
+"GO:0001676" [fillcolor="#A3F6A2", label="GO:0001676
+long-chain fatty
+acid metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0001727" [fillcolor="#A2CDF6", label="GO:0001727
+lipid kinase
+activity", shape=box, style=filled];
+"GO:0001786" [fillcolor="#17DA15", label="GO:0001786
+phosphatidylserine
+binding
+(1/5)", shape=box, style=filled];
+"GO:0001817" [fillcolor="#F6CBA2", label="GO:0001817
+regulation of
+cytokine production", shape=box, style=filled];
+"GO:0001819" [fillcolor="#F6CBA2", label="GO:0001819
+positive regulation
+of cytokine
+production", shape=box, style=filled];
+"GO:0001932" [fillcolor="#A3F6A2", label="GO:0001932
+regulation of
+protein
+phosphorylation
+(1/5)", shape=box, style=filled];
+"GO:0001958" [fillcolor="#17DA15", label="GO:0001958
+endochondral
+ossification
+(1/5)", shape=box, style=filled];
+"GO:0002063" [fillcolor="#F6CBA2", label="GO:0002063
+chondrocyte
+development", shape=box, style=filled];
+"GO:0002138" [fillcolor="#F6CBA2", label="GO:0002138
+retinoic acid
+biosynthetic process", shape=box, style=filled];
+"GO:0002178" [fillcolor="#F5A2F6", label="GO:0002178
+palmitoyltransferase
+complex", shape=box, style=filled];
+"GO:0002237" [fillcolor="#F6CBA2", label="GO:0002237
+response to molecule
+of bacterial origin", shape=box, style=filled];
+"GO:0002244" [fillcolor="#A3F6A2", label="GO:0002244
+hematopoietic
+progenitor cell
+differentiation
+(1/5)", shape=box, style=filled];
+"GO:0002682" [fillcolor="#F6CBA2", label="GO:0002682
+regulation of immune
+system process", shape=box, style=filled];
+"GO:0002684" [fillcolor="#F6CBA2", label="GO:0002684
+positive regulation
+of immune system
+process", shape=box, style=filled];
+"GO:0002685" [fillcolor="#A3F6A2", label="GO:0002685
+regulation of
+leukocyte migration
+(1/5)", shape=box, style=filled];
+"GO:0002694" [fillcolor="#F6CBA2", label="GO:0002694
+regulation of
+leukocyte activation", shape=box, style=filled];
+"GO:0002696" [fillcolor="#F6CBA2", label="GO:0002696
+positive regulation
+of leukocyte
+activation", shape=box, style=filled];
+"GO:0002697" [fillcolor="#F6CBA2", label="GO:0002697
+regulation of immune
+effector process", shape=box, style=filled];
+"GO:0002699" [fillcolor="#F6CBA2", label="GO:0002699
+positive regulation
+of immune effector
+process", shape=box, style=filled];
+"GO:0002700" [fillcolor="#F6CBA2", label="GO:0002700
+regulation of
+production of
+molecular mediator
+of immune response", shape=box, style=filled];
+"GO:0002702" [fillcolor="#F6CBA2", label="GO:0002702
+positive regulation
+of production of
+molecular mediator
+of immune response", shape=box, style=filled];
+"GO:0002703" [fillcolor="#F6CBA2", label="GO:0002703
+regulation of
+leukocyte mediated
+immunity", shape=box, style=filled];
+"GO:0002718" [fillcolor="#F6CBA2", label="GO:0002718
+regulation of
+cytokine production
+involved in immune
+response", shape=box, style=filled];
+"GO:0002720" [fillcolor="#A3F6A2", label="GO:0002720
+positive regulation
+of cytokine
+production involved
+in immune response
+(1/5)", shape=box, style=filled];
+"GO:0002790" [fillcolor="#F6CBA2", label="GO:0002790
+peptide secretion", shape=box, style=filled];
+"GO:0002886" [fillcolor="#F6CBA2", label="GO:0002886
+regulation of
+myeloid leukocyte
+mediated immunity", shape=box, style=filled];
+"GO:0002933" [fillcolor="#17DA15", label="GO:0002933
+lipid hydroxylation
+(1/5)", shape=box, style=filled];
+"GO:0003376" [fillcolor="#17DA15", label="GO:0003376
+sphingosine-1-
+phosphate receptor
+signaling pathway
+(1/5)", shape=box, style=filled];
+"GO:0003433" [fillcolor="#A3F6A2", label="GO:0003433
+chondrocyte
+development involved
+in endochondral bone
+morphogenesis
+(1/5)", shape=box, style=filled];
+"GO:0003674" [fillcolor="#A2CDF6", label="GO:0003674
+molecular_function", shape=box, style=filled];
+"GO:0003824" [fillcolor="#A2CDF6", label="GO:0003824
+catalytic activity", shape=box, style=filled];
+"GO:0004497" [fillcolor="#A3F6A2", label="GO:0004497
+monooxygenase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0004620" [fillcolor="#A2CDF6", label="GO:0004620
+phospholipase
+activity", shape=box, style=filled];
+"GO:0004758" [fillcolor="#17DA15", label="GO:0004758
+serine C-
+palmitoyltransferase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0004767" [fillcolor="#A3F6A2", label="GO:0004767
+sphingomyelin
+phosphodiesterase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0004888" [fillcolor="#A2CDF6", label="GO:0004888
+transmembrane
+signaling receptor
+activity", shape=box, style=filled];
+"GO:0004930" [fillcolor="#A2CDF6", label="GO:0004930
+G protein-coupled
+receptor activity", shape=box, style=filled];
+"GO:0005488" [fillcolor="#A2CDF6", label="GO:0005488
+binding", shape=box, style=filled];
+"GO:0005506" [fillcolor="#A3F6A2", label="GO:0005506
+iron ion binding
+(1/5)", shape=box, style=filled];
+"GO:0005515" [fillcolor="#A3F6A2", label="GO:0005515
+protein binding
+(3/5)", shape=box, style=filled];
+"GO:0005524" [fillcolor="#17DA15", label="GO:0005524
+ATP binding
+(1/5)", shape=box, style=filled];
+"GO:0005537" [fillcolor="#17DA15", label="GO:0005537
+mannose binding
+(1/5)", shape=box, style=filled];
+"GO:0005543" [fillcolor="#A2CDF6", label="GO:0005543
+phospholipid binding", shape=box, style=filled];
+"GO:0005575" [fillcolor="#F5A2F6", label="GO:0005575
+cellular_component", shape=box, style=filled];
+"GO:0005576" [fillcolor="#A3F6A2", label="GO:0005576
+extracellular region
+(1/5)", shape=box, style=filled];
+"GO:0005634" [fillcolor="#A3F6A2", label="GO:0005634
+nucleus
+(1/5)", shape=box, style=filled];
+"GO:0005654" [fillcolor="#17DA15", label="GO:0005654
+nucleoplasm
+(1/5)", shape=box, style=filled];
+"GO:0005737" [fillcolor="#A3F6A2", label="GO:0005737
+cytoplasm
+(2/5)", shape=box, style=filled];
+"GO:0005739" [fillcolor="#17DA15", label="GO:0005739
+mitochondrion
+(1/5)", shape=box, style=filled];
+"GO:0005743" [fillcolor="#17DA15", label="GO:0005743
+mitochondrial inner
+membrane
+(2/5)", shape=box, style=filled];
+"GO:0005765" [fillcolor="#A3F6A2", label="GO:0005765
+lysosomal membrane
+(1/5)", shape=box, style=filled];
+"GO:0005774" [fillcolor="#F5A2F6", label="GO:0005774
+vacuolar membrane", shape=box, style=filled];
+"GO:0005783" [fillcolor="#A3F6A2", label="GO:0005783
+endoplasmic
+reticulum
+(1/5)", shape=box, style=filled];
+"GO:0005789" [fillcolor="#A3F6A2", label="GO:0005789
+endoplasmic
+reticulum membrane
+(2/5)", shape=box, style=filled];
+"GO:0005829" [fillcolor="#A3F6A2", label="GO:0005829
+cytosol
+(1/5)", shape=box, style=filled];
+"GO:0005886" [fillcolor="#A3F6A2", label="GO:0005886
+plasma membrane
+(1/5)", shape=box, style=filled];
+"GO:0006066" [fillcolor="#F6CBA2", label="GO:0006066
+alcohol metabolic
+process", shape=box, style=filled];
+"GO:0006082" [fillcolor="#F6CBA2", label="GO:0006082
+organic acid
+metabolic process", shape=box, style=filled];
+"GO:0006109" [fillcolor="#F6CBA2", label="GO:0006109
+regulation of
+carbohydrate
+metabolic process", shape=box, style=filled];
+"GO:0006139" [fillcolor="#F6CBA2", label="GO:0006139
+nucleobase-
+containing compound
+metabolic process", shape=box, style=filled];
+"GO:0006140" [fillcolor="#F6CBA2", label="GO:0006140
+regulation of
+nucleotide metabolic
+process", shape=box, style=filled];
+"GO:0006259" [fillcolor="#F6CBA2", label="GO:0006259
+DNA metabolic
+process", shape=box, style=filled];
+"GO:0006325" [fillcolor="#F6CBA2", label="GO:0006325
+chromatin
+organization", shape=box, style=filled];
+"GO:0006338" [fillcolor="#F6CBA2", label="GO:0006338
+chromatin remodeling", shape=box, style=filled];
+"GO:0006629" [fillcolor="#F6CBA2", label="GO:0006629
+lipid metabolic
+process", shape=box, style=filled];
+"GO:0006631" [fillcolor="#A3F6A2", label="GO:0006631
+fatty acid metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0006633" [fillcolor="#F6CBA2", label="GO:0006633
+fatty acid
+biosynthetic process", shape=box, style=filled];
+"GO:0006643" [fillcolor="#F6CBA2", label="GO:0006643
+membrane lipid
+metabolic process", shape=box, style=filled];
+"GO:0006644" [fillcolor="#F6CBA2", label="GO:0006644
+phospholipid
+metabolic process", shape=box, style=filled];
+"GO:0006665" [fillcolor="#F6CBA2", label="GO:0006665
+sphingolipid
+metabolic process", shape=box, style=filled];
+"GO:0006667" [fillcolor="#F6CBA2", label="GO:0006667
+sphinganine
+metabolic process", shape=box, style=filled];
+"GO:0006668" [fillcolor="#F6CBA2", label="GO:0006668
+sphinganine-1-
+phosphate metabolic
+process", shape=box, style=filled];
+"GO:0006669" [fillcolor="#17DA15", label="GO:0006669
+sphinganine-1-
+phosphate
+biosynthetic process
+(1/5)", shape=box, style=filled];
+"GO:0006670" [fillcolor="#A3F6A2", label="GO:0006670
+sphingosine
+metabolic process
+(1/5)", shape=box, style=filled];
+"GO:0006672" [fillcolor="#A3F6A2", label="GO:0006672
+ceramide metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0006684" [fillcolor="#A3F6A2", label="GO:0006684
+sphingomyelin
+metabolic process
+(1/5)", shape=box, style=filled];
+"GO:0006685" [fillcolor="#17DA15", label="GO:0006685
+sphingomyelin
+catabolic process
+(1/5)", shape=box, style=filled];
+"GO:0006686" [fillcolor="#17DA15", label="GO:0006686
+sphingomyelin
+biosynthetic process
+(1/5)", shape=box, style=filled];
+"GO:0006690" [fillcolor="#F6CBA2", label="GO:0006690
+icosanoid metabolic
+process", shape=box, style=filled];
+"GO:0006694" [fillcolor="#A3F6A2", label="GO:0006694
+steroid biosynthetic
+process
+(1/5)", shape=box, style=filled];
+"GO:0006720" [fillcolor="#F6CBA2", label="GO:0006720
+isoprenoid metabolic
+process", shape=box, style=filled];
+"GO:0006721" [fillcolor="#F6CBA2", label="GO:0006721
+terpenoid metabolic
+process", shape=box, style=filled];
+"GO:0006725" [fillcolor="#F6CBA2", label="GO:0006725
+cellular aromatic
+compound metabolic
+process", shape=box, style=filled];
+"GO:0006766" [fillcolor="#F6CBA2", label="GO:0006766
+vitamin metabolic
+process", shape=box, style=filled];
+"GO:0006775" [fillcolor="#F6CBA2", label="GO:0006775
+fat-soluble vitamin
+metabolic process", shape=box, style=filled];
+"GO:0006778" [fillcolor="#A3F6A2", label="GO:0006778
+porphyrin-containing
+compound metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0006793" [fillcolor="#F6CBA2", label="GO:0006793
+phosphorus metabolic
+process", shape=box, style=filled];
+"GO:0006796" [fillcolor="#F6CBA2", label="GO:0006796
+phosphate-containing
+compound metabolic
+process", shape=box, style=filled];
+"GO:0006805" [fillcolor="#A3F6A2", label="GO:0006805
+xenobiotic metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0006807" [fillcolor="#F6CBA2", label="GO:0006807
+nitrogen compound
+metabolic process", shape=box, style=filled];
+"GO:0006810" [fillcolor="#F6CBA2", label="GO:0006810
+transport", shape=box, style=filled];
+"GO:0006950" [fillcolor="#F6CBA2", label="GO:0006950
+response to stress", shape=box, style=filled];
+"GO:0006979" [fillcolor="#F6CBA2", label="GO:0006979
+response to
+oxidative stress", shape=box, style=filled];
+"GO:0006996" [fillcolor="#F6CBA2", label="GO:0006996
+organelle
+organization", shape=box, style=filled];
+"GO:0007088" [fillcolor="#F6CBA2", label="GO:0007088
+regulation of
+mitotic nuclear
+division", shape=box, style=filled];
+"GO:0007165" [fillcolor="#F6CBA2", label="GO:0007165
+signal transduction", shape=box, style=filled];
+"GO:0007166" [fillcolor="#F6CBA2", label="GO:0007166
+cell surface
+receptor signaling
+pathway", shape=box, style=filled];
+"GO:0007167" [fillcolor="#F6CBA2", label="GO:0007167
+enzyme-linked
+receptor protein
+signaling pathway", shape=box, style=filled];
+"GO:0007169" [fillcolor="#F6CBA2", label="GO:0007169
+transmembrane
+receptor protein
+tyrosine kinase
+signaling pathway", shape=box, style=filled];
+"GO:0007178" [fillcolor="#F6CBA2", label="GO:0007178
+transmembrane
+receptor protein
+serine/threonine
+kinase signaling
+pathway", shape=box, style=filled];
+"GO:0007186" [fillcolor="#F6CBA2", label="GO:0007186
+G protein-coupled
+receptor signaling
+pathway", shape=box, style=filled];
+"GO:0007346" [fillcolor="#F6CBA2", label="GO:0007346
+regulation of
+mitotic cell cycle", shape=box, style=filled];
+"GO:0007420" [fillcolor="#17DA15", label="GO:0007420
+brain development
+(1/5)", shape=box, style=filled];
+"GO:0007423" [fillcolor="#F6CBA2", label="GO:0007423
+sensory organ
+development", shape=box, style=filled];
+"GO:0007584" [fillcolor="#F6CBA2", label="GO:0007584
+response to nutrient", shape=box, style=filled];
+"GO:0008081" [fillcolor="#A3F6A2", label="GO:0008081
+phosphoric diester
+hydrolase activity
+(1/5)", shape=box, style=filled];
+"GO:0008150" [fillcolor="#F6CBA2", label="GO:0008150
+biological_process", shape=box, style=filled];
+"GO:0008152" [fillcolor="#F6CBA2", label="GO:0008152
+metabolic process", shape=box, style=filled];
+"GO:0008202" [fillcolor="#A3F6A2", label="GO:0008202
+steroid metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0008210" [fillcolor="#A3F6A2", label="GO:0008210
+estrogen metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0008283" [fillcolor="#A3F6A2", label="GO:0008283
+cell population
+proliferation
+(1/5)", shape=box, style=filled];
+"GO:0008284" [fillcolor="#A3F6A2", label="GO:0008284
+positive regulation
+of cell population
+proliferation
+(1/5)", shape=box, style=filled];
+"GO:0008289" [fillcolor="#A2CDF6", label="GO:0008289
+lipid binding", shape=box, style=filled];
+"GO:0008299" [fillcolor="#F6CBA2", label="GO:0008299
+isoprenoid
+biosynthetic process", shape=box, style=filled];
+"GO:0008391" [fillcolor="#A3F6A2", label="GO:0008391
+arachidonic acid
+monooxygenase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0008395" [fillcolor="#A2CDF6", label="GO:0008395
+steroid hydroxylase
+activity", shape=box, style=filled];
+"GO:0008481" [fillcolor="#17DA15", label="GO:0008481
+sphinganine kinase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0008610" [fillcolor="#F6CBA2", label="GO:0008610
+lipid biosynthetic
+process", shape=box, style=filled];
+"GO:0008643" [fillcolor="#F6CBA2", label="GO:0008643
+carbohydrate
+transport", shape=box, style=filled];
+"GO:0008654" [fillcolor="#F6CBA2", label="GO:0008654
+phospholipid
+biosynthetic process", shape=box, style=filled];
+"GO:0009056" [fillcolor="#F6CBA2", label="GO:0009056
+catabolic process", shape=box, style=filled];
+"GO:0009058" [fillcolor="#F6CBA2", label="GO:0009058
+biosynthetic process", shape=box, style=filled];
+"GO:0009059" [fillcolor="#F6CBA2", label="GO:0009059
+macromolecule
+biosynthetic process", shape=box, style=filled];
+"GO:0009308" [fillcolor="#A3F6A2", label="GO:0009308
+amine metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0009395" [fillcolor="#F6CBA2", label="GO:0009395
+phospholipid
+catabolic process", shape=box, style=filled];
+"GO:0009404" [fillcolor="#F6CBA2", label="GO:0009404
+toxin metabolic
+process", shape=box, style=filled];
+"GO:0009605" [fillcolor="#F6CBA2", label="GO:0009605
+response to external
+stimulus", shape=box, style=filled];
+"GO:0009607" [fillcolor="#F6CBA2", label="GO:0009607
+response to biotic
+stimulus", shape=box, style=filled];
+"GO:0009624" [fillcolor="#17DA15", label="GO:0009624
+response to nematode
+(1/5)", shape=box, style=filled];
+"GO:0009628" [fillcolor="#F6CBA2", label="GO:0009628
+response to abiotic
+stimulus", shape=box, style=filled];
+"GO:0009635" [fillcolor="#17DA15", label="GO:0009635
+response to
+herbicide
+(1/5)", shape=box, style=filled];
+"GO:0009636" [fillcolor="#F6CBA2", label="GO:0009636
+response to toxic
+substance", shape=box, style=filled];
+"GO:0009653" [fillcolor="#F6CBA2", label="GO:0009653
+anatomical structure
+morphogenesis", shape=box, style=filled];
+"GO:0009692" [fillcolor="#A3F6A2", label="GO:0009692
+ethylene metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0009698" [fillcolor="#F6CBA2", label="GO:0009698
+phenylpropanoid
+metabolic process", shape=box, style=filled];
+"GO:0009719" [fillcolor="#F6CBA2", label="GO:0009719
+response to
+endogenous stimulus", shape=box, style=filled];
+"GO:0009804" [fillcolor="#A3F6A2", label="GO:0009804
+coumarin metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0009812" [fillcolor="#A3F6A2", label="GO:0009812
+flavonoid metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0009887" [fillcolor="#F6CBA2", label="GO:0009887
+animal organ
+morphogenesis", shape=box, style=filled];
+"GO:0009888" [fillcolor="#F6CBA2", label="GO:0009888
+tissue development", shape=box, style=filled];
+"GO:0009889" [fillcolor="#F6CBA2", label="GO:0009889
+regulation of
+biosynthetic process", shape=box, style=filled];
+"GO:0009890" [fillcolor="#F6CBA2", label="GO:0009890
+negative regulation
+of biosynthetic
+process", shape=box, style=filled];
+"GO:0009891" [fillcolor="#F6CBA2", label="GO:0009891
+positive regulation
+of biosynthetic
+process", shape=box, style=filled];
+"GO:0009892" [fillcolor="#F6CBA2", label="GO:0009892
+negative regulation
+of metabolic process", shape=box, style=filled];
+"GO:0009893" [fillcolor="#F6CBA2", label="GO:0009893
+positive regulation
+of metabolic process", shape=box, style=filled];
+"GO:0009894" [fillcolor="#F6CBA2", label="GO:0009894
+regulation of
+catabolic process", shape=box, style=filled];
+"GO:0009896" [fillcolor="#F6CBA2", label="GO:0009896
+positive regulation
+of catabolic process", shape=box, style=filled];
+"GO:0009914" [fillcolor="#F6CBA2", label="GO:0009914
+hormone transport", shape=box, style=filled];
+"GO:0009966" [fillcolor="#F6CBA2", label="GO:0009966
+regulation of signal
+transduction", shape=box, style=filled];
+"GO:0009967" [fillcolor="#F6CBA2", label="GO:0009967
+positive regulation
+of signal
+transduction", shape=box, style=filled];
+"GO:0009987" [fillcolor="#F6CBA2", label="GO:0009987
+cellular process", shape=box, style=filled];
+"GO:0009991" [fillcolor="#F6CBA2", label="GO:0009991
+response to
+extracellular
+stimulus", shape=box, style=filled];
+"GO:0010033" [fillcolor="#F6CBA2", label="GO:0010033
+response to organic
+substance", shape=box, style=filled];
+"GO:0010035" [fillcolor="#F6CBA2", label="GO:0010035
+response to
+inorganic substance", shape=box, style=filled];
+"GO:0010038" [fillcolor="#F6CBA2", label="GO:0010038
+response to metal
+ion", shape=box, style=filled];
+"GO:0010039" [fillcolor="#F6CBA2", label="GO:0010039
+response to iron ion", shape=box, style=filled];
+"GO:0010041" [fillcolor="#A3F6A2", label="GO:0010041
+response to
+iron(III) ion
+(1/5)", shape=box, style=filled];
+"GO:0010155" [fillcolor="#F6CBA2", label="GO:0010155
+regulation of proton
+transport", shape=box, style=filled];
+"GO:0010243" [fillcolor="#F6CBA2", label="GO:0010243
+response to
+organonitrogen
+compound", shape=box, style=filled];
+"GO:0010468" [fillcolor="#F6CBA2", label="GO:0010468
+regulation of gene
+expression", shape=box, style=filled];
+"GO:0010506" [fillcolor="#F6CBA2", label="GO:0010506
+regulation of
+autophagy", shape=box, style=filled];
+"GO:0010508" [fillcolor="#F6CBA2", label="GO:0010508
+positive regulation
+of autophagy", shape=box, style=filled];
+"GO:0010556" [fillcolor="#F6CBA2", label="GO:0010556
+regulation of
+macromolecule
+biosynthetic process", shape=box, style=filled];
+"GO:0010557" [fillcolor="#F6CBA2", label="GO:0010557
+positive regulation
+of macromolecule
+biosynthetic process", shape=box, style=filled];
+"GO:0010558" [fillcolor="#F6CBA2", label="GO:0010558
+negative regulation
+of macromolecule
+biosynthetic process", shape=box, style=filled];
+"GO:0010564" [fillcolor="#F6CBA2", label="GO:0010564
+regulation of cell
+cycle process", shape=box, style=filled];
+"GO:0010604" [fillcolor="#F6CBA2", label="GO:0010604
+positive regulation
+of macromolecule
+metabolic process", shape=box, style=filled];
+"GO:0010605" [fillcolor="#F6CBA2", label="GO:0010605
+negative regulation
+of macromolecule
+metabolic process", shape=box, style=filled];
+"GO:0010628" [fillcolor="#F6CBA2", label="GO:0010628
+positive regulation
+of gene expression", shape=box, style=filled];
+"GO:0010638" [fillcolor="#F6CBA2", label="GO:0010638
+positive regulation
+of organelle
+organization", shape=box, style=filled];
+"GO:0010646" [fillcolor="#F6CBA2", label="GO:0010646
+regulation of cell
+communication", shape=box, style=filled];
+"GO:0010647" [fillcolor="#F6CBA2", label="GO:0010647
+positive regulation
+of cell
+communication", shape=box, style=filled];
+"GO:0010817" [fillcolor="#F6CBA2", label="GO:0010817
+regulation of
+hormone levels", shape=box, style=filled];
+"GO:0010959" [fillcolor="#F6CBA2", label="GO:0010959
+regulation of metal
+ion transport", shape=box, style=filled];
+"GO:0014070" [fillcolor="#F6CBA2", label="GO:0014070
+response to organic
+cyclic compound", shape=box, style=filled];
+"GO:0015774" [fillcolor="#A3F6A2", label="GO:0015774
+polysaccharide
+transport
+(1/5)", shape=box, style=filled];
+"GO:0015833" [fillcolor="#F6CBA2", label="GO:0015833
+peptide transport", shape=box, style=filled];
+"GO:0016020" [fillcolor="#A3F6A2", label="GO:0016020
+membrane
+(1/5)", shape=box, style=filled];
+"GO:0016042" [fillcolor="#F6CBA2", label="GO:0016042
+lipid catabolic
+process", shape=box, style=filled];
+"GO:0016043" [fillcolor="#F6CBA2", label="GO:0016043
+cellular component
+organization", shape=box, style=filled];
+"GO:0016053" [fillcolor="#F6CBA2", label="GO:0016053
+organic acid
+biosynthetic process", shape=box, style=filled];
+"GO:0016101" [fillcolor="#F6CBA2", label="GO:0016101
+diterpenoid
+metabolic process", shape=box, style=filled];
+"GO:0016102" [fillcolor="#F6CBA2", label="GO:0016102
+diterpenoid
+biosynthetic process", shape=box, style=filled];
+"GO:0016114" [fillcolor="#F6CBA2", label="GO:0016114
+terpenoid
+biosynthetic process", shape=box, style=filled];
+"GO:0016239" [fillcolor="#F6CBA2", label="GO:0016239
+positive regulation
+of macroautophagy", shape=box, style=filled];
+"GO:0016241" [fillcolor="#F6CBA2", label="GO:0016241
+regulation of
+macroautophagy", shape=box, style=filled];
+"GO:0016298" [fillcolor="#A2CDF6", label="GO:0016298
+lipase activity", shape=box, style=filled];
+"GO:0016301" [fillcolor="#A2CDF6", label="GO:0016301
+kinase activity", shape=box, style=filled];
+"GO:0016310" [fillcolor="#A3F6A2", label="GO:0016310
+phosphorylation
+(1/5)", shape=box, style=filled];
+"GO:0016408" [fillcolor="#A2CDF6", label="GO:0016408
+C-acyltransferase
+activity", shape=box, style=filled];
+"GO:0016409" [fillcolor="#A2CDF6", label="GO:0016409
+palmitoyltransferase
+activity", shape=box, style=filled];
+"GO:0016454" [fillcolor="#A2CDF6", label="GO:0016454
+C-
+palmitoyltransferase
+activity", shape=box, style=filled];
+"GO:0016491" [fillcolor="#A3F6A2", label="GO:0016491
+oxidoreductase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0016679" [fillcolor="#A3F6A2", label="GO:0016679
+oxidoreductase
+activity, acting on
+diphenols and
+related substances
+as donors
+(1/5)", shape=box, style=filled];
+"GO:0016705" [fillcolor="#A2CDF6", label="GO:0016705
+oxidoreductase
+activity, acting on
+paired donors, with
+incorporation or
+reduction of
+molecular oxygen", shape=box, style=filled];
+"GO:0016709" [fillcolor="#A2CDF6", label="GO:0016709
+oxidoreductase
+activity, acting on
+paired donors, with
+incorporation or
+reduction of
+molecular oxygen,
+NAD(P)H as one
+donor, and
+incorporation of one
+atom of oxygen", shape=box, style=filled];
+"GO:0016711" [fillcolor="#17DA15", label="GO:0016711
+flavonoid
+3'-monooxygenase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0016712" [fillcolor="#A2CDF6", label="GO:0016712
+oxidoreductase
+activity, acting on
+paired donors, with
+incorporation or
+reduction of
+molecular oxygen,
+reduced flavin or
+flavoprotein as one
+donor, and
+incorporation of one
+atom of oxygen", shape=box, style=filled];
+"GO:0016740" [fillcolor="#A2CDF6", label="GO:0016740
+transferase activity", shape=box, style=filled];
+"GO:0016746" [fillcolor="#A2CDF6", label="GO:0016746
+acyltransferase
+activity", shape=box, style=filled];
+"GO:0016747" [fillcolor="#A2CDF6", label="GO:0016747
+acyltransferase
+activity,
+transferring groups
+other than amino-
+acyl groups", shape=box, style=filled];
+"GO:0016772" [fillcolor="#A2CDF6", label="GO:0016772
+transferase
+activity,
+transferring
+phosphorus-
+containing groups", shape=box, style=filled];
+"GO:0016773" [fillcolor="#A2CDF6", label="GO:0016773
+phosphotransferase
+activity, alcohol
+group as acceptor", shape=box, style=filled];
+"GO:0016787" [fillcolor="#A2CDF6", label="GO:0016787
+hydrolase activity", shape=box, style=filled];
+"GO:0016788" [fillcolor="#A2CDF6", label="GO:0016788
+hydrolase activity,
+acting on ester
+bonds", shape=box, style=filled];
+"GO:0016829" [fillcolor="#A2CDF6", label="GO:0016829
+lyase activity", shape=box, style=filled];
+"GO:0016835" [fillcolor="#A2CDF6", label="GO:0016835
+carbon-oxygen lyase
+activity", shape=box, style=filled];
+"GO:0016836" [fillcolor="#A2CDF6", label="GO:0016836
+hydro-lyase activity", shape=box, style=filled];
+"GO:0017050" [fillcolor="#17DA15", label="GO:0017050
+D-erythro-
+sphingosine kinase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0017059" [fillcolor="#A3F6A2", label="GO:0017059
+serine C-
+palmitoyltransferase
+complex
+(1/5)", shape=box, style=filled];
+"GO:0017076" [fillcolor="#A2CDF6", label="GO:0017076
+purine nucleotide
+binding", shape=box, style=filled];
+"GO:0017143" [fillcolor="#A3F6A2", label="GO:0017143
+insecticide
+metabolic process
+(1/5)", shape=box, style=filled];
+"GO:0017157" [fillcolor="#F6CBA2", label="GO:0017157
+regulation of
+exocytosis", shape=box, style=filled];
+"GO:0018130" [fillcolor="#F6CBA2", label="GO:0018130
+heterocycle
+biosynthetic process", shape=box, style=filled];
+"GO:0018894" [fillcolor="#F6CBA2", label="GO:0018894
+dibenzo-p-dioxin
+metabolic process", shape=box, style=filled];
+"GO:0019216" [fillcolor="#F6CBA2", label="GO:0019216
+regulation of lipid
+metabolic process", shape=box, style=filled];
+"GO:0019219" [fillcolor="#F6CBA2", label="GO:0019219
+regulation of
+nucleobase-
+containing compound
+metabolic process", shape=box, style=filled];
+"GO:0019220" [fillcolor="#F6CBA2", label="GO:0019220
+regulation of
+phosphate metabolic
+process", shape=box, style=filled];
+"GO:0019222" [fillcolor="#F6CBA2", label="GO:0019222
+regulation of
+metabolic process", shape=box, style=filled];
+"GO:0019341" [fillcolor="#17DA15", label="GO:0019341
+dibenzo-p-dioxin
+catabolic process
+(1/5)", shape=box, style=filled];
+"GO:0019369" [fillcolor="#F6CBA2", label="GO:0019369
+arachidonic acid
+metabolic process", shape=box, style=filled];
+"GO:0019373" [fillcolor="#17DA15", label="GO:0019373
+epoxygenase P450
+pathway
+(1/5)", shape=box, style=filled];
+"GO:0019438" [fillcolor="#F6CBA2", label="GO:0019438
+aromatic compound
+biosynthetic process", shape=box, style=filled];
+"GO:0019439" [fillcolor="#F6CBA2", label="GO:0019439
+aromatic compound
+catabolic process", shape=box, style=filled];
+"GO:0019637" [fillcolor="#F6CBA2", label="GO:0019637
+organophosphate
+metabolic process", shape=box, style=filled];
+"GO:0019748" [fillcolor="#F6CBA2", label="GO:0019748
+secondary metabolic
+process", shape=box, style=filled];
+"GO:0019751" [fillcolor="#F6CBA2", label="GO:0019751
+polyol metabolic
+process", shape=box, style=filled];
+"GO:0019752" [fillcolor="#F6CBA2", label="GO:0019752
+carboxylic acid
+metabolic process", shape=box, style=filled];
+"GO:0019825" [fillcolor="#17DA15", label="GO:0019825
+oxygen binding
+(1/5)", shape=box, style=filled];
+"GO:0019842" [fillcolor="#A2CDF6", label="GO:0019842
+vitamin binding", shape=box, style=filled];
+"GO:0019866" [fillcolor="#F5A2F6", label="GO:0019866
+organelle inner
+membrane", shape=box, style=filled];
+"GO:0019899" [fillcolor="#A3F6A2", label="GO:0019899
+enzyme binding
+(1/5)", shape=box, style=filled];
+"GO:0020037" [fillcolor="#17DA15", label="GO:0020037
+heme binding
+(1/5)", shape=box, style=filled];
+"GO:0022402" [fillcolor="#F6CBA2", label="GO:0022402
+cell cycle process", shape=box, style=filled];
+"GO:0022414" [fillcolor="#F6CBA2", label="GO:0022414
+reproductive process", shape=box, style=filled];
+"GO:0022607" [fillcolor="#F6CBA2", label="GO:0022607
+cellular component
+assembly", shape=box, style=filled];
+"GO:0022898" [fillcolor="#F6CBA2", label="GO:0022898
+regulation of
+transmembrane
+transporter activity", shape=box, style=filled];
+"GO:0023051" [fillcolor="#F6CBA2", label="GO:0023051
+regulation of
+signaling", shape=box, style=filled];
+"GO:0023056" [fillcolor="#F6CBA2", label="GO:0023056
+positive regulation
+of signaling", shape=box, style=filled];
+"GO:0023061" [fillcolor="#F6CBA2", label="GO:0023061
+signal release", shape=box, style=filled];
+"GO:0030072" [fillcolor="#A3F6A2", label="GO:0030072
+peptide hormone
+secretion
+(1/5)", shape=box, style=filled];
+"GO:0030148" [fillcolor="#A3F6A2", label="GO:0030148
+sphingolipid
+biosynthetic process
+(2/5)", shape=box, style=filled];
+"GO:0030149" [fillcolor="#F6CBA2", label="GO:0030149
+sphingolipid
+catabolic process", shape=box, style=filled];
+"GO:0030154" [fillcolor="#F6CBA2", label="GO:0030154
+cell differentiation", shape=box, style=filled];
+"GO:0030170" [fillcolor="#17DA15", label="GO:0030170
+pyridoxal phosphate
+binding
+(1/5)", shape=box, style=filled];
+"GO:0030198" [fillcolor="#F6CBA2", label="GO:0030198
+extracellular matrix
+organization", shape=box, style=filled];
+"GO:0030246" [fillcolor="#A2CDF6", label="GO:0030246
+carbohydrate binding", shape=box, style=filled];
+"GO:0030258" [fillcolor="#F6CBA2", label="GO:0030258
+lipid modification", shape=box, style=filled];
+"GO:0030282" [fillcolor="#A3F6A2", label="GO:0030282
+bone mineralization
+(1/5)", shape=box, style=filled];
+"GO:0030308" [fillcolor="#A3F6A2", label="GO:0030308
+negative regulation
+of cell growth
+(1/5)", shape=box, style=filled];
+"GO:0030334" [fillcolor="#F6CBA2", label="GO:0030334
+regulation of cell
+migration", shape=box, style=filled];
+"GO:0030509" [fillcolor="#17DA15", label="GO:0030509
+BMP signaling
+pathway
+(1/5)", shape=box, style=filled];
+"GO:0030544" [fillcolor="#17DA15", label="GO:0030544
+Hsp70 protein
+binding
+(1/5)", shape=box, style=filled];
+"GO:0030554" [fillcolor="#A2CDF6", label="GO:0030554
+adenyl nucleotide
+binding", shape=box, style=filled];
+"GO:0030808" [fillcolor="#F6CBA2", label="GO:0030808
+regulation of
+nucleotide
+biosynthetic process", shape=box, style=filled];
+"GO:0030855" [fillcolor="#F6CBA2", label="GO:0030855
+epithelial cell
+differentiation", shape=box, style=filled];
+"GO:0031072" [fillcolor="#A2CDF6", label="GO:0031072
+heat shock protein
+binding", shape=box, style=filled];
+"GO:0031090" [fillcolor="#F5A2F6", label="GO:0031090
+organelle membrane", shape=box, style=filled];
+"GO:0031211" [fillcolor="#F5A2F6", label="GO:0031211
+endoplasmic
+reticulum
+palmitoyltransferase
+complex", shape=box, style=filled];
+"GO:0031214" [fillcolor="#F6CBA2", label="GO:0031214
+biomineral tissue
+development", shape=box, style=filled];
+"GO:0031267" [fillcolor="#17DA15", label="GO:0031267
+small GTPase binding
+(1/5)", shape=box, style=filled];
+"GO:0031323" [fillcolor="#F6CBA2", label="GO:0031323
+regulation of
+cellular metabolic
+process", shape=box, style=filled];
+"GO:0031324" [fillcolor="#F6CBA2", label="GO:0031324
+negative regulation
+of cellular
+metabolic process", shape=box, style=filled];
+"GO:0031325" [fillcolor="#F6CBA2", label="GO:0031325
+positive regulation
+of cellular
+metabolic process", shape=box, style=filled];
+"GO:0031326" [fillcolor="#F6CBA2", label="GO:0031326
+regulation of
+cellular
+biosynthetic process", shape=box, style=filled];
+"GO:0031327" [fillcolor="#F6CBA2", label="GO:0031327
+negative regulation
+of cellular
+biosynthetic process", shape=box, style=filled];
+"GO:0031328" [fillcolor="#F6CBA2", label="GO:0031328
+positive regulation
+of cellular
+biosynthetic process", shape=box, style=filled];
+"GO:0031329" [fillcolor="#F6CBA2", label="GO:0031329
+regulation of
+cellular catabolic
+process", shape=box, style=filled];
+"GO:0031331" [fillcolor="#F6CBA2", label="GO:0031331
+positive regulation
+of cellular
+catabolic process", shape=box, style=filled];
+"GO:0031399" [fillcolor="#F6CBA2", label="GO:0031399
+regulation of
+protein modification
+process", shape=box, style=filled];
+"GO:0031667" [fillcolor="#F6CBA2", label="GO:0031667
+response to nutrient
+levels", shape=box, style=filled];
+"GO:0031966" [fillcolor="#F5A2F6", label="GO:0031966
+mitochondrial
+membrane", shape=box, style=filled];
+"GO:0031984" [fillcolor="#F5A2F6", label="GO:0031984
+organelle
+subcompartment", shape=box, style=filled];
+"GO:0031985" [fillcolor="#F5A2F6", label="GO:0031985
+Golgi cisterna", shape=box, style=filled];
+"GO:0032026" [fillcolor="#F6CBA2", label="GO:0032026
+response to
+magnesium ion", shape=box, style=filled];
+"GO:0032094" [fillcolor="#A3F6A2", label="GO:0032094
+response to food
+(1/5)", shape=box, style=filled];
+"GO:0032409" [fillcolor="#F6CBA2", label="GO:0032409
+regulation of
+transporter activity", shape=box, style=filled];
+"GO:0032412" [fillcolor="#F6CBA2", label="GO:0032412
+regulation of
+monoatomic ion
+transmembrane
+transporter activity", shape=box, style=filled];
+"GO:0032451" [fillcolor="#A3F6A2", label="GO:0032451
+demethylase activity
+(1/5)", shape=box, style=filled];
+"GO:0032496" [fillcolor="#A3F6A2", label="GO:0032496
+response to
+lipopolysaccharide
+(1/5)", shape=box, style=filled];
+"GO:0032501" [fillcolor="#F6CBA2", label="GO:0032501
+multicellular
+organismal process", shape=box, style=filled];
+"GO:0032502" [fillcolor="#F6CBA2", label="GO:0032502
+developmental
+process", shape=box, style=filled];
+"GO:0032553" [fillcolor="#A2CDF6", label="GO:0032553
+ribonucleotide
+binding", shape=box, style=filled];
+"GO:0032555" [fillcolor="#A2CDF6", label="GO:0032555
+purine
+ribonucleotide
+binding", shape=box, style=filled];
+"GO:0032559" [fillcolor="#A2CDF6", label="GO:0032559
+adenyl
+ribonucleotide
+binding", shape=box, style=filled];
+"GO:0032656" [fillcolor="#F6CBA2", label="GO:0032656
+regulation of
+interleukin-13
+production", shape=box, style=filled];
+"GO:0032675" [fillcolor="#F6CBA2", label="GO:0032675
+regulation of
+interleukin-6
+production", shape=box, style=filled];
+"GO:0032680" [fillcolor="#F6CBA2", label="GO:0032680
+regulation of tumor
+necrosis factor
+production", shape=box, style=filled];
+"GO:0032736" [fillcolor="#17DA15", label="GO:0032736
+positive regulation
+of interleukin-13
+production
+(1/5)", shape=box, style=filled];
+"GO:0032755" [fillcolor="#17DA15", label="GO:0032755
+positive regulation
+of interleukin-6
+production
+(1/5)", shape=box, style=filled];
+"GO:0032760" [fillcolor="#17DA15", label="GO:0032760
+positive regulation
+of tumor necrosis
+factor production
+(1/5)", shape=box, style=filled];
+"GO:0032787" [fillcolor="#F6CBA2", label="GO:0032787
+monocarboxylic acid
+metabolic process", shape=box, style=filled];
+"GO:0032879" [fillcolor="#F6CBA2", label="GO:0032879
+regulation of
+localization", shape=box, style=filled];
+"GO:0032881" [fillcolor="#F6CBA2", label="GO:0032881
+regulation of
+polysaccharide
+metabolic process", shape=box, style=filled];
+"GO:0032885" [fillcolor="#F6CBA2", label="GO:0032885
+regulation of
+polysaccharide
+biosynthetic process", shape=box, style=filled];
+"GO:0032940" [fillcolor="#F6CBA2", label="GO:0032940
+secretion by cell", shape=box, style=filled];
+"GO:0032963" [fillcolor="#A3F6A2", label="GO:0032963
+collagen metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0032991" [fillcolor="#F5A2F6", label="GO:0032991
+protein-containing
+complex", shape=box, style=filled];
+"GO:0032993" [fillcolor="#F5A2F6", label="GO:0032993
+protein-DNA complex", shape=box, style=filled];
+"GO:0033003" [fillcolor="#F6CBA2", label="GO:0033003
+regulation of mast
+cell activation", shape=box, style=filled];
+"GO:0033005" [fillcolor="#F6CBA2", label="GO:0033005
+positive regulation
+of mast cell
+activation", shape=box, style=filled];
+"GO:0033006" [fillcolor="#F6CBA2", label="GO:0033006
+regulation of mast
+cell activation
+involved in immune
+response", shape=box, style=filled];
+"GO:0033008" [fillcolor="#17DA15", label="GO:0033008
+positive regulation
+of mast cell
+activation involved
+in immune response
+(1/5)", shape=box, style=filled];
+"GO:0033013" [fillcolor="#F6CBA2", label="GO:0033013
+tetrapyrrole
+metabolic process", shape=box, style=filled];
+"GO:0033043" [fillcolor="#F6CBA2", label="GO:0033043
+regulation of
+organelle
+organization", shape=box, style=filled];
+"GO:0033189" [fillcolor="#A3F6A2", label="GO:0033189
+response to vitamin
+A
+(1/5)", shape=box, style=filled];
+"GO:0033273" [fillcolor="#F6CBA2", label="GO:0033273
+response to vitamin", shape=box, style=filled];
+"GO:0033554" [fillcolor="#F6CBA2", label="GO:0033554
+cellular response to
+stress", shape=box, style=filled];
+"GO:0033559" [fillcolor="#F6CBA2", label="GO:0033559
+unsaturated fatty
+acid metabolic
+process", shape=box, style=filled];
+"GO:0033993" [fillcolor="#F6CBA2", label="GO:0033993
+response to lipid", shape=box, style=filled];
+"GO:0034097" [fillcolor="#F6CBA2", label="GO:0034097
+response to cytokine", shape=box, style=filled];
+"GO:0034248" [fillcolor="#F6CBA2", label="GO:0034248
+regulation of amide
+metabolic process", shape=box, style=filled];
+"GO:0034250" [fillcolor="#F6CBA2", label="GO:0034250
+positive regulation
+of amide metabolic
+process", shape=box, style=filled];
+"GO:0034308" [fillcolor="#F6CBA2", label="GO:0034308
+primary alcohol
+metabolic process", shape=box, style=filled];
+"GO:0034311" [fillcolor="#F6CBA2", label="GO:0034311
+diol metabolic
+process", shape=box, style=filled];
+"GO:0034312" [fillcolor="#F6CBA2", label="GO:0034312
+diol biosynthetic
+process", shape=box, style=filled];
+"GO:0034599" [fillcolor="#F6CBA2", label="GO:0034599
+cellular response to
+oxidative stress", shape=box, style=filled];
+"GO:0034612" [fillcolor="#F6CBA2", label="GO:0034612
+response to tumor
+necrosis factor", shape=box, style=filled];
+"GO:0034614" [fillcolor="#F6CBA2", label="GO:0034614
+cellular response to
+reactive oxygen
+species", shape=box, style=filled];
+"GO:0034641" [fillcolor="#F6CBA2", label="GO:0034641
+cellular nitrogen
+compound metabolic
+process", shape=box, style=filled];
+"GO:0034654" [fillcolor="#F6CBA2", label="GO:0034654
+nucleobase-
+containing compound
+biosynthetic process", shape=box, style=filled];
+"GO:0034762" [fillcolor="#F6CBA2", label="GO:0034762
+regulation of
+transmembrane
+transport", shape=box, style=filled];
+"GO:0034765" [fillcolor="#F6CBA2", label="GO:0034765
+regulation of
+monoatomic ion
+transmembrane
+transport", shape=box, style=filled];
+"GO:0035264" [fillcolor="#17DA15", label="GO:0035264
+multicellular
+organism growth
+(1/5)", shape=box, style=filled];
+"GO:0035265" [fillcolor="#F6CBA2", label="GO:0035265
+organ growth", shape=box, style=filled];
+"GO:0035295" [fillcolor="#F6CBA2", label="GO:0035295
+tube development", shape=box, style=filled];
+"GO:0035556" [fillcolor="#F6CBA2", label="GO:0035556
+intracellular signal
+transduction", shape=box, style=filled];
+"GO:0035639" [fillcolor="#A2CDF6", label="GO:0035639
+purine
+ribonucleoside
+triphosphate binding", shape=box, style=filled];
+"GO:0035902" [fillcolor="#A3F6A2", label="GO:0035902
+response to
+immobilization
+stress
+(1/5)", shape=box, style=filled];
+"GO:0036075" [fillcolor="#F6CBA2", label="GO:0036075
+replacement
+ossification", shape=box, style=filled];
+"GO:0036094" [fillcolor="#A2CDF6", label="GO:0036094
+small molecule
+binding", shape=box, style=filled];
+"GO:0036293" [fillcolor="#F6CBA2", label="GO:0036293
+response to
+decreased oxygen
+levels", shape=box, style=filled];
+"GO:0036296" [fillcolor="#F6CBA2", label="GO:0036296
+response to
+increased oxygen
+levels", shape=box, style=filled];
+"GO:0038023" [fillcolor="#A2CDF6", label="GO:0038023
+signaling receptor
+activity", shape=box, style=filled];
+"GO:0038036" [fillcolor="#17DA15", label="GO:0038036
+sphingosine-1-
+phosphate receptor
+activity
+(1/5)", shape=box, style=filled];
+"GO:0040007" [fillcolor="#F6CBA2", label="GO:0040007
+growth", shape=box, style=filled];
+"GO:0040008" [fillcolor="#F6CBA2", label="GO:0040008
+regulation of growth", shape=box, style=filled];
+"GO:0040012" [fillcolor="#F6CBA2", label="GO:0040012
+regulation of
+locomotion", shape=box, style=filled];
+"GO:0042127" [fillcolor="#F6CBA2", label="GO:0042127
+regulation of cell
+population
+proliferation", shape=box, style=filled];
+"GO:0042178" [fillcolor="#F6CBA2", label="GO:0042178
+xenobiotic catabolic
+process", shape=box, style=filled];
+"GO:0042221" [fillcolor="#F6CBA2", label="GO:0042221
+response to chemical", shape=box, style=filled];
+"GO:0042325" [fillcolor="#F6CBA2", label="GO:0042325
+regulation of
+phosphorylation", shape=box, style=filled];
+"GO:0042359" [fillcolor="#A3F6A2", label="GO:0042359
+vitamin D metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0042393" [fillcolor="#A3F6A2", label="GO:0042393
+histone binding
+(1/5)", shape=box, style=filled];
+"GO:0042445" [fillcolor="#F6CBA2", label="GO:0042445
+hormone metabolic
+process", shape=box, style=filled];
+"GO:0042475" [fillcolor="#F6CBA2", label="GO:0042475
+odontogenesis of
+dentin-containing
+tooth", shape=box, style=filled];
+"GO:0042476" [fillcolor="#F6CBA2", label="GO:0042476
+odontogenesis", shape=box, style=filled];
+"GO:0042542" [fillcolor="#F6CBA2", label="GO:0042542
+response to hydrogen
+peroxide", shape=box, style=filled];
+"GO:0042572" [fillcolor="#17DA15", label="GO:0042572
+retinol metabolic
+process
+(1/5)", shape=box, style=filled];
+"GO:0042573" [fillcolor="#F6CBA2", label="GO:0042573
+retinoic acid
+metabolic process", shape=box, style=filled];
+"GO:0042578" [fillcolor="#A2CDF6", label="GO:0042578
+phosphoric ester
+hydrolase activity", shape=box, style=filled];
+"GO:0042743" [fillcolor="#F6CBA2", label="GO:0042743
+hydrogen peroxide
+metabolic process", shape=box, style=filled];
+"GO:0042759" [fillcolor="#A3F6A2", label="GO:0042759
+long-chain fatty
+acid biosynthetic
+process
+(1/5)", shape=box, style=filled];
+"GO:0042802" [fillcolor="#A3F6A2", label="GO:0042802
+identical protein
+binding
+(1/5)", shape=box, style=filled];
+"GO:0042886" [fillcolor="#F6CBA2", label="GO:0042886
+amide transport", shape=box, style=filled];
+"GO:0042904" [fillcolor="#17DA15", label="GO:0042904
+9-cis-retinoic acid
+biosynthetic process
+(1/5)", shape=box, style=filled];
+"GO:0042905" [fillcolor="#F6CBA2", label="GO:0042905
+9-cis-retinoic acid
+metabolic process", shape=box, style=filled];
+"GO:0042981" [fillcolor="#F6CBA2", label="GO:0042981
+regulation of
+apoptotic process", shape=box, style=filled];
+"GO:0043010" [fillcolor="#A3F6A2", label="GO:0043010
+camera-type eye
+development
+(1/5)", shape=box, style=filled];
+"GO:0043062" [fillcolor="#F6CBA2", label="GO:0043062
+extracellular
+structure
+organization", shape=box, style=filled];
+"GO:0043065" [fillcolor="#A3F6A2", label="GO:0043065
+positive regulation
+of apoptotic process
+(1/5)", shape=box, style=filled];
+"GO:0043067" [fillcolor="#F6CBA2", label="GO:0043067
+regulation of
+programmed cell
+death", shape=box, style=filled];
+"GO:0043068" [fillcolor="#F6CBA2", label="GO:0043068
+positive regulation
+of programmed cell
+death", shape=box, style=filled];
+"GO:0043122" [fillcolor="#A3F6A2", label="GO:0043122
+regulation of
+canonical NF-kappaB
+signal transduction
+(1/5)", shape=box, style=filled];
+"GO:0043167" [fillcolor="#A2CDF6", label="GO:0043167
+ion binding", shape=box, style=filled];
+"GO:0043168" [fillcolor="#A2CDF6", label="GO:0043168
+anion binding", shape=box, style=filled];
+"GO:0043169" [fillcolor="#A2CDF6", label="GO:0043169
+cation binding", shape=box, style=filled];
+"GO:0043170" [fillcolor="#F6CBA2", label="GO:0043170
+macromolecule
+metabolic process", shape=box, style=filled];
+"GO:0043207" [fillcolor="#F6CBA2", label="GO:0043207
+response to external
+biotic stimulus", shape=box, style=filled];
+"GO:0043226" [fillcolor="#F5A2F6", label="GO:0043226
+organelle", shape=box, style=filled];
+"GO:0043227" [fillcolor="#F5A2F6", label="GO:0043227
+membrane-bounded
+organelle", shape=box, style=filled];
+"GO:0043229" [fillcolor="#F5A2F6", label="GO:0043229
+intracellular
+organelle", shape=box, style=filled];
+"GO:0043231" [fillcolor="#A3F6A2", label="GO:0043231
+intracellular
+membrane-bounded
+organelle
+(2/5)", shape=box, style=filled];
+"GO:0043255" [fillcolor="#F6CBA2", label="GO:0043255
+regulation of
+carbohydrate
+biosynthetic process", shape=box, style=filled];
+"GO:0043269" [fillcolor="#F6CBA2", label="GO:0043269
+regulation of
+monoatomic ion
+transport", shape=box, style=filled];
+"GO:0043270" [fillcolor="#F6CBA2", label="GO:0043270
+positive regulation
+of monoatomic ion
+transport", shape=box, style=filled];
+"GO:0043300" [fillcolor="#F6CBA2", label="GO:0043300
+regulation of
+leukocyte
+degranulation", shape=box, style=filled];
+"GO:0043302" [fillcolor="#F6CBA2", label="GO:0043302
+positive regulation
+of leukocyte
+degranulation", shape=box, style=filled];
+"GO:0043304" [fillcolor="#F6CBA2", label="GO:0043304
+regulation of mast
+cell degranulation", shape=box, style=filled];
+"GO:0043306" [fillcolor="#A3F6A2", label="GO:0043306
+positive regulation
+of mast cell
+degranulation
+(1/5)", shape=box, style=filled];
+"GO:0043436" [fillcolor="#F6CBA2", label="GO:0043436
+oxoacid metabolic
+process", shape=box, style=filled];
+"GO:0043449" [fillcolor="#F6CBA2", label="GO:0043449
+cellular alkene
+metabolic process", shape=box, style=filled];
+"GO:0043467" [fillcolor="#F6CBA2", label="GO:0043467
+regulation of
+generation of
+precursor
+metabolites and
+energy", shape=box, style=filled];
+"GO:0043491" [fillcolor="#17DA15", label="GO:0043491
+phosphatidylinositol
+3-kinase/protein
+kinase B signal
+transduction
+(1/5)", shape=box, style=filled];
+"GO:0043603" [fillcolor="#F6CBA2", label="GO:0043603
+amide metabolic
+process", shape=box, style=filled];
+"GO:0043604" [fillcolor="#F6CBA2", label="GO:0043604
+amide biosynthetic
+process", shape=box, style=filled];
+"GO:0043933" [fillcolor="#F6CBA2", label="GO:0043933
+protein-containing
+complex organization", shape=box, style=filled];
+"GO:0044087" [fillcolor="#F6CBA2", label="GO:0044087
+regulation of
+cellular component
+biogenesis", shape=box, style=filled];
+"GO:0044089" [fillcolor="#F6CBA2", label="GO:0044089
+positive regulation
+of cellular
+component biogenesis", shape=box, style=filled];
+"GO:0044237" [fillcolor="#F6CBA2", label="GO:0044237
+cellular metabolic
+process", shape=box, style=filled];
+"GO:0044238" [fillcolor="#F6CBA2", label="GO:0044238
+primary metabolic
+process", shape=box, style=filled];
+"GO:0044242" [fillcolor="#F6CBA2", label="GO:0044242
+cellular lipid
+catabolic process", shape=box, style=filled];
+"GO:0044248" [fillcolor="#F6CBA2", label="GO:0044248
+cellular catabolic
+process", shape=box, style=filled];
+"GO:0044249" [fillcolor="#F6CBA2", label="GO:0044249
+cellular
+biosynthetic process", shape=box, style=filled];
+"GO:0044255" [fillcolor="#F6CBA2", label="GO:0044255
+cellular lipid
+metabolic process", shape=box, style=filled];
+"GO:0044271" [fillcolor="#F6CBA2", label="GO:0044271
+cellular nitrogen
+compound
+biosynthetic process", shape=box, style=filled];
+"GO:0044281" [fillcolor="#F6CBA2", label="GO:0044281
+small molecule
+metabolic process", shape=box, style=filled];
+"GO:0044282" [fillcolor="#F6CBA2", label="GO:0044282
+small molecule
+catabolic process", shape=box, style=filled];
+"GO:0044283" [fillcolor="#F6CBA2", label="GO:0044283
+small molecule
+biosynthetic process", shape=box, style=filled];
+"GO:0044419" [fillcolor="#F6CBA2", label="GO:0044419
+biological process
+involved in
+interspecies
+interaction between
+organisms", shape=box, style=filled];
+"GO:0045125" [fillcolor="#A2CDF6", label="GO:0045125
+bioactive lipid
+receptor activity", shape=box, style=filled];
+"GO:0045229" [fillcolor="#F6CBA2", label="GO:0045229
+external
+encapsulating
+structure
+organization", shape=box, style=filled];
+"GO:0045787" [fillcolor="#F6CBA2", label="GO:0045787
+positive regulation
+of cell cycle", shape=box, style=filled];
+"GO:0045815" [fillcolor="#A3F6A2", label="GO:0045815
+transcription
+initiation-coupled
+chromatin remodeling
+(1/5)", shape=box, style=filled];
+"GO:0045834" [fillcolor="#F6CBA2", label="GO:0045834
+positive regulation
+of lipid metabolic
+process", shape=box, style=filled];
+"GO:0045840" [fillcolor="#A3F6A2", label="GO:0045840
+positive regulation
+of mitotic nuclear
+division
+(1/5)", shape=box, style=filled];
+"GO:0045912" [fillcolor="#F6CBA2", label="GO:0045912
+negative regulation
+of carbohydrate
+metabolic process", shape=box, style=filled];
+"GO:0045921" [fillcolor="#F6CBA2", label="GO:0045921
+positive regulation
+of exocytosis", shape=box, style=filled];
+"GO:0045926" [fillcolor="#F6CBA2", label="GO:0045926
+negative regulation
+of growth", shape=box, style=filled];
+"GO:0045931" [fillcolor="#F6CBA2", label="GO:0045931
+positive regulation
+of mitotic cell
+cycle", shape=box, style=filled];
+"GO:0046165" [fillcolor="#F6CBA2", label="GO:0046165
+alcohol biosynthetic
+process", shape=box, style=filled];
+"GO:0046173" [fillcolor="#F6CBA2", label="GO:0046173
+polyol biosynthetic
+process", shape=box, style=filled];
+"GO:0046394" [fillcolor="#F6CBA2", label="GO:0046394
+carboxylic acid
+biosynthetic process", shape=box, style=filled];
+"GO:0046434" [fillcolor="#F6CBA2", label="GO:0046434
+organophosphate
+catabolic process", shape=box, style=filled];
+"GO:0046466" [fillcolor="#F6CBA2", label="GO:0046466
+membrane lipid
+catabolic process", shape=box, style=filled];
+"GO:0046467" [fillcolor="#F6CBA2", label="GO:0046467
+membrane lipid
+biosynthetic process", shape=box, style=filled];
+"GO:0046483" [fillcolor="#F6CBA2", label="GO:0046483
+heterocycle
+metabolic process", shape=box, style=filled];
+"GO:0046511" [fillcolor="#17DA15", label="GO:0046511
+sphinganine
+biosynthetic process
+(1/5)", shape=box, style=filled];
+"GO:0046512" [fillcolor="#17DA15", label="GO:0046512
+sphingosine
+biosynthetic process
+(2/5)", shape=box, style=filled];
+"GO:0046513" [fillcolor="#A3F6A2", label="GO:0046513
+ceramide
+biosynthetic process
+(1/5)", shape=box, style=filled];
+"GO:0046519" [fillcolor="#F6CBA2", label="GO:0046519
+sphingoid metabolic
+process", shape=box, style=filled];
+"GO:0046520" [fillcolor="#F6CBA2", label="GO:0046520
+sphingoid
+biosynthetic process", shape=box, style=filled];
+"GO:0046685" [fillcolor="#A3F6A2", label="GO:0046685
+response to arsenic-
+containing substance
+(1/5)", shape=box, style=filled];
+"GO:0046688" [fillcolor="#F6CBA2", label="GO:0046688
+response to copper
+ion", shape=box, style=filled];
+"GO:0046700" [fillcolor="#F6CBA2", label="GO:0046700
+heterocycle
+catabolic process", shape=box, style=filled];
+"GO:0046872" [fillcolor="#A3F6A2", label="GO:0046872
+metal ion binding
+(1/5)", shape=box, style=filled];
+"GO:0046879" [fillcolor="#F6CBA2", label="GO:0046879
+hormone secretion", shape=box, style=filled];
+"GO:0046889" [fillcolor="#F6CBA2", label="GO:0046889
+positive regulation
+of lipid
+biosynthetic process", shape=box, style=filled];
+"GO:0046890" [fillcolor="#F6CBA2", label="GO:0046890
+regulation of lipid
+biosynthetic process", shape=box, style=filled];
+"GO:0046903" [fillcolor="#F6CBA2", label="GO:0046903
+secretion", shape=box, style=filled];
+"GO:0046906" [fillcolor="#A2CDF6", label="GO:0046906
+tetrapyrrole binding", shape=box, style=filled];
+"GO:0046914" [fillcolor="#A2CDF6", label="GO:0046914
+transition metal ion
+binding", shape=box, style=filled];
+"GO:0048008" [fillcolor="#A3F6A2", label="GO:0048008
+platelet-derived
+growth factor
+receptor signaling
+pathway
+(1/5)", shape=box, style=filled];
+"GO:0048029" [fillcolor="#A2CDF6", label="GO:0048029
+monosaccharide
+binding", shape=box, style=filled];
+"GO:0048285" [fillcolor="#F6CBA2", label="GO:0048285
+organelle fission", shape=box, style=filled];
+"GO:0048286" [fillcolor="#17DA15", label="GO:0048286
+lung alveolus
+development
+(1/5)", shape=box, style=filled];
+"GO:0048468" [fillcolor="#F6CBA2", label="GO:0048468
+cell development", shape=box, style=filled];
+"GO:0048513" [fillcolor="#F6CBA2", label="GO:0048513
+animal organ
+development", shape=box, style=filled];
+"GO:0048518" [fillcolor="#F6CBA2", label="GO:0048518
+positive regulation
+of biological
+process", shape=box, style=filled];
+"GO:0048519" [fillcolor="#F6CBA2", label="GO:0048519
+negative regulation
+of biological
+process", shape=box, style=filled];
+"GO:0048522" [fillcolor="#F6CBA2", label="GO:0048522
+positive regulation
+of cellular process", shape=box, style=filled];
+"GO:0048523" [fillcolor="#F6CBA2", label="GO:0048523
+negative regulation
+of cellular process", shape=box, style=filled];
+"GO:0048565" [fillcolor="#A3F6A2", label="GO:0048565
+digestive tract
+development
+(1/5)", shape=box, style=filled];
+"GO:0048583" [fillcolor="#F6CBA2", label="GO:0048583
+regulation of
+response to stimulus", shape=box, style=filled];
+"GO:0048584" [fillcolor="#F6CBA2", label="GO:0048584
+positive regulation
+of response to
+stimulus", shape=box, style=filled];
+"GO:0048589" [fillcolor="#F6CBA2", label="GO:0048589
+developmental growth", shape=box, style=filled];
+"GO:0048609" [fillcolor="#F6CBA2", label="GO:0048609
+multicellular
+organismal
+reproductive process", shape=box, style=filled];
+"GO:0048646" [fillcolor="#F6CBA2", label="GO:0048646
+anatomical structure
+formation involved
+in morphogenesis", shape=box, style=filled];
+"GO:0048660" [fillcolor="#F6CBA2", label="GO:0048660
+regulation of smooth
+muscle cell
+proliferation", shape=box, style=filled];
+"GO:0048661" [fillcolor="#A3F6A2", label="GO:0048661
+positive regulation
+of smooth muscle
+cell proliferation
+(1/5)", shape=box, style=filled];
+"GO:0048856" [fillcolor="#F6CBA2", label="GO:0048856
+anatomical structure
+development", shape=box, style=filled];
+"GO:0048869" [fillcolor="#F6CBA2", label="GO:0048869
+cellular
+developmental
+process", shape=box, style=filled];
+"GO:0050665" [fillcolor="#17DA15", label="GO:0050665
+hydrogen peroxide
+biosynthetic process
+(1/5)", shape=box, style=filled];
+"GO:0050776" [fillcolor="#F6CBA2", label="GO:0050776
+regulation of immune
+response", shape=box, style=filled];
+"GO:0050778" [fillcolor="#F6CBA2", label="GO:0050778
+positive regulation
+of immune response", shape=box, style=filled];
+"GO:0050789" [fillcolor="#F6CBA2", label="GO:0050789
+regulation of
+biological process", shape=box, style=filled];
+"GO:0050790" [fillcolor="#F6CBA2", label="GO:0050790
+regulation of
+catalytic activity", shape=box, style=filled];
+"GO:0050793" [fillcolor="#F6CBA2", label="GO:0050793
+regulation of
+developmental
+process", shape=box, style=filled];
+"GO:0050794" [fillcolor="#F6CBA2", label="GO:0050794
+regulation of
+cellular process", shape=box, style=filled];
+"GO:0050865" [fillcolor="#F6CBA2", label="GO:0050865
+regulation of cell
+activation", shape=box, style=filled];
+"GO:0050867" [fillcolor="#F6CBA2", label="GO:0050867
+positive regulation
+of cell activation", shape=box, style=filled];
+"GO:0050896" [fillcolor="#F6CBA2", label="GO:0050896
+response to stimulus", shape=box, style=filled];
+"GO:0051020" [fillcolor="#A2CDF6", label="GO:0051020
+GTPase binding", shape=box, style=filled];
+"GO:0051046" [fillcolor="#F6CBA2", label="GO:0051046
+regulation of
+secretion", shape=box, style=filled];
+"GO:0051047" [fillcolor="#F6CBA2", label="GO:0051047
+positive regulation
+of secretion", shape=box, style=filled];
+"GO:0051049" [fillcolor="#F6CBA2", label="GO:0051049
+regulation of
+transport", shape=box, style=filled];
+"GO:0051050" [fillcolor="#F6CBA2", label="GO:0051050
+positive regulation
+of transport", shape=box, style=filled];
+"GO:0051087" [fillcolor="#A2CDF6", label="GO:0051087
+protein-folding
+chaperone binding", shape=box, style=filled];
+"GO:0051128" [fillcolor="#F6CBA2", label="GO:0051128
+regulation of
+cellular component
+organization", shape=box, style=filled];
+"GO:0051130" [fillcolor="#F6CBA2", label="GO:0051130
+positive regulation
+of cellular
+component
+organization", shape=box, style=filled];
+"GO:0051171" [fillcolor="#F6CBA2", label="GO:0051171
+regulation of
+nitrogen compound
+metabolic process", shape=box, style=filled];
+"GO:0051172" [fillcolor="#F6CBA2", label="GO:0051172
+negative regulation
+of nitrogen compound
+metabolic process", shape=box, style=filled];
+"GO:0051173" [fillcolor="#F6CBA2", label="GO:0051173
+positive regulation
+of nitrogen compound
+metabolic process", shape=box, style=filled];
+"GO:0051174" [fillcolor="#F6CBA2", label="GO:0051174
+regulation of
+phosphorus metabolic
+process", shape=box, style=filled];
+"GO:0051179" [fillcolor="#F6CBA2", label="GO:0051179
+localization", shape=box, style=filled];
+"GO:0051234" [fillcolor="#F6CBA2", label="GO:0051234
+establishment of
+localization", shape=box, style=filled];
+"GO:0051239" [fillcolor="#F6CBA2", label="GO:0051239
+regulation of
+multicellular
+organismal process", shape=box, style=filled];
+"GO:0051240" [fillcolor="#F6CBA2", label="GO:0051240
+positive regulation
+of multicellular
+organismal process", shape=box, style=filled];
+"GO:0051246" [fillcolor="#F6CBA2", label="GO:0051246
+regulation of
+protein metabolic
+process", shape=box, style=filled];
+"GO:0051341" [fillcolor="#F6CBA2", label="GO:0051341
+regulation of
+oxidoreductase
+activity", shape=box, style=filled];
+"GO:0051707" [fillcolor="#F6CBA2", label="GO:0051707
+response to other
+organism", shape=box, style=filled];
+"GO:0051716" [fillcolor="#F6CBA2", label="GO:0051716
+cellular response to
+stimulus", shape=box, style=filled];
+"GO:0051726" [fillcolor="#F6CBA2", label="GO:0051726
+regulation of cell
+cycle", shape=box, style=filled];
+"GO:0051775" [fillcolor="#F6CBA2", label="GO:0051775
+response to redox
+state", shape=box, style=filled];
+"GO:0051783" [fillcolor="#F6CBA2", label="GO:0051783
+regulation of
+nuclear division", shape=box, style=filled];
+"GO:0051785" [fillcolor="#F6CBA2", label="GO:0051785
+positive regulation
+of nuclear division", shape=box, style=filled];
+"GO:0051879" [fillcolor="#17DA15", label="GO:0051879
+Hsp90 protein
+binding
+(1/5)", shape=box, style=filled];
+"GO:0051924" [fillcolor="#F6CBA2", label="GO:0051924
+regulation of
+calcium ion
+transport", shape=box, style=filled];
+"GO:0051928" [fillcolor="#F6CBA2", label="GO:0051928
+positive regulation
+of calcium ion
+transport", shape=box, style=filled];
+"GO:0055093" [fillcolor="#A3F6A2", label="GO:0055093
+response to
+hyperoxia
+(1/5)", shape=box, style=filled];
+"GO:0055094" [fillcolor="#F6CBA2", label="GO:0055094
+response to
+lipoprotein particle", shape=box, style=filled];
+"GO:0060089" [fillcolor="#A2CDF6", label="GO:0060089
+molecular transducer
+activity", shape=box, style=filled];
+"GO:0060137" [fillcolor="#17DA15", label="GO:0060137
+maternal process
+involved in
+parturition
+(1/5)", shape=box, style=filled];
+"GO:0060255" [fillcolor="#F6CBA2", label="GO:0060255
+regulation of
+macromolecule
+metabolic process", shape=box, style=filled];
+"GO:0060612" [fillcolor="#A3F6A2", label="GO:0060612
+adipose tissue
+development
+(1/5)", shape=box, style=filled];
+"GO:0060627" [fillcolor="#F6CBA2", label="GO:0060627
+regulation of
+vesicle-mediated
+transport", shape=box, style=filled];
+"GO:0061035" [fillcolor="#A3F6A2", label="GO:0061035
+regulation of
+cartilage
+development
+(1/5)", shape=box, style=filled];
+"GO:0061448" [fillcolor="#F6CBA2", label="GO:0061448
+connective tissue
+development", shape=box, style=filled];
+"GO:0061751" [fillcolor="#17DA15", label="GO:0061751
+neutral
+sphingomyelin
+phosphodiesterase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0062012" [fillcolor="#F6CBA2", label="GO:0062012
+regulation of small
+molecule metabolic
+process", shape=box, style=filled];
+"GO:0062197" [fillcolor="#F6CBA2", label="GO:0062197
+cellular response to
+chemical stress", shape=box, style=filled];
+"GO:0065007" [fillcolor="#F6CBA2", label="GO:0065007
+biological
+regulation", shape=box, style=filled];
+"GO:0065008" [fillcolor="#F6CBA2", label="GO:0065008
+regulation of
+biological quality", shape=box, style=filled];
+"GO:0065009" [fillcolor="#F6CBA2", label="GO:0065009
+regulation of
+molecular function", shape=box, style=filled];
+"GO:0070279" [fillcolor="#A2CDF6", label="GO:0070279
+vitamin B6 binding", shape=box, style=filled];
+"GO:0070300" [fillcolor="#17DA15", label="GO:0070300
+phosphatidic acid
+binding
+(1/5)", shape=box, style=filled];
+"GO:0070301" [fillcolor="#17DA15", label="GO:0070301
+cellular response to
+hydrogen peroxide
+(1/5)", shape=box, style=filled];
+"GO:0070314" [fillcolor="#A3F6A2", label="GO:0070314
+G1 to G0 transition
+(1/5)", shape=box, style=filled];
+"GO:0070330" [fillcolor="#17DA15", label="GO:0070330
+aromatase activity
+(1/5)", shape=box, style=filled];
+"GO:0070365" [fillcolor="#17DA15", label="GO:0070365
+hepatocyte
+differentiation
+(1/5)", shape=box, style=filled];
+"GO:0070482" [fillcolor="#F6CBA2", label="GO:0070482
+response to oxygen
+levels", shape=box, style=filled];
+"GO:0070576" [fillcolor="#A3F6A2", label="GO:0070576
+vitamin D
+24-hydroxylase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0070887" [fillcolor="#F6CBA2", label="GO:0070887
+cellular response to
+chemical stimulus", shape=box, style=filled];
+"GO:0071241" [fillcolor="#F6CBA2", label="GO:0071241
+cellular response to
+inorganic substance", shape=box, style=filled];
+"GO:0071248" [fillcolor="#F6CBA2", label="GO:0071248
+cellular response to
+metal ion", shape=box, style=filled];
+"GO:0071280" [fillcolor="#17DA15", label="GO:0071280
+cellular response to
+copper ion
+(1/5)", shape=box, style=filled];
+"GO:0071286" [fillcolor="#17DA15", label="GO:0071286
+cellular response to
+magnesium ion
+(1/5)", shape=box, style=filled];
+"GO:0071310" [fillcolor="#F6CBA2", label="GO:0071310
+cellular response to
+organic substance", shape=box, style=filled];
+"GO:0071345" [fillcolor="#F6CBA2", label="GO:0071345
+cellular response to
+cytokine stimulus", shape=box, style=filled];
+"GO:0071356" [fillcolor="#17DA15", label="GO:0071356
+cellular response to
+tumor necrosis
+factor
+(1/5)", shape=box, style=filled];
+"GO:0071396" [fillcolor="#F6CBA2", label="GO:0071396
+cellular response to
+lipid", shape=box, style=filled];
+"GO:0071402" [fillcolor="#F6CBA2", label="GO:0071402
+cellular response to
+lipoprotein particle
+stimulus", shape=box, style=filled];
+"GO:0071404" [fillcolor="#F6CBA2", label="GO:0071404
+cellular response to
+low-density
+lipoprotein particle
+stimulus", shape=box, style=filled];
+"GO:0071407" [fillcolor="#A3F6A2", label="GO:0071407
+cellular response to
+organic cyclic
+compound
+(1/5)", shape=box, style=filled];
+"GO:0071417" [fillcolor="#F6CBA2", label="GO:0071417
+cellular response to
+organonitrogen
+compound", shape=box, style=filled];
+"GO:0071461" [fillcolor="#17DA15", label="GO:0071461
+cellular response to
+redox state
+(1/5)", shape=box, style=filled];
+"GO:0071495" [fillcolor="#F6CBA2", label="GO:0071495
+cellular response to
+endogenous stimulus", shape=box, style=filled];
+"GO:0071702" [fillcolor="#F6CBA2", label="GO:0071702
+organic substance
+transport", shape=box, style=filled];
+"GO:0071704" [fillcolor="#F6CBA2", label="GO:0071704
+organic substance
+metabolic process", shape=box, style=filled];
+"GO:0071705" [fillcolor="#F6CBA2", label="GO:0071705
+nitrogen compound
+transport", shape=box, style=filled];
+"GO:0071824" [fillcolor="#F6CBA2", label="GO:0071824
+protein-DNA complex
+organization", shape=box, style=filled];
+"GO:0071840" [fillcolor="#F6CBA2", label="GO:0071840
+cellular component
+organization or
+biogenesis", shape=box, style=filled];
+"GO:0071897" [fillcolor="#A3F6A2", label="GO:0071897
+DNA biosynthetic
+process
+(1/5)", shape=box, style=filled];
+"GO:0072330" [fillcolor="#F6CBA2", label="GO:0072330
+monocarboxylic acid
+biosynthetic process", shape=box, style=filled];
+"GO:0072341" [fillcolor="#A2CDF6", label="GO:0072341
+modified amino acid
+binding", shape=box, style=filled];
+"GO:0072593" [fillcolor="#F6CBA2", label="GO:0072593
+reactive oxygen
+species metabolic
+process", shape=box, style=filled];
+"GO:0080090" [fillcolor="#F6CBA2", label="GO:0080090
+regulation of
+primary metabolic
+process", shape=box, style=filled];
+"GO:0085029" [fillcolor="#A3F6A2", label="GO:0085029
+extracellular matrix
+assembly
+(1/5)", shape=box, style=filled];
+"GO:0090036" [fillcolor="#F6CBA2", label="GO:0090036
+regulation of
+protein kinase C
+signaling", shape=box, style=filled];
+"GO:0090037" [fillcolor="#17DA15", label="GO:0090037
+positive regulation
+of protein kinase C
+signaling
+(1/5)", shape=box, style=filled];
+"GO:0090068" [fillcolor="#F6CBA2", label="GO:0090068
+positive regulation
+of cell cycle
+process", shape=box, style=filled];
+"GO:0090153" [fillcolor="#F6CBA2", label="GO:0090153
+regulation of
+sphingolipid
+biosynthetic process", shape=box, style=filled];
+"GO:0090154" [fillcolor="#F6CBA2", label="GO:0090154
+positive regulation
+of sphingolipid
+biosynthetic process", shape=box, style=filled];
+"GO:0090279" [fillcolor="#F6CBA2", label="GO:0090279
+regulation of
+calcium ion import", shape=box, style=filled];
+"GO:0090280" [fillcolor="#17DA15", label="GO:0090280
+positive regulation
+of calcium ion
+import
+(1/5)", shape=box, style=filled];
+"GO:0090304" [fillcolor="#F6CBA2", label="GO:0090304
+nucleic acid
+metabolic process", shape=box, style=filled];
+"GO:0090407" [fillcolor="#F6CBA2", label="GO:0090407
+organophosphate
+biosynthetic process", shape=box, style=filled];
+"GO:0090520" [fillcolor="#A3F6A2", label="GO:0090520
+sphingolipid
+mediated signaling
+pathway
+(1/5)", shape=box, style=filled];
+"GO:0097159" [fillcolor="#A2CDF6", label="GO:0097159
+organic cyclic
+compound binding", shape=box, style=filled];
+"GO:0097187" [fillcolor="#17DA15", label="GO:0097187
+dentinogenesis
+(1/5)", shape=box, style=filled];
+"GO:0097267" [fillcolor="#17DA15", label="GO:0097267
+omega-hydroxylase
+P450 pathway
+(1/5)", shape=box, style=filled];
+"GO:0097305" [fillcolor="#F6CBA2", label="GO:0097305
+response to alcohol", shape=box, style=filled];
+"GO:0097306" [fillcolor="#F6CBA2", label="GO:0097306
+cellular response to
+alcohol", shape=box, style=filled];
+"GO:0097367" [fillcolor="#A2CDF6", label="GO:0097367
+carbohydrate
+derivative binding", shape=box, style=filled];
+"GO:0098588" [fillcolor="#F5A2F6", label="GO:0098588
+bounding membrane of
+organelle", shape=box, style=filled];
+"GO:0098791" [fillcolor="#F5A2F6", label="GO:0098791
+Golgi apparatus
+subcompartment", shape=box, style=filled];
+"GO:0098852" [fillcolor="#F5A2F6", label="GO:0098852
+lytic vacuole
+membrane", shape=box, style=filled];
+"GO:0098868" [fillcolor="#A3F6A2", label="GO:0098868
+bone growth
+(1/5)", shape=box, style=filled];
+"GO:0101020" [fillcolor="#17DA15", label="GO:0101020
+estrogen 16-alpha-
+hydroxylase activity
+(1/5)", shape=box, style=filled];
+"GO:0101021" [fillcolor="#17DA15", label="GO:0101021
+estrogen
+2-hydroxylase
+activity
+(1/5)", shape=box, style=filled];
+"GO:0102033" [fillcolor="#17DA15", label="GO:0102033
+long-chain fatty
+acid omega-
+hydroxylase activity
+(1/5)", shape=box, style=filled];
+"GO:0106256" [fillcolor="#17DA15", label="GO:0106256
+hydroperoxy
+icosatetraenoate
+dehydratase activity
+(1/5)", shape=box, style=filled];
+"GO:0110165" [fillcolor="#F5A2F6", label="GO:0110165
+cellular anatomical
+entity", shape=box, style=filled];
+"GO:0120250" [fillcolor="#A2CDF6", label="GO:0120250
+fatty acid omega-
+hydroxylase activity", shape=box, style=filled];
+"GO:0120252" [fillcolor="#F6CBA2", label="GO:0120252
+hydrocarbon
+metabolic process", shape=box, style=filled];
+"GO:0120254" [fillcolor="#F6CBA2", label="GO:0120254
+olefinic compound
+metabolic process", shape=box, style=filled];
+"GO:0120319" [fillcolor="#17DA15", label="GO:0120319
+long-chain fatty
+acid omega-1
+hydroxylase activity
+(1/5)", shape=box, style=filled];
+"GO:0140014" [fillcolor="#A3F6A2", label="GO:0140014
+mitotic nuclear
+division
+(1/5)", shape=box, style=filled];
+"GO:0140052" [fillcolor="#17DA15", label="GO:0140052
+cellular response to
+oxidised low-density
+lipoprotein particle
+stimulus
+(1/5)", shape=box, style=filled];
+"GO:0140352" [fillcolor="#F6CBA2", label="GO:0140352
+export from cell", shape=box, style=filled];
+"GO:0140534" [fillcolor="#F5A2F6", label="GO:0140534
+endoplasmic
+reticulum protein-
+containing complex", shape=box, style=filled];
+"GO:0141091" [fillcolor="#F6CBA2", label="GO:0141091
+transforming growth
+factor beta receptor
+superfamily
+signaling pathway", shape=box, style=filled];
+"GO:1900087" [fillcolor="#A3F6A2", label="GO:1900087
+positive regulation
+of G1/S transition
+of mitotic cell
+cycle
+(1/5)", shape=box, style=filled];
+"GO:1900125" [fillcolor="#F6CBA2", label="GO:1900125
+regulation of
+hyaluronan
+biosynthetic process", shape=box, style=filled];
+"GO:1900126" [fillcolor="#17DA15", label="GO:1900126
+negative regulation
+of hyaluronan
+biosynthetic process
+(1/5)", shape=box, style=filled];
+"GO:1900371" [fillcolor="#F6CBA2", label="GO:1900371
+regulation of purine
+nucleotide
+biosynthetic process", shape=box, style=filled];
+"GO:1900542" [fillcolor="#F6CBA2", label="GO:1900542
+regulation of purine
+nucleotide metabolic
+process", shape=box, style=filled];
+"GO:1900673" [fillcolor="#F6CBA2", label="GO:1900673
+olefin metabolic
+process", shape=box, style=filled];
+"GO:1901265" [fillcolor="#A2CDF6", label="GO:1901265
+nucleoside phosphate
+binding", shape=box, style=filled];
+"GO:1901360" [fillcolor="#F6CBA2", label="GO:1901360
+organic cyclic
+compound metabolic
+process", shape=box, style=filled];
+"GO:1901361" [fillcolor="#F6CBA2", label="GO:1901361
+organic cyclic
+compound catabolic
+process", shape=box, style=filled];
+"GO:1901362" [fillcolor="#F6CBA2", label="GO:1901362
+organic cyclic
+compound
+biosynthetic process", shape=box, style=filled];
+"GO:1901363" [fillcolor="#A2CDF6", label="GO:1901363
+heterocyclic
+compound binding", shape=box, style=filled];
+"GO:1901564" [fillcolor="#F6CBA2", label="GO:1901564
+organonitrogen
+compound metabolic
+process", shape=box, style=filled];
+"GO:1901565" [fillcolor="#F6CBA2", label="GO:1901565
+organonitrogen
+compound catabolic
+process", shape=box, style=filled];
+"GO:1901566" [fillcolor="#F6CBA2", label="GO:1901566
+organonitrogen
+compound
+biosynthetic process", shape=box, style=filled];
+"GO:1901575" [fillcolor="#F6CBA2", label="GO:1901575
+organic substance
+catabolic process", shape=box, style=filled];
+"GO:1901576" [fillcolor="#F6CBA2", label="GO:1901576
+organic substance
+biosynthetic process", shape=box, style=filled];
+"GO:1901615" [fillcolor="#F6CBA2", label="GO:1901615
+organic hydroxy
+compound metabolic
+process", shape=box, style=filled];
+"GO:1901617" [fillcolor="#F6CBA2", label="GO:1901617
+organic hydroxy
+compound
+biosynthetic process", shape=box, style=filled];
+"GO:1901652" [fillcolor="#F6CBA2", label="GO:1901652
+response to peptide", shape=box, style=filled];
+"GO:1901653" [fillcolor="#A3F6A2", label="GO:1901653
+cellular response to
+peptide
+(1/5)", shape=box, style=filled];
+"GO:1901654" [fillcolor="#F6CBA2", label="GO:1901654
+response to ketone", shape=box, style=filled];
+"GO:1901655" [fillcolor="#F6CBA2", label="GO:1901655
+cellular response to
+ketone", shape=box, style=filled];
+"GO:1901698" [fillcolor="#F6CBA2", label="GO:1901698
+response to nitrogen
+compound", shape=box, style=filled];
+"GO:1901699" [fillcolor="#F6CBA2", label="GO:1901699
+cellular response to
+nitrogen compound", shape=box, style=filled];
+"GO:1901700" [fillcolor="#F6CBA2", label="GO:1901700
+response to oxygen-
+containing compound", shape=box, style=filled];
+"GO:1901701" [fillcolor="#F6CBA2", label="GO:1901701
+cellular response to
+oxygen-containing
+compound", shape=box, style=filled];
+"GO:1901987" [fillcolor="#F6CBA2", label="GO:1901987
+regulation of cell
+cycle phase
+transition", shape=box, style=filled];
+"GO:1901989" [fillcolor="#F6CBA2", label="GO:1901989
+positive regulation
+of cell cycle phase
+transition", shape=box, style=filled];
+"GO:1901990" [fillcolor="#F6CBA2", label="GO:1901990
+regulation of
+mitotic cell cycle
+phase transition", shape=box, style=filled];
+"GO:1901992" [fillcolor="#F6CBA2", label="GO:1901992
+positive regulation
+of mitotic cell
+cycle phase
+transition", shape=box, style=filled];
+"GO:1902074" [fillcolor="#F6CBA2", label="GO:1902074
+response to salt", shape=box, style=filled];
+"GO:1902494" [fillcolor="#F5A2F6", label="GO:1902494
+catalytic complex", shape=box, style=filled];
+"GO:1902531" [fillcolor="#F6CBA2", label="GO:1902531
+regulation of
+intracellular signal
+transduction", shape=box, style=filled];
+"GO:1902533" [fillcolor="#F6CBA2", label="GO:1902533
+positive regulation
+of intracellular
+signal transduction", shape=box, style=filled];
+"GO:1902806" [fillcolor="#F6CBA2", label="GO:1902806
+regulation of cell
+cycle G1/S phase
+transition", shape=box, style=filled];
+"GO:1902808" [fillcolor="#F6CBA2", label="GO:1902808
+positive regulation
+of cell cycle G1/S
+phase transition", shape=box, style=filled];
+"GO:1903047" [fillcolor="#F6CBA2", label="GO:1903047
+mitotic cell cycle
+process", shape=box, style=filled];
+"GO:1903305" [fillcolor="#F6CBA2", label="GO:1903305
+regulation of
+regulated secretory
+pathway", shape=box, style=filled];
+"GO:1903307" [fillcolor="#F6CBA2", label="GO:1903307
+positive regulation
+of regulated
+secretory pathway", shape=box, style=filled];
+"GO:1903409" [fillcolor="#F6CBA2", label="GO:1903409
+reactive oxygen
+species biosynthetic
+process", shape=box, style=filled];
+"GO:1903426" [fillcolor="#A3F6A2", label="GO:1903426
+regulation of
+reactive oxygen
+species biosynthetic
+process
+(1/5)", shape=box, style=filled];
+"GO:1903530" [fillcolor="#F6CBA2", label="GO:1903530
+regulation of
+secretion by cell", shape=box, style=filled];
+"GO:1903532" [fillcolor="#F6CBA2", label="GO:1903532
+positive regulation
+of secretion by cell", shape=box, style=filled];
+"GO:1903541" [fillcolor="#F6CBA2", label="GO:1903541
+regulation of
+exosomal secretion", shape=box, style=filled];
+"GO:1903543" [fillcolor="#17DA15", label="GO:1903543
+positive regulation
+of exosomal
+secretion
+(1/5)", shape=box, style=filled];
+"GO:1903555" [fillcolor="#F6CBA2", label="GO:1903555
+regulation of tumor
+necrosis factor
+superfamily cytokine
+production", shape=box, style=filled];
+"GO:1903557" [fillcolor="#F6CBA2", label="GO:1903557
+positive regulation
+of tumor necrosis
+factor superfamily
+cytokine production", shape=box, style=filled];
+"GO:1903578" [fillcolor="#F6CBA2", label="GO:1903578
+regulation of ATP
+metabolic process", shape=box, style=filled];
+"GO:1904062" [fillcolor="#F6CBA2", label="GO:1904062
+regulation of
+monoatomic cation
+transmembrane
+transport", shape=box, style=filled];
+"GO:1904502" [fillcolor="#F6CBA2", label="GO:1904502
+regulation of
+lipophagy", shape=box, style=filled];
+"GO:1904504" [fillcolor="#17DA15", label="GO:1904504
+positive regulation
+of lipophagy
+(1/5)", shape=box, style=filled];
+"GO:1904627" [fillcolor="#F6CBA2", label="GO:1904627
+response to phorbol
+13-acetate
+12-myristate", shape=box, style=filled];
+"GO:1904628" [fillcolor="#17DA15", label="GO:1904628
+cellular response to
+phorbol 13-acetate
+12-myristate
+(1/5)", shape=box, style=filled];
+"GO:1904732" [fillcolor="#F6CBA2", label="GO:1904732
+regulation of
+electron transfer
+activity", shape=box, style=filled];
+"GO:1904959" [fillcolor="#A3F6A2", label="GO:1904959
+regulation of
+cytochrome-c oxidase
+activity
+(1/5)", shape=box, style=filled];
+"GO:1905038" [fillcolor="#F6CBA2", label="GO:1905038
+regulation of
+membrane lipid
+metabolic process", shape=box, style=filled];
+"GO:1990234" [fillcolor="#F5A2F6", label="GO:1990234
+transferase complex", shape=box, style=filled];
+"GO:2000026" [fillcolor="#F6CBA2", label="GO:2000026
+regulation of
+multicellular
+organismal
+development", shape=box, style=filled];
+"GO:2000045" [fillcolor="#F6CBA2", label="GO:2000045
+regulation of G1/S
+transition of
+mitotic cell cycle", shape=box, style=filled];
+"GO:2000145" [fillcolor="#F6CBA2", label="GO:2000145
+regulation of cell
+motility", shape=box, style=filled];
+"GO:2000303" [fillcolor="#F6CBA2", label="GO:2000303
+regulation of
+ceramide
+biosynthetic process", shape=box, style=filled];
+"GO:2000304" [fillcolor="#A3F6A2", label="GO:2000304
+positive regulation
+of ceramide
+biosynthetic process
+(1/5)", shape=box, style=filled];
+"GO:2000377" [fillcolor="#F6CBA2", label="GO:2000377
+regulation of
+reactive oxygen
+species metabolic
+process", shape=box, style=filled];
+"GO:2001169" [fillcolor="#A3F6A2", label="GO:2001169
+regulation of ATP
+biosynthetic process
+(1/5)", shape=box, style=filled];
+"GO:0000166" -> "GO:0017076";
+"GO:0000166" -> "GO:0032553";
+"GO:0000280" -> "GO:0140014";
+"GO:0000302" -> "GO:0034614";
+"GO:0000302" -> "GO:0042542";
+"GO:0001503" -> "GO:0036075";
+"GO:0001523" -> "GO:0042572";
+"GO:0001523" -> "GO:0042573";
+"GO:0001558" -> "GO:0030308";
+"GO:0001654" -> "GO:0043010";
+"GO:0001676" -> "GO:0019369";
+"GO:0001676" -> "GO:0042759";
+"GO:0001727" -> "GO:0008481";
+"GO:0001727" -> "GO:0017050";
+"GO:0001817" -> "GO:0001819";
+"GO:0001817" -> "GO:0002718";
+"GO:0001817" -> "GO:0032656";
+"GO:0001817" -> "GO:0032675";
+"GO:0001817" -> "GO:1903555";
+"GO:0001819" -> "GO:0002720";
+"GO:0001819" -> "GO:0032736";
+"GO:0001819" -> "GO:0032755";
+"GO:0001819" -> "GO:1903557";
+"GO:0002063" -> "GO:0003433";
+"GO:0002138" -> "GO:0042904";
+"GO:0002178" -> "GO:0031211";
+"GO:0002237" -> "GO:0032496";
+"GO:0002682" -> "GO:0002684";
+"GO:0002682" -> "GO:0002685";
+"GO:0002682" -> "GO:0002694";
+"GO:0002682" -> "GO:0002697";
+"GO:0002682" -> "GO:0050776";
+"GO:0002684" -> "GO:0002696";
+"GO:0002684" -> "GO:0002699";
+"GO:0002684" -> "GO:0050778";
+"GO:0002694" -> "GO:0002696";
+"GO:0002694" -> "GO:0033003";
+"GO:0002696" -> "GO:0033005";
+"GO:0002697" -> "GO:0002699";
+"GO:0002697" -> "GO:0002700";
+"GO:0002697" -> "GO:0002703";
+"GO:0002697" -> "GO:0043300";
+"GO:0002699" -> "GO:0002702";
+"GO:0002699" -> "GO:0033006";
+"GO:0002699" -> "GO:0043302";
+"GO:0002700" -> "GO:0002702";
+"GO:0002700" -> "GO:0002718";
+"GO:0002702" -> "GO:0002720";
+"GO:0002703" -> "GO:0002886";
+"GO:0002718" -> "GO:0002720";
+"GO:0002790" -> "GO:0030072";
+"GO:0002886" -> "GO:0043304";
+"GO:0003674" -> "GO:0003824";
+"GO:0003674" -> "GO:0005488";
+"GO:0003674" -> "GO:0060089";
+"GO:0003824" -> "GO:0016491";
+"GO:0003824" -> "GO:0016740";
+"GO:0003824" -> "GO:0016787";
+"GO:0003824" -> "GO:0016829";
+"GO:0003824" -> "GO:0032451";
+"GO:0004497" -> "GO:0008391";
+"GO:0004497" -> "GO:0008395";
+"GO:0004497" -> "GO:0016709";
+"GO:0004497" -> "GO:0016712";
+"GO:0004497" -> "GO:0070576";
+"GO:0004620" -> "GO:0004767";
+"GO:0004767" -> "GO:0061751";
+"GO:0004888" -> "GO:0004930";
+"GO:0004930" -> "GO:0045125";
+"GO:0005488" -> "GO:0005515";
+"GO:0005488" -> "GO:0008289";
+"GO:0005488" -> "GO:0030246";
+"GO:0005488" -> "GO:0036094";
+"GO:0005488" -> "GO:0043167";
+"GO:0005488" -> "GO:0072341";
+"GO:0005488" -> "GO:0097159";
+"GO:0005488" -> "GO:0097367";
+"GO:0005515" -> "GO:0019899";
+"GO:0005515" -> "GO:0031072";
+"GO:0005515" -> "GO:0042393";
+"GO:0005515" -> "GO:0042802";
+"GO:0005515" -> "GO:0051087";
+"GO:0005543" -> "GO:0001786";
+"GO:0005543" -> "GO:0070300";
+"GO:0005575" -> "GO:0032991";
+"GO:0005575" -> "GO:0110165";
+"GO:0005774" -> "GO:0098852";
+"GO:0006066" -> "GO:0019751";
+"GO:0006066" -> "GO:0034308";
+"GO:0006066" -> "GO:0046165";
+"GO:0006082" -> "GO:0016053";
+"GO:0006082" -> "GO:0043436";
+"GO:0006109" -> "GO:0032881";
+"GO:0006109" -> "GO:0043255";
+"GO:0006109" -> "GO:0045912";
+"GO:0006139" -> "GO:0034654";
+"GO:0006139" -> "GO:0090304";
+"GO:0006140" -> "GO:0030808";
+"GO:0006140" -> "GO:1900542";
+"GO:0006259" -> "GO:0071897";
+"GO:0006325" -> "GO:0006338";
+"GO:0006338" -> "GO:0045815";
+"GO:0006629" -> "GO:0008202";
+"GO:0006629" -> "GO:0008610";
+"GO:0006629" -> "GO:0016042";
+"GO:0006629" -> "GO:0044255";
+"GO:0006631" -> "GO:0001676";
+"GO:0006631" -> "GO:0006633";
+"GO:0006631" -> "GO:0033559";
+"GO:0006633" -> "GO:0042759";
+"GO:0006643" -> "GO:0006665";
+"GO:0006643" -> "GO:0046466";
+"GO:0006643" -> "GO:0046467";
+"GO:0006644" -> "GO:0006668";
+"GO:0006644" -> "GO:0006684";
+"GO:0006644" -> "GO:0008654";
+"GO:0006644" -> "GO:0009395";
+"GO:0006665" -> "GO:0006668";
+"GO:0006665" -> "GO:0006672";
+"GO:0006665" -> "GO:0006684";
+"GO:0006665" -> "GO:0030148";
+"GO:0006665" -> "GO:0030149";
+"GO:0006665" -> "GO:0046519";
+"GO:0006667" -> "GO:0046511";
+"GO:0006668" -> "GO:0006669";
+"GO:0006670" -> "GO:0046512";
+"GO:0006672" -> "GO:0046513";
+"GO:0006684" -> "GO:0006685";
+"GO:0006684" -> "GO:0006686";
+"GO:0006690" -> "GO:0019369";
+"GO:0006720" -> "GO:0006721";
+"GO:0006720" -> "GO:0008299";
+"GO:0006721" -> "GO:0016101";
+"GO:0006721" -> "GO:0016114";
+"GO:0006725" -> "GO:0006139";
+"GO:0006725" -> "GO:0009698";
+"GO:0006725" -> "GO:0018894";
+"GO:0006725" -> "GO:0019438";
+"GO:0006725" -> "GO:0019439";
+"GO:0006725" -> "GO:0033013";
+"GO:0006766" -> "GO:0006775";
+"GO:0006775" -> "GO:0042359";
+"GO:0006793" -> "GO:0006796";
+"GO:0006793" -> "GO:0019637";
+"GO:0006796" -> "GO:0006644";
+"GO:0006796" -> "GO:0016310";
+"GO:0006805" -> "GO:0017143";
+"GO:0006805" -> "GO:0042178";
+"GO:0006807" -> "GO:0034641";
+"GO:0006807" -> "GO:0043603";
+"GO:0006807" -> "GO:1901564";
+"GO:0006810" -> "GO:0009914";
+"GO:0006810" -> "GO:0046903";
+"GO:0006810" -> "GO:0071702";
+"GO:0006810" -> "GO:0071705";
+"GO:0006810" -> "GO:0140352";
+"GO:0006950" -> "GO:0001666";
+"GO:0006950" -> "GO:0006979";
+"GO:0006950" -> "GO:0009635";
+"GO:0006950" -> "GO:0033554";
+"GO:0006950" -> "GO:0035902";
+"GO:0006950" -> "GO:0055093";
+"GO:0006979" -> "GO:0000302";
+"GO:0006979" -> "GO:0034599";
+"GO:0006996" -> "GO:0048285";
+"GO:0007088" -> "GO:0045840";
+"GO:0007165" -> "GO:0007166";
+"GO:0007165" -> "GO:0007186";
+"GO:0007165" -> "GO:0035556";
+"GO:0007165" -> "GO:0090520";
+"GO:0007166" -> "GO:0007167";
+"GO:0007167" -> "GO:0007169";
+"GO:0007167" -> "GO:0007178";
+"GO:0007169" -> "GO:0048008";
+"GO:0007178" -> "GO:0141091";
+"GO:0007186" -> "GO:0003376";
+"GO:0007346" -> "GO:0007088";
+"GO:0007346" -> "GO:0045931";
+"GO:0007346" -> "GO:1901990";
+"GO:0007423" -> "GO:0001654";
+"GO:0007584" -> "GO:0033273";
+"GO:0008081" -> "GO:0004767";
+"GO:0008150" -> "GO:0008152";
+"GO:0008150" -> "GO:0009987";
+"GO:0008150" -> "GO:0022414";
+"GO:0008150" -> "GO:0032501";
+"GO:0008150" -> "GO:0032502";
+"GO:0008150" -> "GO:0040007";
+"GO:0008150" -> "GO:0044419";
+"GO:0008150" -> "GO:0050896";
+"GO:0008150" -> "GO:0051179";
+"GO:0008150" -> "GO:0065007";
+"GO:0008152" -> "GO:0006807";
+"GO:0008152" -> "GO:0009056";
+"GO:0008152" -> "GO:0009058";
+"GO:0008152" -> "GO:0019748";
+"GO:0008152" -> "GO:0032963";
+"GO:0008152" -> "GO:0042445";
+"GO:0008152" -> "GO:0044237";
+"GO:0008152" -> "GO:0044238";
+"GO:0008152" -> "GO:0044281";
+"GO:0008152" -> "GO:0071704";
+"GO:0008202" -> "GO:0006694";
+"GO:0008202" -> "GO:0008210";
+"GO:0008202" -> "GO:0042359";
+"GO:0008284" -> "GO:0048661";
+"GO:0008289" -> "GO:0005543";
+"GO:0008299" -> "GO:0016114";
+"GO:0008395" -> "GO:0101020";
+"GO:0008395" -> "GO:0101021";
+"GO:0008610" -> "GO:0006633";
+"GO:0008610" -> "GO:0006694";
+"GO:0008610" -> "GO:0008299";
+"GO:0008610" -> "GO:0008654";
+"GO:0008610" -> "GO:0046467";
+"GO:0008643" -> "GO:0015774";
+"GO:0008654" -> "GO:0006669";
+"GO:0008654" -> "GO:0006686";
+"GO:0009056" -> "GO:0044248";
+"GO:0009056" -> "GO:0044282";
+"GO:0009056" -> "GO:1901575";
+"GO:0009058" -> "GO:0044249";
+"GO:0009058" -> "GO:0044283";
+"GO:0009058" -> "GO:1901576";
+"GO:0009058" -> "GO:1903409";
+"GO:0009059" -> "GO:0071897";
+"GO:0009395" -> "GO:0006685";
+"GO:0009404" -> "GO:0017143";
+"GO:0009605" -> "GO:0009991";
+"GO:0009605" -> "GO:0043207";
+"GO:0009607" -> "GO:0043207";
+"GO:0009628" -> "GO:0070482";
+"GO:0009636" -> "GO:0009635";
+"GO:0009653" -> "GO:0009887";
+"GO:0009698" -> "GO:0009804";
+"GO:0009719" -> "GO:0055094";
+"GO:0009719" -> "GO:0071495";
+"GO:0009887" -> "GO:0042476";
+"GO:0009888" -> "GO:0031214";
+"GO:0009888" -> "GO:0061448";
+"GO:0009889" -> "GO:0009890";
+"GO:0009889" -> "GO:0009891";
+"GO:0009889" -> "GO:0031326";
+"GO:0009889" -> "GO:0043255";
+"GO:0009889" -> "GO:0046890";
+"GO:0009889" -> "GO:1903426";
+"GO:0009890" -> "GO:0031327";
+"GO:0009891" -> "GO:0031328";
+"GO:0009891" -> "GO:0046889";
+"GO:0009892" -> "GO:0009890";
+"GO:0009892" -> "GO:0010605";
+"GO:0009892" -> "GO:0031324";
+"GO:0009892" -> "GO:0045912";
+"GO:0009892" -> "GO:0051172";
+"GO:0009893" -> "GO:0009891";
+"GO:0009893" -> "GO:0009896";
+"GO:0009893" -> "GO:0010604";
+"GO:0009893" -> "GO:0031325";
+"GO:0009893" -> "GO:0045834";
+"GO:0009893" -> "GO:0051173";
+"GO:0009894" -> "GO:0009896";
+"GO:0009894" -> "GO:0031329";
+"GO:0009896" -> "GO:0031331";
+"GO:0009914" -> "GO:0046879";
+"GO:0009966" -> "GO:0009967";
+"GO:0009966" -> "GO:1902531";
+"GO:0009967" -> "GO:1902533";
+"GO:0009987" -> "GO:0007165";
+"GO:0009987" -> "GO:0008283";
+"GO:0009987" -> "GO:0022402";
+"GO:0009987" -> "GO:0044237";
+"GO:0009987" -> "GO:0048869";
+"GO:0009987" -> "GO:0051716";
+"GO:0009987" -> "GO:0071840";
+"GO:0009987" -> "GO:0140352";
+"GO:0009991" -> "GO:0031667";
+"GO:0010033" -> "GO:0002237";
+"GO:0010033" -> "GO:0010243";
+"GO:0010033" -> "GO:0014070";
+"GO:0010033" -> "GO:0033993";
+"GO:0010033" -> "GO:0034097";
+"GO:0010033" -> "GO:0042542";
+"GO:0010033" -> "GO:0071310";
+"GO:0010033" -> "GO:0097305";
+"GO:0010033" -> "GO:1901654";
+"GO:0010035" -> "GO:0010038";
+"GO:0010035" -> "GO:0042542";
+"GO:0010035" -> "GO:0071241";
+"GO:0010038" -> "GO:0010039";
+"GO:0010038" -> "GO:0032026";
+"GO:0010038" -> "GO:0046688";
+"GO:0010038" -> "GO:0071248";
+"GO:0010039" -> "GO:0010041";
+"GO:0010155" -> "GO:1904959";
+"GO:0010243" -> "GO:0055094";
+"GO:0010243" -> "GO:0071417";
+"GO:0010243" -> "GO:1901652";
+"GO:0010468" -> "GO:0001817";
+"GO:0010468" -> "GO:0002700";
+"GO:0010468" -> "GO:0010628";
+"GO:0010506" -> "GO:0010508";
+"GO:0010506" -> "GO:0016241";
+"GO:0010508" -> "GO:0016239";
+"GO:0010556" -> "GO:0010468";
+"GO:0010556" -> "GO:0010557";
+"GO:0010556" -> "GO:0010558";
+"GO:0010556" -> "GO:0032885";
+"GO:0010556" -> "GO:0090153";
+"GO:0010557" -> "GO:0010628";
+"GO:0010558" -> "GO:1900126";
+"GO:0010564" -> "GO:0007088";
+"GO:0010564" -> "GO:0090068";
+"GO:0010564" -> "GO:1901987";
+"GO:0010604" -> "GO:0010557";
+"GO:0010605" -> "GO:0010558";
+"GO:0010628" -> "GO:0001819";
+"GO:0010628" -> "GO:0002702";
+"GO:0010638" -> "GO:0051785";
+"GO:0010646" -> "GO:0009966";
+"GO:0010646" -> "GO:0010647";
+"GO:0010647" -> "GO:0009967";
+"GO:0010817" -> "GO:0009914";
+"GO:0010817" -> "GO:0042445";
+"GO:0010959" -> "GO:0051924";
+"GO:0014070" -> "GO:0071407";
+"GO:0015833" -> "GO:0002790";
+"GO:0016020" -> "GO:0005886";
+"GO:0016020" -> "GO:0031090";
+"GO:0016042" -> "GO:0044242";
+"GO:0016043" -> "GO:0006996";
+"GO:0016043" -> "GO:0022607";
+"GO:0016043" -> "GO:0043062";
+"GO:0016043" -> "GO:0043933";
+"GO:0016043" -> "GO:0045229";
+"GO:0016053" -> "GO:0046394";
+"GO:0016101" -> "GO:0001523";
+"GO:0016101" -> "GO:0016102";
+"GO:0016102" -> "GO:0002138";
+"GO:0016114" -> "GO:0016102";
+"GO:0016239" -> "GO:1904504";
+"GO:0016241" -> "GO:0016239";
+"GO:0016241" -> "GO:1904502";
+"GO:0016298" -> "GO:0004620";
+"GO:0016301" -> "GO:0001727";
+"GO:0016408" -> "GO:0016454";
+"GO:0016409" -> "GO:0016454";
+"GO:0016454" -> "GO:0004758";
+"GO:0016491" -> "GO:0004497";
+"GO:0016491" -> "GO:0016679";
+"GO:0016491" -> "GO:0016705";
+"GO:0016705" -> "GO:0008391";
+"GO:0016705" -> "GO:0016709";
+"GO:0016705" -> "GO:0016712";
+"GO:0016705" -> "GO:0101020";
+"GO:0016705" -> "GO:0101021";
+"GO:0016705" -> "GO:0120319";
+"GO:0016709" -> "GO:0016711";
+"GO:0016712" -> "GO:0070330";
+"GO:0016712" -> "GO:0120250";
+"GO:0016740" -> "GO:0016746";
+"GO:0016740" -> "GO:0016772";
+"GO:0016746" -> "GO:0016747";
+"GO:0016747" -> "GO:0016408";
+"GO:0016747" -> "GO:0016409";
+"GO:0016772" -> "GO:0016301";
+"GO:0016772" -> "GO:0016773";
+"GO:0016773" -> "GO:0008481";
+"GO:0016773" -> "GO:0017050";
+"GO:0016787" -> "GO:0016788";
+"GO:0016788" -> "GO:0016298";
+"GO:0016788" -> "GO:0042578";
+"GO:0016829" -> "GO:0016835";
+"GO:0016835" -> "GO:0016836";
+"GO:0016836" -> "GO:0106256";
+"GO:0017076" -> "GO:0030554";
+"GO:0017076" -> "GO:0032555";
+"GO:0017157" -> "GO:0045921";
+"GO:0017157" -> "GO:1903305";
+"GO:0017157" -> "GO:1903541";
+"GO:0018130" -> "GO:0034654";
+"GO:0018894" -> "GO:0019341";
+"GO:0019216" -> "GO:0045834";
+"GO:0019216" -> "GO:0046890";
+"GO:0019216" -> "GO:1905038";
+"GO:0019219" -> "GO:0006140";
+"GO:0019220" -> "GO:0006140";
+"GO:0019220" -> "GO:0042325";
+"GO:0019222" -> "GO:0009889";
+"GO:0019222" -> "GO:0009892";
+"GO:0019222" -> "GO:0009893";
+"GO:0019222" -> "GO:0009894";
+"GO:0019222" -> "GO:0031323";
+"GO:0019222" -> "GO:0051171";
+"GO:0019222" -> "GO:0060255";
+"GO:0019222" -> "GO:0062012";
+"GO:0019222" -> "GO:0080090";
+"GO:0019369" -> "GO:0019373";
+"GO:0019369" -> "GO:0097267";
+"GO:0019438" -> "GO:0034654";
+"GO:0019439" -> "GO:0019341";
+"GO:0019637" -> "GO:0006644";
+"GO:0019637" -> "GO:0046434";
+"GO:0019637" -> "GO:0090407";
+"GO:0019748" -> "GO:0009404";
+"GO:0019748" -> "GO:0009698";
+"GO:0019751" -> "GO:0034311";
+"GO:0019751" -> "GO:0046173";
+"GO:0019752" -> "GO:0006690";
+"GO:0019752" -> "GO:0032787";
+"GO:0019752" -> "GO:0046394";
+"GO:0019842" -> "GO:0070279";
+"GO:0019866" -> "GO:0005743";
+"GO:0019899" -> "GO:0051020";
+"GO:0022402" -> "GO:0070314";
+"GO:0022402" -> "GO:1903047";
+"GO:0022414" -> "GO:0048609";
+"GO:0022607" -> "GO:0085029";
+"GO:0022898" -> "GO:0032412";
+"GO:0023051" -> "GO:0009966";
+"GO:0023051" -> "GO:0023056";
+"GO:0023056" -> "GO:0009967";
+"GO:0023061" -> "GO:0046879";
+"GO:0030148" -> "GO:0006669";
+"GO:0030148" -> "GO:0006686";
+"GO:0030148" -> "GO:0046513";
+"GO:0030148" -> "GO:0046520";
+"GO:0030149" -> "GO:0006685";
+"GO:0030154" -> "GO:0002244";
+"GO:0030154" -> "GO:0030855";
+"GO:0030198" -> "GO:0085029";
+"GO:0030246" -> "GO:0048029";
+"GO:0030258" -> "GO:0002933";
+"GO:0030334" -> "GO:0002685";
+"GO:0030554" -> "GO:0032559";
+"GO:0030808" -> "GO:1900371";
+"GO:0030855" -> "GO:0070365";
+"GO:0031072" -> "GO:0030544";
+"GO:0031072" -> "GO:0051879";
+"GO:0031090" -> "GO:0005789";
+"GO:0031090" -> "GO:0019866";
+"GO:0031090" -> "GO:0031966";
+"GO:0031090" -> "GO:0098588";
+"GO:0031211" -> "GO:0017059";
+"GO:0031214" -> "GO:0030282";
+"GO:0031323" -> "GO:0019219";
+"GO:0031323" -> "GO:0031324";
+"GO:0031323" -> "GO:0031325";
+"GO:0031323" -> "GO:0031326";
+"GO:0031323" -> "GO:0031329";
+"GO:0031323" -> "GO:0043467";
+"GO:0031323" -> "GO:0051174";
+"GO:0031323" -> "GO:1905038";
+"GO:0031323" -> "GO:2000377";
+"GO:0031324" -> "GO:0031327";
+"GO:0031325" -> "GO:0031328";
+"GO:0031325" -> "GO:0031331";
+"GO:0031326" -> "GO:0010556";
+"GO:0031326" -> "GO:0030808";
+"GO:0031326" -> "GO:0031327";
+"GO:0031326" -> "GO:0031328";
+"GO:0031327" -> "GO:0010558";
+"GO:0031328" -> "GO:0010557";
+"GO:0031328" -> "GO:0090154";
+"GO:0031329" -> "GO:0010506";
+"GO:0031329" -> "GO:0031331";
+"GO:0031331" -> "GO:0010508";
+"GO:0031399" -> "GO:0001932";
+"GO:0031667" -> "GO:0007584";
+"GO:0031667" -> "GO:0032094";
+"GO:0031966" -> "GO:0005743";
+"GO:0031984" -> "GO:0098791";
+"GO:0031985" -> "GO:0000137";
+"GO:0032026" -> "GO:0071286";
+"GO:0032409" -> "GO:0022898";
+"GO:0032412" -> "GO:1904959";
+"GO:0032501" -> "GO:0001503";
+"GO:0032501" -> "GO:0035264";
+"GO:0032501" -> "GO:0035265";
+"GO:0032502" -> "GO:0009653";
+"GO:0032502" -> "GO:0048646";
+"GO:0032502" -> "GO:0048856";
+"GO:0032502" -> "GO:0048869";
+"GO:0032553" -> "GO:0032555";
+"GO:0032555" -> "GO:0032559";
+"GO:0032559" -> "GO:0005524";
+"GO:0032656" -> "GO:0032736";
+"GO:0032675" -> "GO:0032755";
+"GO:0032680" -> "GO:0032760";
+"GO:0032787" -> "GO:0006631";
+"GO:0032787" -> "GO:0042573";
+"GO:0032787" -> "GO:0072330";
+"GO:0032879" -> "GO:0051049";
+"GO:0032881" -> "GO:0032885";
+"GO:0032885" -> "GO:1900125";
+"GO:0032940" -> "GO:0023061";
+"GO:0032991" -> "GO:0032993";
+"GO:0032991" -> "GO:0140534";
+"GO:0032991" -> "GO:1902494";
+"GO:0032993" -> "GO:0000786";
+"GO:0033003" -> "GO:0033005";
+"GO:0033003" -> "GO:0033006";
+"GO:0033005" -> "GO:0033008";
+"GO:0033006" -> "GO:0033008";
+"GO:0033013" -> "GO:0006778";
+"GO:0033043" -> "GO:0010638";
+"GO:0033043" -> "GO:0051783";
+"GO:0033273" -> "GO:0033189";
+"GO:0033554" -> "GO:0062197";
+"GO:0033559" -> "GO:0019369";
+"GO:0033993" -> "GO:0032496";
+"GO:0033993" -> "GO:0033189";
+"GO:0033993" -> "GO:0071396";
+"GO:0033993" -> "GO:1904627";
+"GO:0034097" -> "GO:0034612";
+"GO:0034097" -> "GO:0071345";
+"GO:0034248" -> "GO:0034250";
+"GO:0034248" -> "GO:2000303";
+"GO:0034250" -> "GO:2000304";
+"GO:0034308" -> "GO:0042572";
+"GO:0034311" -> "GO:0006667";
+"GO:0034311" -> "GO:0006670";
+"GO:0034311" -> "GO:0034312";
+"GO:0034312" -> "GO:0046511";
+"GO:0034312" -> "GO:0046512";
+"GO:0034599" -> "GO:0034614";
+"GO:0034612" -> "GO:0071356";
+"GO:0034614" -> "GO:0070301";
+"GO:0034641" -> "GO:0006139";
+"GO:0034641" -> "GO:0044271";
+"GO:0034654" -> "GO:0071897";
+"GO:0034762" -> "GO:0022898";
+"GO:0034762" -> "GO:0034765";
+"GO:0034765" -> "GO:1904062";
+"GO:0035265" -> "GO:0098868";
+"GO:0035295" -> "GO:0048565";
+"GO:0035556" -> "GO:0043491";
+"GO:0035639" -> "GO:0005524";
+"GO:0036075" -> "GO:0001958";
+"GO:0036094" -> "GO:0019825";
+"GO:0036094" -> "GO:0019842";
+"GO:0036094" -> "GO:0048029";
+"GO:0036094" -> "GO:1901363";
+"GO:0036293" -> "GO:0001666";
+"GO:0036296" -> "GO:0055093";
+"GO:0038023" -> "GO:0004888";
+"GO:0040007" -> "GO:0048589";
+"GO:0040008" -> "GO:0001558";
+"GO:0040008" -> "GO:0045926";
+"GO:0040012" -> "GO:2000145";
+"GO:0042127" -> "GO:0008284";
+"GO:0042127" -> "GO:0048660";
+"GO:0042178" -> "GO:0019341";
+"GO:0042221" -> "GO:0007584";
+"GO:0042221" -> "GO:0009636";
+"GO:0042221" -> "GO:0010033";
+"GO:0042221" -> "GO:0010035";
+"GO:0042221" -> "GO:0032094";
+"GO:0042221" -> "GO:0046685";
+"GO:0042221" -> "GO:0070887";
+"GO:0042221" -> "GO:1901698";
+"GO:0042221" -> "GO:1901700";
+"GO:0042221" -> "GO:1902074";
+"GO:0042325" -> "GO:0001932";
+"GO:0042445" -> "GO:0008210";
+"GO:0042445" -> "GO:0042572";
+"GO:0042445" -> "GO:0042573";
+"GO:0042475" -> "GO:0097187";
+"GO:0042476" -> "GO:0042475";
+"GO:0042542" -> "GO:0070301";
+"GO:0042573" -> "GO:0002138";
+"GO:0042573" -> "GO:0042905";
+"GO:0042578" -> "GO:0008081";
+"GO:0042743" -> "GO:0050665";
+"GO:0042886" -> "GO:0015833";
+"GO:0042905" -> "GO:0042904";
+"GO:0042981" -> "GO:0043065";
+"GO:0043062" -> "GO:0030198";
+"GO:0043067" -> "GO:0042981";
+"GO:0043067" -> "GO:0043068";
+"GO:0043068" -> "GO:0043065";
+"GO:0043167" -> "GO:0043168";
+"GO:0043167" -> "GO:0043169";
+"GO:0043168" -> "GO:0030170";
+"GO:0043168" -> "GO:0035639";
+"GO:0043168" -> "GO:0070300";
+"GO:0043169" -> "GO:0046872";
+"GO:0043170" -> "GO:0009059";
+"GO:0043170" -> "GO:0090304";
+"GO:0043207" -> "GO:0002237";
+"GO:0043207" -> "GO:0051707";
+"GO:0043226" -> "GO:0043227";
+"GO:0043226" -> "GO:0043229";
+"GO:0043227" -> "GO:0043231";
+"GO:0043229" -> "GO:0043231";
+"GO:0043231" -> "GO:0005634";
+"GO:0043231" -> "GO:0005739";
+"GO:0043231" -> "GO:0005783";
+"GO:0043255" -> "GO:0032885";
+"GO:0043269" -> "GO:0010959";
+"GO:0043269" -> "GO:0034765";
+"GO:0043269" -> "GO:0043270";
+"GO:0043270" -> "GO:0051928";
+"GO:0043300" -> "GO:0043302";
+"GO:0043300" -> "GO:0043304";
+"GO:0043302" -> "GO:0043306";
+"GO:0043304" -> "GO:0043306";
+"GO:0043436" -> "GO:0019752";
+"GO:0043449" -> "GO:0009692";
+"GO:0043467" -> "GO:1904732";
+"GO:0043603" -> "GO:0006672";
+"GO:0043603" -> "GO:0006684";
+"GO:0043603" -> "GO:0043604";
+"GO:0043604" -> "GO:0006686";
+"GO:0043604" -> "GO:0046513";
+"GO:0043933" -> "GO:0071824";
+"GO:0044087" -> "GO:0044089";
+"GO:0044087" -> "GO:0090153";
+"GO:0044089" -> "GO:1903543";
+"GO:0044237" -> "GO:0006082";
+"GO:0044237" -> "GO:0006725";
+"GO:0044237" -> "GO:0006793";
+"GO:0044237" -> "GO:0006805";
+"GO:0044237" -> "GO:0009404";
+"GO:0044237" -> "GO:0034641";
+"GO:0044237" -> "GO:0043449";
+"GO:0044237" -> "GO:0044248";
+"GO:0044237" -> "GO:0044249";
+"GO:0044237" -> "GO:0044255";
+"GO:0044237" -> "GO:0046483";
+"GO:0044237" -> "GO:0072593";
+"GO:0044238" -> "GO:0006139";
+"GO:0044238" -> "GO:0006629";
+"GO:0044242" -> "GO:0009395";
+"GO:0044242" -> "GO:0046466";
+"GO:0044248" -> "GO:0019439";
+"GO:0044248" -> "GO:0042178";
+"GO:0044248" -> "GO:0044242";
+"GO:0044248" -> "GO:0046700";
+"GO:0044249" -> "GO:0008299";
+"GO:0044249" -> "GO:0009059";
+"GO:0044249" -> "GO:0016053";
+"GO:0044249" -> "GO:0018130";
+"GO:0044249" -> "GO:0019438";
+"GO:0044249" -> "GO:0044271";
+"GO:0044249" -> "GO:0046467";
+"GO:0044249" -> "GO:0050665";
+"GO:0044255" -> "GO:0006631";
+"GO:0044255" -> "GO:0006643";
+"GO:0044255" -> "GO:0006644";
+"GO:0044255" -> "GO:0006720";
+"GO:0044255" -> "GO:0030258";
+"GO:0044255" -> "GO:0044242";
+"GO:0044271" -> "GO:0034654";
+"GO:0044271" -> "GO:0043604";
+"GO:0044271" -> "GO:0046511";
+"GO:0044271" -> "GO:0046512";
+"GO:0044281" -> "GO:0006066";
+"GO:0044281" -> "GO:0006082";
+"GO:0044281" -> "GO:0006766";
+"GO:0044281" -> "GO:0018894";
+"GO:0044281" -> "GO:0044282";
+"GO:0044281" -> "GO:0044283";
+"GO:0044282" -> "GO:0019341";
+"GO:0044283" -> "GO:0016053";
+"GO:0044283" -> "GO:0046165";
+"GO:0044419" -> "GO:0051707";
+"GO:0045125" -> "GO:0038036";
+"GO:0045229" -> "GO:0030198";
+"GO:0045787" -> "GO:0045931";
+"GO:0045787" -> "GO:0090068";
+"GO:0045834" -> "GO:0046889";
+"GO:0045912" -> "GO:1900126";
+"GO:0045921" -> "GO:1903307";
+"GO:0045921" -> "GO:1903543";
+"GO:0045926" -> "GO:0030308";
+"GO:0045931" -> "GO:1901992";
+"GO:0046165" -> "GO:0046173";
+"GO:0046173" -> "GO:0034312";
+"GO:0046394" -> "GO:0072330";
+"GO:0046434" -> "GO:0009395";
+"GO:0046466" -> "GO:0030149";
+"GO:0046467" -> "GO:0030148";
+"GO:0046483" -> "GO:0006139";
+"GO:0046483" -> "GO:0009804";
+"GO:0046483" -> "GO:0018130";
+"GO:0046483" -> "GO:0018894";
+"GO:0046483" -> "GO:0033013";
+"GO:0046483" -> "GO:0046700";
+"GO:0046519" -> "GO:0006667";
+"GO:0046519" -> "GO:0006670";
+"GO:0046519" -> "GO:0046520";
+"GO:0046520" -> "GO:0046511";
+"GO:0046520" -> "GO:0046512";
+"GO:0046688" -> "GO:0071280";
+"GO:0046700" -> "GO:0019341";
+"GO:0046872" -> "GO:0046914";
+"GO:0046879" -> "GO:0030072";
+"GO:0046889" -> "GO:0090154";
+"GO:0046890" -> "GO:0046889";
+"GO:0046890" -> "GO:0090153";
+"GO:0046903" -> "GO:0002790";
+"GO:0046903" -> "GO:0032940";
+"GO:0046906" -> "GO:0020037";
+"GO:0046914" -> "GO:0005506";
+"GO:0048029" -> "GO:0005537";
+"GO:0048285" -> "GO:0000280";
+"GO:0048468" -> "GO:0002063";
+"GO:0048513" -> "GO:0007420";
+"GO:0048513" -> "GO:0007423";
+"GO:0048518" -> "GO:0002684";
+"GO:0048518" -> "GO:0009893";
+"GO:0048518" -> "GO:0023056";
+"GO:0048518" -> "GO:0048522";
+"GO:0048518" -> "GO:0048584";
+"GO:0048518" -> "GO:0051050";
+"GO:0048518" -> "GO:0051240";
+"GO:0048519" -> "GO:0009892";
+"GO:0048519" -> "GO:0045926";
+"GO:0048519" -> "GO:0048523";
+"GO:0048522" -> "GO:0008284";
+"GO:0048522" -> "GO:0010647";
+"GO:0048522" -> "GO:0031325";
+"GO:0048522" -> "GO:0043068";
+"GO:0048522" -> "GO:0044089";
+"GO:0048522" -> "GO:0045787";
+"GO:0048522" -> "GO:0050867";
+"GO:0048522" -> "GO:0051130";
+"GO:0048522" -> "GO:1903532";
+"GO:0048523" -> "GO:0030308";
+"GO:0048523" -> "GO:0031324";
+"GO:0048583" -> "GO:0009966";
+"GO:0048583" -> "GO:0048584";
+"GO:0048583" -> "GO:0050776";
+"GO:0048584" -> "GO:0009967";
+"GO:0048584" -> "GO:0050778";
+"GO:0048589" -> "GO:0035264";
+"GO:0048589" -> "GO:0035265";
+"GO:0048609" -> "GO:0060137";
+"GO:0048646" -> "GO:0097187";
+"GO:0048660" -> "GO:0048661";
+"GO:0048856" -> "GO:0001568";
+"GO:0048856" -> "GO:0009888";
+"GO:0048856" -> "GO:0035295";
+"GO:0048856" -> "GO:0048286";
+"GO:0048856" -> "GO:0048468";
+"GO:0048856" -> "GO:0048513";
+"GO:0048869" -> "GO:0030154";
+"GO:0048869" -> "GO:0048468";
+"GO:0050776" -> "GO:0033006";
+"GO:0050776" -> "GO:0050778";
+"GO:0050778" -> "GO:0033008";
+"GO:0050789" -> "GO:0002682";
+"GO:0050789" -> "GO:0019222";
+"GO:0050789" -> "GO:0023051";
+"GO:0050789" -> "GO:0032879";
+"GO:0050789" -> "GO:0040008";
+"GO:0050789" -> "GO:0040012";
+"GO:0050789" -> "GO:0048518";
+"GO:0050789" -> "GO:0048519";
+"GO:0050789" -> "GO:0048583";
+"GO:0050789" -> "GO:0050793";
+"GO:0050789" -> "GO:0050794";
+"GO:0050789" -> "GO:0051239";
+"GO:0050790" -> "GO:0051341";
+"GO:0050793" -> "GO:2000026";
+"GO:0050794" -> "GO:0007165";
+"GO:0050794" -> "GO:0010646";
+"GO:0050794" -> "GO:0031323";
+"GO:0050794" -> "GO:0034762";
+"GO:0050794" -> "GO:0042127";
+"GO:0050794" -> "GO:0043067";
+"GO:0050794" -> "GO:0044087";
+"GO:0050794" -> "GO:0048522";
+"GO:0050794" -> "GO:0048523";
+"GO:0050794" -> "GO:0050865";
+"GO:0050794" -> "GO:0051128";
+"GO:0050794" -> "GO:0051726";
+"GO:0050794" -> "GO:0060627";
+"GO:0050794" -> "GO:1903530";
+"GO:0050794" -> "GO:2000145";
+"GO:0050865" -> "GO:0002694";
+"GO:0050865" -> "GO:0050867";
+"GO:0050867" -> "GO:0002696";
+"GO:0050896" -> "GO:0006950";
+"GO:0050896" -> "GO:0009605";
+"GO:0050896" -> "GO:0009607";
+"GO:0050896" -> "GO:0009628";
+"GO:0050896" -> "GO:0009719";
+"GO:0050896" -> "GO:0042221";
+"GO:0050896" -> "GO:0051716";
+"GO:0050896" -> "GO:0051775";
+"GO:0051020" -> "GO:0031267";
+"GO:0051046" -> "GO:0051047";
+"GO:0051046" -> "GO:1903530";
+"GO:0051047" -> "GO:1903532";
+"GO:0051049" -> "GO:0034762";
+"GO:0051049" -> "GO:0043269";
+"GO:0051049" -> "GO:0051046";
+"GO:0051049" -> "GO:0051050";
+"GO:0051049" -> "GO:0060627";
+"GO:0051050" -> "GO:0043270";
+"GO:0051050" -> "GO:0051047";
+"GO:0051087" -> "GO:0030544";
+"GO:0051128" -> "GO:0001558";
+"GO:0051128" -> "GO:0033043";
+"GO:0051128" -> "GO:0051130";
+"GO:0051130" -> "GO:0010638";
+"GO:0051171" -> "GO:0019219";
+"GO:0051171" -> "GO:0034248";
+"GO:0051171" -> "GO:0051172";
+"GO:0051171" -> "GO:0051173";
+"GO:0051171" -> "GO:0051246";
+"GO:0051171" -> "GO:0090153";
+"GO:0051171" -> "GO:1900125";
+"GO:0051172" -> "GO:1900126";
+"GO:0051173" -> "GO:0034250";
+"GO:0051173" -> "GO:0090154";
+"GO:0051174" -> "GO:0019220";
+"GO:0051179" -> "GO:0051234";
+"GO:0051234" -> "GO:0006810";
+"GO:0051239" -> "GO:0001817";
+"GO:0051239" -> "GO:0050865";
+"GO:0051239" -> "GO:0051240";
+"GO:0051239" -> "GO:2000026";
+"GO:0051240" -> "GO:0001819";
+"GO:0051240" -> "GO:0050867";
+"GO:0051246" -> "GO:0031399";
+"GO:0051341" -> "GO:1904732";
+"GO:0051707" -> "GO:0009624";
+"GO:0051716" -> "GO:0033554";
+"GO:0051716" -> "GO:0070887";
+"GO:0051716" -> "GO:0071402";
+"GO:0051726" -> "GO:0007346";
+"GO:0051726" -> "GO:0010564";
+"GO:0051726" -> "GO:0045787";
+"GO:0051775" -> "GO:0071461";
+"GO:0051783" -> "GO:0007088";
+"GO:0051783" -> "GO:0051785";
+"GO:0051785" -> "GO:0045840";
+"GO:0051924" -> "GO:0051928";
+"GO:0051924" -> "GO:0090279";
+"GO:0051928" -> "GO:0090280";
+"GO:0055094" -> "GO:0071404";
+"GO:0060089" -> "GO:0038023";
+"GO:0060255" -> "GO:0010556";
+"GO:0060255" -> "GO:0010604";
+"GO:0060255" -> "GO:0010605";
+"GO:0060255" -> "GO:0032881";
+"GO:0060255" -> "GO:0051246";
+"GO:0060627" -> "GO:0017157";
+"GO:0061448" -> "GO:0060612";
+"GO:0062012" -> "GO:0006140";
+"GO:0062197" -> "GO:0034599";
+"GO:0065007" -> "GO:0050789";
+"GO:0065007" -> "GO:0065008";
+"GO:0065007" -> "GO:0065009";
+"GO:0065008" -> "GO:0010817";
+"GO:0065009" -> "GO:0032409";
+"GO:0065009" -> "GO:0050790";
+"GO:0070279" -> "GO:0030170";
+"GO:0070482" -> "GO:0036293";
+"GO:0070482" -> "GO:0036296";
+"GO:0070887" -> "GO:0062197";
+"GO:0070887" -> "GO:0071241";
+"GO:0070887" -> "GO:0071310";
+"GO:0070887" -> "GO:1901699";
+"GO:0070887" -> "GO:1901701";
+"GO:0071241" -> "GO:0071248";
+"GO:0071248" -> "GO:0071280";
+"GO:0071248" -> "GO:0071286";
+"GO:0071310" -> "GO:0071345";
+"GO:0071310" -> "GO:0071396";
+"GO:0071310" -> "GO:0071407";
+"GO:0071310" -> "GO:0071417";
+"GO:0071310" -> "GO:0097306";
+"GO:0071345" -> "GO:0071356";
+"GO:0071396" -> "GO:1904628";
+"GO:0071402" -> "GO:0071404";
+"GO:0071404" -> "GO:0140052";
+"GO:0071417" -> "GO:1901653";
+"GO:0071495" -> "GO:0071417";
+"GO:0071702" -> "GO:0008643";
+"GO:0071702" -> "GO:0015833";
+"GO:0071704" -> "GO:0006082";
+"GO:0071704" -> "GO:0006629";
+"GO:0071704" -> "GO:0009812";
+"GO:0071704" -> "GO:0019637";
+"GO:0071704" -> "GO:0042743";
+"GO:0071704" -> "GO:0043170";
+"GO:0071704" -> "GO:0120252";
+"GO:0071704" -> "GO:0120254";
+"GO:0071704" -> "GO:1901360";
+"GO:0071704" -> "GO:1901564";
+"GO:0071704" -> "GO:1901575";
+"GO:0071704" -> "GO:1901576";
+"GO:0071704" -> "GO:1901615";
+"GO:0071705" -> "GO:0042886";
+"GO:0071824" -> "GO:0006325";
+"GO:0071840" -> "GO:0016043";
+"GO:0072330" -> "GO:0002138";
+"GO:0072330" -> "GO:0006633";
+"GO:0072341" -> "GO:0001786";
+"GO:0072593" -> "GO:0042743";
+"GO:0072593" -> "GO:1903409";
+"GO:0080090" -> "GO:0006109";
+"GO:0080090" -> "GO:0019216";
+"GO:0080090" -> "GO:0019219";
+"GO:0080090" -> "GO:0051246";
+"GO:0090036" -> "GO:0090037";
+"GO:0090068" -> "GO:0045840";
+"GO:0090068" -> "GO:1901989";
+"GO:0090153" -> "GO:0090154";
+"GO:0090153" -> "GO:2000303";
+"GO:0090154" -> "GO:2000304";
+"GO:0090279" -> "GO:0090280";
+"GO:0090304" -> "GO:0006259";
+"GO:0090407" -> "GO:0008654";
+"GO:0090520" -> "GO:0003376";
+"GO:0097159" -> "GO:0046906";
+"GO:0097159" -> "GO:0070279";
+"GO:0097159" -> "GO:1901265";
+"GO:0097305" -> "GO:0097306";
+"GO:0097305" -> "GO:1904627";
+"GO:0097306" -> "GO:1904628";
+"GO:0097367" -> "GO:0032553";
+"GO:0098588" -> "GO:0000139";
+"GO:0098588" -> "GO:0005774";
+"GO:0098791" -> "GO:0031985";
+"GO:0098852" -> "GO:0005765";
+"GO:0110165" -> "GO:0005576";
+"GO:0110165" -> "GO:0005654";
+"GO:0110165" -> "GO:0005737";
+"GO:0110165" -> "GO:0005829";
+"GO:0110165" -> "GO:0016020";
+"GO:0110165" -> "GO:0031984";
+"GO:0110165" -> "GO:0043226";
+"GO:0120250" -> "GO:0102033";
+"GO:0120252" -> "GO:1900673";
+"GO:0120254" -> "GO:0019369";
+"GO:0120254" -> "GO:0042572";
+"GO:0120254" -> "GO:1900673";
+"GO:0140352" -> "GO:0032940";
+"GO:0140534" -> "GO:0031211";
+"GO:0141091" -> "GO:0030509";
+"GO:1900125" -> "GO:1900126";
+"GO:1900371" -> "GO:2001169";
+"GO:1900542" -> "GO:1900371";
+"GO:1900542" -> "GO:1903578";
+"GO:1900673" -> "GO:0043449";
+"GO:1901265" -> "GO:0000166";
+"GO:1901265" -> "GO:0035639";
+"GO:1901360" -> "GO:0006139";
+"GO:1901360" -> "GO:0008202";
+"GO:1901360" -> "GO:0009698";
+"GO:1901360" -> "GO:0018894";
+"GO:1901360" -> "GO:0033013";
+"GO:1901360" -> "GO:1901361";
+"GO:1901360" -> "GO:1901362";
+"GO:1901361" -> "GO:0019341";
+"GO:1901362" -> "GO:0006694";
+"GO:1901362" -> "GO:0034654";
+"GO:1901363" -> "GO:0000166";
+"GO:1901363" -> "GO:0070279";
+"GO:1901564" -> "GO:0006665";
+"GO:1901564" -> "GO:0009308";
+"GO:1901564" -> "GO:0033013";
+"GO:1901564" -> "GO:1901565";
+"GO:1901564" -> "GO:1901566";
+"GO:1901565" -> "GO:0030149";
+"GO:1901566" -> "GO:0030148";
+"GO:1901575" -> "GO:0016042";
+"GO:1901575" -> "GO:0046434";
+"GO:1901575" -> "GO:1901361";
+"GO:1901575" -> "GO:1901565";
+"GO:1901576" -> "GO:0008610";
+"GO:1901576" -> "GO:0009059";
+"GO:1901576" -> "GO:0016053";
+"GO:1901576" -> "GO:0050665";
+"GO:1901576" -> "GO:0090407";
+"GO:1901576" -> "GO:1901362";
+"GO:1901576" -> "GO:1901566";
+"GO:1901576" -> "GO:1901617";
+"GO:1901615" -> "GO:0006066";
+"GO:1901615" -> "GO:0042359";
+"GO:1901615" -> "GO:1901617";
+"GO:1901617" -> "GO:0046165";
+"GO:1901652" -> "GO:1901653";
+"GO:1901654" -> "GO:1901655";
+"GO:1901654" -> "GO:1904627";
+"GO:1901655" -> "GO:1904628";
+"GO:1901698" -> "GO:0010243";
+"GO:1901698" -> "GO:1901699";
+"GO:1901699" -> "GO:0071417";
+"GO:1901700" -> "GO:0000302";
+"GO:1901700" -> "GO:0032496";
+"GO:1901700" -> "GO:0097305";
+"GO:1901700" -> "GO:1901652";
+"GO:1901700" -> "GO:1901654";
+"GO:1901700" -> "GO:1901701";
+"GO:1901701" -> "GO:0034614";
+"GO:1901701" -> "GO:0097306";
+"GO:1901701" -> "GO:1901653";
+"GO:1901701" -> "GO:1901655";
+"GO:1901987" -> "GO:1901989";
+"GO:1901987" -> "GO:1901990";
+"GO:1901987" -> "GO:1902806";
+"GO:1901989" -> "GO:1901992";
+"GO:1901989" -> "GO:1902808";
+"GO:1901990" -> "GO:1901992";
+"GO:1901990" -> "GO:2000045";
+"GO:1901992" -> "GO:1900087";
+"GO:1902074" -> "GO:0010041";
+"GO:1902494" -> "GO:1990234";
+"GO:1902531" -> "GO:0043122";
+"GO:1902531" -> "GO:0090036";
+"GO:1902531" -> "GO:1902533";
+"GO:1902533" -> "GO:0090037";
+"GO:1902806" -> "GO:1902808";
+"GO:1902806" -> "GO:2000045";
+"GO:1902808" -> "GO:1900087";
+"GO:1903047" -> "GO:0140014";
+"GO:1903305" -> "GO:0043300";
+"GO:1903305" -> "GO:1903307";
+"GO:1903307" -> "GO:0043302";
+"GO:1903409" -> "GO:0050665";
+"GO:1903530" -> "GO:0017157";
+"GO:1903530" -> "GO:1903532";
+"GO:1903532" -> "GO:0045921";
+"GO:1903541" -> "GO:1903543";
+"GO:1903555" -> "GO:0032680";
+"GO:1903555" -> "GO:1903557";
+"GO:1903557" -> "GO:0032760";
+"GO:1903578" -> "GO:2001169";
+"GO:1904062" -> "GO:0010155";
+"GO:1904502" -> "GO:1904504";
+"GO:1904627" -> "GO:1904628";
+"GO:1904732" -> "GO:1904959";
+"GO:1905038" -> "GO:0090153";
+"GO:1990234" -> "GO:0002178";
+"GO:2000026" -> "GO:0061035";
+"GO:2000045" -> "GO:1900087";
+"GO:2000145" -> "GO:0030334";
+"GO:2000303" -> "GO:2000304";
+"GO:2000377" -> "GO:1903426";
+
+}
