@@ -1,17 +1,13 @@
-import os
-import sys
-from pathlib import Path
-
 import click
-
+from pathlib import Path
+from genescape import __version__
 from genescape import resources, utils
 
 
-@click.group()
+HELP  = f"Gene function visualization (v{__version__})."
+
+@click.group(help=HELP)
 def cli():
-    """
-    Genomic function visualization.
-    """
     pass
 
 

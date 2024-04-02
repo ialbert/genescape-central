@@ -20,7 +20,7 @@ web:
 
 # Performs a python-only test.
 test:
-	pytest
+	hatch run test
 
 # A full test with file generation.
 testall: test
