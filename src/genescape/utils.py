@@ -1,11 +1,16 @@
-import logging, time, functools
-import os, gzip, json, csv
-import sys, pathlib
-from logging import DEBUG, ERROR, INFO, WARNING
+import csv
+import functools
+import gzip
+import io
+import json
+import logging
+import os
+import pathlib
+import shutil
+import sys
+import time
 from itertools import tee
-import io, shutil
-
-
+from logging import DEBUG, ERROR, INFO, WARNING
 from pathlib import Path
 
 # Get the logger.
@@ -18,10 +23,11 @@ logger.setLevel(INFO)
 logging.addLevelName(logging.WARNING, "WARN")
 
 # Data format version.
-TAG= 'v1'
+TAG = 'v1'
 
 # Loggin format
 LOG_FORMAT = "# %(levelname)s\t%(module)s.%(funcName)-12s\t%(message)s"
+
 
 # A callable to initialize the logger
 def init_logger(logger):
@@ -30,6 +36,7 @@ def init_logger(logger):
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
+
 # Set the log level
 def verbosity(flag=False):
     global logger
@@ -37,6 +44,7 @@ def verbosity(flag=False):
         logger.setLevel(DEBUG)
     else:
         logger.setLevel(INFO)
+
 
 # Initialize the logger
 init_logger(logger)
@@ -47,10 +55,12 @@ info = logger.info
 warn = logger.warning
 error = logger.error
 
+
 # Stops the process with an error.
 def stop(msg):
     logger.error(msg)
     sys.exit(1)
+
 
 # The keys in the data annotation object.
 STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "data", "code", "errors", "unknown_terms"
@@ -87,13 +97,13 @@ NAMESPACE_MAP = {
 }
 
 # Revers namespace map
-NAMESPACE_MAP_REV = dict( (y, x) for x,y in NAMESPACE_MAP.items() )
+NAMESPACE_MAP_REV = dict((y, x) for x, y in NAMESPACE_MAP.items())
 
 # Map colors to the namespaces.
 NAMESPACE_COLORS = {
-     NS_BP: "#F6CBA2",
-     NS_MF: "#A2CDF6",
-     NS_CC: "#F5A2F6",
+    NS_BP: "#F6CBA2",
+    NS_MF: "#A2CDF6",
+    NS_CC: "#F5A2F6",
 }
 
 # The index names
@@ -102,11 +112,13 @@ IDX_GO2SYM = "GO2SYM"
 IDX_SYM2GO = "SYM2GO"
 IDX_META_DATA = "metadata"
 
+
 def get_date():
     # Current time with hours
     curr = time.localtime()
     text = time.strftime("%Y-%m-%d %H:%M:%S", curr)
     return text
+
 
 def parse_terms(iterable):
     """
@@ -179,7 +191,7 @@ def get_stream(inp=None):
             debug(f"Reading: {inp}")
             stream = open(inp, encoding="utf-8-sig")
     elif not sys.stdin.isatty():
-        debug(f"Reading stdin")
+        debug("Reading stdin")
         stream = sys.stdin
     else:
         stop("No input found. A filename or stream is required.")
@@ -232,6 +244,7 @@ def timer(func):
 
     return wrapper
 
+
 def index_stats(index, verbose=False):
     """
     Returns the number of mappings, symbols and terms in the index.
@@ -249,6 +262,7 @@ def index_stats(index, verbose=False):
         info(f"index: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms,")
 
     return map_count, sym_count, go_count
+
 
 if __name__ == "__main__":
     print(get_date())

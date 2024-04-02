@@ -20,7 +20,7 @@ web:
 
 # Performs the testing.
 test:
-	(cd test && make test)
+	pytest
 
 # Runs a linter.
 lint:
@@ -38,12 +38,11 @@ fix:
 push:
 	git commit -am 'saving work' && git push
 
-VERSION ?= $(shell grep '__version__' src/genescape/__about__.py | sed "s/__version__ = \"\\(.*\\)\"/\1/" )
+VERSION ?= $(shell grep '__VERSION__' src/genescape/__about__.py | sed "s/__VERSION__ = \"\\(.*\\)\"/\1/" )
 
 NAME = GeneScape
 
 mac:
-
 	# Example of generating a tag file with the version
 	@echo "VERSION=${VERSION}"
 
@@ -63,7 +62,7 @@ clean:
 realclean: clean
 	rm -rf build dist
 
-build:
+build: test
 	rm -rf build dist
 	hatch build 
 	ls -lh dist

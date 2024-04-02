@@ -1,11 +1,19 @@
-from genescape import utils
-import shutil, os, gzip, json, toml, pprint
-from pathlib import Path
+import gzip
+import json
+import os
+import pprint
+import shutil
 from importlib import resources as rsc
+from pathlib import Path
+
+import toml
+
+from genescape import utils
 
 CURR_DIR = Path(os.path.dirname(__file__))
 
 CACHE = {}
+
 
 def cache(key, func):
     global CACHE
@@ -15,12 +23,13 @@ def cache(key, func):
 
     return CACHE[key]
 
+
 def clear_cache():
     global CACHE
     CACHE = {}
 
 
-class Resource(object):
+class Resource:
 
     def __init__(self, config):
 
@@ -51,15 +60,16 @@ class Resource(object):
         self.GAF_FILE = get("goa_human.gaf.gz")
 
         # Webserver related directories
-        self.WEB_DIR  = get("index.html").parent
+        self.WEB_DIR = get("index.html").parent
         self.STATIC_DIR = self.WEB_DIR / "static"
 
     def get_index(self, code):
         for value in self.config.get("index", []):
             if value["code"] == code:
                 return value["path"]
-        utils.error(f"index code not found: {{code}}")
+        utils.error("index code not found: {code}")
         return self.INDEX
+
 
 # Reset the resource directory
 def reset_dir(config):
@@ -70,6 +80,7 @@ def reset_dir(config):
     if os.path.isdir(path):
         utils.info(f"deleting path: {path}")
         shutil.rmtree(path)
+
 
 def get_config(fname=None):
     """
@@ -82,6 +93,7 @@ def get_config(fname=None):
             config = toml.load(path)
     return config
 
+
 def get_storedir(config):
     """
     The storage directory to the config file.
@@ -90,6 +102,7 @@ def get_storedir(config):
     store = config.get("store", '~/.tmpdir')
     path = Path(os.path.expanduser(store)) / Path(tag)
     return path
+
 
 def get_path(package, target, subdir=None, config=None, devmode=False):
     """
@@ -160,7 +173,6 @@ def init(config, devmode=False):
     return res
 
 
-
 def get_json(path):
 
     # Open JSON data
@@ -189,17 +201,12 @@ if __name__ == "__main__":
 
     cnf = get_config()
 
-    #reset_dir(config)
+    # reset_dir(config)
 
-    res = init(config= cnf, devmode=False)
+    res = init(config=cnf, devmode=False)
 
+    print(res.WEB_DIR)
 
-    print (res.WEB_DIR)
+    print(res.get_index("mm"))
 
-    print (res.get_index("mm"))
-
-
-
-    print ("-" * 80)
-
-
+    print("-" * 80)
