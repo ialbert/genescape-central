@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 import click
 
@@ -22,7 +23,6 @@ ROOT_CHOICES = [utils.NS_BP, utils.NS_MF, utils.NS_CC, utils.NS_ALL]
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal count for a GO term (1)")
 @click.option('-r', '--root', type=click.Choice(ROOT_CHOICES, case_sensitive=False), default=utils.NS_ALL, help='Select a category: BP, MF, CC, or ALL.')
-
 @click.option("-t", "--test", "test", is_flag=True, help="run with demo data")
 @click.option("-v", "verbose", is_flag=True, help="verbose output")
 @click.help_option("-h", "--help")
@@ -60,6 +60,7 @@ def tree(fname, out=None, index=None, root=utils.NS_ALL, match=None, count=1, ve
 @cli.command()
 @click.argument("fname", default=None, required=False)
 @click.option("-i", "--index", "index", metavar="TEXT", help="OBO index file.")
+@click.option("-o", "--out", "out", metavar="TEXT", default="", help="output graph file")
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal count for a GO term (1)")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
@@ -67,7 +68,7 @@ def tree(fname, out=None, index=None, root=utils.NS_ALL, match=None, count=1, ve
 @click.option("--csv", "csvout", is_flag=True, help="Produce CSV output instead of JSON")
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, csvout=False, match="", count=1):
+def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, csvout=False, match="", count=1, out=''):
     """
     Generates the GO terms for a list of genes.
     """
@@ -99,11 +100,14 @@ def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, cs
     utils.debug(f"params c={count} m={match}")
 
     # Get the annotation output
-    out = annot.run(data=data, index=index, pattern=match, mincount=count, csvout=csvout, root=root)
+    text = annot.run(data=data, index=index, pattern=match, mincount=count, csvout=csvout, root=root)
 
-    # Print the annotation aoutput.
-    print(out)
-
+    # How to deal with outputs.
+    if not out:
+        print(text)
+    else:
+        with open(out, "wt") as fp:
+            fp.write(text)
 
 @cli.command()
 @click.option("-b", "--obo", "obo", help="Input OBO file (go-basic.obo)")

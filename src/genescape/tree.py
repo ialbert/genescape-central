@@ -91,7 +91,16 @@ def make_tree(ann, graph):
     # Print information messages.
     utils.info(f"subtree {len(tree.nodes())} nodes and {len(tree.edges())} edges")
 
-    return tree
+    # Sort nodes and edges (Example: By node label)
+    s_nodes = sorted(tree.nodes(data=True))
+    s_edges = sorted(tree.edges(data=True))
+
+    # Attempt to sort the graph nodes and edges to make the output deterministic.
+    s_tree = nx.DiGraph()
+    s_tree.add_nodes_from(s_nodes)
+    s_tree.add_edges_from(s_edges)
+
+    return s_tree
 
 
 # Count all nodes reachable from start, also counting start.

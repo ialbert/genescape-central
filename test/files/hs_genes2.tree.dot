@@ -1,0 +1,164 @@
+digraph genescape {
+"GO:0003674" [fillcolor="#A2CDF6", label="GO:0003674
+molecular_function", shape=box, style=filled];
+"GO:0004857" [fillcolor="#A2CDF6", label="GO:0004857
+enzyme inhibitor
+activity", shape=box, style=filled];
+"GO:0004866" [fillcolor="#A3F6A2", label="GO:0004866
+endopeptidase
+inhibitor activity
+(1/4)", shape=box, style=filled];
+"GO:0005096" [fillcolor="#17DA15", label="GO:0005096
+GTPase activator
+activity
+(1/4)", shape=box, style=filled];
+"GO:0005488" [fillcolor="#A2CDF6", label="GO:0005488
+binding", shape=box, style=filled];
+"GO:0005515" [fillcolor="#A2CDF6", label="GO:0005515
+protein binding", shape=box, style=filled];
+"GO:0005575" [fillcolor="#F5A2F6", label="GO:0005575
+cellular_component", shape=box, style=filled];
+"GO:0005615" [fillcolor="#17DA15", label="GO:0005615
+extracellular space
+(1/4)", shape=box, style=filled];
+"GO:0005737" [fillcolor="#A3F6A2", label="GO:0005737
+cytoplasm
+(1/4)", shape=box, style=filled];
+"GO:0008047" [fillcolor="#A2CDF6", label="GO:0008047
+enzyme activator
+activity", shape=box, style=filled];
+"GO:0008150" [fillcolor="#F6CBA2", label="GO:0008150
+biological_process", shape=box, style=filled];
+"GO:0016020" [fillcolor="#A3F6A2", label="GO:0016020
+membrane
+(1/4)", shape=box, style=filled];
+"GO:0030234" [fillcolor="#A2CDF6", label="GO:0030234
+enzyme regulator
+activity", shape=box, style=filled];
+"GO:0030414" [fillcolor="#A2CDF6", label="GO:0030414
+peptidase inhibitor
+activity", shape=box, style=filled];
+"GO:0030695" [fillcolor="#A2CDF6", label="GO:0030695
+GTPase regulator
+activity", shape=box, style=filled];
+"GO:0031082" [fillcolor="#F5A2F6", label="GO:0031082
+BLOC complex", shape=box, style=filled];
+"GO:0031083" [fillcolor="#17DA15", label="GO:0031083
+BLOC-1 complex
+(1/4)", shape=box, style=filled];
+"GO:0032991" [fillcolor="#F5A2F6", label="GO:0032991
+protein-containing
+complex", shape=box, style=filled];
+"GO:0043085" [fillcolor="#F6CBA2", label="GO:0043085
+positive regulation
+of catalytic
+activity", shape=box, style=filled];
+"GO:0043087" [fillcolor="#F6CBA2", label="GO:0043087
+regulation of GTPase
+activity", shape=box, style=filled];
+"GO:0043547" [fillcolor="#F6CBA2", label="GO:0043547
+positive regulation
+of GTPase activity", shape=box, style=filled];
+"GO:0044093" [fillcolor="#F6CBA2", label="GO:0044093
+positive regulation
+of molecular
+function", shape=box, style=filled];
+"GO:0046982" [fillcolor="#17DA15", label="GO:0046982
+protein
+heterodimerization
+activity
+(1/4)", shape=box, style=filled];
+"GO:0046983" [fillcolor="#A2CDF6", label="GO:0046983
+protein dimerization
+activity", shape=box, style=filled];
+"GO:0050790" [fillcolor="#F6CBA2", label="GO:0050790
+regulation of
+catalytic activity", shape=box, style=filled];
+"GO:0051336" [fillcolor="#F6CBA2", label="GO:0051336
+regulation of
+hydrolase activity", shape=box, style=filled];
+"GO:0051345" [fillcolor="#F6CBA2", label="GO:0051345
+positive regulation
+of hydrolase
+activity", shape=box, style=filled];
+"GO:0060589" [fillcolor="#A2CDF6", label="GO:0060589
+nucleoside-
+triphosphatase
+regulator activity", shape=box, style=filled];
+"GO:0061134" [fillcolor="#A2CDF6", label="GO:0061134
+peptidase regulator
+activity", shape=box, style=filled];
+"GO:0061135" [fillcolor="#A2CDF6", label="GO:0061135
+endopeptidase
+regulator activity", shape=box, style=filled];
+"GO:0065007" [fillcolor="#F6CBA2", label="GO:0065007
+biological
+regulation", shape=box, style=filled];
+"GO:0065009" [fillcolor="#F6CBA2", label="GO:0065009
+regulation of
+molecular function", shape=box, style=filled];
+"GO:0090630" [fillcolor="#17DA15", label="GO:0090630
+activation of GTPase
+activity
+(1/4)", shape=box, style=filled];
+"GO:0098772" [fillcolor="#A2CDF6", label="GO:0098772
+molecular function
+regulator activity", shape=box, style=filled];
+"GO:0110165" [fillcolor="#F5A2F6", label="GO:0110165
+cellular anatomical
+entity", shape=box, style=filled];
+"GO:0140535" [fillcolor="#F5A2F6", label="GO:0140535
+intracellular
+protein-containing
+complex", shape=box, style=filled];
+"GO:0140677" [fillcolor="#A2CDF6", label="GO:0140677
+molecular function
+activator activity", shape=box, style=filled];
+"GO:0140678" [fillcolor="#A2CDF6", label="GO:0140678
+molecular function
+inhibitor activity", shape=box, style=filled];
+"GO:0003674" -> "GO:0005488";
+"GO:0003674" -> "GO:0098772";
+"GO:0004857" -> "GO:0030414";
+"GO:0005488" -> "GO:0005515";
+"GO:0005515" -> "GO:0046983";
+"GO:0005575" -> "GO:0032991";
+"GO:0005575" -> "GO:0110165";
+"GO:0008047" -> "GO:0005096";
+"GO:0008150" -> "GO:0065007";
+"GO:0030234" -> "GO:0004857";
+"GO:0030234" -> "GO:0008047";
+"GO:0030234" -> "GO:0060589";
+"GO:0030234" -> "GO:0061134";
+"GO:0030414" -> "GO:0004866";
+"GO:0030695" -> "GO:0005096";
+"GO:0031082" -> "GO:0031083";
+"GO:0032991" -> "GO:0140535";
+"GO:0043085" -> "GO:0051345";
+"GO:0043087" -> "GO:0043547";
+"GO:0043547" -> "GO:0090630";
+"GO:0044093" -> "GO:0043085";
+"GO:0046983" -> "GO:0046982";
+"GO:0050790" -> "GO:0043085";
+"GO:0050790" -> "GO:0051336";
+"GO:0051336" -> "GO:0043087";
+"GO:0051336" -> "GO:0051345";
+"GO:0051345" -> "GO:0043547";
+"GO:0060589" -> "GO:0030695";
+"GO:0061134" -> "GO:0030414";
+"GO:0061134" -> "GO:0061135";
+"GO:0061135" -> "GO:0004866";
+"GO:0065007" -> "GO:0065009";
+"GO:0065009" -> "GO:0044093";
+"GO:0065009" -> "GO:0050790";
+"GO:0098772" -> "GO:0030234";
+"GO:0098772" -> "GO:0140677";
+"GO:0098772" -> "GO:0140678";
+"GO:0110165" -> "GO:0005615";
+"GO:0110165" -> "GO:0005737";
+"GO:0110165" -> "GO:0016020";
+"GO:0140535" -> "GO:0031082";
+"GO:0140677" -> "GO:0008047";
+"GO:0140678" -> "GO:0004857";
+
+}
