@@ -18,15 +18,20 @@ usage:
 web:
 	python src/genescape/server.py
 
-# Performs the testing.
+# Performs a python-only test.
 test:
 	pytest
+
+# A full test with file generation.
+testall: test
+	(cd test && make test)
 
 # Runs a linter.
 lint:
 	hatch run lint:style
 
-docs:
+# Generate images for the documentation
+docimg:
 	genescape tree -o docs/images/genescape-output1.png src/genescape/data/test_genes.txt 
 	genescape tree -o docs/images/genescape-output2.png src/genescape/data/test_goids.txt 
 	genescape tree -m lipid -o docs/images/genescape-output3.png src/genescape/data/test_goids.txt 
@@ -38,7 +43,7 @@ fix:
 push:
 	git commit -am 'saving work' && git push
 
-VERSION ?= $(shell grep '__VERSION__' src/genescape/__about__.py | sed "s/__VERSION__ = \"\\(.*\\)\"/\1/" )
+VERSION ?= $(shell grep '__version__' src/genescape/__about__.py | sed "s/__version__ = \"\\(.*\\)\"/\1/")
 
 NAME = GeneScape
 

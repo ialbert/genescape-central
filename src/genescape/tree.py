@@ -25,7 +25,7 @@ def build_onto_graph(index):
     terms = data[utils.IDX_OBO]
 
     # Add all nodes to Graph
-    for key, node in terms.items():
+    for node in terms.values():
         oid = node["id"]
         name = node["name"]
         text = textwrap.fill(name, width=20)
@@ -34,7 +34,7 @@ def build_onto_graph(index):
         graph.add_node(oid, id=oid, name=name, namespace=namespace, label=label, **utils.NODE_ATTRS)
 
     # Add all edges to Graph
-    for name, node in terms.items():
+    for node in terms.values():
         for parent in node.get("is_a", []):
             if graph.has_node(parent):
                 graph.add_edge(parent, node["id"])
@@ -236,10 +236,10 @@ def parse_input(inp, index, pattern=None, root=utils.NS_ALL, mincount=1):
     utils.info(f"index: {index}")
 
     # Get the input stream.
-    iter = utils.get_stream(inp=inp)
+    it = utils.get_stream(inp=inp)
 
     # Parse the input into a dictionary.
-    data = utils.parse_terms(iterable=iter)
+    data = utils.parse_terms(iterable=it)
 
     # Run the annotation command
     ann = annot.run(data, index=index, mincount=mincount, pattern=pattern, root=root)

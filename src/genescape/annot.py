@@ -9,7 +9,6 @@ import json
 import re
 import sys
 from collections import Counter
-from itertools import *
 from pathlib import Path
 
 from genescape import resources, utils
@@ -144,9 +143,9 @@ def ann2csv(ann):
         write = csv.DictWriter(stream, fieldnames=fields, extrasaction='ignore')
         write.writeheader()
         for row in data:
-            row = dict(row)
-            row[utils.SOURCE] = ";".join(row.get(utils.SOURCE, []))
-            write.writerow(row)
+            rc = dict(row)
+            rc[utils.SOURCE] = ";".join(row.get(utils.SOURCE, []))
+            write.writerow(rc)
         text = stream.getvalue()
 
     return text
