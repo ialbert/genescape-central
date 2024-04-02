@@ -228,6 +228,18 @@ Then use an online tool like [viz-js][viz] to visualize the graph.
 
 [viz]: https://viz-js.com/ 
 
+## Testing
+
+Tests are run via a `Makefile` as:
+
+```console
+make test
+```
+
+Tests require that `graphviz` is installed and available on the `PATH`.
+
+Due to the nondeterministic way that the images are created, we are unable to test for exact outputs the tests are limited to running the software and checking for runtime errors.
+
 ## License
 
 `genescape` is distributed under the terms of the MIT license. 

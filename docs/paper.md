@@ -8,7 +8,7 @@ tags:
 authors:
   - name: Istvan Albert
     orcid: 0000-0001-8366-984X
-    affiliation: ["1", "2"] 
+    affiliation: ["1, 2"] 
 
 affiliations:
  - name: Bioinformatics Consulting Center, Pennsylvania State University, USA
@@ -79,6 +79,29 @@ reduce the subgraph to nodes for which:
 1. The function definitions match certain patterns
 2. A minimum number of genes share a function, 
 3. Nodes belong to a specific GO subtree: Biological Process (BP), Molecular Function (MF), Cellular Component (CC)
+
+As an example, take the input genelist of just four genes:
+
+```
+Cyp1a1
+Sphk2
+Sptlc2
+Smpd3
+```
+
+the resulting funcitonal ontology graph is huge:
+
+![GeneScape subgraph for a gene list \label{fig:interface}](images/genescape-output2.png)
+
+Users can reduce the tree to show only terms that match the word `lipid` via the graphical user interface or the command line:
+
+```console
+genescape tree -m lipid genes.txt -o output.pdf
+```
+
+The filtering process will result in a smaller tree focused on the lipid-related terms:
+
+![GeneScape subgraph for a gene list \label{fig:interface}](images/genescape-output3.png)
 
 In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
 
