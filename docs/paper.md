@@ -41,9 +41,16 @@ Web-based tools designed to visualize and filter gene ontology data include `Ami
 
 GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software that does not require Python to be installed on the user's computer, thus making it accessible to a wide range of users.
 
-GeneScape has prebuilt databases for human and mouse genomes. Users may build databases for other organisms by downloading the GAF files from the Gene Ontology website then running the `genescape build` command according to the instructions.
+GeneScape is distributed with prebuilt databases for human and mouse genomes. For other organisms, users need to download the GAF files from the Gene Ontology website and run the command:
+
+```
+genescape build --gaf mydata.gaf --index mydata.index.gz 
+```
+
+The `build` command will create a database that can then be used for all subsequent analyses with the software. Users should consult the [GeneScape documentation][docs] for up-to-date details. 
 
 [genescape]: https://github.com/ialbert/genescape-central
+[docs]: https://github.com/ialbert/genescape-central
 
 A typical usage starts with a gene list such as: 
 
