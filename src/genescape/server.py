@@ -9,8 +9,7 @@ from random import random
 
 import toml
 
-from genescape import __VERSION__ as VERSION
-from genescape import annot, bottle, resources, tree, utils
+from genescape import __version__, annot, bottle, resources, tree, utils
 from genescape.bottle import TEMPLATE_PATH, Bottle, get, post, redirect, request, response, static_file, template, view
 
 DEVMODE = True
@@ -80,7 +79,7 @@ def get_param(request, name='param'):
 def safe_int(value, default=1):
     try:
         return int(value)
-    except:
+    except ValueError as exc:
         return default
 
 
@@ -91,7 +90,7 @@ def webapp(res, config, devmode=False, host="localhost", port=8000):
     @debugger
     def index():
         dbs = get_dbs(res.config)
-        param = dict(title="GeneScape", version=VERSION, rand=random(), dbs=dbs)
+        param = dict(title="GeneScape", version=__version__, rand=random(), dbs=dbs)
         return param
 
     @app.route('/upload/', method='POST')
@@ -142,7 +141,7 @@ def webapp(res, config, devmode=False, host="localhost", port=8000):
         bottle.debug(True)
 
     try:
-        print(f"#\n# GeneScape version: {VERSION}")
+        print(f"#\n# GeneScape version: {__version__}")
         app.run(host=host, port=port, reloader=devmode)
     except Exception as e:
         print(f"Server Error: {e}", sys.stderr)

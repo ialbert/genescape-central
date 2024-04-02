@@ -1,1 +1,1 @@
-from genescape.__about__ import __VERSION__
+from genescape.__about__ import __version__

@@ -253,7 +253,7 @@ def index_stats(index, verbose=False):
     sym2go = index[IDX_SYM2GO]
 
     map_count = 0
-    for key, value in go2sym.items():
+    for value in go2sym.values():
         map_count += len(list(set(value)))
     sym_count = len(sym2go)
     go_count = len(go2sym)

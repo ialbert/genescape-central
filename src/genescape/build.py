@@ -5,8 +5,6 @@ import csv
 import gzip
 import json
 import os
-import sys
-from itertools import *
 from pathlib import Path
 
 from genescape import resources, utils
@@ -79,7 +77,7 @@ def make_index(obo, gaf, index, with_synonyms=False):
         # Decide which symbols to use.
         if with_synonyms:
             synons = list(filter(None, db_other.strip().split("|")))
-            symbols = [db_id, db_sym] + synons
+            symbols = [db_id, db_sym, *synons]
         else:
             symbols = [db_sym]
 
