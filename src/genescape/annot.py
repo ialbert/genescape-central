@@ -1,22 +1,24 @@
 """
 Annotates a list of genes with functions based on the GO graph
 """
-import csv, io
+
+import csv
 import gzip
-import sys, json, re
+import io
+import json
+import re
+import sys
 from collections import Counter
 from itertools import *
 from pathlib import Path
-from genescape import utils, resources
+
+from genescape import resources, utils
 
 
 def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
 
     # Collect the run status into this list.
-    status = {
-        utils.CODE_FIELD: 0,
-        utils.INVALID_FIELD: []
-    }
+    status = {utils.CODE_FIELD: 0, utils.INVALID_FIELD: []}
 
     # Checking the input
     if not index:
@@ -46,7 +48,7 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
     go = idx[utils.IDX_OBO]
 
     # The valid ids are the unqiue gene and protein ids.
-    valid_ids = set(sym2go) |set(go)
+    valid_ids = set(sym2go) | set(go)
 
     # Fetch GO functions for a given gene or protein id.
     def get_func(name):
@@ -73,7 +75,7 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
     # The missing ids.
     if miss:
         status[utils.CODE_FIELD] = 1
-        status[utils.INVALID_FIELD] = (list(miss))
+        status[utils.INVALID_FIELD] = list(miss)
         utils.warn(f"{status}")
 
     # Get the elements for a go id.
@@ -119,7 +121,7 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
         if root != utils.NS_ALL and root != root_code:
             continue
 
-        name = dict(zip(data_fields, [goid, root_code, cnt,func, funcs, cnt, n_size, label]))
+        name = dict(zip(data_fields, [goid, root_code, cnt, func, funcs, cnt, n_size, label], strict=False))
 
         res.append(name)
 

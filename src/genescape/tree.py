@@ -1,12 +1,15 @@
-import os, json, io, csv
+import csv
+import io
+import json
+import os
 import textwrap
 
-import pydot
 import networkx as nx
+import pydot
 from networkx import DiGraph
 
-from genescape import utils, annot, resources
-from genescape.utils import GID, LABEL, DEGREE, COUNT_DESC, INPUT, NAMESPACE
+from genescape import annot, resources, utils
+from genescape.utils import COUNT_DESC, DEGREE, GID, INPUT, LABEL, NAMESPACE
 
 
 # Parse GO Ontology file from fname into a networkx graph
@@ -107,6 +110,7 @@ def make_tree(ann, graph):
 def count_descendants(graph, start):
     return len(nx.descendants(graph, start)) + 1
 
+
 def pydot_graph(extra, tree):
     """
     Adds additional information to the tree nodes.
@@ -157,12 +161,15 @@ def pydot_graph(extra, tree):
 
     return pg
 
+
 WIDTH = 16.9
 HEIGHT = 6.0
 
+
 def dpi(size):
-    value = size/WIDTH
+    value = size / WIDTH
     return value
+
 
 def write(pg, out=None, imgsize=2048):
     """
@@ -194,6 +201,7 @@ def write(pg, out=None, imgsize=2048):
 
     return text
 
+
 def build_tree(ann, index):
 
     # Speed up the process by caching the graph.
@@ -204,9 +212,10 @@ def build_tree(ann, index):
     graph = resources.cache("graph", func=build)
 
     # Generate the tree from the graph.
-    tree = make_tree(ann=ann,  graph=graph)
+    tree = make_tree(ann=ann, graph=graph)
 
     return tree
+
 
 def write_tree(tree, ann, out=None):
 
@@ -239,10 +248,11 @@ def parse_input(inp, index, pattern=None, root=utils.NS_ALL, mincount=1):
     ann = json.loads(ann)
 
     # Run the tree command.
-    tree = build_tree (ann=ann, index=index)
+    tree = build_tree(ann=ann, index=index)
 
     # Return the tree
     return tree, ann
+
 
 if __name__ == "__main__":
     cnf = resources.get_config()
@@ -253,5 +263,3 @@ if __name__ == "__main__":
     out = os.path.join("genescape.pdf")
     tree, ann = parse_input(inp=inp, index=ind, mincount=1, root=utils.NS_CC)
     text = write_tree(tree, ann, out=out)
-
-

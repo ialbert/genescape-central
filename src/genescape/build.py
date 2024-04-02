@@ -1,13 +1,17 @@
 #
 # Parse an OBO and produces a GZIPed JSON file
 #
-import gzip, os, sys
-import json
 import csv
+import gzip
+import json
+import os
+import sys
 from itertools import *
 from pathlib import Path
-from genescape import utils, resources
+
+from genescape import resources, utils
 from genescape.__about__ import __version__
+
 
 def parse_line(text, sep):
     text = text.strip()
@@ -49,6 +53,7 @@ def parse_gaf(fname):
 
     stream = csv.reader(stream, delimiter="\t")
     return stream
+
 
 def make_index(obo, gaf, index, with_synonyms=False):
 
@@ -99,8 +104,8 @@ def make_index(obo, gaf, index, with_synonyms=False):
 
     # Database metadata
     meta = dict(
-        version=__version__, date=utils.get_date(),
-        gaf=gaf.name, obo=obo.name, index=index.name, synonyms=with_synonyms)
+        version=__version__, date=utils.get_date(), gaf=gaf.name, obo=obo.name, index=index.name, synonyms=with_synonyms
+    )
 
     # The complete data
     data = {
@@ -132,12 +137,10 @@ if __name__ == "__main__":
     gaf = res.GAF_FILE
     ind = Path("genescape.json.gz")
 
-
     @utils.timer
     def test_make_index():
         retval = make_index(obo=obo, gaf=gaf, index=ind, with_synonyms=False)
         return retval
-
 
     @utils.timer
     def test_load_json():
@@ -147,8 +150,5 @@ if __name__ == "__main__":
     vals = test_make_index()
     obj = test_load_json()
 
-    #data = obj[utils.IDX_SYM2GO]
-    #print (json.dumps(data, indent=4))
-
-
-
+    # data = obj[utils.IDX_SYM2GO]
+    # print (json.dumps(data, indent=4))

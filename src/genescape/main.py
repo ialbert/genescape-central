@@ -1,9 +1,10 @@
 import os
 import sys
 from pathlib import Path
+
 import click
 
-from genescape import utils, resources
+from genescape import resources, utils
 
 
 @click.group()
@@ -13,16 +14,29 @@ def cli():
     """
     pass
 
+
 ROOT_CHOICES = [utils.NS_BP, utils.NS_MF, utils.NS_CC, utils.NS_ALL]
 
 
 @cli.command()
 @click.argument("fname", default=None, required=False)
 @click.option("-o", "--out", "out", metavar="TEXT", default="genescape.pdf", help="output graph file")
-@click.option("-i", "--index", "index", metavar="FILE", help="OBO index file", )
+@click.option(
+    "-i",
+    "--index",
+    "index",
+    metavar="FILE",
+    help="OBO index file",
+)
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal count for a GO term (1)")
-@click.option('-r', '--root', type=click.Choice(ROOT_CHOICES, case_sensitive=False), default=utils.NS_ALL, help='Select a category: BP, MF, CC, or ALL.')
+@click.option(
+    '-r',
+    '--root',
+    type=click.Choice(ROOT_CHOICES, case_sensitive=False),
+    default=utils.NS_ALL,
+    help='Select a category: BP, MF, CC, or ALL.',
+)
 @click.option("-t", "--test", "test", is_flag=True, help="run with demo data")
 @click.option("-v", "verbose", is_flag=True, help="verbose output")
 @click.help_option("-h", "--help")
@@ -64,7 +78,13 @@ def tree(fname, out=None, index=None, root=utils.NS_ALL, match=None, count=1, ve
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal count for a GO term (1)")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
-@click.option('-r', '--root', type=click.Choice(ROOT_CHOICES, case_sensitive=False), default=utils.NS_ALL, help='Select a category: BP, MF, CC, or ALL.')
+@click.option(
+    '-r',
+    '--root',
+    type=click.Choice(ROOT_CHOICES, case_sensitive=False),
+    default=utils.NS_ALL,
+    help='Select a category: BP, MF, CC, or ALL.',
+)
 @click.option("--csv", "csvout", is_flag=True, help="Produce CSV output instead of JSON")
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
@@ -106,17 +126,18 @@ def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, cs
     if not out:
         print(text)
     else:
-        with open(out, "wt") as fp:
+        with open(out, "w") as fp:
             fp.write(text)
+
 
 @cli.command()
 @click.option("-b", "--obo", "obo", help="Input OBO file (go-basic.obo)")
 @click.option("-g", "--gaf", "gaf", help="Input GAF file (goa_human.gaf.gz)")
 @click.option("-i", "--index", "index", default="genescape.json.gz", help="Output index file (genescape.json.gz)")
-@click.option("-s", "--synonms", "synon", is_flag=True,  help="Include synonyms in the index")
-@click.option("-d", "--dump", "dump", is_flag=True,  help="Print the index to stdout")
+@click.option("-s", "--synonms", "synon", is_flag=True, help="Include synonyms in the index")
+@click.option("-d", "--dump", "dump", is_flag=True, help="Print the index to stdout")
 @click.help_option("-h", "--help")
-def build(index=None, obo=None, gaf=None, synon=False, dump=False ):
+def build(index=None, obo=None, gaf=None, synon=False, dump=False):
     """
     Builds a JSON index file from an OBO file.
     """
@@ -135,26 +156,29 @@ def build(index=None, obo=None, gaf=None, synon=False, dump=False ):
     ind = Path(index)
 
     if dump:
+
         @utils.timer
         def load_index():
             retval = resources.get_json(ind)
             return retval
+
         obj = load_index()
         meta = obj[utils.IDX_META_DATA]
-        print (f"# {meta}")
+        print(f"# {meta}")
         sym2go = obj[utils.IDX_SYM2GO]
         for key, value in sym2go.items():
-            row = [ key] + value
+            row = [key] + value
             print("\t".join(row))
 
     else:
         # Run the build command.
         build.make_index(obo=obo, gaf=gaf, index=ind, with_synonyms=synon)
 
+
 @cli.command()
 @click.option("--devmode", "devmode", is_flag=True, help="run in development mode")
 @click.option("--reset", "reset", is_flag=True, help="reset the resources")
-@click.option("-i", "--index", "index",  help="Genescape index file")
+@click.option("-i", "--index", "index", help="Genescape index file")
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
 def web(devmode=False, reset=False, verbose=False, index=None):
