@@ -37,7 +37,7 @@ The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. Ty
 
 The most annotated gene in the human genome, `HTT1`, currently has 1098 annotations. Thus, even small lists of genes may have a large number of annotations presenting an extraordinary challenge for interpretation. There is a clear need to visualize shared gene functions in an informative manner. 
 
-Web-based tools designed to visualize gene ontology data include `AmiGO` [@AmiGO]. Command line tools like `goatools` [@goatools] support GO term lineage visualization. R packages like `topGO` [@topGO] implement GO structure visualizations of enriched GO terms. To our knowledge, no standalone software package specifically designed to filter and visualize gene ontology data derived from lists of genes exists at this time.
+Web-based tools designed to visualize and filter gene ontology data include `AmiGO` [@AmiGO] and `QuickGO` [@QuickGO]. Command line tools like `goatools` [@goatools] support GO term lineage visualization. R packages like `topGO` [@topGO] implement GO structure visualizations of enriched GO terms. We are unaware of locally installable software that specifically allows for interactive filtering and visualization of gene ontology derived on gene lists.
 
 GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software that does not require Python to be installed on the user's computer, thus making it accessible to a wide range of users.
 
