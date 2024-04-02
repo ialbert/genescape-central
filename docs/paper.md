@@ -76,7 +76,7 @@ GO:0005615,CC,1,extracellular space,C3P1,4,(1/4)
 
 In the next step, GeneScape visualizes the GO terms as the graph structure that represents the functional context of the genes relative to the larger Gene Ontology.
 
-![GeneScape subgraph for a gene list \label{fig:interface}](images/genescape-output1.png){height="400px"}
+![Ontology subgraph for a gene list \label{fig:interface}](images/genescape-output1.png){height="400px"}
 
 Various colors are used to provide additional context to the nodes in the graph; for example, functions derived from the input genes are colored green. The intermediate nodes are colored by their category. 
 
