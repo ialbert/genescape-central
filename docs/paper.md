@@ -8,7 +8,7 @@ tags:
 authors:
   - name: Istvan Albert
     orcid: 0000-0001-8366-984X
-    affiliation: ["1, 2"] 
+    affiliation: "1, 2"
 
 affiliations:
  - name: Bioinformatics Consulting Center, Pennsylvania State University, USA
