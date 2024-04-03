@@ -96,7 +96,7 @@ def make_tree(ann, graph):
 
     # Sort nodes and edges (Example: By node label)
     s_nodes = sorted(tree.nodes(data=True))
-    s_edges = sorted(tree.edges(data=True))
+    s_edges = list(tree.edges(data=True))
 
     # Attempt to sort the graph nodes and edges to make the output deterministic.
     s_tree = nx.DiGraph()
