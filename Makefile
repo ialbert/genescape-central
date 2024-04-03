@@ -54,7 +54,7 @@ mac:
 	(cd dist && zip ${NAME}-${VERSION}-MacOS.zip ${NAME})
 
 win:
-	(cd dist && zip ${NAME}-${VERSION}-Window.zip ${NAME}.exe)
+	(cd dist && zip ${NAME}-${VERSION}-Windows.zip ${NAME}.exe)
 
 clean:
 	rm -f src/genescape/web/static/tmp/image*
