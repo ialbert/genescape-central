@@ -13,7 +13,7 @@ authors:
 affiliations:
  - name: Bioinformatics Consulting Center, Pennsylvania State University, United States of America
    index: 1
- - name: Biochemistry and Molecular Biology, Pennsylvania State University, United States of America
+ - name: Department of Biochemistry and Molecular Biology, Pennsylvania State University, United States of America
    index: 2
    
 
