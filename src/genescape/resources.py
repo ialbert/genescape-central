@@ -18,6 +18,10 @@ CACHE = {}
 def cache(key, func):
     global CACHE
 
+    #key = str(key)
+
+    utils.info(f"cache key: {key}")
+
     if key not in CACHE:
         CACHE[key] = func()
 
@@ -65,7 +69,7 @@ class Resource:
 
     def get_index(self, code):
         for value in self.config.get("index", []):
-            if value["code"] == code:
+            if value.get("code", "") == code:
                 return value["path"]
         utils.error("index code not found: {code}")
         return self.INDEX

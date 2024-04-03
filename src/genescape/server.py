@@ -117,6 +117,8 @@ def webapp(res, config, devmode=False, host="localhost", port=8000):
         count = safe_int(count, default=1)
         db = get_param(request, name='db')
 
+        #resources.clear_cache()
+
         # Choose a different index
         index = res.get_index(db)
 

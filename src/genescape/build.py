@@ -89,15 +89,33 @@ def make_index(obo, gaf, index, with_synonyms=False):
             sym2go.setdefault(sym, []).append(go_id)
             go2sym.setdefault(go_id, []).append(sym)
 
+    # Remove duplicates
+    for key in sym2go:
+        sym2go[key] = list(set(sym2go[key]))
+
+    for key in go2sym:
+        go2sym[key] = list(set(go2sym[key]))
+
     utils.info(f"reading: {obo}")
     stream = gzip.open(obo, mode="rt", encoding="utf-8") if obo.name.endswith(".gz") else open(obo)
     terms = parse_obo(stream)
     terms = filter(lambda x: not x.get("is_obsolete"), terms)
     terms = list(terms)
 
+    # The total number of symbols
+    sym_count = len(sym2go) or 1
+
+    # Number of genes annotated with this GO term.
+    def gene_count(goid):
+        return len(go2sym.get(goid, []))
+
     # Create a dictionary of GO terms
     obo_dict = {}
     for term in terms:
+        goid = term["id"]
+        gcnt = gene_count(goid)
+        term[utils.GO2GENE_COUNT] = gcnt
+        term[utils.GO2GENE_PERC] = (gcnt / sym_count) * 100
         obo_dict[term["id"]] = term
 
     # Database metadata

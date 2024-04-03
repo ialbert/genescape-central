@@ -33,7 +33,8 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
         return idx
 
     # Cache the index
-    idx = resources.cache("index", func=build)
+    key = f"file_{index}"
+    idx = resources.cache(key, func=build)
 
     # Extract the gene names from the data
     names = map(lambda x: x[utils.GID], data[utils.DATA_FIELD])
@@ -109,7 +110,9 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
     res = []
     data_fields = [utils.GID, "root", "count", "function", utils.SOURCE, "count", "size", utils.LABEL]
 
+
     for goid, cnt, func in counts:
+
         label = f"({cnt}/{n_size})"
         funcs = func2name.get(goid, [])
         name_space = go2ns(goid)
@@ -152,17 +155,21 @@ def ann2csv(ann):
 
 
 if __name__ == "__main__":
+
+    # Get default config
+    cnf = resources.get_config()
+
     # Initialize the resources
-    res = resources.init()
+    res = resources.init(cnf)
 
     inp = res.TEST_GENES
-    index = res.INDEX
+    ind = res.INDEX
 
     # Read the genelist
     stream = utils.get_stream(inp=inp)
 
     data = utils.parse_terms(iterable=stream)
 
-    out = run(data=data, index=index, csvout=True)
+    out = run(data=data, index=ind, csvout=True)
 
     print(out)

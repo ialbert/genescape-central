@@ -1,64 +1,64 @@
 digraph genescape {
 "GO:0000137" [fillcolor="#17DA15", label="GO:0000137
-Golgi cis cisterna
+Golgi cis cisterna: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0000139" [fillcolor="#17DA15", label="GO:0000139
-Golgi membrane
+Golgi membrane: 3.4%
 (1/5)", shape=box, style=filled];
 "GO:0000166" [fillcolor="#A2CDF6", label="GO:0000166
-nucleotide binding", shape=box, style=filled];
+nucleotide binding: 0.3%", shape=box, style=filled];
 "GO:0000280" [fillcolor="#F6CBA2", label="GO:0000280
 nuclear division", shape=box, style=filled];
 "GO:0000302" [fillcolor="#F6CBA2", label="GO:0000302
 response to reactive
 oxygen species", shape=box, style=filled];
 "GO:0000786" [fillcolor="#A3F6A2", label="GO:0000786
-nucleosome
+nucleosome: 0.5%
 (1/5)", shape=box, style=filled];
 "GO:0001503" [fillcolor="#F6CBA2", label="GO:0001503
-ossification", shape=box, style=filled];
+ossification: 0.4%", shape=box, style=filled];
 "GO:0001523" [fillcolor="#F6CBA2", label="GO:0001523
 retinoid metabolic
-process", shape=box, style=filled];
+process: 0.1%", shape=box, style=filled];
 "GO:0001558" [fillcolor="#F6CBA2", label="GO:0001558
 regulation of cell
-growth", shape=box, style=filled];
+growth: 0.4%", shape=box, style=filled];
 "GO:0001568" [fillcolor="#A3F6A2", label="GO:0001568
 blood vessel
-development
+development: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0001654" [fillcolor="#F6CBA2", label="GO:0001654
-eye development", shape=box, style=filled];
+eye development: 0.2%", shape=box, style=filled];
 "GO:0001666" [fillcolor="#A3F6A2", label="GO:0001666
-response to hypoxia
+response to hypoxia: 0.9%
 (1/5)", shape=box, style=filled];
 "GO:0001676" [fillcolor="#A3F6A2", label="GO:0001676
 long-chain fatty
 acid metabolic
-process
+process: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0001727" [fillcolor="#A2CDF6", label="GO:0001727
 lipid kinase
 activity", shape=box, style=filled];
 "GO:0001786" [fillcolor="#17DA15", label="GO:0001786
 phosphatidylserine
-binding
+binding: 0.4%
 (1/5)", shape=box, style=filled];
 "GO:0001817" [fillcolor="#F6CBA2", label="GO:0001817
 regulation of
-cytokine production", shape=box, style=filled];
+cytokine production: 0.3%", shape=box, style=filled];
 "GO:0001819" [fillcolor="#F6CBA2", label="GO:0001819
 positive regulation
 of cytokine
-production", shape=box, style=filled];
+production: 0.3%", shape=box, style=filled];
 "GO:0001932" [fillcolor="#A3F6A2", label="GO:0001932
 regulation of
 protein
-phosphorylation
+phosphorylation: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0001958" [fillcolor="#17DA15", label="GO:0001958
 endochondral
-ossification
+ossification: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0002063" [fillcolor="#F6CBA2", label="GO:0002063
 chondrocyte
@@ -75,11 +75,11 @@ of bacterial origin", shape=box, style=filled];
 "GO:0002244" [fillcolor="#A3F6A2", label="GO:0002244
 hematopoietic
 progenitor cell
-differentiation
+differentiation: 0.4%
 (1/5)", shape=box, style=filled];
 "GO:0002682" [fillcolor="#F6CBA2", label="GO:0002682
 regulation of immune
-system process", shape=box, style=filled];
+system process: 0.2%", shape=box, style=filled];
 "GO:0002684" [fillcolor="#F6CBA2", label="GO:0002684
 positive regulation
 of immune system
@@ -148,12 +148,12 @@ in endochondral bone
 morphogenesis
 (1/5)", shape=box, style=filled];
 "GO:0003674" [fillcolor="#A2CDF6", label="GO:0003674
-molecular_function", shape=box, style=filled];
+molecular_function: 3.6%", shape=box, style=filled];
 "GO:0003824" [fillcolor="#A2CDF6", label="GO:0003824
-catalytic activity", shape=box, style=filled];
+catalytic activity: 0.1%", shape=box, style=filled];
 "GO:0004497" [fillcolor="#A3F6A2", label="GO:0004497
 monooxygenase
-activity
+activity: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0004620" [fillcolor="#A2CDF6", label="GO:0004620
 phospholipase
@@ -171,65 +171,65 @@ activity
 "GO:0004888" [fillcolor="#A2CDF6", label="GO:0004888
 transmembrane
 signaling receptor
-activity", shape=box, style=filled];
+activity: 0.7%", shape=box, style=filled];
 "GO:0004930" [fillcolor="#A2CDF6", label="GO:0004930
 G protein-coupled
-receptor activity", shape=box, style=filled];
+receptor activity: 3.5%", shape=box, style=filled];
 "GO:0005488" [fillcolor="#A2CDF6", label="GO:0005488
 binding", shape=box, style=filled];
 "GO:0005506" [fillcolor="#A3F6A2", label="GO:0005506
-iron ion binding
+iron ion binding: 0.7%
 (1/5)", shape=box, style=filled];
 "GO:0005515" [fillcolor="#A3F6A2", label="GO:0005515
-protein binding
+protein binding: 64.2%
 (3/5)", shape=box, style=filled];
 "GO:0005524" [fillcolor="#17DA15", label="GO:0005524
-ATP binding
+ATP binding: 7.5%
 (1/5)", shape=box, style=filled];
 "GO:0005537" [fillcolor="#17DA15", label="GO:0005537
-mannose binding
+mannose binding: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0005543" [fillcolor="#A2CDF6", label="GO:0005543
-phospholipid binding", shape=box, style=filled];
+phospholipid binding: 0.6%", shape=box, style=filled];
 "GO:0005575" [fillcolor="#F5A2F6", label="GO:0005575
-cellular_component", shape=box, style=filled];
+cellular_component: 2.1%", shape=box, style=filled];
 "GO:0005576" [fillcolor="#A3F6A2", label="GO:0005576
-extracellular region
+extracellular region: 10.0%
 (1/5)", shape=box, style=filled];
 "GO:0005634" [fillcolor="#A3F6A2", label="GO:0005634
-nucleus
+nucleus: 28.6%
 (1/5)", shape=box, style=filled];
 "GO:0005654" [fillcolor="#17DA15", label="GO:0005654
-nucleoplasm
+nucleoplasm: 19.7%
 (1/5)", shape=box, style=filled];
 "GO:0005737" [fillcolor="#A3F6A2", label="GO:0005737
-cytoplasm
+cytoplasm: 25.9%
 (2/5)", shape=box, style=filled];
 "GO:0005739" [fillcolor="#17DA15", label="GO:0005739
-mitochondrion
+mitochondrion: 6.9%
 (1/5)", shape=box, style=filled];
 "GO:0005743" [fillcolor="#17DA15", label="GO:0005743
 mitochondrial inner
-membrane
+membrane: 2.4%
 (2/5)", shape=box, style=filled];
 "GO:0005765" [fillcolor="#A3F6A2", label="GO:0005765
-lysosomal membrane
+lysosomal membrane: 1.9%
 (1/5)", shape=box, style=filled];
 "GO:0005774" [fillcolor="#F5A2F6", label="GO:0005774
 vacuolar membrane", shape=box, style=filled];
 "GO:0005783" [fillcolor="#A3F6A2", label="GO:0005783
 endoplasmic
-reticulum
+reticulum: 5.5%
 (1/5)", shape=box, style=filled];
 "GO:0005789" [fillcolor="#A3F6A2", label="GO:0005789
 endoplasmic
-reticulum membrane
+reticulum membrane: 5.6%
 (2/5)", shape=box, style=filled];
 "GO:0005829" [fillcolor="#A3F6A2", label="GO:0005829
-cytosol
+cytosol: 27.7%
 (1/5)", shape=box, style=filled];
 "GO:0005886" [fillcolor="#A3F6A2", label="GO:0005886
-plasma membrane
+plasma membrane: 26.7%
 (1/5)", shape=box, style=filled];
 "GO:0006066" [fillcolor="#F6CBA2", label="GO:0006066
 alcohol metabolic
@@ -244,35 +244,35 @@ metabolic process", shape=box, style=filled];
 "GO:0006139" [fillcolor="#F6CBA2", label="GO:0006139
 nucleobase-
 containing compound
-metabolic process", shape=box, style=filled];
+metabolic process: 0.2%", shape=box, style=filled];
 "GO:0006140" [fillcolor="#F6CBA2", label="GO:0006140
 regulation of
 nucleotide metabolic
 process", shape=box, style=filled];
 "GO:0006259" [fillcolor="#F6CBA2", label="GO:0006259
 DNA metabolic
-process", shape=box, style=filled];
+process: 0.1%", shape=box, style=filled];
 "GO:0006325" [fillcolor="#F6CBA2", label="GO:0006325
 chromatin
-organization", shape=box, style=filled];
+organization: 0.8%", shape=box, style=filled];
 "GO:0006338" [fillcolor="#F6CBA2", label="GO:0006338
-chromatin remodeling", shape=box, style=filled];
+chromatin remodeling: 1.6%", shape=box, style=filled];
 "GO:0006629" [fillcolor="#F6CBA2", label="GO:0006629
 lipid metabolic
-process", shape=box, style=filled];
+process: 0.9%", shape=box, style=filled];
 "GO:0006631" [fillcolor="#A3F6A2", label="GO:0006631
 fatty acid metabolic
-process
+process: 0.4%
 (1/5)", shape=box, style=filled];
 "GO:0006633" [fillcolor="#F6CBA2", label="GO:0006633
 fatty acid
-biosynthetic process", shape=box, style=filled];
+biosynthetic process: 0.2%", shape=box, style=filled];
 "GO:0006643" [fillcolor="#F6CBA2", label="GO:0006643
 membrane lipid
 metabolic process", shape=box, style=filled];
 "GO:0006644" [fillcolor="#F6CBA2", label="GO:0006644
 phospholipid
-metabolic process", shape=box, style=filled];
+metabolic process: 0.3%", shape=box, style=filled];
 "GO:0006665" [fillcolor="#F6CBA2", label="GO:0006665
 sphingolipid
 metabolic process", shape=box, style=filled];
@@ -294,7 +294,7 @@ metabolic process
 (1/5)", shape=box, style=filled];
 "GO:0006672" [fillcolor="#A3F6A2", label="GO:0006672
 ceramide metabolic
-process
+process: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0006684" [fillcolor="#A3F6A2", label="GO:0006684
 sphingomyelin
@@ -313,7 +313,7 @@ icosanoid metabolic
 process", shape=box, style=filled];
 "GO:0006694" [fillcolor="#A3F6A2", label="GO:0006694
 steroid biosynthetic
-process
+process: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0006720" [fillcolor="#F6CBA2", label="GO:0006720
 isoprenoid metabolic
@@ -345,31 +345,31 @@ compound metabolic
 process", shape=box, style=filled];
 "GO:0006805" [fillcolor="#A3F6A2", label="GO:0006805
 xenobiotic metabolic
-process
+process: 0.6%
 (1/5)", shape=box, style=filled];
 "GO:0006807" [fillcolor="#F6CBA2", label="GO:0006807
 nitrogen compound
 metabolic process", shape=box, style=filled];
 "GO:0006810" [fillcolor="#F6CBA2", label="GO:0006810
-transport", shape=box, style=filled];
+transport: 0.1%", shape=box, style=filled];
 "GO:0006950" [fillcolor="#F6CBA2", label="GO:0006950
 response to stress", shape=box, style=filled];
 "GO:0006979" [fillcolor="#F6CBA2", label="GO:0006979
 response to
-oxidative stress", shape=box, style=filled];
+oxidative stress: 0.6%", shape=box, style=filled];
 "GO:0006996" [fillcolor="#F6CBA2", label="GO:0006996
 organelle
 organization", shape=box, style=filled];
 "GO:0007088" [fillcolor="#F6CBA2", label="GO:0007088
 regulation of
 mitotic nuclear
-division", shape=box, style=filled];
+division: 0.1%", shape=box, style=filled];
 "GO:0007165" [fillcolor="#F6CBA2", label="GO:0007165
-signal transduction", shape=box, style=filled];
+signal transduction: 5.7%", shape=box, style=filled];
 "GO:0007166" [fillcolor="#F6CBA2", label="GO:0007166
 cell surface
 receptor signaling
-pathway", shape=box, style=filled];
+pathway: 1.5%", shape=box, style=filled];
 "GO:0007167" [fillcolor="#F6CBA2", label="GO:0007167
 enzyme-linked
 receptor protein
@@ -378,7 +378,7 @@ signaling pathway", shape=box, style=filled];
 transmembrane
 receptor protein
 tyrosine kinase
-signaling pathway", shape=box, style=filled];
+signaling pathway: 0.5%", shape=box, style=filled];
 "GO:0007178" [fillcolor="#F6CBA2", label="GO:0007178
 transmembrane
 receptor protein
@@ -388,45 +388,45 @@ pathway", shape=box, style=filled];
 "GO:0007186" [fillcolor="#F6CBA2", label="GO:0007186
 G protein-coupled
 receptor signaling
-pathway", shape=box, style=filled];
+pathway: 4.8%", shape=box, style=filled];
 "GO:0007346" [fillcolor="#F6CBA2", label="GO:0007346
 regulation of
-mitotic cell cycle", shape=box, style=filled];
+mitotic cell cycle: 0.3%", shape=box, style=filled];
 "GO:0007420" [fillcolor="#17DA15", label="GO:0007420
-brain development
+brain development: 1.0%
 (1/5)", shape=box, style=filled];
 "GO:0007423" [fillcolor="#F6CBA2", label="GO:0007423
 sensory organ
-development", shape=box, style=filled];
+development: 0.1%", shape=box, style=filled];
 "GO:0007584" [fillcolor="#F6CBA2", label="GO:0007584
-response to nutrient", shape=box, style=filled];
+response to nutrient: 0.3%", shape=box, style=filled];
 "GO:0008081" [fillcolor="#A3F6A2", label="GO:0008081
 phosphoric diester
 hydrolase activity
 (1/5)", shape=box, style=filled];
 "GO:0008150" [fillcolor="#F6CBA2", label="GO:0008150
-biological_process", shape=box, style=filled];
+biological_process: 2.9%", shape=box, style=filled];
 "GO:0008152" [fillcolor="#F6CBA2", label="GO:0008152
 metabolic process", shape=box, style=filled];
 "GO:0008202" [fillcolor="#A3F6A2", label="GO:0008202
 steroid metabolic
-process
+process: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0008210" [fillcolor="#A3F6A2", label="GO:0008210
 estrogen metabolic
-process
+process: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0008283" [fillcolor="#A3F6A2", label="GO:0008283
 cell population
-proliferation
+proliferation: 0.7%
 (1/5)", shape=box, style=filled];
 "GO:0008284" [fillcolor="#A3F6A2", label="GO:0008284
 positive regulation
 of cell population
-proliferation
+proliferation: 2.4%
 (1/5)", shape=box, style=filled];
 "GO:0008289" [fillcolor="#A2CDF6", label="GO:0008289
-lipid binding", shape=box, style=filled];
+lipid binding: 0.8%", shape=box, style=filled];
 "GO:0008299" [fillcolor="#F6CBA2", label="GO:0008299
 isoprenoid
 biosynthetic process", shape=box, style=filled];
@@ -447,10 +447,10 @@ lipid biosynthetic
 process", shape=box, style=filled];
 "GO:0008643" [fillcolor="#F6CBA2", label="GO:0008643
 carbohydrate
-transport", shape=box, style=filled];
+transport: 0.1%", shape=box, style=filled];
 "GO:0008654" [fillcolor="#F6CBA2", label="GO:0008654
 phospholipid
-biosynthetic process", shape=box, style=filled];
+biosynthetic process: 0.1%", shape=box, style=filled];
 "GO:0009056" [fillcolor="#F6CBA2", label="GO:0009056
 catabolic process", shape=box, style=filled];
 "GO:0009058" [fillcolor="#F6CBA2", label="GO:0009058
@@ -486,10 +486,10 @@ herbicide
 (1/5)", shape=box, style=filled];
 "GO:0009636" [fillcolor="#F6CBA2", label="GO:0009636
 response to toxic
-substance", shape=box, style=filled];
+substance: 0.4%", shape=box, style=filled];
 "GO:0009653" [fillcolor="#F6CBA2", label="GO:0009653
 anatomical structure
-morphogenesis", shape=box, style=filled];
+morphogenesis: 0.6%", shape=box, style=filled];
 "GO:0009692" [fillcolor="#A3F6A2", label="GO:0009692
 ethylene metabolic
 process
@@ -510,7 +510,7 @@ process
 (1/5)", shape=box, style=filled];
 "GO:0009887" [fillcolor="#F6CBA2", label="GO:0009887
 animal organ
-morphogenesis", shape=box, style=filled];
+morphogenesis: 0.6%", shape=box, style=filled];
 "GO:0009888" [fillcolor="#F6CBA2", label="GO:0009888
 tissue development", shape=box, style=filled];
 "GO:0009889" [fillcolor="#F6CBA2", label="GO:0009889
@@ -540,7 +540,7 @@ of catabolic process", shape=box, style=filled];
 hormone transport", shape=box, style=filled];
 "GO:0009966" [fillcolor="#F6CBA2", label="GO:0009966
 regulation of signal
-transduction", shape=box, style=filled];
+transduction: 0.2%", shape=box, style=filled];
 "GO:0009967" [fillcolor="#F6CBA2", label="GO:0009967
 positive regulation
 of signal
@@ -553,7 +553,7 @@ extracellular
 stimulus", shape=box, style=filled];
 "GO:0010033" [fillcolor="#F6CBA2", label="GO:0010033
 response to organic
-substance", shape=box, style=filled];
+substance: 0.1%", shape=box, style=filled];
 "GO:0010035" [fillcolor="#F6CBA2", label="GO:0010035
 response to
 inorganic substance", shape=box, style=filled];
@@ -575,13 +575,13 @@ organonitrogen
 compound", shape=box, style=filled];
 "GO:0010468" [fillcolor="#F6CBA2", label="GO:0010468
 regulation of gene
-expression", shape=box, style=filled];
+expression: 0.9%", shape=box, style=filled];
 "GO:0010506" [fillcolor="#F6CBA2", label="GO:0010506
 regulation of
-autophagy", shape=box, style=filled];
+autophagy: 0.4%", shape=box, style=filled];
 "GO:0010508" [fillcolor="#F6CBA2", label="GO:0010508
 positive regulation
-of autophagy", shape=box, style=filled];
+of autophagy: 0.4%", shape=box, style=filled];
 "GO:0010556" [fillcolor="#F6CBA2", label="GO:0010556
 regulation of
 macromolecule
@@ -607,7 +607,7 @@ of macromolecule
 metabolic process", shape=box, style=filled];
 "GO:0010628" [fillcolor="#F6CBA2", label="GO:0010628
 positive regulation
-of gene expression", shape=box, style=filled];
+of gene expression: 2.3%", shape=box, style=filled];
 "GO:0010638" [fillcolor="#F6CBA2", label="GO:0010638
 positive regulation
 of organelle
@@ -627,7 +627,7 @@ regulation of metal
 ion transport", shape=box, style=filled];
 "GO:0014070" [fillcolor="#F6CBA2", label="GO:0014070
 response to organic
-cyclic compound", shape=box, style=filled];
+cyclic compound: 0.3%", shape=box, style=filled];
 "GO:0015774" [fillcolor="#A3F6A2", label="GO:0015774
 polysaccharide
 transport
@@ -635,11 +635,11 @@ transport
 "GO:0015833" [fillcolor="#F6CBA2", label="GO:0015833
 peptide transport", shape=box, style=filled];
 "GO:0016020" [fillcolor="#A3F6A2", label="GO:0016020
-membrane
+membrane: 16.5%
 (1/5)", shape=box, style=filled];
 "GO:0016042" [fillcolor="#F6CBA2", label="GO:0016042
 lipid catabolic
-process", shape=box, style=filled];
+process: 0.3%", shape=box, style=filled];
 "GO:0016043" [fillcolor="#F6CBA2", label="GO:0016043
 cellular component
 organization", shape=box, style=filled];
@@ -657,30 +657,30 @@ terpenoid
 biosynthetic process", shape=box, style=filled];
 "GO:0016239" [fillcolor="#F6CBA2", label="GO:0016239
 positive regulation
-of macroautophagy", shape=box, style=filled];
+of macroautophagy: 0.2%", shape=box, style=filled];
 "GO:0016241" [fillcolor="#F6CBA2", label="GO:0016241
 regulation of
-macroautophagy", shape=box, style=filled];
+macroautophagy: 0.3%", shape=box, style=filled];
 "GO:0016298" [fillcolor="#A2CDF6", label="GO:0016298
 lipase activity", shape=box, style=filled];
 "GO:0016301" [fillcolor="#A2CDF6", label="GO:0016301
-kinase activity", shape=box, style=filled];
+kinase activity: 0.3%", shape=box, style=filled];
 "GO:0016310" [fillcolor="#A3F6A2", label="GO:0016310
-phosphorylation
+phosphorylation: 1.5%
 (1/5)", shape=box, style=filled];
 "GO:0016408" [fillcolor="#A2CDF6", label="GO:0016408
 C-acyltransferase
 activity", shape=box, style=filled];
 "GO:0016409" [fillcolor="#A2CDF6", label="GO:0016409
 palmitoyltransferase
-activity", shape=box, style=filled];
+activity: 0.1%", shape=box, style=filled];
 "GO:0016454" [fillcolor="#A2CDF6", label="GO:0016454
 C-
 palmitoyltransferase
 activity", shape=box, style=filled];
 "GO:0016491" [fillcolor="#A3F6A2", label="GO:0016491
 oxidoreductase
-activity
+activity: 0.4%
 (1/5)", shape=box, style=filled];
 "GO:0016679" [fillcolor="#A3F6A2", label="GO:0016679
 oxidoreductase
@@ -723,12 +723,12 @@ reduced flavin or
 flavoprotein as one
 donor, and
 incorporation of one
-atom of oxygen", shape=box, style=filled];
+atom of oxygen: 0.1%", shape=box, style=filled];
 "GO:0016740" [fillcolor="#A2CDF6", label="GO:0016740
-transferase activity", shape=box, style=filled];
+transferase activity: 0.2%", shape=box, style=filled];
 "GO:0016746" [fillcolor="#A2CDF6", label="GO:0016746
 acyltransferase
-activity", shape=box, style=filled];
+activity: 0.1%", shape=box, style=filled];
 "GO:0016747" [fillcolor="#A2CDF6", label="GO:0016747
 acyltransferase
 activity,
@@ -746,13 +746,13 @@ phosphotransferase
 activity, alcohol
 group as acceptor", shape=box, style=filled];
 "GO:0016787" [fillcolor="#A2CDF6", label="GO:0016787
-hydrolase activity", shape=box, style=filled];
+hydrolase activity: 0.4%", shape=box, style=filled];
 "GO:0016788" [fillcolor="#A2CDF6", label="GO:0016788
 hydrolase activity,
 acting on ester
 bonds", shape=box, style=filled];
 "GO:0016829" [fillcolor="#A2CDF6", label="GO:0016829
-lyase activity", shape=box, style=filled];
+lyase activity: 0.1%", shape=box, style=filled];
 "GO:0016835" [fillcolor="#A2CDF6", label="GO:0016835
 carbon-oxygen lyase
 activity", shape=box, style=filled];
@@ -777,7 +777,7 @@ metabolic process
 (1/5)", shape=box, style=filled];
 "GO:0017157" [fillcolor="#F6CBA2", label="GO:0017157
 regulation of
-exocytosis", shape=box, style=filled];
+exocytosis: 0.2%", shape=box, style=filled];
 "GO:0018130" [fillcolor="#F6CBA2", label="GO:0018130
 heterocycle
 biosynthetic process", shape=box, style=filled];
@@ -786,7 +786,7 @@ dibenzo-p-dioxin
 metabolic process", shape=box, style=filled];
 "GO:0019216" [fillcolor="#F6CBA2", label="GO:0019216
 regulation of lipid
-metabolic process", shape=box, style=filled];
+metabolic process: 0.2%", shape=box, style=filled];
 "GO:0019219" [fillcolor="#F6CBA2", label="GO:0019219
 regulation of
 nucleobase-
@@ -798,17 +798,17 @@ phosphate metabolic
 process", shape=box, style=filled];
 "GO:0019222" [fillcolor="#F6CBA2", label="GO:0019222
 regulation of
-metabolic process", shape=box, style=filled];
+metabolic process: 0.1%", shape=box, style=filled];
 "GO:0019341" [fillcolor="#17DA15", label="GO:0019341
 dibenzo-p-dioxin
 catabolic process
 (1/5)", shape=box, style=filled];
 "GO:0019369" [fillcolor="#F6CBA2", label="GO:0019369
 arachidonic acid
-metabolic process", shape=box, style=filled];
+metabolic process: 0.2%", shape=box, style=filled];
 "GO:0019373" [fillcolor="#17DA15", label="GO:0019373
 epoxygenase P450
-pathway
+pathway: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0019438" [fillcolor="#F6CBA2", label="GO:0019438
 aromatic compound
@@ -829,7 +829,7 @@ process", shape=box, style=filled];
 carboxylic acid
 metabolic process", shape=box, style=filled];
 "GO:0019825" [fillcolor="#17DA15", label="GO:0019825
-oxygen binding
+oxygen binding: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0019842" [fillcolor="#A2CDF6", label="GO:0019842
 vitamin binding", shape=box, style=filled];
@@ -837,10 +837,10 @@ vitamin binding", shape=box, style=filled];
 organelle inner
 membrane", shape=box, style=filled];
 "GO:0019899" [fillcolor="#A3F6A2", label="GO:0019899
-enzyme binding
+enzyme binding: 1.8%
 (1/5)", shape=box, style=filled];
 "GO:0020037" [fillcolor="#17DA15", label="GO:0020037
-heme binding
+heme binding: 0.7%
 (1/5)", shape=box, style=filled];
 "GO:0022402" [fillcolor="#F6CBA2", label="GO:0022402
 cell cycle process", shape=box, style=filled];
@@ -867,41 +867,41 @@ secretion
 (1/5)", shape=box, style=filled];
 "GO:0030148" [fillcolor="#A3F6A2", label="GO:0030148
 sphingolipid
-biosynthetic process
+biosynthetic process: 0.3%
 (2/5)", shape=box, style=filled];
 "GO:0030149" [fillcolor="#F6CBA2", label="GO:0030149
 sphingolipid
 catabolic process", shape=box, style=filled];
 "GO:0030154" [fillcolor="#F6CBA2", label="GO:0030154
-cell differentiation", shape=box, style=filled];
+cell differentiation: 3.0%", shape=box, style=filled];
 "GO:0030170" [fillcolor="#17DA15", label="GO:0030170
 pyridoxal phosphate
-binding
+binding: 0.3%
 (1/5)", shape=box, style=filled];
 "GO:0030198" [fillcolor="#F6CBA2", label="GO:0030198
 extracellular matrix
-organization", shape=box, style=filled];
+organization: 0.8%", shape=box, style=filled];
 "GO:0030246" [fillcolor="#A2CDF6", label="GO:0030246
-carbohydrate binding", shape=box, style=filled];
+carbohydrate binding: 0.9%", shape=box, style=filled];
 "GO:0030258" [fillcolor="#F6CBA2", label="GO:0030258
 lipid modification", shape=box, style=filled];
 "GO:0030282" [fillcolor="#A3F6A2", label="GO:0030282
-bone mineralization
+bone mineralization: 0.3%
 (1/5)", shape=box, style=filled];
 "GO:0030308" [fillcolor="#A3F6A2", label="GO:0030308
 negative regulation
-of cell growth
+of cell growth: 0.6%
 (1/5)", shape=box, style=filled];
 "GO:0030334" [fillcolor="#F6CBA2", label="GO:0030334
 regulation of cell
-migration", shape=box, style=filled];
+migration: 0.5%", shape=box, style=filled];
 "GO:0030509" [fillcolor="#17DA15", label="GO:0030509
 BMP signaling
-pathway
+pathway: 0.4%
 (1/5)", shape=box, style=filled];
 "GO:0030544" [fillcolor="#17DA15", label="GO:0030544
 Hsp70 protein
-binding
+binding: 0.3%
 (1/5)", shape=box, style=filled];
 "GO:0030554" [fillcolor="#A2CDF6", label="GO:0030554
 adenyl nucleotide
@@ -912,12 +912,12 @@ nucleotide
 biosynthetic process", shape=box, style=filled];
 "GO:0030855" [fillcolor="#F6CBA2", label="GO:0030855
 epithelial cell
-differentiation", shape=box, style=filled];
+differentiation: 0.5%", shape=box, style=filled];
 "GO:0031072" [fillcolor="#A2CDF6", label="GO:0031072
 heat shock protein
-binding", shape=box, style=filled];
+binding: 0.3%", shape=box, style=filled];
 "GO:0031090" [fillcolor="#F5A2F6", label="GO:0031090
-organelle membrane", shape=box, style=filled];
+organelle membrane: 0.1%", shape=box, style=filled];
 "GO:0031211" [fillcolor="#F5A2F6", label="GO:0031211
 endoplasmic
 reticulum
@@ -925,9 +925,9 @@ palmitoyltransferase
 complex", shape=box, style=filled];
 "GO:0031214" [fillcolor="#F6CBA2", label="GO:0031214
 biomineral tissue
-development", shape=box, style=filled];
+development: 0.1%", shape=box, style=filled];
 "GO:0031267" [fillcolor="#17DA15", label="GO:0031267
-small GTPase binding
+small GTPase binding: 1.4%
 (1/5)", shape=box, style=filled];
 "GO:0031323" [fillcolor="#F6CBA2", label="GO:0031323
 regulation of
@@ -967,10 +967,10 @@ protein modification
 process", shape=box, style=filled];
 "GO:0031667" [fillcolor="#F6CBA2", label="GO:0031667
 response to nutrient
-levels", shape=box, style=filled];
+levels: 0.2%", shape=box, style=filled];
 "GO:0031966" [fillcolor="#F5A2F6", label="GO:0031966
 mitochondrial
-membrane", shape=box, style=filled];
+membrane: 0.8%", shape=box, style=filled];
 "GO:0031984" [fillcolor="#F5A2F6", label="GO:0031984
 organelle
 subcompartment", shape=box, style=filled];
@@ -980,7 +980,7 @@ Golgi cisterna", shape=box, style=filled];
 response to
 magnesium ion", shape=box, style=filled];
 "GO:0032094" [fillcolor="#A3F6A2", label="GO:0032094
-response to food
+response to food: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0032409" [fillcolor="#F6CBA2", label="GO:0032409
 regulation of
@@ -995,14 +995,14 @@ demethylase activity
 (1/5)", shape=box, style=filled];
 "GO:0032496" [fillcolor="#A3F6A2", label="GO:0032496
 response to
-lipopolysaccharide
+lipopolysaccharide: 0.7%
 (1/5)", shape=box, style=filled];
 "GO:0032501" [fillcolor="#F6CBA2", label="GO:0032501
 multicellular
 organismal process", shape=box, style=filled];
 "GO:0032502" [fillcolor="#F6CBA2", label="GO:0032502
 developmental
-process", shape=box, style=filled];
+process: 0.1%", shape=box, style=filled];
 "GO:0032553" [fillcolor="#A2CDF6", label="GO:0032553
 ribonucleotide
 binding", shape=box, style=filled];
@@ -1034,12 +1034,12 @@ production
 "GO:0032755" [fillcolor="#17DA15", label="GO:0032755
 positive regulation
 of interleukin-6
-production
+production: 0.5%
 (1/5)", shape=box, style=filled];
 "GO:0032760" [fillcolor="#17DA15", label="GO:0032760
 positive regulation
 of tumor necrosis
-factor production
+factor production: 0.5%
 (1/5)", shape=box, style=filled];
 "GO:0032787" [fillcolor="#F6CBA2", label="GO:0032787
 monocarboxylic acid
@@ -1063,9 +1063,9 @@ process
 (1/5)", shape=box, style=filled];
 "GO:0032991" [fillcolor="#F5A2F6", label="GO:0032991
 protein-containing
-complex", shape=box, style=filled];
+complex: 3.1%", shape=box, style=filled];
 "GO:0032993" [fillcolor="#F5A2F6", label="GO:0032993
-protein-DNA complex", shape=box, style=filled];
+protein-DNA complex: 0.2%", shape=box, style=filled];
 "GO:0033003" [fillcolor="#F6CBA2", label="GO:0033003
 regulation of mast
 cell activation", shape=box, style=filled];
@@ -1107,7 +1107,7 @@ process", shape=box, style=filled];
 "GO:0033993" [fillcolor="#F6CBA2", label="GO:0033993
 response to lipid", shape=box, style=filled];
 "GO:0034097" [fillcolor="#F6CBA2", label="GO:0034097
-response to cytokine", shape=box, style=filled];
+response to cytokine: 0.2%", shape=box, style=filled];
 "GO:0034248" [fillcolor="#F6CBA2", label="GO:0034248
 regulation of amide
 metabolic process", shape=box, style=filled];
@@ -1126,14 +1126,14 @@ diol biosynthetic
 process", shape=box, style=filled];
 "GO:0034599" [fillcolor="#F6CBA2", label="GO:0034599
 cellular response to
-oxidative stress", shape=box, style=filled];
+oxidative stress: 0.5%", shape=box, style=filled];
 "GO:0034612" [fillcolor="#F6CBA2", label="GO:0034612
 response to tumor
-necrosis factor", shape=box, style=filled];
+necrosis factor: 0.1%", shape=box, style=filled];
 "GO:0034614" [fillcolor="#F6CBA2", label="GO:0034614
 cellular response to
 reactive oxygen
-species", shape=box, style=filled];
+species: 0.2%", shape=box, style=filled];
 "GO:0034641" [fillcolor="#F6CBA2", label="GO:0034641
 cellular nitrogen
 compound metabolic
@@ -1150,18 +1150,18 @@ transport", shape=box, style=filled];
 regulation of
 monoatomic ion
 transmembrane
-transport", shape=box, style=filled];
+transport: 0.1%", shape=box, style=filled];
 "GO:0035264" [fillcolor="#17DA15", label="GO:0035264
 multicellular
-organism growth
+organism growth: 0.4%
 (1/5)", shape=box, style=filled];
 "GO:0035265" [fillcolor="#F6CBA2", label="GO:0035265
-organ growth", shape=box, style=filled];
+organ growth: 0.1%", shape=box, style=filled];
 "GO:0035295" [fillcolor="#F6CBA2", label="GO:0035295
 tube development", shape=box, style=filled];
 "GO:0035556" [fillcolor="#F6CBA2", label="GO:0035556
 intracellular signal
-transduction", shape=box, style=filled];
+transduction: 1.9%", shape=box, style=filled];
 "GO:0035639" [fillcolor="#A2CDF6", label="GO:0035639
 purine
 ribonucleoside
@@ -1169,14 +1169,14 @@ triphosphate binding", shape=box, style=filled];
 "GO:0035902" [fillcolor="#A3F6A2", label="GO:0035902
 response to
 immobilization
-stress
+stress: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0036075" [fillcolor="#F6CBA2", label="GO:0036075
 replacement
 ossification", shape=box, style=filled];
 "GO:0036094" [fillcolor="#A2CDF6", label="GO:0036094
 small molecule
-binding", shape=box, style=filled];
+binding: 0.2%", shape=box, style=filled];
 "GO:0036293" [fillcolor="#F6CBA2", label="GO:0036293
 response to
 decreased oxygen
@@ -1187,7 +1187,7 @@ increased oxygen
 levels", shape=box, style=filled];
 "GO:0038023" [fillcolor="#A2CDF6", label="GO:0038023
 signaling receptor
-activity", shape=box, style=filled];
+activity: 1.0%", shape=box, style=filled];
 "GO:0038036" [fillcolor="#17DA15", label="GO:0038036
 sphingosine-1-
 phosphate receptor
@@ -1203,10 +1203,10 @@ locomotion", shape=box, style=filled];
 "GO:0042127" [fillcolor="#F6CBA2", label="GO:0042127
 regulation of cell
 population
-proliferation", shape=box, style=filled];
+proliferation: 0.7%", shape=box, style=filled];
 "GO:0042178" [fillcolor="#F6CBA2", label="GO:0042178
 xenobiotic catabolic
-process", shape=box, style=filled];
+process: 0.1%", shape=box, style=filled];
 "GO:0042221" [fillcolor="#F6CBA2", label="GO:0042221
 response to chemical", shape=box, style=filled];
 "GO:0042325" [fillcolor="#F6CBA2", label="GO:0042325
@@ -1217,7 +1217,7 @@ vitamin D metabolic
 process
 (1/5)", shape=box, style=filled];
 "GO:0042393" [fillcolor="#A3F6A2", label="GO:0042393
-histone binding
+histone binding: 0.9%
 (1/5)", shape=box, style=filled];
 "GO:0042445" [fillcolor="#F6CBA2", label="GO:0042445
 hormone metabolic
@@ -1225,19 +1225,19 @@ process", shape=box, style=filled];
 "GO:0042475" [fillcolor="#F6CBA2", label="GO:0042475
 odontogenesis of
 dentin-containing
-tooth", shape=box, style=filled];
+tooth: 0.3%", shape=box, style=filled];
 "GO:0042476" [fillcolor="#F6CBA2", label="GO:0042476
-odontogenesis", shape=box, style=filled];
+odontogenesis: 0.2%", shape=box, style=filled];
 "GO:0042542" [fillcolor="#F6CBA2", label="GO:0042542
 response to hydrogen
-peroxide", shape=box, style=filled];
+peroxide: 0.2%", shape=box, style=filled];
 "GO:0042572" [fillcolor="#17DA15", label="GO:0042572
 retinol metabolic
-process
+process: 0.3%
 (1/5)", shape=box, style=filled];
 "GO:0042573" [fillcolor="#F6CBA2", label="GO:0042573
 retinoic acid
-metabolic process", shape=box, style=filled];
+metabolic process: 0.1%", shape=box, style=filled];
 "GO:0042578" [fillcolor="#A2CDF6", label="GO:0042578
 phosphoric ester
 hydrolase activity", shape=box, style=filled];
@@ -1247,11 +1247,11 @@ metabolic process", shape=box, style=filled];
 "GO:0042759" [fillcolor="#A3F6A2", label="GO:0042759
 long-chain fatty
 acid biosynthetic
-process
+process: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0042802" [fillcolor="#A3F6A2", label="GO:0042802
 identical protein
-binding
+binding: 7.8%
 (1/5)", shape=box, style=filled];
 "GO:0042886" [fillcolor="#F6CBA2", label="GO:0042886
 amide transport", shape=box, style=filled];
@@ -1264,10 +1264,10 @@ biosynthetic process
 metabolic process", shape=box, style=filled];
 "GO:0042981" [fillcolor="#F6CBA2", label="GO:0042981
 regulation of
-apoptotic process", shape=box, style=filled];
+apoptotic process: 1.0%", shape=box, style=filled];
 "GO:0043010" [fillcolor="#A3F6A2", label="GO:0043010
 camera-type eye
-development
+development: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0043062" [fillcolor="#F6CBA2", label="GO:0043062
 extracellular
@@ -1275,7 +1275,7 @@ structure
 organization", shape=box, style=filled];
 "GO:0043065" [fillcolor="#A3F6A2", label="GO:0043065
 positive regulation
-of apoptotic process
+of apoptotic process: 1.5%
 (1/5)", shape=box, style=filled];
 "GO:0043067" [fillcolor="#F6CBA2", label="GO:0043067
 regulation of
@@ -1288,7 +1288,7 @@ death", shape=box, style=filled];
 "GO:0043122" [fillcolor="#A3F6A2", label="GO:0043122
 regulation of
 canonical NF-kappaB
-signal transduction
+signal transduction: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0043167" [fillcolor="#A2CDF6", label="GO:0043167
 ion binding", shape=box, style=filled];
@@ -1313,7 +1313,7 @@ organelle", shape=box, style=filled];
 "GO:0043231" [fillcolor="#A3F6A2", label="GO:0043231
 intracellular
 membrane-bounded
-organelle
+organelle: 4.4%
 (2/5)", shape=box, style=filled];
 "GO:0043255" [fillcolor="#F6CBA2", label="GO:0043255
 regulation of
@@ -1359,7 +1359,7 @@ energy", shape=box, style=filled];
 phosphatidylinositol
 3-kinase/protein
 kinase B signal
-transduction
+transduction: 0.4%
 (1/5)", shape=box, style=filled];
 "GO:0043603" [fillcolor="#F6CBA2", label="GO:0043603
 amide metabolic
@@ -1425,11 +1425,11 @@ structure
 organization", shape=box, style=filled];
 "GO:0045787" [fillcolor="#F6CBA2", label="GO:0045787
 positive regulation
-of cell cycle", shape=box, style=filled];
+of cell cycle: 0.2%", shape=box, style=filled];
 "GO:0045815" [fillcolor="#A3F6A2", label="GO:0045815
 transcription
 initiation-coupled
-chromatin remodeling
+chromatin remodeling: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0045834" [fillcolor="#F6CBA2", label="GO:0045834
 positive regulation
@@ -1438,7 +1438,7 @@ process", shape=box, style=filled];
 "GO:0045840" [fillcolor="#A3F6A2", label="GO:0045840
 positive regulation
 of mitotic nuclear
-division
+division: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0045912" [fillcolor="#F6CBA2", label="GO:0045912
 negative regulation
@@ -1446,14 +1446,14 @@ of carbohydrate
 metabolic process", shape=box, style=filled];
 "GO:0045921" [fillcolor="#F6CBA2", label="GO:0045921
 positive regulation
-of exocytosis", shape=box, style=filled];
+of exocytosis: 0.1%", shape=box, style=filled];
 "GO:0045926" [fillcolor="#F6CBA2", label="GO:0045926
 negative regulation
-of growth", shape=box, style=filled];
+of growth: 0.1%", shape=box, style=filled];
 "GO:0045931" [fillcolor="#F6CBA2", label="GO:0045931
 positive regulation
 of mitotic cell
-cycle", shape=box, style=filled];
+cycle: 0.2%", shape=box, style=filled];
 "GO:0046165" [fillcolor="#F6CBA2", label="GO:0046165
 alcohol biosynthetic
 process", shape=box, style=filled];
@@ -1485,7 +1485,7 @@ biosynthetic process
 (2/5)", shape=box, style=filled];
 "GO:0046513" [fillcolor="#A3F6A2", label="GO:0046513
 ceramide
-biosynthetic process
+biosynthetic process: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0046519" [fillcolor="#F6CBA2", label="GO:0046519
 sphingoid metabolic
@@ -1504,14 +1504,14 @@ ion", shape=box, style=filled];
 heterocycle
 catabolic process", shape=box, style=filled];
 "GO:0046872" [fillcolor="#A3F6A2", label="GO:0046872
-metal ion binding
+metal ion binding: 12.2%
 (1/5)", shape=box, style=filled];
 "GO:0046879" [fillcolor="#F6CBA2", label="GO:0046879
 hormone secretion", shape=box, style=filled];
 "GO:0046889" [fillcolor="#F6CBA2", label="GO:0046889
 positive regulation
 of lipid
-biosynthetic process", shape=box, style=filled];
+biosynthetic process: 0.1%", shape=box, style=filled];
 "GO:0046890" [fillcolor="#F6CBA2", label="GO:0046890
 regulation of lipid
 biosynthetic process", shape=box, style=filled];
@@ -1521,12 +1521,12 @@ secretion", shape=box, style=filled];
 tetrapyrrole binding", shape=box, style=filled];
 "GO:0046914" [fillcolor="#A2CDF6", label="GO:0046914
 transition metal ion
-binding", shape=box, style=filled];
+binding: 0.1%", shape=box, style=filled];
 "GO:0048008" [fillcolor="#A3F6A2", label="GO:0048008
 platelet-derived
 growth factor
 receptor signaling
-pathway
+pathway: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0048029" [fillcolor="#A2CDF6", label="GO:0048029
 monosaccharide
@@ -1535,13 +1535,13 @@ binding", shape=box, style=filled];
 organelle fission", shape=box, style=filled];
 "GO:0048286" [fillcolor="#17DA15", label="GO:0048286
 lung alveolus
-development
+development: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0048468" [fillcolor="#F6CBA2", label="GO:0048468
-cell development", shape=box, style=filled];
+cell development: 0.1%", shape=box, style=filled];
 "GO:0048513" [fillcolor="#F6CBA2", label="GO:0048513
 animal organ
-development", shape=box, style=filled];
+development: 0.1%", shape=box, style=filled];
 "GO:0048518" [fillcolor="#F6CBA2", label="GO:0048518
 positive regulation
 of biological
@@ -1558,7 +1558,7 @@ negative regulation
 of cellular process", shape=box, style=filled];
 "GO:0048565" [fillcolor="#A3F6A2", label="GO:0048565
 digestive tract
-development
+development: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0048583" [fillcolor="#F6CBA2", label="GO:0048583
 regulation of
@@ -1568,7 +1568,7 @@ positive regulation
 of response to
 stimulus", shape=box, style=filled];
 "GO:0048589" [fillcolor="#F6CBA2", label="GO:0048589
-developmental growth", shape=box, style=filled];
+developmental growth: 0.1%", shape=box, style=filled];
 "GO:0048609" [fillcolor="#F6CBA2", label="GO:0048609
 multicellular
 organismal
@@ -1584,11 +1584,11 @@ proliferation", shape=box, style=filled];
 "GO:0048661" [fillcolor="#A3F6A2", label="GO:0048661
 positive regulation
 of smooth muscle
-cell proliferation
+cell proliferation: 0.3%
 (1/5)", shape=box, style=filled];
 "GO:0048856" [fillcolor="#F6CBA2", label="GO:0048856
 anatomical structure
-development", shape=box, style=filled];
+development: 0.2%", shape=box, style=filled];
 "GO:0048869" [fillcolor="#F6CBA2", label="GO:0048869
 cellular
 developmental
@@ -1599,10 +1599,10 @@ biosynthetic process
 (1/5)", shape=box, style=filled];
 "GO:0050776" [fillcolor="#F6CBA2", label="GO:0050776
 regulation of immune
-response", shape=box, style=filled];
+response: 0.1%", shape=box, style=filled];
 "GO:0050778" [fillcolor="#F6CBA2", label="GO:0050778
 positive regulation
-of immune response", shape=box, style=filled];
+of immune response: 0.2%", shape=box, style=filled];
 "GO:0050789" [fillcolor="#F6CBA2", label="GO:0050789
 regulation of
 biological process", shape=box, style=filled];
@@ -1623,9 +1623,9 @@ activation", shape=box, style=filled];
 positive regulation
 of cell activation", shape=box, style=filled];
 "GO:0050896" [fillcolor="#F6CBA2", label="GO:0050896
-response to stimulus", shape=box, style=filled];
+response to stimulus: 0.3%", shape=box, style=filled];
 "GO:0051020" [fillcolor="#A2CDF6", label="GO:0051020
-GTPase binding", shape=box, style=filled];
+GTPase binding: 0.2%", shape=box, style=filled];
 "GO:0051046" [fillcolor="#F6CBA2", label="GO:0051046
 regulation of
 secretion", shape=box, style=filled];
@@ -1640,7 +1640,7 @@ positive regulation
 of transport", shape=box, style=filled];
 "GO:0051087" [fillcolor="#A2CDF6", label="GO:0051087
 protein-folding
-chaperone binding", shape=box, style=filled];
+chaperone binding: 0.5%", shape=box, style=filled];
 "GO:0051128" [fillcolor="#F6CBA2", label="GO:0051128
 regulation of
 cellular component
@@ -1667,7 +1667,7 @@ regulation of
 phosphorus metabolic
 process", shape=box, style=filled];
 "GO:0051179" [fillcolor="#F6CBA2", label="GO:0051179
-localization", shape=box, style=filled];
+localization: 0.1%", shape=box, style=filled];
 "GO:0051234" [fillcolor="#F6CBA2", label="GO:0051234
 establishment of
 localization", shape=box, style=filled];
@@ -1695,7 +1695,7 @@ cellular response to
 stimulus", shape=box, style=filled];
 "GO:0051726" [fillcolor="#F6CBA2", label="GO:0051726
 regulation of cell
-cycle", shape=box, style=filled];
+cycle: 1.1%", shape=box, style=filled];
 "GO:0051775" [fillcolor="#F6CBA2", label="GO:0051775
 response to redox
 state", shape=box, style=filled];
@@ -1707,16 +1707,16 @@ positive regulation
 of nuclear division", shape=box, style=filled];
 "GO:0051879" [fillcolor="#17DA15", label="GO:0051879
 Hsp90 protein
-binding
+binding: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0051924" [fillcolor="#F6CBA2", label="GO:0051924
 regulation of
 calcium ion
-transport", shape=box, style=filled];
+transport: 0.1%", shape=box, style=filled];
 "GO:0051928" [fillcolor="#F6CBA2", label="GO:0051928
 positive regulation
 of calcium ion
-transport", shape=box, style=filled];
+transport: 0.1%", shape=box, style=filled];
 "GO:0055093" [fillcolor="#A3F6A2", label="GO:0055093
 response to
 hyperoxia
@@ -1738,7 +1738,7 @@ macromolecule
 metabolic process", shape=box, style=filled];
 "GO:0060612" [fillcolor="#A3F6A2", label="GO:0060612
 adipose tissue
-development
+development: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0060627" [fillcolor="#F6CBA2", label="GO:0060627
 regulation of
@@ -1778,17 +1778,17 @@ molecular function", shape=box, style=filled];
 vitamin B6 binding", shape=box, style=filled];
 "GO:0070300" [fillcolor="#17DA15", label="GO:0070300
 phosphatidic acid
-binding
+binding: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0070301" [fillcolor="#17DA15", label="GO:0070301
 cellular response to
-hydrogen peroxide
+hydrogen peroxide: 0.3%
 (1/5)", shape=box, style=filled];
 "GO:0070314" [fillcolor="#A3F6A2", label="GO:0070314
 G1 to G0 transition
 (1/5)", shape=box, style=filled];
 "GO:0070330" [fillcolor="#17DA15", label="GO:0070330
-aromatase activity
+aromatase activity: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0070365" [fillcolor="#17DA15", label="GO:0070365
 hepatocyte
@@ -1813,7 +1813,7 @@ cellular response to
 metal ion", shape=box, style=filled];
 "GO:0071280" [fillcolor="#17DA15", label="GO:0071280
 cellular response to
-copper ion
+copper ion: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0071286" [fillcolor="#17DA15", label="GO:0071286
 cellular response to
@@ -1824,11 +1824,11 @@ cellular response to
 organic substance", shape=box, style=filled];
 "GO:0071345" [fillcolor="#F6CBA2", label="GO:0071345
 cellular response to
-cytokine stimulus", shape=box, style=filled];
+cytokine stimulus: 0.2%", shape=box, style=filled];
 "GO:0071356" [fillcolor="#17DA15", label="GO:0071356
 cellular response to
 tumor necrosis
-factor
+factor: 0.6%
 (1/5)", shape=box, style=filled];
 "GO:0071396" [fillcolor="#F6CBA2", label="GO:0071396
 cellular response to
@@ -1845,7 +1845,7 @@ stimulus", shape=box, style=filled];
 "GO:0071407" [fillcolor="#A3F6A2", label="GO:0071407
 cellular response to
 organic cyclic
-compound
+compound: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:0071417" [fillcolor="#F6CBA2", label="GO:0071417
 cellular response to
@@ -1876,7 +1876,7 @@ organization or
 biogenesis", shape=box, style=filled];
 "GO:0071897" [fillcolor="#A3F6A2", label="GO:0071897
 DNA biosynthetic
-process
+process: 0.1%
 (1/5)", shape=box, style=filled];
 "GO:0072330" [fillcolor="#F6CBA2", label="GO:0072330
 monocarboxylic acid
@@ -1887,7 +1887,7 @@ binding", shape=box, style=filled];
 "GO:0072593" [fillcolor="#F6CBA2", label="GO:0072593
 reactive oxygen
 species metabolic
-process", shape=box, style=filled];
+process: 0.2%", shape=box, style=filled];
 "GO:0080090" [fillcolor="#F6CBA2", label="GO:0080090
 regulation of
 primary metabolic
@@ -2027,7 +2027,7 @@ signaling pathway", shape=box, style=filled];
 positive regulation
 of G1/S transition
 of mitotic cell
-cycle
+cycle: 0.2%
 (1/5)", shape=box, style=filled];
 "GO:1900125" [fillcolor="#F6CBA2", label="GO:1900125
 regulation of
@@ -2137,7 +2137,7 @@ transition", shape=box, style=filled];
 "GO:1902074" [fillcolor="#F6CBA2", label="GO:1902074
 response to salt", shape=box, style=filled];
 "GO:1902494" [fillcolor="#F5A2F6", label="GO:1902494
-catalytic complex", shape=box, style=filled];
+catalytic complex: 0.1%", shape=box, style=filled];
 "GO:1902531" [fillcolor="#F6CBA2", label="GO:1902531
 regulation of
 intracellular signal
@@ -2246,7 +2246,7 @@ development", shape=box, style=filled];
 "GO:2000045" [fillcolor="#F6CBA2", label="GO:2000045
 regulation of G1/S
 transition of
-mitotic cell cycle", shape=box, style=filled];
+mitotic cell cycle: 0.3%", shape=box, style=filled];
 "GO:2000145" [fillcolor="#F6CBA2", label="GO:2000145
 regulation of cell
 motility", shape=box, style=filled];
@@ -2263,7 +2263,7 @@ biosynthetic process
 regulation of
 reactive oxygen
 species metabolic
-process", shape=box, style=filled];
+process: 0.1%", shape=box, style=filled];
 "GO:2001169" [fillcolor="#A3F6A2", label="GO:2001169
 regulation of ATP
 biosynthetic process
