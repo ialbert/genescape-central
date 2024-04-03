@@ -47,23 +47,8 @@ fix:
 push:
 	git commit -am 'saving work' && git push
 
-VERSION ?= $(shell grep '__version__' src/genescape/__about__.py | sed "s/__version__ = \"\\(.*\\)\"/\1/")
-
-NAME = GeneScape
-
-mac:
-	# Example of generating a tag file with the version
-	@echo "VERSION=${VERSION}"
-
-	rm -rf build dist
-	pyinstaller src/genescape/server.py \
-		--add-data=src/genescape/data:genescape/data \
-		-i docs/images/logo.ico -n ${NAME} -y --onefile
-
-	(cd dist && zip ${NAME}-${VERSION}-MacOS.zip ${NAME})
-
-win:
-	(cd dist && zip ${NAME}-${VERSION}-Windows.zip ${NAME}.exe)
+zip:
+	python src/genescape/dist.py
 
 clean:
 	rm -f src/genescape/web/static/tmp/image*
