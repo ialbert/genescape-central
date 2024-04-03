@@ -122,7 +122,7 @@ def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, cs
     if not out:
         print(text)
     else:
-        with open(out, "w") as fp:
+        with open(out, "wt",  newline='') as fp:
             fp.write(text)
 
 

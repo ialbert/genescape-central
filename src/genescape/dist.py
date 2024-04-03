@@ -27,14 +27,14 @@ def build(name="GeneScape", version=__version__):
     # The path to the distribution directory
     dist_path = Path(os.getcwd(), "dist")
 
+    # The executable's name might differ by platform
+    exe_name = f"{name}.exe" if sys.platform == "win32" else name
+
     # Find the dist directory where the executable is placed
-    exe_path = dist_path / name
+    exe_path = dist_path / exe_name
 
     # Create a directory for the distribution
     os.makedirs(dist_path.parent, exist_ok=True)
-
-    # The executable's name might differ by platform
-    exe_name = f"{name}.exe" if sys.platform == "win32" else name
 
     # Platform name for the zip file
     if sys.platform == "win32":

@@ -10,7 +10,6 @@ def read_file(fname):
     """
     with open(fname,  mode="r") as fp:
         data = fp.read()
-    data = data.replace('\r\n', '\n')
     return data
 
 
@@ -65,12 +64,12 @@ def test_annotate_hs_genes2_json():
 
 
 def test_annotate_hs_genes1_csv():
-    cmd = "genescape annotate test/files/hs_genes1.txt --csv -o test/out/hs_genes1.annot.json test/files/hs_genes1.annot.csv"
+    cmd = "genescape annotate test/files/hs_genes1.txt --csv -o test/out/hs_genes1.annot.csv test/files/hs_genes1.annot.csv"
     run_command(cmd)
 
 
 def test_annotate_hs_genes2_csv():
-    cmd = "genescape annotate test/files/hs_genes2.txt --csv -o test/out/hs_genes2.annot.json test/files/hs_genes2.annot.csv"
+    cmd = "genescape annotate test/files/hs_genes2.txt --csv -o test/out/hs_genes2.annot.csv test/files/hs_genes2.annot.csv"
     run_command(cmd)
 
 
