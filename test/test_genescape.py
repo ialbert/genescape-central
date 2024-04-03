@@ -5,10 +5,12 @@ import pytest
 
 
 def read_file(fname):
-    """Check if the contents of two files are identical."""
-    with open(fname) as fp:
+    """
+    Check if the contents of two files are identical. Use on text files only.
+    """
+    # Universal lines ending
+    with open(fname,  mode="r", newline=None) as fp:
         return fp.read()
-
 
 def run_command(text):
 
@@ -31,10 +33,11 @@ def run_command(text):
 
     if exp != gen:
         diffs = difflib.unified_diff(exp.splitlines(), gen.splitlines(), fromfile=fname_exp, tofile=fname_gen)
+        diffs = list(diffs)[:10]
         print("\n".join(diffs))
         print(f"# Generated file: {fname_gen}")
         print(f"# Expected file: {fname_exp}")
-        print(f"# Command: {' '.join(exec)}")
+        print(f"# Command: {' '.join(cmd)}")
         msg = "# Content mismatch"
         raise AssertionError(msg)
 
