@@ -30,6 +30,9 @@ def build_onto_graph(index):
         name = node["name"]
         text = textwrap.fill(name, width=20)
         label = f"{oid}\n{text}"
+        gperc = node.get(utils.GO2GENE_PERC, 0)
+        if gperc > 0.09:
+            label += f": {gperc:.1f}%"
         namespace = utils.NAMESPACE_MAP.get(node["namespace"], "?")
         graph.add_node(oid, id=oid, name=name, namespace=namespace, label=label, **utils.NODE_ATTRS)
 
@@ -209,7 +212,8 @@ def build_tree(ann, index):
         graph = build_onto_graph(index)
         return graph
 
-    graph = resources.cache("graph", func=build)
+    key = f"graph_{index}"
+    graph = resources.cache(key, func=build)
 
     # Generate the tree from the graph.
     tree = make_tree(ann=ann, graph=graph)

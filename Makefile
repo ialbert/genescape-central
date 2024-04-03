@@ -5,14 +5,30 @@
 #
 
 # Default OBO file.
-URL = http://current.geneontology.org/ontology/go-basic.obo
-OBO = tmp/go-basic.obo
+OBO_URL = http://current.geneontology.org/ontology/go-basic.obo
+OBO_FILE = tmp/go-basic.obo
+
+# The gene association file.
+GAF_URL = https://current.geneontology.org/annotations/goa_human.gaf.gz
+GAF_FILE = tmp/goa_human.gaf.gz
 
 # Usage information.
 usage:
 	@echo "#"
 	@echo "# Use the source, Luke!"
 	@echo "#"
+
+# Download the gene ontology file
+${OBO_FILE}:
+	mkdir -p $(dir ${OBO_FILE})
+	curl -L ${OBO_URL} > ${OBO_FILE}
+
+${GAF_FILE}:
+	mkdir -p $(dir ${GAF_FILE})
+	curl -L ${GAF_URL} > ${GAF_FILE}
+
+index: ${OBO_FILE} ${GAF_FILE}
+	genescape build --obo ${OBO_FILE} --gaf ${GAF_FILE} --index ${GAF_FILE}.index.gz
 
 # Performs the testing.
 web:
