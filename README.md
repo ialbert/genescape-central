@@ -54,7 +54,26 @@ The program will generate a tree visualization of the functional elements of the
 1. Extracts the **Functional Annotations** associated with the input genes 
 1. Builds and visualizes a tree based on these GO terms 
 
-## Color scheme
+## Node labeling 
+
+The labels in the graph carry additional information on the number of genes in the input that carry that function as well as an indicator for the specificity of the function in the organism. For example, the label:
+
+```
+   GO:0098978
+  glutamatergic
+  synapse: 2.1%
+      (1/2)
+```
+
+Indicates that the function `glutamatergic synapse` was seen as an annotation to 2.1% of *all genes* in the original association file. Thus it is characteristic of the annotation of the organism.
+
+When it comes to the input file, 1 out of 2 genes carry this function. 
+
+Thus we are observing a function that appears in 2.1% of all genes of the organism and a 1/2=50% fraction of the input genes. 
+
+You are welcome to apply a p-value to this difference to determine whether it is statistically significant. Note that assigning p-value to enrichment counts is fraught with challenges, as in our opinion, GO annotations are neither complete, nor independent nor accurate enough to make such determination.
+
+## Node coloring
 
 The colors in the tree carry additional meaning:
 
