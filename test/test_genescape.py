@@ -8,11 +8,11 @@ def read_file(fname):
     """
     Check if the contents of two files are identical. Use on text files only.
     """
-    # Universal lines ending
     with open(fname,  mode="r") as fp:
         data = fp.read()
     data = data.replace('\r\n', '\n')
     return data
+
 
 def run_command(text):
 
