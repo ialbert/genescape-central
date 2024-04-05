@@ -6,9 +6,11 @@
 
 **GeneScape** is a software tool for visualizing gene functions. 
 
-**GeneScape** is distributed as a standalone executable that can be run on Windows or MacOS.
+**GeneScape** is distributed as a [standalone executable][releases] that can be run on Windows or MacOS.
 
-The software can also operate in command line mode on any platform where Python 3.10 or above is available and can be installed with `pip install genescape` When executed from the command line:
+**GeneScape** is also runnable as a command line Python program installable via `pip install genescape`.
+
+When executed from the command line:
 
 * `genescape tree` draws informative Gene Ontology (GO) subgraphs
 * `genescape annotate` annotates a list of genes with GO functions
@@ -24,9 +26,11 @@ Download the latest binary release for your platform
 
 [releases]: https://www.github.com/ialbert/genescape-central/releases
 
-**Windows**: unzip then double-click the executable to start the program.
+**Windows**: Unzip then double-click the executable to start the program. You may need to give permission to run the software. In the future you can double-click the executable to start the program.
 
-**MacOS** The first time you run the tool on MacOS you have to unzip, right-click and select **open**. You then again have to agree to run the software. Once you do so the program runs, and in the future you can double-click the executable to start the program.
+**MacOS** The first time around unzip the program, then right-click and select **Open**. You then again have to agree to run the software. In the future you can double-click the executable to start the program.
+
+On all platforms you may also use `pip install genescape` to install the software then run `genescape web` to start the web interface.
 
 Visit the localhost address in your browser:
 
