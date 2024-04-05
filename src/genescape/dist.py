@@ -6,11 +6,36 @@ import subprocess
 import sys
 from pathlib import Path
 import os
+import click
 import shutil
 from zipfile import ZipFile
 from genescape import __version__, utils
 
-def build(name="GeneScape", version=__version__):
+@click.command()
+@click.option("--name", default="GeneScape", help="The name of the executable")
+@click.option("--tag", is_flag=True, help="Run a git tag command")
+@click.option("--build", is_flag=True, help="Run a git tag command")
+@click.help_option("-h", "--help")
+def run(name="GeneScape", tag=False, build=False):
+    if tag:
+        tag_cmd()
+
+    if build:
+        build_cmd(name=name)
+
+def tag_cmd():
+    # The git command
+    cmd = ["git", "tag", f"v{__version__}"]
+    #subprocess.run(cmd, check=True)
+    utils.info(f"{' '.join(cmd)}")
+
+    # Push the tag to the remote
+    push = ["git", "push", "--tags" ]
+    subprocess.run(push, check=True)
+    utils.info(f"Version: v{__version__}")
+
+
+def build_cmd(name="GeneScape", version=__version__):
     # The PyInstaller command
     cmd = [
         "pyinstaller",
@@ -59,5 +84,5 @@ def build(name="GeneScape", version=__version__):
     utils.info(f"File: {latest_path}")
 
 if __name__ == "__main__":
-    build()
+    run()
 

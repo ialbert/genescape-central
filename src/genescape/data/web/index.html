@@ -46,11 +46,11 @@
 
                 <select name="db" id="db">
                     %for code, name, sel in dbs:
-                        % if sel:
-                            <option value="{{code}}" selected>{{name}}</option>
-                        % else:
-                            <option value="{{code}}">{{name}}</option>
-                        %end
+                    % if sel:
+                    <option value="{{code}}" selected>{{name}}</option>
+                    % else:
+                    <option value="{{code}}">{{name}}</option>
+                    %end
                     %end
                 </select>
 
@@ -126,7 +126,23 @@ PSG5
 
                 <textarea class="input" name="terms" id="terms"
                           hx-swap-oob="true">
-            </textarea>
+                </textarea>
+
+            </div>
+
+            <div>
+                <div class="header">Legend</div>
+
+                <div>
+                    <ul>
+                        <li>[313] terms annotated in the GAF file</li>
+                        <li>(1/5) input genes annotated with the function</li>
+                        <li>Light green: annotations in the genes</li>
+                        <li>Dark green: annotations leaf nodes in the genes</li>
+                        <li>GO subtrees are colored by type: BP, CC and MF</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
         <div class="col-sm-9" id="mainBar">

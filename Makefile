@@ -34,6 +34,11 @@ index: ${OBO_FILE} ${GAF_FILE}
 web:
 	python src/genescape/server.py
 
+# Push a tag to the repository.
+tag:
+	pytest
+	python src/genescape/dist.py --tag
+
 # Performs a python-only test.
 test:
 	hatch run test

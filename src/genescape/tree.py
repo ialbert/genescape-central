@@ -11,6 +11,20 @@ from networkx import DiGraph
 from genescape import annot, resources, utils
 from genescape.utils import COUNT_DESC, DEGREE, GID, INPUT, LABEL, NAMESPACE
 
+def human_readable(value, digits=0):
+    """
+    Converts a size in bytes to a human readable format.
+    """
+    try:
+        value = int(round(float(value), digits))
+    except ValueError:
+        return value
+    if value >= 1000:
+        value = int(round(float(value)/1000, digits))
+        value = f"{value:d}K"
+    else:
+        value = f"{value:d}"
+    return value
 
 # Parse GO Ontology file from fname into a networkx graph
 def build_onto_graph(index):
@@ -30,11 +44,14 @@ def build_onto_graph(index):
         name = node["name"]
         text = textwrap.fill(name, width=20)
         label = f"{oid}\n{text}"
-        gperc = node.get(utils.GO2GENE_PERC, 0)
-        if gperc > 0.09:
-            label += f": {gperc:.1f}%"
+        #gperc = node.get(utils.GO2GENE_PERC, 0)
+        gcount = node.get(utils.GO2GENE_COUNT, 0)
+        gcount = human_readable(gcount)
+        label += f" [{gcount}]"
+
         namespace = utils.NAMESPACE_MAP.get(node["namespace"], "?")
         graph.add_node(oid, id=oid, name=name, namespace=namespace, label=label, **utils.NODE_ATTRS)
+
 
     # Add all edges to Graph
     for node in terms.values():

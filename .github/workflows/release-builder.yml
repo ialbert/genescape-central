@@ -1,24 +1,30 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
 name: Build releases
 
 on:
   push:
-    branches: [ "dist" ]
-  pull_request:
-    branches: [ "dist" ]
+    tags:
+      - '*'
 
 permissions:
   contents: read
 
 jobs:
   build:
-
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact-name: "Linux"
+          - os: windows-latest
+            artifact-name: "Windows"
+          - os: macos-latest
+            artifact-name: "MacOS"
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up Python 3.10
       uses: actions/setup-python@v4
       with:
@@ -27,10 +33,10 @@ jobs:
     - name: Set up the environment
       run: |
         python -m pip install --upgrade pip
-        pip install pytest pyinstaller 
+        pip install pytest pyinstaller
         pip install .
         pytest
-        python src/genescape/dist.py
+        python src/genescape/dist.py --build
 
     - name: Extract package version
       run: echo "VERSION=$(python -c 'from genescape import __version__; print(__version__)')" >> $GITHUB_ENV
@@ -38,5 +44,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: GeneScape-${{ env.VERSION }}-Windows.zip
+        name: GeneScape-${{ env.VERSION }}-${{ matrix.artifact-name }}.zip
         path: dist/GeneScape-latest.zip

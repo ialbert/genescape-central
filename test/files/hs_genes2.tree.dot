@@ -1,122 +1,122 @@
 digraph genescape {
 "GO:0003674" [fillcolor="#A2CDF6", label="GO:0003674
-molecular_function: 3.6%", shape=box, style=filled];
+molecular_function [715]", shape=box, style=filled];
 "GO:0004857" [fillcolor="#A2CDF6", label="GO:0004857
 enzyme inhibitor
-activity: 0.2%", shape=box, style=filled];
+activity [35]", shape=box, style=filled];
 "GO:0004866" [fillcolor="#A3F6A2", label="GO:0004866
 endopeptidase
-inhibitor activity: 0.2%
+inhibitor activity [39]
 (1/4)", shape=box, style=filled];
 "GO:0005096" [fillcolor="#17DA15", label="GO:0005096
 GTPase activator
-activity: 1.4%
+activity [274]
 (1/4)", shape=box, style=filled];
 "GO:0005488" [fillcolor="#A2CDF6", label="GO:0005488
-binding", shape=box, style=filled];
+binding [0]", shape=box, style=filled];
 "GO:0005515" [fillcolor="#A2CDF6", label="GO:0005515
-protein binding: 64.2%", shape=box, style=filled];
+protein binding [13K]", shape=box, style=filled];
 "GO:0005575" [fillcolor="#F5A2F6", label="GO:0005575
-cellular_component: 2.1%", shape=box, style=filled];
+cellular_component [415]", shape=box, style=filled];
 "GO:0005615" [fillcolor="#17DA15", label="GO:0005615
-extracellular space: 8.5%
+extracellular space [2K]
 (1/4)", shape=box, style=filled];
 "GO:0005737" [fillcolor="#A3F6A2", label="GO:0005737
-cytoplasm: 25.9%
+cytoplasm [5K]
 (1/4)", shape=box, style=filled];
 "GO:0008047" [fillcolor="#A2CDF6", label="GO:0008047
 enzyme activator
-activity: 0.3%", shape=box, style=filled];
+activity [59]", shape=box, style=filled];
 "GO:0008150" [fillcolor="#F6CBA2", label="GO:0008150
-biological_process: 2.9%", shape=box, style=filled];
+biological_process [564]", shape=box, style=filled];
 "GO:0016020" [fillcolor="#A3F6A2", label="GO:0016020
-membrane: 16.5%
+membrane [3K]
 (1/4)", shape=box, style=filled];
 "GO:0030234" [fillcolor="#A2CDF6", label="GO:0030234
 enzyme regulator
-activity: 0.1%", shape=box, style=filled];
+activity [23]", shape=box, style=filled];
 "GO:0030414" [fillcolor="#A2CDF6", label="GO:0030414
 peptidase inhibitor
-activity", shape=box, style=filled];
+activity [14]", shape=box, style=filled];
 "GO:0030695" [fillcolor="#A2CDF6", label="GO:0030695
 GTPase regulator
-activity", shape=box, style=filled];
+activity [15]", shape=box, style=filled];
 "GO:0031082" [fillcolor="#F5A2F6", label="GO:0031082
-BLOC complex", shape=box, style=filled];
+BLOC complex [0]", shape=box, style=filled];
 "GO:0031083" [fillcolor="#17DA15", label="GO:0031083
-BLOC-1 complex
+BLOC-1 complex [15]
 (1/4)", shape=box, style=filled];
 "GO:0032991" [fillcolor="#F5A2F6", label="GO:0032991
 protein-containing
-complex: 3.1%", shape=box, style=filled];
+complex [614]", shape=box, style=filled];
 "GO:0043085" [fillcolor="#F6CBA2", label="GO:0043085
 positive regulation
 of catalytic
-activity: 0.1%", shape=box, style=filled];
+activity [20]", shape=box, style=filled];
 "GO:0043087" [fillcolor="#F6CBA2", label="GO:0043087
 regulation of GTPase
-activity: 0.3%", shape=box, style=filled];
+activity [61]", shape=box, style=filled];
 "GO:0043547" [fillcolor="#F6CBA2", label="GO:0043547
 positive regulation
-of GTPase activity: 0.7%", shape=box, style=filled];
+of GTPase activity [143]", shape=box, style=filled];
 "GO:0044093" [fillcolor="#F6CBA2", label="GO:0044093
 positive regulation
 of molecular
-function", shape=box, style=filled];
+function [0]", shape=box, style=filled];
 "GO:0046982" [fillcolor="#17DA15", label="GO:0046982
 protein
 heterodimerization
-activity: 1.6%
+activity [313]
 (1/4)", shape=box, style=filled];
 "GO:0046983" [fillcolor="#A2CDF6", label="GO:0046983
 protein dimerization
-activity: 0.7%", shape=box, style=filled];
+activity [144]", shape=box, style=filled];
 "GO:0050790" [fillcolor="#F6CBA2", label="GO:0050790
 regulation of
-catalytic activity", shape=box, style=filled];
+catalytic activity [13]", shape=box, style=filled];
 "GO:0051336" [fillcolor="#F6CBA2", label="GO:0051336
 regulation of
-hydrolase activity", shape=box, style=filled];
+hydrolase activity [0]", shape=box, style=filled];
 "GO:0051345" [fillcolor="#F6CBA2", label="GO:0051345
 positive regulation
 of hydrolase
-activity", shape=box, style=filled];
+activity [2]", shape=box, style=filled];
 "GO:0060589" [fillcolor="#A2CDF6", label="GO:0060589
 nucleoside-
 triphosphatase
-regulator activity", shape=box, style=filled];
+regulator activity [0]", shape=box, style=filled];
 "GO:0061134" [fillcolor="#A2CDF6", label="GO:0061134
 peptidase regulator
-activity", shape=box, style=filled];
+activity [0]", shape=box, style=filled];
 "GO:0061135" [fillcolor="#A2CDF6", label="GO:0061135
 endopeptidase
-regulator activity", shape=box, style=filled];
+regulator activity [2]", shape=box, style=filled];
 "GO:0065007" [fillcolor="#F6CBA2", label="GO:0065007
 biological
-regulation", shape=box, style=filled];
+regulation [0]", shape=box, style=filled];
 "GO:0065009" [fillcolor="#F6CBA2", label="GO:0065009
 regulation of
-molecular function", shape=box, style=filled];
+molecular function [0]", shape=box, style=filled];
 "GO:0090630" [fillcolor="#17DA15", label="GO:0090630
 activation of GTPase
-activity: 0.5%
+activity [100]
 (1/4)", shape=box, style=filled];
 "GO:0098772" [fillcolor="#A2CDF6", label="GO:0098772
 molecular function
-regulator activity", shape=box, style=filled];
+regulator activity [0]", shape=box, style=filled];
 "GO:0110165" [fillcolor="#F5A2F6", label="GO:0110165
 cellular anatomical
-entity", shape=box, style=filled];
+entity [2]", shape=box, style=filled];
 "GO:0140535" [fillcolor="#F5A2F6", label="GO:0140535
 intracellular
 protein-containing
-complex", shape=box, style=filled];
+complex [2]", shape=box, style=filled];
 "GO:0140677" [fillcolor="#A2CDF6", label="GO:0140677
 molecular function
-activator activity: 0.1%", shape=box, style=filled];
+activator activity [24]", shape=box, style=filled];
 "GO:0140678" [fillcolor="#A2CDF6", label="GO:0140678
 molecular function
-inhibitor activity: 0.1%", shape=box, style=filled];
+inhibitor activity [27]", shape=box, style=filled];
 "GO:0003674" -> "GO:0005488";
 "GO:0003674" -> "GO:0098772";
 "GO:0004857" -> "GO:0030414";
