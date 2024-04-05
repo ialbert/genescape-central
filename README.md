@@ -32,7 +32,10 @@ Download the latest binary release for your platform
 
 On all platforms you may also use `pip install genescape` to install the software then run `genescape web` to start the web interface.
 
-Visit the localhost address in your browser:
+
+## Accessing the interface
+
+Once the program runs, visit the `http://localhost:8000` in your browser:
 
 * [http://localhost:8000](http://localhost:8000)
 
@@ -41,6 +44,10 @@ the page you see should look like this:
 ![GeneScape interface][iface1]
 
 [iface1]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-empty.png
+
+When you are done with the program, close the terminal that started the program to stop the server.
+
+## Using the interface
 
 Fill in the text box with a list of genes names or GO terms or gene names and click the `Draw Tree` button to visualize the relationships between the GO terms.
 
