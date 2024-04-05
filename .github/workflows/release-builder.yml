@@ -39,6 +39,7 @@ jobs:
         python src/genescape/dist.py --build
 
     - name: Extract package version
+      shell: bash
       run: echo "VERSION=$(python -c 'from genescape import __version__; print(__version__)')" >> $GITHUB_ENV
 
     - name: Upload artifact
