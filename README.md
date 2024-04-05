@@ -70,17 +70,15 @@ The program will generate a tree visualization of the functional elements of the
 The labels in the graph carry additional information on the number of genes in the input that carry that function as well as an indicator for the specificity of the function in the organism. For example, the label:
 
 ```
-   GO:0098978
-  glutamatergic
-  synapse: 2.1%
-      (1/2)
+      GO:0004866
+    endopeptidase
+  inhibitor activity [39]
+        (1/5)
 ```
 
-Indicates that the function `glutamatergic synapse` was seen as an annotation to 2.1% of *all genes* in the original association file. Thus it is characteristic of the annotation of the organism.
+Indicates that the function `endopeptidase inhibitor activity` was seen as an annotation to `39` of *all genes* in the original association file (for the human there are over 19K gene symbols). Thus, the `[39]` is a characteristic of  annotation of the organism.
 
-When it comes to the input file, 1 out of 2 genes carry this function. 
-
-Thus we are observing a function that appears in 2.1% of all genes of the organism and a 1/2=50% fraction of the input genes. 
+The `(1/5)` means that  `1` out of `5` genes in the input list carry this function. Thus it is a characteristic of the input list.
 
 You are welcome to apply a p-value to this difference to determine whether it is statistically significant. Note that assigning p-value to enrichment counts is fraught with challenges, as in our opinion, GO annotations are neither complete, nor independent nor accurate enough to make such determination.
 
