@@ -26,7 +26,7 @@ def run(name="GeneScape", tag=False, build=False):
 def tag_cmd():
     # The git command
     cmd = ["git", "tag", f"v{__version__}"]
-    #subprocess.run(cmd, check=True)
+    subprocess.run(cmd, check=True)
     utils.info(f"{' '.join(cmd)}")
 
     # Push the tag to the remote
