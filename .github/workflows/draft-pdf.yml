@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'docs/paper.*'
+  workflow_dispatch:
+    
 jobs:
   paper:
     runs-on: ubuntu-latest
