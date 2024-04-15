@@ -18,7 +18,7 @@ When executed from the command line:
 
 More details in [Install](#installation) section below.
 
-## Quick start
+## Quickstart
 
 Download the latest binary release for your platform
 
@@ -26,26 +26,25 @@ Download the latest binary release for your platform
 
 [releases]: https://www.github.com/ialbert/genescape-central/releases
 
-**Windows**: Unzip then double-click the executable to start the program. You may need to give permission to run the software. In the future you can double-click the executable to start the program.
+**Windows**: Unzip then double-click the executable to start the program. You may need to give permission to run the software. Once you allow the software to run subsequently you can double-click the executable to start the program.
 
-**MacOS** The first time around unzip the program, then right-click and select **Open**. You then again have to agree to run the software. In the future you can double-click the executable to start the program.
+**MacOS** The first time around unzip the program, then right-click and select **Open**. You then again have to agree to run the software. After allowing the program to run once you can in the future double-click the executable to start the program.
 
 On all platforms you may also use `pip install genescape` to install the software then run `genescape web` to start the web interface.
 
+## Accessing the graphical interface
 
-## Accessing the interface
-
-Once the program runs, visit the `http://localhost:8000` in your browser:
+The user interface is browser-based. Once the program runs, visit the `http://localhost:8000` URL in your browser:
 
 * [http://localhost:8000](http://localhost:8000)
 
-the page you see should look like this:
+The page you see should look similar to the image below:
 
 ![GeneScape interface][iface1]
 
 [iface1]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-empty.png
 
-When you are done with the program, close the terminal that started the program to stop the server.
+Once you are done running with the program, you will need to close the terminal that started the program or press CTRL+C to stop the program from running.
 
 ## Using the interface
 
@@ -59,13 +58,17 @@ The program will generate a tree visualization of the functional elements of the
 
 ![GeneScape][tree]
 
-**GeneScape** does the following:
+**GeneScape** works the following way:
 
-1. Reads genes from an **Input list** 
-1. Extracts the **Functional Annotations** associated with the input genes 
-1. Builds and visualizes a tree based on these GO terms 
+1. It first reads genes from an **Input List** 
+1. Then extracts the **Annotations** associated with the input genes 
+1. Finallyit builds and visualizes the functional subtree tree based on these Annotations. 
 
-## Node labeling 
+> **Note**
+>
+> Even short lists of genes (under ten genes) can create large trees. Filter by minimum counts (how many genes share the function) or functional patterns (functions that match a pattern). 
+
+## Node Labeling 
 
 The labels in the graph carry additional information on the number of genes in the input that carry that function as well as an indicator for the specificity of the function in the organism. For example, the label:
 
@@ -76,13 +79,13 @@ The labels in the graph carry additional information on the number of genes in t
         (1/5)
 ```
 
-Indicates that the function `endopeptidase inhibitor activity` was seen as an annotation to `39` of *all genes* in the original association file (for the human there are over 19K gene symbols). Thus, the `[39]` is a characteristic of  annotation of the organism.
+Indicates that the function `endopeptidase inhibitor activity` was seen as an annotation to `39` of *all genes* in the original association file (for the human there are over 19K gene symbols). Thus, the `[39]` is a characteristic of annotation of the organism.
 
-The `(1/5)` means that  `1` out of `5` genes in the input list carry this function. Thus it is a characteristic of the input list.
+The `(1/5)` means that  `1` out of `5` genes in the input list carry this annotation. Thus the value is a characteristic of the input list. The `mincount` filter is applied to the count value to filter out functions that are under a threshold.
 
-You are welcome to apply a p-value to this difference to determine whether it is statistically significant. Note that assigning p-value to enrichment counts is fraught with challenges, as in our opinion, GO annotations are neither complete, nor independent nor accurate enough to make such determination.
+You are welcome to apply a p-value to the differences in counts to determine whether it is statistically significant. Note that assigning p-value to enrichment counts is fraught with many challenges, as in our opinion, GO annotations are neither complete, nor independent nor accurate enough to make such determination. The selection of the background to correct p-values for multiple comparisons is also an additional challenge. For these reasons, we do not compute p-values in the application.
 
-## Node coloring
+## Node Coloring
 
 The colors in the tree carry additional meaning:
 

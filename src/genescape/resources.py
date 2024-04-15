@@ -20,7 +20,7 @@ def cache(key, func):
 
     #key = str(key)
 
-    utils.info(f"cache key: {key}")
+    utils.debug(f"cache: {key}")
 
     if key not in CACHE:
         CACHE[key] = func()

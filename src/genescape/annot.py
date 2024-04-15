@@ -108,7 +108,7 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
 
     # Create the data object
     res = []
-    data_fields = [utils.GID, "root", "count", "function", utils.SOURCE, "count", "size", utils.LABEL]
+    data_fields = ["count", "root", utils.GID,  "function", utils.SOURCE, "count", "size", utils.LABEL]
 
 
     for goid, cnt, func in counts:
@@ -123,7 +123,7 @@ def run(data, index, pattern='', mincount=1, root=utils.NS_ALL, csvout=False):
         if root != utils.NS_ALL and root != root_code:
             continue
 
-        name = dict(zip(data_fields, [goid, root_code, cnt, func, funcs, cnt, n_size, label], strict=False))
+        name = dict(zip(data_fields, [cnt, root_code, goid, func, funcs, cnt, n_size, label], strict=False))
 
         res.append(name)
 
@@ -150,7 +150,7 @@ def ann2csv(ann):
             rc[utils.SOURCE] = ";".join(row.get(utils.SOURCE, []))
             write.writerow(rc)
         text = stream.getvalue()
-
+    text = text.strip()
     return text
 
 

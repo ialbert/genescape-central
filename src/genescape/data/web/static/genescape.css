@@ -106,9 +106,12 @@ svg {
     flex-grow: 1;
 }
 
-
+pre {
+    margin: 0;
+}
 #terms {
     height: 50%;
+    #width: 100%;
     min-height:300px;
     border: var(--border-color) solid 1px;
 }

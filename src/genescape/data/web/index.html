@@ -105,7 +105,7 @@
             <div class="grow">
 
                 <div class="header">
-                    Input List
+                    Input
                 </div>
 
                 <textarea class="input" name="input" id="input"
@@ -118,15 +118,14 @@ GRTP1
 PSG5
             </textarea>
 
-                <div class="header">Function Annotations
+                <div class="header">Annotations
                     <span id="loadingFile" class="htmx-indicator">
-                    <span class="mark"> ... processing</span>
-                </span>
+                        <span class="mark"> ... processing</span>
+                    </span>
                 </div>
 
-                <textarea class="input" name="terms" id="terms"
-                          hx-swap-oob="true">
-                </textarea>
+                <pre id="terms" hx-swap-oob="true">
+                </pre>
 
             </div>
 
@@ -150,7 +149,7 @@ PSG5
             <div class="growX">
 
                 <div class="header">
-                    Function Tree
+                    Functions
                     <!-- Loading  indicator -->
                     <span id="loadingImage" class="htmx-indicator">
                         <span class="mark">... processing</span>

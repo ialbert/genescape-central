@@ -66,7 +66,7 @@ def stop(msg):
 STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "data", "code", "errors", "unknown_terms"
 
 # The name of the columns in the annotation CSV file
-GID, LABEL, SOURCE = "gid", "label", "source"
+GID, LABEL, SOURCE = "goid", "label", "source"
 
 # A few handy constants
 DEGREE, COUNT_DESC, INPUT, NAME, NAMESPACE = "degree", "count_desc", "input", "name", "namespace"
@@ -262,7 +262,7 @@ def index_stats(index, verbose=False):
     go_count = len(go2sym)
 
     if verbose:
-        info(f"index: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms,")
+        info(f"index: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms")
 
     return map_count, sym_count, go_count
 
