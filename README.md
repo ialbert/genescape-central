@@ -62,11 +62,9 @@ The program will generate a tree visualization of the functional elements of the
 
 1. It first reads genes from an **Input List** 
 1. Then extracts the **Annotations** associated with the input genes 
-1. Finallyit builds and visualizes the functional subtree tree based on these Annotations. 
+1. Finally it builds and visualizes the functional subtree tree based on these Annotations. 
 
-> **Note**
->
-> Even short lists of genes (under ten genes) can create large trees. Filter by minimum counts (how many genes share the function) or functional patterns (functions that match a pattern). 
+> **Note**: Even short lists of genes (under ten genes) can create large trees. Filter by minimum counts (how many genes share the function) or functional patterns (functions that match a pattern). 
 
 ## Node Labeling 
 
@@ -83,7 +81,7 @@ Indicates that the function `endopeptidase inhibitor activity` was seen as an an
 
 The `(1/5)` means that  `1` out of `5` genes in the input list carry this annotation. Thus the value is a characteristic of the input list. The `mincount` filter is applied to the count value to filter out functions that are under a threshold.
 
-You are welcome to apply a p-value to the differences in counts to determine whether it is statistically significant. Note that assigning p-value to enrichment counts is fraught with many challenges, as in our opinion, GO annotations are neither complete, nor independent nor accurate enough to make such determination. The selection of the background to correct p-values for multiple comparisons is also an additional challenge. For these reasons, we do not compute p-values in the application.
+It is possible to compute a p-value to determine whether am observed enrichment difference is statistically significant. We'll just note that assigning p-values to enrichment counts is fraught with several challenges. In our opinion, GO annotations are neither complete, nor independent, nor precise enough to satisfy mathematical requirements. In addition, appropriate selection of the background (aka the `19000` above) to correct p-values for multiple comparisons also presents many challenges. For these reasons, we do not compute p-values in our application.
 
 ## Node Coloring
 
