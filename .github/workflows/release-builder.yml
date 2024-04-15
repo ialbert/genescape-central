@@ -51,5 +51,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: GeneScape-${{ env.VERSION }}-${{ matrix.artifact-name }}
-        path: dist/GeneScape-${{ env.VERSION }}-${{ matrix.artifact-name }}.zip
+        name: GeneScape-${{ matrix.artifact-name }}-${{ env.VERSION }}
+        path: dist/GeneScape-${{ matrix.artifact-name }}-${{ env.VERSION }}-.zip
