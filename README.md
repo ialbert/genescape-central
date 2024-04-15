@@ -81,7 +81,7 @@ Indicates that the function `endopeptidase inhibitor activity` was seen as an an
 
 The `(1/5)` means that  `1` out of `5` genes in the input list carry this annotation. Thus the value is a characteristic of the input list. The `mincount` filter is applied to the count value to filter out functions that are under a threshold.
 
-It is possible to compute a p-value to determine whether am observed enrichment difference is statistically significant. We'll just note that assigning p-values to enrichment counts is fraught with several challenges. In our opinion, GO annotations are neither complete, nor independent, nor precise enough to satisfy mathematical requirements. In addition, appropriate selection of the background (aka the `19000` above) to correct p-values for multiple comparisons also presents many challenges. For these reasons, we do not compute p-values in our application.
+It is possible to compute a p-value to determine whether an observed enrichment difference is statistically significant. We'll just note that assigning p-values to enrichment counts is fraught with several challenges. In our opinion, GO annotations are neither complete, nor independent, nor precise enough to satisfy mathematical requirements. In addition, appropriate selection of the background (aka the `19000` above) to correct p-values for multiple comparisons also presents many challenges. For these reasons, we do not compute p-values in our application.
 
 ## Node Coloring
 
