@@ -14,7 +14,7 @@ from genescape import __version__, utils
 @click.command()
 @click.option("--name", default="GeneScape", help="The name of the executable")
 @click.option("--tag", is_flag=True, help="Run a git tag command")
-@click.option("--build", is_flag=True, help="Run a git tag command")
+@click.option("--build", is_flag=True, help="Build the executable")
 @click.help_option("-h", "--help")
 def run(name="GeneScape", tag=False, build=False):
     if tag:
@@ -36,6 +36,21 @@ def tag_cmd():
 
 
 def build_cmd(name="GeneScape", version=__version__):
+
+    # Platform name for the zip file
+    if sys.platform == "win32":
+        plat_name = "Windows"
+    elif sys.platform == "darwin":
+        plat_name = "MacOS"
+    else:
+        plat_name = "Linux"
+
+    # The name of the executable
+    name = f"{name}-{plat_name}"
+
+    # The executable's name might differ by platform
+    exe_name = f"{name}.exe" if sys.platform == "win32" else name
+
     # The PyInstaller command
     cmd = [
         "pyinstaller",
@@ -49,11 +64,10 @@ def build_cmd(name="GeneScape", version=__version__):
     # Run PyInstaller
     subprocess.run(cmd, check=True)
 
+    utils.info(f"Exe: dist/{exe_name}")
+
     # The path to the distribution directory
     dist_path = Path(os.getcwd(), "dist")
-
-    # The executable's name might differ by platform
-    exe_name = f"{name}.exe" if sys.platform == "win32" else name
 
     # Find the dist directory where the executable is placed
     exe_path = dist_path / exe_name
@@ -70,18 +84,14 @@ def build_cmd(name="GeneScape", version=__version__):
         plat_name = "Linux"
 
     # The path to the zip file.
-    zip_name = f"{name}-{version}-{plat_name}.zip"
+    zip_name = f"{name}-{version}.zip"
     zip_path = dist_path / zip_name
 
     with ZipFile(zip_path, 'w') as zipf:
         zipf.write(exe_path, arcname=exe_name)
 
-    utils.info(f"File: {zip_path}")
+    utils.info(f"Zip: {zip_path}")
 
-    # Also create a latest version
-    latest_path = dist_path /f"{name}-latest.zip"
-    shutil.copy(zip_path, latest_path)
-    utils.info(f"File: {latest_path}")
 
 if __name__ == "__main__":
     run()

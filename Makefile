@@ -34,10 +34,14 @@ index: ${OBO_FILE} ${GAF_FILE}
 web:
 	python src/genescape/server.py
 
-# Push a tag to the repository.
-tag:
+# Tag and push to repository.
+tag: exe
 	pytest
-	python src/genescape/dist.py --tag
+	python src/genescape/exe.py --tag
+
+# Build the executable.
+exe:
+	python src/genescape/exe.py --build
 
 # Performs a python-only test.
 test:
