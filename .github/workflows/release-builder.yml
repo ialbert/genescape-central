@@ -52,4 +52,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: GeneScape-${{ matrix.artifact-name }}-${{ env.VERSION }}
-        path: dist/GeneScape-${{ matrix.artifact-name }}-${{ env.VERSION }}-.zip
+        path: dist/GeneScape-${{ matrix.artifact-name }}-${{ env.VERSION }}.zip
