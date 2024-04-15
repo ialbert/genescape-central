@@ -19,7 +19,7 @@ jobs:
           - os: ubuntu-latest
             artifact-name: "Linux"
           - os: windows-latest
-            artifact-name: "Windows"
+            artifact-name: "Windows.exe"
           - os: macos-latest
             artifact-name: "MacOS"
 
@@ -47,4 +47,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: GeneScape-${{ env.VERSION }}-${{ matrix.artifact-name }}
-        path: dist/GeneScape-${{ matrix.artifact-name }}.zip
+        path: dist/GeneScape-${{ matrix.artifact-name }}
