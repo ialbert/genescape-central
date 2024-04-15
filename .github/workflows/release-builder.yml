@@ -18,15 +18,10 @@ jobs:
         include:
           - os: ubuntu-latest
             artifact-name: "Linux"
-            artifact-suffix: ""
-
           - os: windows-latest
             artifact-name: "Windows"
-            artifact-suffix: ".exe"
-
           - os: macos-latest
             artifact-name: "MacOS"
-            artifact-suffix: ""
 
     steps:
     - uses: actions/checkout@v4
