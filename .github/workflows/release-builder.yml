@@ -18,10 +18,15 @@ jobs:
         include:
           - os: ubuntu-latest
             artifact-name: "Linux"
+            artifact-suffix: ""
+
           - os: windows-latest
-            artifact-name: "Windows.exe"
+            artifact-name: "Windows"
+            artifact-suffix: ".exe"
+
           - os: macos-latest
             artifact-name: "MacOS"
+            artifact-suffix: ""
 
     steps:
     - uses: actions/checkout@v4
@@ -47,4 +52,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: GeneScape-${{ env.VERSION }}-${{ matrix.artifact-name }}
-        path: dist/GeneScape-${{ matrix.artifact-name }}
+        path: dist/GeneScape-${{ env.VERSION }}-${{ matrix.artifact-name }}.zip
