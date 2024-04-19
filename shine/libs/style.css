@@ -1,0 +1,9 @@
+:root {
+    --border-color: #77ddaa;
+    --input-back-color: #fcfcfc;
+}
+
+#terms {
+    min-height:300px;
+    border: var(--border-color) solid 1px;
+}
