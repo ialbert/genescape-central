@@ -7,3 +7,11 @@
     min-height:300px;
     border: var(--border-color) solid 1px;
 }
+
+#annot_elem {
+    height: 300px;
+}
+
+#dot_elem {
+    height: 300px;
+}

@@ -29,6 +29,7 @@ app_ui = ui.page_sidebar(
         ui.input_text_area("terms", label="Gene List", value=GENE_LIST),
         ui.input_action_button("submit", "Draw Tree", onclick=""),
         ui.output_code("annot_elem"),
+        ui.output_code("dot_elem"),
         width=300,
     ),
 
@@ -37,7 +38,7 @@ app_ui = ui.page_sidebar(
         """
         $(function() {
             Shiny.addCustomMessageHandler("trigger", function(message) {
-                render_graph();
+                render_graph_delay();
             });
         });
         """),
@@ -47,12 +48,7 @@ app_ui = ui.page_sidebar(
     ),
 
     ui.div("""Press "Draw Tree" to generate the graph""", id="graph_elem"),
-
-    ui.output_code("dot_elem"),
-
     ui.output_text("run_elem"),
-
-    #ui.output_("AAA", id="demo_elem"),
 
     title="GeneScape",
 
@@ -68,12 +64,11 @@ def text2list(text):
     terms = list(terms)
     return terms
 
-value = "A"
 
 def server(input, output, session):
 
-    ann_value = reactive.Value("X")
-    dot_value = reactive.Value(DOT)
+    ann_value = reactive.Value("# Annotations will go here")
+    dot_value = reactive.Value("# DOT file will go here")
 
     @output
     @render.text
@@ -89,6 +84,12 @@ def server(input, output, session):
     @render.text
     def demo_elem():
         return dot_value.get()
+
+    @reactive.event(input.dot_elem)
+    def _():
+        print ("OBSERVING")
+        session.send_custom_message("trigger", 1)
+
 
     @render.text
     @reactive.event(input.submit)
@@ -109,7 +110,7 @@ def server(input, output, session):
 
         await session.send_custom_message("trigger", 1)
 
-        return f"OK: {inp}"
+        return f""
 
 
 

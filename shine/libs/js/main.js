@@ -1,3 +1,9 @@
+function render_graph_delay() {
+	setTimeout(() => {
+	  render_graph()
+	}, 1000);
+}
+
 function render_graph() {
 
 	dot = document.getElementById('dot_elem').textContent;
