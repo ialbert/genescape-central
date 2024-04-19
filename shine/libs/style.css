@@ -4,14 +4,14 @@
 }
 
 #terms {
-    min-height:300px;
+    min-height:250px;
     border: var(--border-color) solid 1px;
 }
 
 #annot_elem {
-    height: 300px;
+    height: 250px;
 }
 
 #dot_elem {
-    height: 300px;
+    height: 250px;
 }
