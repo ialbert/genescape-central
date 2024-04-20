@@ -223,7 +223,13 @@ To build the new index use:
 genescape build --gaf mydata.gaf.gz -i mydata.index.gz 
 ```
 
-You can also load up a different version of the OBO ontology. See the `--help` for more options.
+To use the custom index, pass the `-i` (`--index`) option to any of the commands, `web`, `tree` and `annotate` like so:
+
+```console
+genescape web --index mydata.index.gz
+```
+
+See the `--help` for more options.
 
 ## Testing
 
