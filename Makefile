@@ -32,7 +32,7 @@ index: ${OBO_FILE} ${GAF_FILE}
 
 # Performs the testing.
 web:
-	shiny run --reload genescape.core:app
+	shiny run --reload genescape.web:app
 
 # Tag and push to repository.
 tag: exe

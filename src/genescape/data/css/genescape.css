@@ -15,3 +15,7 @@
 #dot_elem {
     height: 250px;
 }
+
+#main {
+    min-width: 100%;
+}

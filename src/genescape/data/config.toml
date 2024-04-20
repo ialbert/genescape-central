@@ -5,20 +5,12 @@ title = "GeneScape Configuration"
 store = "~/.genescape"
 
 # A versioned directory for the data files
-tag = "v2"
+tag = "v3"
 
 # A listing of the files used by GeneScape
 
-[[index]]
+[[files]]
 target = "genescape.hs.json.gz"
-code = "hs"
-name = "Human"
-package = 'genescape.data'
-
-[[index]]
-target = "genescape.mm.json.gz"
-code = "mm"
-name = "Mouse"
 package = 'genescape.data'
 
 [[files]]
@@ -38,9 +30,19 @@ target = "test_genes.txt"
 package = "genescape.data"
 
 [[files]]
-target = "main.js"
+target = "genescape.js"
 subdir = [ "js" ]
 package = "genescape.data.js"
+
+[[files]]
+target = "viz-standalone.js"
+subdir = [ "js" ]
+package = "genescape.data.js"
+
+[[files]]
+target = "genescape.css"
+subdir = [ "css" ]
+package = "genescape.data.css"
 
 
 

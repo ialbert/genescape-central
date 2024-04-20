@@ -44,7 +44,7 @@ class Resource:
         self.files = dict()
 
         # Populate the resource files.
-        targets = config.get("index", []) + config.get("files", [])
+        targets = config.get("files", [])
         for value in targets:
             self.files[value["target"]] = value["path"]
 
@@ -63,6 +63,11 @@ class Resource:
         # The GAF demo data.
         self.GAF_FILE = get("goa_human.gaf.gz")
 
+        # The CSS and JS files.
+        self.GENESCAPE_CSS = get("genescape.css")
+        self.GENESCAPE_JS = get("genescape.js")
+        self.VIZ_JS = get("viz-standalone.js")
+
     def get_index(self, code):
         for value in self.config.get("index", []):
             if value.get("code", "") == code:
@@ -76,7 +81,7 @@ def reset_dir(config):
     """
     Deletes the storage directory.
     """
-    path = get_storedir(config)
+    path = get_storage_dir(config)
     if os.path.isdir(path):
         utils.info(f"deleting path: {path}")
         shutil.rmtree(path)
@@ -94,7 +99,7 @@ def get_config(fname=None):
     return config
 
 
-def get_storedir(config):
+def get_storage_dir(config):
     """
     The storage directory to the config file.
     """
@@ -104,7 +109,7 @@ def get_storedir(config):
     return path
 
 
-def get_path(package, target, subdir=None, config=None, devmode=False):
+def get_path(package='', target='', subdir=None, config=None):
     """
     Returns a file path to a resource.
     """
@@ -116,14 +121,6 @@ def get_path(package, target, subdir=None, config=None, devmode=False):
     if not package:
         return Path(target)
 
-    # The paths during devmode are the local files
-    if devmode:
-        parts = package.split('.')[1:]
-        path = Path(CURR_DIR, *parts) / target
-        if not os.path.isfile(path):
-            utils.warn(f"missing devmode resource: {path}")
-        return path
-
     # Set a sane default for the configuration.
     config = config or {}
 
@@ -131,42 +128,45 @@ def get_path(package, target, subdir=None, config=None, devmode=False):
     subdir = subdir or []
 
     # Get the complete path to the resource.
-    path = get_storedir(config) / Path(*subdir) / Path(target)
+    path = get_storage_dir(config) / Path(*subdir) / Path(target)
 
+    # Ensure the target directory exists
     if not os.path.isdir(path.parent):
+
         # Creates local directory.
         utils.info(f"creating path: {path.parent}")
 
-        # Ensure the target directory exists
         path.parent.mkdir(parents=True, exist_ok=True)
-        # Create the resource if it does not exist.
 
+    # Copy the resource to the target directory if it is not there or newer.
     with rsc.path(package, target) as src:
         # The condition to copy the resource
         cond = not os.path.isfile(path) or os.path.getmtime(src) > os.path.getmtime(path)
         if cond:
-            # Copy the resource to the target directory
             shutil.copy(src, path)
             utils.info(f'copy: {path}')
 
     return path
 
 
-def init(config, devmode=False):
+def init(config=None):
     """
-    Initializes the data the configuration file points to.
+    Initializes resources from a configuration file.
     """
-    # Initialize the targets in the config
-    targets = config.get("index", []) + config.get("files", [])
 
-    # Get the path to each resource.
+    # Initialize the configuration.
+    config = config or get_config()
+
+    # Initialize the targets in the config
+    targets = config.get("files", [])
+
+    # Adds a path to each target.
     for value in targets:
         package = value.get("package", None)
         target = value.get("target", None)
         subdir = value.get("subdir", [])
-        path = get_path(package=package, target=target, subdir=subdir, config=config, devmode=devmode)
-        if path:
-            value['path'] = path
+        path = get_path(package=package, target=target, subdir=subdir, config=config)
+        value['path'] = path
 
     res = Resource(config)
 
@@ -197,14 +197,9 @@ def get_index(index, res):
 
 
 if __name__ == "__main__":
+
     utils.verbosity(True)
 
-    cnf = get_config()
-
-    # reset_dir(config)
-
-    res = init(config=cnf, devmode=False)
-
-    print(res.get_index("mm"))
+    res = init()
 
     print("-" * 80)

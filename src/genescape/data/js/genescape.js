@@ -12,8 +12,6 @@ function render_graph() {
     Viz.instance().then(function (viz) {
         var svg = viz.renderSVGElement(dot);
         svg.setAttribute("id", "svgtree");
-        //svg.setAttribute("width", "100%");
-        //svg.setAttribute("height", "1200px");
         graph.innerHTML = '';
         graph.appendChild(svg);
     }).catch(
@@ -22,7 +20,7 @@ function render_graph() {
 }
 
 function saveSvgAsImage() {
-    var svg = document.querySelector('svg');
+    var svg = document.getElementById('svgtree');
     var svgData = new XMLSerializer().serializeToString(svg);
     var canvas = document.createElement("canvas");
     var ctx = canvas.getContext("2d");
@@ -44,6 +42,61 @@ function saveSvgAsImage() {
     };
 }
 
+function resize_container(svg){
+
+	var svg = document.getElementById('svgtree')
+
+	var h = svg.getBoundingClientRect().height;
+	var w = svg.getBoundingClientRect().width;
+
+	var cn = document.getElementById('main');
+
+	//cn.style.height = h + 'px';
+	//cn.style.width  = w + 'px';
+
+	console.log('cn:', cn.style.height, cn.style.width);
+}
+
+var zoomLevel = 1; // Initial zoom level
+
+// Function to adjust SVG zoom based on action
+function adjustSVGZoom(zoomAction) {
+
+    console.log(zoomAction)
+
+    var svg = document.querySelector('#svgtree');
+
+    if (!svg) return;
+
+    // Adjust zoom level based on the action
+    if (zoomAction === 'zoom-in') {
+        zoomLevel *= 1.2;
+    } else if (zoomAction === 'zoom-out') {
+        zoomLevel /= 1.2;
+    } else {
+        zoomLevel = 1;
+    }
+
+    // Apply new zoom level to the SVG
+    svg.style.transform = `scale(${zoomLevel})`;
+    svg.style.transformOrigin = 'top left';
+
+	resize_container();
+
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("saveImage").addEventListener("click", saveSvgAsImage);
+
+    document.querySelectorAll('button[data-action]').forEach(button => {
+
+        button.addEventListener('click', function() {
+            var action = this.getAttribute('data-action');
+            console.log("ACTION", action);
+
+            adjustSVGZoom(action);
+        }
+    );
+});
+
 });

@@ -12,7 +12,15 @@ ABTB3
 BCAS4
 C3P1
 GRTP1
-
+ABTB3
+BCAS4
+C3P1
+GRTP1
+Cyp1a1
+Sphk2
+Sptlc2
+GO:0005488
+GO:0005515
 '''
 
 DOT = '''
@@ -23,14 +31,15 @@ digraph SimpleGraph {
 }
 '''
 
-base_dir = Path(__file__).parent / "data"
-site_css = base_dir / "css"/ "style.css"
-site_js_viz = base_dir / "js" / "viz-standalone.js"
-site_js_main = base_dir / "js" / "main.js"
+# Load the default resources.
+res = resources.init()
 
-
+# Load default icons
 icon_play = icon_svg("play")
 icon_down = icon_svg("download")
+icon_zoom_in = icon_svg("magnifying-glass-plus")
+icon_zoom_out = icon_svg("magnifying-glass-minus")
+zoom_reset = icon_svg("magnifying-glass")
 
 # Shiny UI
 app_ui = ui.page_sidebar(
@@ -46,10 +55,9 @@ app_ui = ui.page_sidebar(
                 "BP": "Biological Process",
                 "MF": "Molecular Function",
                 "CC": "Cellular Component"},
-
         ),
         ui.input_action_button("submit", "Draw Tree", class_="btn-success", icon=icon_play),
-        ui.input_action_button("saveImage", "Save Image", icon=icon_down),
+
         ui.output_code("annot_elem"),
         ui.download_link("download_annot", "Download annotations", icon=icon_down),
         ui.output_code("dot_elem"),
@@ -67,17 +75,31 @@ app_ui = ui.page_sidebar(
                 });
             });
             """),
-        ui.include_css(site_css),
-        ui.include_js(site_js_viz, defer=""),
-        ui.include_js(site_js_main, method="inline"),
+        ui.include_css(res.GENESCAPE_CSS),
+        ui.include_js(res.VIZ_JS, defer=""),
+        ui.include_js(res.GENESCAPE_JS, method="inline"),
     ),
 
-    ui.div("""Press "Draw Tree" to generate the graph""", id="graph_elem"),
-    ui.tags.hr(),
+    ui.tags.p(
+    ui.input_action_button("zoom_in", label="Zoom", icon=icon_zoom_in, class_="btn btn-light btn-sm",
+                   data_action="zoom-in"),
+        ui.tags.span(" "),
+        ui.input_action_button("reset", label="Reset", icon=zoom_reset, class_="btn btn-light btn-sm", data_action="zoom-reset"),
+        ui.tags.span(" "),
+        ui.input_action_button("zoom_out", label="Zoom", icon=icon_zoom_out, class_="btn btn-light btn-sm", data_action="zoom-out"),
+ui.tags.span(" "),
+        ui.input_action_button("saveImage", "Save", class_="btn btn-light btn-sm", icon=icon_down),
+    align="center",
+    ),
+
+    ui.tags.p(
+        ui.div("""Press "Draw Tree" to generate the graph""", id="graph_elem", align="center"),
+    ),
+
     ui.tags.p(f"GeneScape {__version__}", align="center", class_="fw-light"),
     ui.output_text("run_elem"),
 
-    title="GeneScape",
+    title="GeneScape", id="main",
 
 )
 

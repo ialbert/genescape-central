@@ -182,13 +182,12 @@ def web(devmode=False, reset=False, verbose=False, index=None):
     """
     Run the web interface.
     """
-    from genescape import core
+    from genescape import web
 
     # Set the verbosity level.
     utils.verbosity(verbose)
 
-    shiny.run_app(core.app)
-
+    shiny.run_app(web.app)
 
 
 if __name__ == "__main__":
