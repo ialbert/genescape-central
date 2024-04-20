@@ -2,9 +2,9 @@
   "data": [
     {
       "count": 1,
+      "function": "activation of GTPase activity",
       "root": "BP",
       "goid": "GO:0090630",
-      "function": "activation of GTPase activity",
       "source": [
         "GRTP1"
       ],
@@ -13,9 +13,9 @@
     },
     {
       "count": 1,
+      "function": "protein heterodimerization activity",
       "root": "MF",
       "goid": "GO:0046982",
-      "function": "protein heterodimerization activity",
       "source": [
         "ABTB3"
       ],
@@ -24,9 +24,9 @@
     },
     {
       "count": 1,
+      "function": "BLOC-1 complex",
       "root": "CC",
       "goid": "GO:0031083",
-      "function": "BLOC-1 complex",
       "source": [
         "BCAS4"
       ],
@@ -35,9 +35,9 @@
     },
     {
       "count": 1,
+      "function": "membrane",
       "root": "CC",
       "goid": "GO:0016020",
-      "function": "membrane",
       "source": [
         "ABTB3"
       ],
@@ -46,9 +46,9 @@
     },
     {
       "count": 1,
+      "function": "cytoplasm",
       "root": "CC",
       "goid": "GO:0005737",
-      "function": "cytoplasm",
       "source": [
         "BCAS4"
       ],
@@ -57,9 +57,9 @@
     },
     {
       "count": 1,
+      "function": "extracellular space",
       "root": "CC",
       "goid": "GO:0005615",
-      "function": "extracellular space",
       "source": [
         "C3P1"
       ],
@@ -68,9 +68,9 @@
     },
     {
       "count": 1,
+      "function": "GTPase activator activity",
       "root": "MF",
       "goid": "GO:0005096",
-      "function": "GTPase activator activity",
       "source": [
         "GRTP1"
       ],
@@ -79,9 +79,9 @@
     },
     {
       "count": 1,
+      "function": "endopeptidase inhibitor activity",
       "root": "MF",
       "goid": "GO:0004866",
-      "function": "endopeptidase inhibitor activity",
       "source": [
         "C3P1"
       ],

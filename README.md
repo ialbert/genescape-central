@@ -6,9 +6,11 @@
 
 **GeneScape** is a software tool for visualizing gene functions. 
 
-**GeneScape** is a [Python based Shiny][pyshiny] application runs both at the command line and also via a graphical user interface.
+**GeneScape** is a Python-based [Shiny][pyshiny] application that be run both at the command line and also via a graphical user interface.
 
 [pyshiny]: https://shiny.posit.co/py/
+
+## Quickstart
 
 To install run:
 
@@ -16,21 +18,18 @@ To install run:
 pip install genescape
 ```
 
-When executed from the command line:
+The above installs an executable called `genescape` that can be executed with the following subcommands:
 
 * `genescape tree` draws informative Gene Ontology (GO) subgraphs
 * `genescape annotate` annotates a list of genes with GO functions
 * `genescape web` provides a web interface for the `tree` command
 
-More details in [Install](#installation) section below.
-
-## Quickstart
-
-After installaion launch the user interface with:
+After installaion we cam launch the user interface with:
 
 ```bash
 genescape web
 ``` 
+
 The user interface is browser-based. Once the program runs, visit the `http://localhost:8000` URL in your browser:
 
 * [http://localhost:8000](http://localhost:8000)
@@ -160,7 +159,7 @@ Sptlc2
 We run the `tree` command to visualize the relationships between the GO terms 
 
 ```console
-genescape tree genes.txt -o output.pdf
+genescape tree genes.txt
 ```
 
 Note that we had only three genes in the input yet even that produces a huge tree of terms.
@@ -172,7 +171,7 @@ Note that we had only three genes in the input yet even that produces a huge tre
 We can narrow down the visualization in multiple ways, for example, we can select only terms that match the word `lipid` :
 
 ```console
-genescape tree -m lipid genes.txt -o output.pdf
+genescape tree -m lipid genes.txt 
 ```
 
 When filtered as shown above, the output is much more manageable:
@@ -195,21 +194,21 @@ Smpd3
 The command:
 
 ```console
-genescape annotate -t --csv
+genescape annotate --test --csv
 ```
 
 will produce the output:
 
 ```
-gid,root,count,function,source,size,label
-GO:0090630,BP,1,activation of GTPase activity,GRTP1,4,(1/4)
-GO:0046982,MF,1,protein heterodimerization activity,ABTB3,4,(1/4)
-GO:0031083,CC,1,BLOC-1 complex,BCAS4,4,(1/4)
-GO:0016020,CC,1,membrane,ABTB3,4,(1/4)
-GO:0005737,CC,1,cytoplasm,BCAS4,4,(1/4)
-GO:0005615,CC,1,extracellular space,C3P1,4,(1/4)
-GO:0005096,MF,1,GTPase activator activity,GRTP1,4,(1/4)
-GO:0004866,MF,1,endopeptidase inhibitor activity,C3P1,4,(1/4)
+count,function,root,goid,source,size,label
+1,activation of GTPase activity,BP,GO:0090630,GRTP1,4,(1/4)
+1,protein heterodimerization activity,MF,GO:0046982,ABTB3,4,(1/4)
+1,BLOC-1 complex,CC,GO:0031083,BCAS4,4,(1/4)
+1,membrane,CC,GO:0016020,ABTB3,4,(1/4)
+1,cytoplasm,CC,GO:0005737,BCAS4,4,(1/4)
+1,extracellular space,CC,GO:0005615,C3P1,4,(1/4)
+1,GTPase activator activity,MF,GO:0005096,GRTP1,4,(1/4)
+1,endopeptidase inhibitor activity,MF,GO:0004866,C3P1,4,(1/4)
 ```
 
 ## genescape build
