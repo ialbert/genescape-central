@@ -105,11 +105,9 @@ Note the information in the box titles **Function Annotations** you can filter t
 2. a minimum number of genes that carry that function shown in the **count** column
 3. the GO subtree shown in the **root** column
 
-Note the options available in the interface.
+All the above options may be applied in the user interface.
 
-![GeneScape bar][iface2]
-
-All filters are applied during the annotation step and will filter the GO terms derived from the gene list.
+Filters are applied during the annotation step and will filter the GO terms derived from the gene list.
 
 ## Command line usage
 
