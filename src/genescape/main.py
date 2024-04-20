@@ -172,13 +172,17 @@ def build(index=None, obo=None, gaf=None, synon=False, dump=False):
         build.make_index(obo=obo, gaf=gaf, index=ind, with_synonyms=synon)
 
 
+host = "127.0.0.1"
+port= 8000,
+
 @cli.command()
-@click.option("--devmode", "devmode", is_flag=True, help="run in development mode")
-@click.option("--reset", "reset", is_flag=True, help="reset the resources")
+@click.option("--host", "host", default="127.0.0.1", help="hostname to bind to")
+@click.option("--port", "port", default=8000, type=int, help="port number")
 @click.option("-i", "--index", "index", help="Genescape index file")
+@click.option("--reset", "reset", is_flag=True, help="reset the resources")
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def web(devmode=False, reset=False, verbose=False, index=None):
+def web(index=None, host=None, port=None, reset=False, verbose=False):
     """
     Run the web interface.
     """
@@ -187,7 +191,15 @@ def web(devmode=False, reset=False, verbose=False, index=None):
     # Set the verbosity level.
     utils.verbosity(verbose)
 
-    shiny.run_app(web.app)
+    cnf = resources.get_config()
+
+    res = resources.init(cnf)
+
+    # Set the generack index file.
+    web.INDEX = Path(index) if index else res.INDEX
+
+    # Run the server.
+    shiny.run_app(web.app, host=host, port=port)
 
 
 if __name__ == "__main__":
