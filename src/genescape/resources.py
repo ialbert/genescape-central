@@ -205,8 +205,6 @@ if __name__ == "__main__":
 
     res = init(config=cnf, devmode=False)
 
-    print(res.WEB_DIR)
-
     print(res.get_index("mm"))
 
     print("-" * 80)
