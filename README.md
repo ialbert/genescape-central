@@ -24,7 +24,7 @@ The above installs an executable called `genescape` that can be executed with th
 * `genescape annotate` annotates a list of genes with GO functions
 * `genescape web` provides a web interface for the `tree` command
 
-After installaion we cam launch the user interface with:
+After installaion users launch the graphical user interface with:
 
 ```console
 genescape web
