@@ -6,17 +6,72 @@
 
 # Default OBO file.
 OBO_URL = http://current.geneontology.org/ontology/go-basic.obo
-OBO_FILE = tmp/go-basic.obo
+OBO_FILE = obo/go-basic.obo
 
 # The gene association file.
 GAF_URL = https://current.geneontology.org/annotations/goa_human.gaf.gz
-GAF_FILE = tmp/goa_human.gaf.gz
+GAF_FILE = obo/goa_human.gaf.gz
+
+# The index file.
+IDX_FILE = obo/genescape.index.gz
+
+# Makefile customizations
+SHELL := bash
+.ONESHELL:
+.SHELLFLAGS := -eu -o pipefail -c
+.DELETE_ON_ERROR:
+MAKEFLAGS += --warn-undefined-variables
+MAKEFLAGS += --no-builtin-rules
 
 # Usage information.
 usage:
 	@echo "#"
 	@echo "# Use the source, Luke!"
 	@echo "#"
+
+# Performs the testing.
+web:
+	shiny run --reload genescape.web:app
+
+# Tag and push to repository.
+tag: test
+	python src/genescape/exe.py --tag
+
+# Build the executable.
+exe: test
+	python src/genescape/exe.py --build
+
+shiny: test
+	pip install rsconnect
+	rsconnect deploy shiny src/genescape --name biostar --title GeneScape
+
+# Generate images for the documentation
+docimg:
+	genescape tree -o docs/images/genescape-output1.png src/genescape/data/test_genes.txt 
+	genescape tree -o docs/images/genescape-output2.png src/genescape/data/test_goids.txt 
+	genescape tree -m lipid -o docs/images/genescape-output3.png src/genescape/data/test_goids.txt 
+
+# Runs a linter.
+lint:
+	hatch run lint:style
+
+# Fix linting errors.
+fix:
+	hatch run lint:fmt
+
+# Save work.
+push:
+	git commit -am 'saving work' && git push
+
+
+
+build: clean
+	rm -rf build dist
+	hatch build 
+	ls -lh dist
+
+publish: build
+	hatch publish
 
 # Download the gene ontology file
 ${OBO_FILE}:
@@ -27,24 +82,17 @@ ${GAF_FILE}:
 	mkdir -p $(dir ${GAF_FILE})
 	curl -L ${GAF_URL} > ${GAF_FILE}
 
-index: ${OBO_FILE} ${GAF_FILE}
-	genescape build --obo ${OBO_FILE} --gaf ${GAF_FILE} --index ${GAF_FILE}.index.gz
+${IDX_FILE}: ${OBO_FILE} ${GAF_FILE}
+	hatch run genescape build --obo ${OBO_FILE} --gaf ${GAF_FILE} --index ${IDX_FILE}
 
-# Performs the testing.
-web:
-	shiny run --reload genescape.web:app
+obo: ${OBO_FILE}
+	ls -lh ${OBO_FILE}
 
-# Tag and push to repository.
-tag: exe
-	pytest
-	python src/genescape/exe.py --tag
+gaf: ${GAF_FILE}
+	ls -lh ${GAF_FILE}
 
-# Build the executable.
-exe:
-	python src/genescape/exe.py --build
-
-shiny:
-	rsconnect deploy shiny src/genescape --name biostar --title GeneScape
+index: ${IDX_FILE}
+	ls -lh ${IDX_FILE}
 
 # Performs a python-only test.
 test:
@@ -52,47 +100,12 @@ test:
 
 # A full test with file generation.
 testall: test
-	(cd test && make test)
-
-# Runs a linter.
-lint:
-	hatch run lint:style
-
-# Generate images for the documentation
-docimg:
-	genescape tree -o docs/images/genescape-output1.png src/genescape/data/test_genes.txt 
-	genescape tree -o docs/images/genescape-output2.png src/genescape/data/test_goids.txt 
-	genescape tree -m lipid -o docs/images/genescape-output3.png src/genescape/data/test_goids.txt 
-
-# Fix linting errors.
-fix:
-	hatch run lint:fmt
-
-push:
-	git commit -am 'saving work' && git push
-
-zip:
-	python src/genescape/dist.py
+	(cd test && make testall)
 
 clean:
-	rm -f src/genescape/web/static/tmp/image*
+	rm -rf build dist ${IDX_FILE}
 
-realclean: clean
-	rm -rf build dist
+env:
+	conda create -n genescape python=3.11 shiny rsconnect graphviz
 
-build: test
-	rm -rf build dist
-	hatch build 
-	ls -lh dist
-
-pypi: build
-	hatch publish
-
-$(OBO):
-	mkdir -p $(dir $(OBO))
-	curl -L $(URL) > $(OBO)
-
-get: $(OBO)
-	@ls -l $(OBO)
-
-.PHONY: test docs lint fix push demo clean realclean build pypi get
+.PHONY: test lint fix push clean build publish obo docimg web

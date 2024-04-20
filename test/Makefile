@@ -11,11 +11,11 @@ OBO = tmp/go-basic.obo
 # Usage information.
 usage:
 	@echo "#"
-	@echo "# make test"
+	@echo "# make testall"
 	@echo "#"
 
 # Generates various outputs
-test:
+testall:
 	# Make the output directory.
 	mkdir -p out
 
@@ -43,4 +43,4 @@ test:
 clean:
 	rm -f out/*.*
 
-.PHONY: test clean
+.PHONY: testall clean
