@@ -29,6 +29,7 @@ dependencies = [
   "networkx",
   "pydot",
   "shiny",
+  "faicons",
 ]
 
 [project.urls]

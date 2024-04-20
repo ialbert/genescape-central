@@ -3,6 +3,7 @@ from shiny import App, render, ui
 from pathlib import Path
 from datetime import datetime
 import time, asyncio
+from faicons import icon_svg
 
 from genescape import __version__, annot, bottle, resources, tree, utils
 
@@ -24,6 +25,10 @@ site_css = base_dir / "style.css"
 site_js_viz = base_dir / "js" / "viz-standalone.js"
 site_js_main = base_dir / "js" / "main.js"
 
+
+icon_play = icon_svg("play")
+icon_down = icon_svg("download")
+
 # Shiny UI
 app_ui = ui.page_sidebar(
 
@@ -40,11 +45,14 @@ app_ui = ui.page_sidebar(
                 "CC": "Cellular Component"},
 
         ),
-        ui.input_action_button("submit", "Draw Tree", class_="btn-success"),
+        ui.input_action_button("submit", "Draw Tree", class_="btn-success", icon=icon_play),
+        ui.input_action_button("saveImage", "Save Image", icon=icon_down),
         ui.output_code("annot_elem"),
+        ui.download_link("download_annot", "Download annotations", icon=icon_down),
         ui.output_code("dot_elem"),
+        ui.download_link("download_dot", "Download dot file", icon=icon_down),
 
-        width=400,
+        width=400, bg="#f8f8f8",
     ),
 
     ui.head_content(
@@ -62,6 +70,8 @@ app_ui = ui.page_sidebar(
     ),
 
     ui.div("""Press "Draw Tree" to generate the graph""", id="graph_elem"),
+    ui.tags.hr(),
+    ui.tags.p(f"GeneScape {__version__}", align="center", class_="fw-light"),
     ui.output_text("run_elem"),
 
     title="GeneScape",
@@ -110,6 +120,21 @@ def server(input, output, session):
 
         return dot, text
 
+    @render.download(
+        filename=lambda: "genescape.csv"
+    )
+    async def download_csv():
+        await asyncio.sleep(0.25)
+        yield ann_value.get()
+
+    @render.download(
+        filename=lambda: "genescape.dot.txt"
+    )
+    async def download_dot():
+        await asyncio.sleep(0.25)
+        yield dot_value.get()
+
+
     @output
     @render.text
     def annot_elem():
@@ -134,7 +159,7 @@ def server(input, output, session):
     async def run_elem():
 
         with ui.Progress(min=1, max=15) as p:
-            p.set(message="Generating the image", detail="This may take a while...")
+            p.set(message="Generating the image", detail="Please wait...")
             for i in range(1, 10):
                 p.set(i, message="Computing")
                 await asyncio.sleep(0.1)

@@ -54,7 +54,7 @@ def build_cmd(name="GeneScape", version=__version__):
     # The PyInstaller command
     cmd = [
         "pyinstaller",
-        "src/genescape/server.py",
+        "src/shine/core.py",
         "--add-data=src/genescape/data:genescape/data",
         "-i", "docs/images/logo.ico",
         "-n", name,
