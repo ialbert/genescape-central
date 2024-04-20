@@ -26,7 +26,7 @@ The above installs an executable called `genescape` that can be executed with th
 
 After installaion we cam launch the user interface with:
 
-```bash
+```console
 genescape web
 ``` 
 
@@ -113,7 +113,7 @@ Filters are applied during the annotation step and will filter the GO terms deri
 
 To generate images from command line the `graphviz` software must be installed. You can install it via `conda`
 
-```bash
+```console
 conda install graphviz
 ```
 
