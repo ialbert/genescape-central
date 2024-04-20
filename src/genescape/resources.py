@@ -63,10 +63,6 @@ class Resource:
         # The GAF demo data.
         self.GAF_FILE = get("goa_human.gaf.gz")
 
-        # Webserver related directories
-        self.WEB_DIR = get("index.html").parent
-        self.STATIC_DIR = self.WEB_DIR / "static"
-
     def get_index(self, code):
         for value in self.config.get("index", []):
             if value.get("code", "") == code:

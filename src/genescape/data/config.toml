@@ -1,12 +1,11 @@
 # This is a TOML document
-
 title = "GeneScape Configuration"
 
 # This directory will host the data files
 store = "~/.genescape"
 
 # A versioned directory for the data files
-tag = "v1"
+tag = "v2"
 
 # A listing of the files used by GeneScape
 
@@ -14,7 +13,6 @@ tag = "v1"
 target = "genescape.hs.json.gz"
 code = "hs"
 name = "Human"
-selected = true
 package = 'genescape.data'
 
 [[index]]
@@ -40,58 +38,9 @@ target = "test_genes.txt"
 package = "genescape.data"
 
 [[files]]
-target = "index.html"
-subdir = [ "web" ]
-package = "genescape.data.web"
+target = "main.js"
+subdir = [ "js" ]
+package = "genescape.data.js"
 
-[[files]]
-target = "draw.html"
-subdir = [ "web" ]
-package = "genescape.data.web"
-
-[[files]]
-target = "genescape.css"
-subdir = [ "web", "static" ]
-package = "genescape.data.web.static"
-
-[[files]]
-target = "favicon.ico"
-subdir = [ "web", "static" ]
-package = "genescape.data.web.static"
-
-[[files]]
-target = "shield.svg"
-subdir = [ "web", "static" ]
-package = "genescape.data.web.static"
-
-[[files]]
-target = "genescape.css"
-subdir = [ "web", "static" ]
-package = "genescape.data.web.static"
-
-[[files]]
-target = "genescape.js"
-subdir = [ "web", "static" ]
-package = "genescape.data.web.static"
-
-[[files]]
-target = "htmx.min.js.gz"
-subdir = [ "web", "static" ]
-package = "genescape.data.web.static"
-
-[[files]]
-target = "viz-standalone.js"
-subdir = [ "web", "static" ]
-package = "genescape.data.web.static"
-
-[[files]]
-target = "mini-default.css"
-subdir = [ "web", "static" ]
-package = "genescape.data.web.static"
-
-[[files]]
-target = "logo.png"
-subdir = [ "web", "static" ]
-package = "genescape.data.web.static"
 
 

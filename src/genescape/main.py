@@ -2,6 +2,7 @@ import click
 from pathlib import Path
 from genescape import __version__
 from genescape import resources, utils
+import shiny
 
 
 HELP  = f"Gene function visualization (v{__version__})."
@@ -181,13 +182,13 @@ def web(devmode=False, reset=False, verbose=False, index=None):
     """
     Run the web interface.
     """
-    from genescape import server
+    from genescape import core
 
     # Set the verbosity level.
     utils.verbosity(verbose)
 
-    # Start the server.
-    server.start(devmode=devmode, reset=reset, index=index)
+    shiny.run_app(core.app)
+
 
 
 if __name__ == "__main__":

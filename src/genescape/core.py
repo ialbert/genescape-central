@@ -10,6 +10,9 @@ from genescape import __version__, annot, bottle, resources, tree, utils
 GENE_LIST = '''
 ABTB3
 BCAS4
+C3P1
+GRTP1
+
 '''
 
 DOT = '''
@@ -20,8 +23,8 @@ digraph SimpleGraph {
 }
 '''
 
-base_dir = Path(__file__).parent / "libs"
-site_css = base_dir / "style.css"
+base_dir = Path(__file__).parent / "data"
+site_css = base_dir / "css"/ "style.css"
 site_js_viz = base_dir / "js" / "viz-standalone.js"
 site_js_main = base_dir / "js" / "main.js"
 
@@ -168,6 +171,5 @@ def server(input, output, session):
 
 
         return f""
-
 
 app = App(app_ui, server)
