@@ -32,7 +32,7 @@ index: ${OBO_FILE} ${GAF_FILE}
 
 # Performs the testing.
 web:
-	python src/genescape/server.py
+	shiny run --reload src/shine/core.py
 
 # Tag and push to repository.
 tag: exe
