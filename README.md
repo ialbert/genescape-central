@@ -6,9 +6,15 @@
 
 **GeneScape** is a software tool for visualizing gene functions. 
 
-**GeneScape** is distributed as a [standalone executable][releases] that can be run on Windows or MacOS.
+**GeneScape** is a [Python based Shiny][pyshiny] application runs both at the command line and also via a graphical user interface.
 
-**GeneScape** is also runnable as a command line Python program installable via `pip install genescape`.
+[pyshiny]: https://shiny.posit.co/py/
+
+To install run:
+
+```console
+pip install genescape
+```
 
 When executed from the command line:
 
@@ -20,20 +26,11 @@ More details in [Install](#installation) section below.
 
 ## Quickstart
 
-Download the latest binary release for your platform
+After installaion launch the user interface with:
 
-* [GeneScape Releases][releases]
-
-[releases]: https://www.github.com/ialbert/genescape-central/releases
-
-**Windows**: Unzip then double-click the executable to start the program. You may need to give permission to run the software. Once you allow the software to run subsequently you can double-click the executable to start the program.
-
-**MacOS** The first time around unzip the program, then right-click and select **Open**. You then again have to agree to run the software. After allowing the program to run once you can in the future double-click the executable to start the program.
-
-On all platforms you may also use `pip install genescape` to install the software then run `genescape web` to start the web interface.
-
-## Accessing the graphical interface
-
+```bash
+genescape web
+``` 
 The user interface is browser-based. Once the program runs, visit the `http://localhost:8000` URL in your browser:
 
 * [http://localhost:8000](http://localhost:8000)
@@ -109,28 +106,34 @@ Note the information in the box titles **Function Annotations** you can filter t
 2. a minimum number of genes that carry that function shown in the **count** column
 3. the GO subtree shown in the **root** column
 
-Note the options available in the interface:
+Note the options available in the interface.
 
-![GeneScape bar][bar]
+![GeneScape bar][iface2]
 
-[bar]: 
-https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-bar.png
-
-All of these elements are applied during the annotation step and will filter the GO terms derived from the gene list.
+All filters are applied during the annotation step and will filter the GO terms derived from the gene list.
 
 ## Command line usage
 
-To start the web interface type:
+To generate images from command line the `graphviz` software must be installed. You can install it via `conda`
 
-```console
-genescape web
+```bash
+conda install graphviz
 ```
 
-A web browser will start with the interface above.
+or via `apt` or `brew`.
+
+Those unable to install the `graphviz` package can save the output as a `.dot` file:
+
+```console
+genescape tree --test -o output.dot 
+```
+
+Then use an online tool like [viz-js][viz] to visualize the graph.
+
+[viz]: https://viz-js.com/ 
+
 
 ## genescape tree
-
-You can also use GeneScape completely from the command line with no web interface.
 
 We packaged test data with the software so you can test it like so:
 
@@ -220,42 +223,10 @@ To build an index for a different organism, download the GAF association file fr
 To build the new index use:
 
 ```console
-genescape build --gaf mydata.gaf -i mydata.index.gz 
+genescape build --gaf mydata.gaf.gz -i mydata.index.gz 
 ```
 
 You can also load up a different version of the OBO ontology. See the `--help` for more options.
-
-## Installation
-
-For a standalone executable Windows or MacOS executable, download the latest release from the [releases page][releases]. 
-
-When installed from the command line, the software requires Python 3.10 or above.  You can install `genescape` via `pip` or `pipx`.
-
-```console
-pip install genescape
-```
-
-No other software installation is needed if you want to use of the web interface via 
-
-```console
-genescape web
-```
-
-If you want to generate PDF or PNG images from the command line without a web browser, you will need to have the `graphviz` software from [Graphviz](https://graphviz.org/) installed and available on your `PATH`. The simplest way to install Graphviz via your package manager `apt`, `brew` or via `conda`:
-
-```console  
-conda install graphviz
-```
-
-If you are unable to install the `graphviz` package you can save the output as a `.dot` file. 
-
-```console
-genescape tree --test -o output.dot 
-```
-
-Then use an online tool like [viz-js][viz] to visualize the graph.
-
-[viz]: https://viz-js.com/ 
 
 ## Testing
 

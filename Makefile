@@ -47,9 +47,9 @@ shiny: test
 
 # Generate images for the documentation
 docimg:
-	genescape tree -o docs/images/genescape-output1.png src/genescape/data/test_genes.txt 
-	genescape tree -o docs/images/genescape-output2.png src/genescape/data/test_goids.txt 
-	genescape tree -m lipid -o docs/images/genescape-output3.png src/genescape/data/test_goids.txt 
+	genescape tree -o docs/images/genescape-output1a.png src/genescape/data/test_genes.txt
+	genescape tree -o docs/images/genescape-output2a.png src/genescape/data/test_goids.txt
+	genescape tree -m lipid -o docs/images/genescape-output3a.png src/genescape/data/test_goids.txt
 
 # Runs a linter.
 lint:
