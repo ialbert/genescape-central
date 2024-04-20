@@ -43,6 +43,3 @@ package = "genescape.data.js"
 target = "genescape.css"
 subdir = [ "css" ]
 package = "genescape.data.css"
-
-
-

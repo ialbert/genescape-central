@@ -3,7 +3,7 @@ from shiny import App, render, ui
 from pathlib import Path
 from datetime import datetime
 import time, asyncio
-from faicons import icon_svg
+from genescape import icons
 
 from genescape import __version__, annot, bottle, resources, tree, utils
 
@@ -34,12 +34,8 @@ digraph SimpleGraph {
 # Load the default resources.
 res = resources.init()
 
-# Load default icons
-icon_play = icon_svg("play")
-icon_down = icon_svg("download")
-icon_zoom_in = icon_svg("magnifying-glass-plus")
-icon_zoom_out = icon_svg("magnifying-glass-minus")
-zoom_reset = icon_svg("magnifying-glass")
+
+HOME = "https://github.com/ialbert/genescape-central/"
 
 # Shiny UI
 app_ui = ui.page_sidebar(
@@ -50,18 +46,18 @@ app_ui = ui.page_sidebar(
         ui.input_text("pattern", label="Word pattern (regex)", value="protein|cytoplasm"),
         ui.input_selectize(
             "selectize",
-            "Ontology root:",{
+            "Ontology root:", {
                 "AA": "All roots",
                 "BP": "Biological Process",
                 "MF": "Molecular Function",
                 "CC": "Cellular Component"},
         ),
-        ui.input_action_button("submit", "Draw Tree", class_="btn-success", icon=icon_play),
+        ui.input_action_button("submit", "Draw Tree", class_="btn-success", icon=icons.icon_play),
 
         ui.output_code("annot_elem"),
-        ui.download_link("download_annot", "Download annotations", icon=icon_down),
+        ui.download_link("download_csv", "Download annotations", icon=icons.icon_down),
         ui.output_code("dot_elem"),
-        ui.download_link("download_dot", "Download dot file", icon=icon_down),
+        ui.download_link("download_dot", "Download dot file", icon=icons.icon_down),
 
         width=400, bg="#f8f8f8",
     ),
@@ -81,22 +77,33 @@ app_ui = ui.page_sidebar(
     ),
 
     ui.tags.p(
-    ui.input_action_button("zoom_in", label="Zoom", icon=icon_zoom_in, class_="btn btn-light btn-sm",
-                   data_action="zoom-in"),
+        ui.input_action_button("zoom_in", label="Zoom", icon=icons.icon_zoom_in, class_="btn btn-light btn-sm",
+                               data_action="zoom-in"),
         ui.tags.span(" "),
-        ui.input_action_button("reset", label="Reset", icon=zoom_reset, class_="btn btn-light btn-sm", data_action="zoom-reset"),
+        ui.input_action_button("reset", label="Reset", icon=icons.zoom_reset, class_="btn btn-light btn-sm",
+                               data_action="zoom-reset"),
         ui.tags.span(" "),
-        ui.input_action_button("zoom_out", label="Zoom", icon=icon_zoom_out, class_="btn btn-light btn-sm", data_action="zoom-out"),
-ui.tags.span(" "),
-        ui.input_action_button("saveImage", "Save", class_="btn btn-light btn-sm", icon=icon_down),
-    align="center",
+        ui.input_action_button("zoom_out", label="Zoom", icon=icons.icon_zoom_out, class_="btn btn-light btn-sm",
+                               data_action="zoom-out"),
+        ui.tags.span(" "),
+        ui.input_action_button("saveImage", "Save", class_="btn btn-light btn-sm", icon=icons.icon_down),
+        align="center",
     ),
+
+    ui.tags.hr(),
 
     ui.tags.p(
         ui.div("""Press "Draw Tree" to generate the graph""", id="graph_elem", align="center"),
     ),
 
-    ui.tags.p(f"GeneScape {__version__}", align="center", class_="fw-light"),
+    ui.tags.div(
+        ui.tags.hr(),
+        ui.tags.p(
+            ui.tags.a(HOME, href=HOME),
+        ),
+        ui.tags.p(f"GeneScape {__version__}"),
+        align="center",
+    ),
     ui.output_text("run_elem"),
 
     title="GeneScape", id="main",
@@ -145,20 +152,15 @@ def server(input, output, session):
 
         return dot, text
 
-    @render.download(
-        filename=lambda: "genescape.csv"
-    )
+    @render.download( filename=lambda: "genescape.csv")
     async def download_csv():
-        await asyncio.sleep(0.25)
+        await asyncio.sleep(0.5)
         yield ann_value.get()
 
-    @render.download(
-        filename=lambda: "genescape.dot.txt"
-    )
+    @render.download(filename=lambda: "genescape.dot.txt")
     async def download_dot():
-        await asyncio.sleep(0.25)
+        await asyncio.sleep(0.5)
         yield dot_value.get()
-
 
     @output
     @render.text
@@ -175,14 +177,9 @@ def server(input, output, session):
     def demo_elem():
         return dot_value.get()
 
-    @reactive.event(input.mincount)
-    async def _():
-        dot, text = await create_tree(input.terms())
-
     @render.text
     @reactive.event(input.submit)
     async def run_elem():
-
         with ui.Progress(min=1, max=15) as p:
             p.set(message="Generating the image", detail="Please wait...")
             for i in range(1, 10):
@@ -191,7 +188,11 @@ def server(input, output, session):
 
         dot, text = await create_tree(input.terms())
 
-
         return f""
 
+
 app = App(app_ui, server)
+
+if __name__ == '__main__':
+    import shiny
+    shiny.run_app(app)

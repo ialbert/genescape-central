@@ -43,6 +43,9 @@ tag: exe
 exe:
 	python src/genescape/exe.py --build
 
+shiny:
+	rsconnect deploy shiny src/genescape --name biostar --title GeneScape
+
 # Performs a python-only test.
 test:
 	hatch run test
