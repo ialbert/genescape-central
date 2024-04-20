@@ -239,9 +239,13 @@ Tests are run via a `Makefile` as:
 make test
 ```
 
-Tests require that `graphviz` is installed and available on the `PATH`.
+A more comprehensive test suite is available in the `tests` directory and can be run in that directory via:
 
-Due to the nondeterministic way that the images are created, we are unable to test for exact outputs the tests are limited to running the software and checking for runtime errors.
+```console  
+make testall
+```
+
+The `testall` command requires that `graphviz` is installed and available on the `PATH`.
 
 ## Contributing
 
