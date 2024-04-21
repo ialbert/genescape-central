@@ -235,6 +235,20 @@ genescape web --index mydata.index.gz
 
 See the `--help` for more options.
 
+## Odds and ends
+
+It is possible to mix gene and ontology terms. The following is a valid input:
+
+```console
+GO:0005488
+GO:0005515
+Cyp1a1
+Sphk2
+Sptlc2
+```
+
+Listing the same gene or GO term multiple times will count it multiple times.
+
 ## Testing
 
 Tests are run via a `Makefile` as:
