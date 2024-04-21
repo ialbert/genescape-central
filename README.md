@@ -8,6 +8,10 @@
 
 **GeneScape** is a Python-based [Shiny][pyshiny] application that be run both at the command line and also via a graphical user interface.
 
+There is a public version of the software at:
+
+* https://biostar.shinyapps.io/genescape/
+
 [pyshiny]: https://shiny.posit.co/py/
 
 ## Quickstart

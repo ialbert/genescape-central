@@ -41,9 +41,6 @@ tag: test
 exe: test
 	python src/genescape/exe.py --build
 
-shiny: test
-	pip install rsconnect
-	rsconnect deploy shiny src/genescape --name biostar --title GeneScape
 
 # Generate images for the documentation
 docimg:
@@ -62,8 +59,6 @@ fix:
 # Save work.
 push:
 	git commit -am 'saving work' && git push
-
-
 
 build: clean
 	rm -rf build dist
@@ -106,6 +101,10 @@ clean:
 	rm -rf build dist ${IDX_FILE}
 
 env:
-	conda create -n genescape python=3.11 shiny rsconnect graphviz
+	micromamba create -n shiny python=3.11 rsconnect-python graphviz make -y
+
+shiny:
+	cp -f src/genescape/web.py src/app/app.py
+	rsconnect deploy shiny src/app --name biostar --title GeneScape
 
 .PHONY: test lint fix push clean build publish obo docimg web
