@@ -90,6 +90,8 @@ The colors in the tree carry additional meaning:
 - Light green nodes represent functions that are in the input list.
 - Dark green nodes are functions present in the input and are leaf nodes in the terminology, the most granular annotation possible 
 
+A dark green means that the ontology has no terms that would be even more specific than that specific annotation. A light green means there are more specific annotations, but none of the genes were annotated as such. In both cases, the green color indicates that the function was present in the input list.
+
 Each subtree in a different GO category has a different color:
   - Biological Process (BP)
   - Molecular Function (MF)
