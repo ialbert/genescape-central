@@ -4,6 +4,8 @@ import os
 import pprint
 import shutil
 from importlib import resources as rsc
+
+
 from pathlib import Path
 
 import toml
@@ -51,7 +53,6 @@ class Resource:
         def get(name):
             return self.files.get(name, name)
 
-        self.INDEX = get("genescape.hs.json.gz")
         self.OBO_FILE = get("go-basic.obo.gz")
 
         # Initialize test data files.
@@ -68,24 +69,51 @@ class Resource:
         self.GENESCAPE_JS = get("genescape.js")
         self.VIZ_JS = get("viz-standalone.js")
 
-    def get_index(self, code):
-        for value in self.config.get("index", []):
-            if value.get("code", "") == code:
-                return value["path"]
-        utils.error("index code not found: {code}")
-        return self.INDEX
+        self.INDEX_CHOICES = {}
+        self.INDEX_FILES = {}
 
+        def pieces(elem):
+            return (elem.get("code", "CODE"), elem.get("label", "LABEL"), elem.get("path", "PATH"))
+
+        values = self.config.get("files", [])
+        values = filter(lambda x: x.get("type", "") == "index", values)
+        values = map(lambda x: pieces(x), values)
+        for code, label, path in values:
+            self.INDEX_CHOICES[code] = label
+            self.INDEX_FILES[code] = path
+
+        # Default code is the first file.
+        self.DEFAULT_CODE = list(self.INDEX_FILES.keys())[0]
+
+        # The default index.
+        self.INDEX = self.find_index()
+
+    def find_index(self, code=None):
+        code = code or self.DEFAULT_CODE
+        if code not in self.INDEX_FILES:
+            raise Exception(f"Code not found: {code}")
+        return self.INDEX_FILES.get(code, None)
 
 # Reset the resource directory
-def reset_dir(config):
+def reset_dir(cnf=None):
     """
     Deletes the storage directory.
     """
-    path = get_storage_dir(config)
+    cnf = cnf or get_config()
+    path = get_storage_dir(cnf)
     if os.path.isdir(path):
         utils.info(f"deleting path: {path}")
         shutil.rmtree(path)
 
+
+def update_config(fname, cnf=None):
+    """
+    Updates a parsed toml object with a configuration file.
+    """
+    cnf = cnf or {}
+    obj = get_config(fname)
+    cnf.update(obj)
+    return cnf
 
 def get_config(fname=None):
     """
@@ -94,7 +122,7 @@ def get_config(fname=None):
     if fname:
         config = toml.load(fname)
     else:
-        with rsc.path(package="genescape.data", resource="config.toml") as path:
+        with rsc.files("genescape.data").joinpath("config.toml").open() as path:
             config = toml.load(path)
     return config
 
@@ -139,11 +167,12 @@ def get_path(package='', target='', subdir=None, config=None):
         path.parent.mkdir(parents=True, exist_ok=True)
 
     # Copy the resource to the target directory if it is not there or newer.
-    with rsc.path(package, target) as src:
+    with rsc.files(package).joinpath(target).open('rb') as src:
         # The condition to copy the resource
-        cond = not os.path.isfile(path) or os.path.getmtime(src) > os.path.getmtime(path)
+        cond = not os.path.isfile(path) or os.path.getmtime(src.fileno()) > os.path.getmtime(path)
         if cond:
-            shutil.copy(src, path)
+            with open(path, 'wb') as dst:
+                shutil.copyfileobj(src, dst)
             utils.info(f'copy: {path}')
 
     return path
@@ -200,6 +229,13 @@ if __name__ == "__main__":
 
     utils.verbosity(True)
 
+    cnf = get_config()
+
     res = init()
+
+    ind = res.INDEX_CHOICES
+    fls = res.INDEX_FILES
+
+    print (ind, fls)
 
     print("-" * 80)

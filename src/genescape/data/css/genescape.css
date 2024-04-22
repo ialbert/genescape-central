@@ -4,7 +4,7 @@
 }
 
 #terms {
-    min-height:200px;
+    min-height: 200px;
     border: var(--border-color) solid 1px;
 }
 
@@ -19,3 +19,35 @@
 #main {
     min-width: 100%;
 }
+
+.left-aligned-label .control-label {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+    width:6em;
+    color:red;
+}
+
+
+.left-aligned {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 80px 1fr; /* 150px for labels and remaining space for inputs */
+    gap: 10px;
+    margin-bottom: 10px; /* Adds bottom margin for spacing between groups */
+}
+
+.left-aligned .form-group {
+    display: contents; /* Makes .form-group elements behave like they're part of the parent grid */
+}
+
+.left-aligned .form-group .control-label {
+    text-align: left; /* Aligns the text right, closer to the input */
+}
+
+.left-aligned .form-group .shiny-input-text {
+    width: 100%; /* Fills the cell allocated by the grid */
+}
+
+
+

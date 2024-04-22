@@ -178,15 +178,20 @@ port= 8000,
 @cli.command()
 @click.option("--host", "host", default="127.0.0.1", help="hostname to bind to")
 @click.option("--port", "port", default=8000, type=int, help="port number")
-@click.option("-i", "--index", "index", help="Genescape index file")
 @click.option("--reload", "reload", is_flag=True, help="reload the server on changes")
+@click.option("--reset", "reset", is_flag=True, help="resets resources")
+@click.option("-i", "--index", "index", help="Genescape index file")
+
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def web(index=None, host=None, port=None, reload=False, verbose=False):
+def web(index=None, host=None, port=None, reload=False, reset=False, verbose=False):
     """
     Run the web interface.
     """
 
+    # Reset the resource directory
+    if reset:
+        resources.reset_dir()
 
     # Set the verbosity level.
     utils.verbosity(verbose)

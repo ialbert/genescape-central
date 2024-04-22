@@ -4,7 +4,12 @@ function render_graph_delay() {
     }, 1000);
 }
 
+var zoomLevel = 1; // Initial zoom level
+
 function render_graph() {
+
+	// Reset the zoom level.
+	zoomLevel = 1;
 
     dot = document.getElementById('dot_elem').textContent;
     graph = document.getElementById('graph_elem')
@@ -57,7 +62,7 @@ function resize_container(svg){
 	console.log('cn:', cn.style.height, cn.style.width);
 }
 
-var zoomLevel = 1; // Initial zoom level
+
 
 // Function to adjust SVG zoom based on action
 function adjustSVGZoom(zoomAction) {

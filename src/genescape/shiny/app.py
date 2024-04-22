@@ -2,7 +2,7 @@ from shiny import reactive
 from shiny import App, render, ui
 from pathlib import Path
 from datetime import datetime
-import time, asyncio
+import time, asyncio, random
 from genescape import icons
 from genescape import __version__, annot, build, resources, tree, utils
 
@@ -43,23 +43,35 @@ res = resources.init()
 # This is the global index name
 INDEX = res.INDEX
 
-def generate_ui():
+DATABASE_CHOICES = res.INDEX_CHOICES
 
+
+def generate_ui():
     app_ui = ui.page_sidebar(
 
         ui.sidebar(
             ui.input_text_area("terms", label="Gene List", value=GENE_LIST),
-            ui.input_text("mincount", label="Minimum count (integer)", value="1"),
-            ui.input_text("pattern", label="Word pattern (regex)", value=PATTERN),
-            ui.input_select(
-                "root",
-                "Ontology root:", {
-                    utils.NS_ALL: "All roots",
-                    utils.NS_BP: "Biological Process",
-                    utils.NS_MF: "Molecular Function",
-                    utils.NS_CC: "Cellular Component"
-                },
-            ),
+
+            ui.div({"class": "left-aligned"},
+
+                   ui.input_select(
+                       "database",
+                       "Organism", DATABASE_CHOICES,
+                   ),
+
+                   ui.input_text("mincount", label="Mincount", value="1"),
+                   ui.input_text("pattern", label="Pattern", value=PATTERN),
+
+                   ui.input_select(
+                       "root",
+                       "Root", {
+                           utils.NS_ALL: "All roots",
+                           utils.NS_BP: "Biological Process",
+                           utils.NS_MF: "Molecular Function",
+                           utils.NS_CC: "Cellular Component"
+                       },
+                   ),
+                   ),
             ui.input_action_button("submit", "Draw Tree", class_="btn-success", icon=icons.icon_play),
 
             ui.output_code("annot_elem"),
@@ -75,7 +87,7 @@ def generate_ui():
                 """
                 $(function() {
                     Shiny.addCustomMessageHandler("trigger", function(message) {
-                        render_graph_delay();
+                        render_graph();
                     });
                 });
                 """),
@@ -140,17 +152,19 @@ def server(input, output, session):
 
     res = resources.init()
 
-    # External index or default
-    index = INDEX or res.INDEX
-
     async def create_tree(text):
         mincount = int(input.mincount())
         pattern = input.pattern()
+        code = input.database()
 
         inp = text2list(text)
 
         root = input.root()
 
+        index = res.find_index(code=code)
+
+        print (code, index)
+        
         graph, ann = tree.parse_input(inp=inp, index=index, mincount=mincount, pattern=pattern, root=root)
 
         dot = tree.write_tree(graph, ann, out=None)
@@ -160,11 +174,14 @@ def server(input, output, session):
         ann_value.set(text)
         dot_value.set(dot)
 
-        await session.send_custom_message("trigger", 1)
+        async def trigger():
+            await session.send_custom_message("trigger", 1)
+
+        session.on_flushed(trigger, once=True)
 
         return dot, text
 
-    @render.download( filename=lambda: "genescape.csv")
+    @render.download(filename=lambda: "genescape.csv")
     async def download_csv():
         await asyncio.sleep(0.5)
         yield ann_value.get()
@@ -199,20 +216,24 @@ def server(input, output, session):
     # The main tree runner.
     async def run_main():
 
-        # Remind the user that a computation is in progress.
-        with ui.Progress(min=1, max=15) as p:
+        limit = 10
+        # Emulate some sort of progress bar
+        with ui.Progress(min=1, max=limit) as p:
             p.set(message="Generating the image", detail="Please wait...")
-            for i in range(1, 10):
-                p.set(i, message="Computing")
+            for i in range(1, limit):
+                p.set(i)
                 await asyncio.sleep(0.1)
 
-        dot, text = await create_tree(input.terms())
+            dot, text = await create_tree(input.terms())
+
 
 # Create the app.
 def app():
     app_ui = generate_ui()
     return App(app_ui, server)
 
+
 if __name__ == '__main__':
     import shiny
+
     shiny.run_app(app())
