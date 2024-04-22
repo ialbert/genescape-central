@@ -31,7 +31,7 @@ usage:
 
 # Performs the testing.
 web:
-	shiny run --reload genescape.web:app
+	shiny run --reload genescape.shiny.app:app
 
 # Tag and push to repository.
 tag: test
@@ -104,7 +104,6 @@ env:
 	micromamba create -n shiny python=3.11 rsconnect-python graphviz make -y
 
 shiny:
-	cp -f src/genescape/web.py src/app/app.py
-	rsconnect deploy shiny src/app --name biostar --title GeneScape
+	rsconnect deploy shiny src/genescape/shiny --name biostar --title GeneScape
 
 .PHONY: test lint fix push clean build publish obo docimg web

@@ -186,7 +186,7 @@ def web(index=None, host=None, port=None, reset=False, verbose=False):
     """
     Run the web interface.
     """
-    from genescape import web
+    from genescape.shiny.app import app
 
     # Set the verbosity level.
     utils.verbosity(verbose)
@@ -199,7 +199,7 @@ def web(index=None, host=None, port=None, reset=False, verbose=False):
     web.INDEX = Path(index) if index else res.INDEX
 
     # Run the server.
-    shiny.run_app(web.app, host=host, port=port)
+    shiny.run_app(app, host=host, port=port)
 
 
 if __name__ == "__main__":

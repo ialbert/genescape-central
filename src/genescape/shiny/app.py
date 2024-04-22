@@ -4,8 +4,9 @@ from pathlib import Path
 from datetime import datetime
 import time, asyncio
 from genescape import icons
-
 from genescape import __version__, annot, build, resources, tree, utils
+
+PAGE_TITLE = "GeneScape"
 
 # Default gene list.
 GENE_LIST = '''
@@ -42,7 +43,6 @@ res = resources.init()
 # This is the global index name
 INDEX = res.INDEX
 
-# Shiny UI
 app_ui = ui.page_sidebar(
 
     ui.sidebar(
@@ -112,7 +112,7 @@ app_ui = ui.page_sidebar(
     ),
     ui.output_text("run_elem"),
 
-    title=f"GeneScape" , id="main",
+    title=PAGE_TITLE, id="main",
 
 )
 
