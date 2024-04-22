@@ -179,14 +179,14 @@ port= 8000,
 @click.option("--host", "host", default="127.0.0.1", help="hostname to bind to")
 @click.option("--port", "port", default=8000, type=int, help="port number")
 @click.option("-i", "--index", "index", help="Genescape index file")
-@click.option("--reset", "reset", is_flag=True, help="reset the resources")
+@click.option("--reload", "reload", is_flag=True, help="reload the server on changes")
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def web(index=None, host=None, port=None, reset=False, verbose=False):
+def web(index=None, host=None, port=None, reload=False, verbose=False):
     """
     Run the web interface.
     """
-    from genescape.shiny.app import app
+
 
     # Set the verbosity level.
     utils.verbosity(verbose)
@@ -196,10 +196,10 @@ def web(index=None, host=None, port=None, reset=False, verbose=False):
     res = resources.init(cnf)
 
     # Set the generack index file.
-    web.INDEX = Path(index) if index else res.INDEX
+    #web.INDEX = Path(index) if index else res.INDEX
 
     # Run the server.
-    shiny.run_app(app, host=host, port=port)
+    shiny.run_app("genescape.shiny.app:app", host=host, port=port, reload=reload, factory=True)
 
 
 if __name__ == "__main__":
