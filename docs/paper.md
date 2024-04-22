@@ -39,20 +39,26 @@ The most annotated gene in the human genome, `HTT1`, currently has 1098 annotati
 
 Web-based tools designed to visualize and filter gene ontology data include `AmiGO` [@AmiGO] and `QuickGO` [@QuickGO]. Command line tools like `goatools` [@goatools] support GO term lineage visualization. R packages like `topGO` [@topGO] implement GO structure visualizations of enriched GO terms. We are unaware of locally installable software that specifically allows for interactive filtering and visualization of gene ontology derived on gene lists.
 
-GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software via the [Shiny platform][shiny], thus making it accessible to a wide range of users.
+GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. 
+
+GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software via the [Shiny platform][shiny] [@shiny], thus making it accessible to a wide range of users.
+
+![GeneScape as a Shiny App \label{fig:shiny}](images/genescape-app.png)
 
 [shiny]: https://shiny.posit.co/
 
-GeneScape is distributed with prebuilt databases for human and mouse genomes. For other organisms, users need to download the GAF files from the Gene Ontology website and run the command:
+GeneScape comes with a number of prebuilt databases for model organisms including the human, mouse, rat, fruitfly and zebrafish genomes. To study additional organisms, users must download GAF files from the Gene Ontology website and create custom databases using the `build` subcommand:
 
 ```
 genescape build --gaf mydata.gaf.gz --index mydata.index.gz 
 ```
 
-The `build` command will create a database that can then be used for all subsequent analyses with the software. Users should consult the [GeneScape documentation][docs] for up-to-date details. 
+For detailed instructions on using the software, users should refer to the [GeneScape documentation][docs]. A Q&A discussion board is also available on the GeneScape GitHub page.
 
 [genescape]: https://github.com/ialbert/genescape-central
 [docs]: https://github.com/ialbert/genescape-central
+
+## Typical usage
 
 A typical usage starts with a gene list such as: 
 
@@ -63,7 +69,13 @@ C3P1
 GRTP1
 ```
 
-GeneScape first transforms the above gene input list into a GO term list, where additional information is added to each term:
+Users can process the list above via the command line or via the Shiny interface. A command line invocation might look like:
+
+```console
+genescape tree genes.txt -o output.pdf
+```
+
+Internally, GeneScape first transforms the input gene list into a GO term list, where additional information is added to each term:
 
 ```
 count,function,root,goid,source,size,label
