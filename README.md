@@ -267,6 +267,14 @@ make testall
 
 The `testall` command requires that `graphviz` is installed and available on the `PATH`.
 
+## Additional customizations
+
+The software can be customized by creating a copy of the `config.toml` file and settings the `GENESCAPE_CONFIG` environment variable to point to the new configuration file.
+
+* [config.toml](src/genescape/data/config.toml)
+
+In this file the lines that have an `index` type will be used to build the dropdown menu in the web interface.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the development of GeneScape.

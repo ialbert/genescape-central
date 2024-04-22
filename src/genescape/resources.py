@@ -69,8 +69,8 @@ class Resource:
         self.GENESCAPE_JS = get("genescape.js")
         self.VIZ_JS = get("viz-standalone.js")
 
-        self.INDEX_CHOICES = {}
-        self.INDEX_FILES = {}
+        self.INDEX_MAP = {}
+
 
         def pieces(elem):
             return (elem.get("code", "CODE"), elem.get("label", "LABEL"), elem.get("path", "PATH"))
@@ -79,20 +79,44 @@ class Resource:
         values = filter(lambda x: x.get("type", "") == "index", values)
         values = map(lambda x: pieces(x), values)
         for code, label, path in values:
-            self.INDEX_CHOICES[code] = label
-            self.INDEX_FILES[code] = path
+            self.INDEX_MAP[code] = (code, label, path)
 
         # Default code is the first file.
-        self.DEFAULT_CODE = list(self.INDEX_FILES.keys())[0]
+        self.DEFAULT_CODE = list(self.INDEX_MAP.keys())[0]
 
         # The default index.
         self.INDEX = self.find_index()
 
     def find_index(self, code=None):
         code = code or self.DEFAULT_CODE
-        if code not in self.INDEX_FILES:
+        if code not in self.INDEX_MAP:
             raise Exception(f"Code not found: {code}")
-        return self.INDEX_FILES.get(code, None)
+        return self.INDEX_MAP[code][2]
+
+    def index_choices(self):
+        choices = dict(map(lambda x: (x[0], x[1]), self.INDEX_MAP.values()))
+        return choices
+
+    def update_from_env(self, key="GENESCAPE_INDEX"):
+        """
+        Need to put the new keys first
+        """
+        value = os.environ.get(key, None)
+        if value:
+
+            code, label, path = value.split(":")
+
+            path = Path(path)
+            # Check that path exists
+            if not path.exists():
+                utils.stop(f"Index does not exist: {path}")
+
+            # Change the order
+            current = list(self.INDEX_MAP.values())
+            current.insert(0, (code, label, path))
+
+            # Recreate the index map
+            self.INDEX_MAP = dict(map(lambda x: (x[0], x), current))
 
 # Reset the resource directory
 def reset_dir(cnf=None):
@@ -229,13 +253,15 @@ if __name__ == "__main__":
 
     utils.verbosity(True)
 
+    os.environ['GENESCAPE_INDEX'] = "idx:GO:resources.py"
+
     cnf = get_config()
 
     res = init()
+    res.update_from_env()
 
-    ind = res.INDEX_CHOICES
-    fls = res.INDEX_FILES
+    ind = res.INDEX_MAP
 
-    print (ind, fls)
+    print (ind)
 
     print("-" * 80)

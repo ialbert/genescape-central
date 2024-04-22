@@ -1,50 +1,46 @@
 from shiny import reactive
 from shiny import App, render, ui
-from pathlib import Path
-from datetime import datetime
-import time, asyncio, random
+import  asyncio, os
 from genescape import icons
-from genescape import __version__, annot, build, resources, tree, utils
+from genescape import __version__, annot, resources, tree, utils
 
-PAGE_TITLE = "GeneScape"
+# Get a resource configuration file.
+cnf_fname = os.environ.get("GENESCAPE_CONFIG", None)
+
+# Load the configuration file.
+cnf = resources.get_config(fname=cnf_fname)
+
+# Load the default resources.
+res = resources.init(config=cnf)
+
+# Update the resources from the environment.
+res.update_from_env()
+
+# This is the global database choices
+DATABASE_CHOICES = dict()
+
+# Update the choices with the defaults.
+DATABASE_CHOICES.update(res.index_choices())
+
+PAGE_TITLE = res.config.get("PAGE_TITLE", "GeneScape")
 
 # Default gene list.
-GENE_LIST = '''
-ABTB3
-BCAS4
-C3P1
-GRTP1
-'''
+GENE_LIST = res.config.get("GENE_LIST", "ABTB3\nBCAS4\nC3P1\nGRTP1")
 
 # Default pattern.
-PATTERN = ""
+PATTERN = res.config.get("PATTERN", "")
 
-# Default dot file.
-DOT = '''
-digraph SimpleGraph {
-    A -> B;
-    B -> C;
-    C -> A;
-}
-'''
+# Default mincount.
+MINCOUNT = res.config.get("MINCOUNT", 1)
 
-# Default sidebar width.
-SIDEBAR_WIDTH = 300
+# Load the sidebar width.
+SIDEBAR_WIDTH = res.config.get("SIDEBAR_WIDTH", 300)
 
 # Default sidebar background color.
-SIDEBAR_BG = "#f8f8f8"
+SIDEBAR_BG = res.config.get("SIDEBAR_WIDTH", "#f9f9f9")
 
 # Home page link
 HOME = "https://github.com/ialbert/genescape-central/"
-
-# Load the default resources.
-res = resources.init()
-
-# This is the global index name
-INDEX = res.INDEX
-
-DATABASE_CHOICES = res.INDEX_CHOICES
-
 
 def generate_ui():
     app_ui = ui.page_sidebar(
@@ -59,7 +55,7 @@ def generate_ui():
                        "Organism", DATABASE_CHOICES,
                    ),
 
-                   ui.input_text("mincount", label="Mincount", value="1"),
+                   ui.input_text("mincount", label="Mincount", value=MINCOUNT),
                    ui.input_text("pattern", label="Pattern", value=PATTERN),
 
                    ui.input_select(
@@ -147,10 +143,10 @@ def server(input, output, session):
     """
     Shiny server.
     """
+    global res
+
     ann_value = reactive.Value("# The annotations will appear here.")
     dot_value = reactive.Value("# The dot file will appear here.")
-
-    res = resources.init()
 
     async def create_tree(text):
         mincount = int(input.mincount())
@@ -163,8 +159,6 @@ def server(input, output, session):
 
         index = res.find_index(code=code)
 
-        print (code, index)
-        
         graph, ann = tree.parse_input(inp=inp, index=index, mincount=mincount, pattern=pattern, root=root)
 
         dot = tree.write_tree(graph, ann, out=None)
@@ -225,7 +219,6 @@ def server(input, output, session):
                 await asyncio.sleep(0.1)
 
             dot, text = await create_tree(input.terms())
-
 
 # Create the app.
 def app():
