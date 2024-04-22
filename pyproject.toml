@@ -46,12 +46,13 @@ include = [
 ]
 
 [tool.hatch.build.targets.sdist]
-exclude = [
-  ".git",
-  ".idea",
-  ".DS_Store",
-  "tmp",
+include = [
+  "README.md",
+  "LICENSE.txt",
+  "pyproject.toml",
+  "src/genescape",
 ]
+
 
 [tool.hatch.build.targets.wheel]
 packages = [

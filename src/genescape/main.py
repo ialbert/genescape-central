@@ -189,6 +189,7 @@ def web(index=None, host=None, port=None, reload=False, reset=False, conf=None, 
     """
     Run the web interface.
     """
+    from genescape.shiny.app import app
 
     # TODO: Implement the configuration file.
     if conf:
@@ -210,7 +211,7 @@ def web(index=None, host=None, port=None, reload=False, reset=False, conf=None, 
         os.environ['GENESCAPE_INDEX'] = f'{key}:{label}:{index}'
 
     # Run the server.
-    shiny.run_app("genescape.shiny.app:app", host=host, port=port, reload=reload, factory=True)
+    shiny.run_app("genescape.shiny.app:app", host=host, port=port, reload=reload)
 
 
 if __name__ == "__main__":
