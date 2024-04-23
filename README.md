@@ -42,7 +42,7 @@ The program is distributed as an executable called `genescape` with the followin
 
 After installation, users launch the graphical user interface with:
 
-The user interface is browser-based via the rul:
+The user interface is browser-based via the URL:
 
 * [http://localhost:8000][local]
 
