@@ -22,7 +22,7 @@ Users can also run the program on their system by installing the software via `p
 pip install genescape
 ```
 
-After installation the Shiny interface can be started via:
+After installation, the Shiny interface can be started via:
 
 ```console
 genescape web
@@ -34,7 +34,7 @@ Visit the [http://localhost:8000][local] URL in your browser to see the interfac
 
 ## Command line use
 
-The program is distributed as an executable called `genescape` that can has te following subcommands:
+The program is distributed as an executable called `genescape` that with the following subcommands:
 
 * `genescape tree` draws informative Gene Ontology (GO) subgraphs
 * `genescape annotate` annotates a list of genes with GO functions
