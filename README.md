@@ -34,7 +34,7 @@ Visit the [http://localhost:8000][local] URL in your browser to see the interfac
 
 ## Command line use
 
-The program is distributed as an executable called `genescape` that with the following subcommands:
+The program is distributed as an executable called `genescape` with the following subcommands:
 
 * `genescape tree` draws informative Gene Ontology (GO) subgraphs
 * `genescape annotate` annotates a list of genes with GO functions
