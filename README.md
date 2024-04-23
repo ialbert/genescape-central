@@ -8,35 +8,43 @@
 
 **GeneScape** is a Python-based [Shiny][pyshiny] application that be run both at the command line and also via a graphical user interface.
 
-There is a public version of the software at:
+## Quickstart
+
+The public version of the software can be accessed at:
 
 * https://biostar.shinyapps.io/genescape/
 
 [pyshiny]: https://shiny.posit.co/py/
 
-## Quickstart
-
-To install run:
+Users can also run the program on their system by installing the software via `pip`:
 
 ```console
 pip install genescape
 ```
 
-The above installs an executable called `genescape` that can be executed with the following subcommands:
-
-* `genescape tree` draws informative Gene Ontology (GO) subgraphs
-* `genescape annotate` annotates a list of genes with GO functions
-* `genescape web` provides a web interface for the `tree` command
-
-After installaion users launch the graphical user interface with:
+After installation the Shiny interface can be started via:
 
 ```console
 genescape web
 ``` 
 
-The user interface is browser-based. Once the program runs, visit the `http://localhost:8000` URL in your browser:
+Visit the [http://localhost:8000][local] URL in your browser to see the interface.
 
-* [http://localhost:8000](http://localhost:8000)
+[local]: http://localhost:8000
+
+## Command line use
+
+The program is distributed as an executable called `genescape` that can has te following subcommands:
+
+* `genescape tree` draws informative Gene Ontology (GO) subgraphs
+* `genescape annotate` annotates a list of genes with GO functions
+* `genescape web` provides a web interface for the `tree` command
+
+After installation, users launch the graphical user interface with:
+
+The user interface is browser-based via the rul:
+
+* [http://localhost:8000][local]
 
 The page you see should look similar to the image below:
 
@@ -115,7 +123,7 @@ All the above options may be applied in the user interface.
 
 Filters are applied during the annotation step and will filter the GO terms derived from the gene list.
 
-## Command line usage
+## Command line requirements
 
 To generate images from command line the `graphviz` software must be installed. You can install it via `conda`
 
@@ -134,7 +142,6 @@ genescape tree --test -o output.dot
 Then use an online tool like [viz-js][viz] to visualize the graph.
 
 [viz]: https://viz-js.com/ 
-
 
 ## genescape tree
 
