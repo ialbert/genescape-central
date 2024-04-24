@@ -261,10 +261,12 @@ def index_stats(index, verbose=False):
     sym_count = len(sym2go)
     go_count = len(go2sym)
 
-    if verbose:
-        info(f"index: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms")
+    msg = f"index: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms"
 
-    return map_count, sym_count, go_count
+    if verbose:
+        info(msg)
+
+    return map_count, sym_count, go_count, msg
 
 
 if __name__ == "__main__":

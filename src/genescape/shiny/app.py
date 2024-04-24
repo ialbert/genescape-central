@@ -108,7 +108,12 @@ app_ui = ui.page_sidebar(
     ui.tags.hr(),
 
     ui.tags.p(
-        ui.div("""Press "Draw Tree" to generate the graph""", id="graph_elem", align="center"),
+
+        ui.p("""Press "Draw Tree" to generate the graph""", id="graph_elem", align="center"),
+        # TODO ui.div(
+        #    ui.output_text("msg_elem"),
+        #    align="center",
+        # ),
     ),
 
     ui.tags.div(
@@ -144,6 +149,7 @@ def server(input, output, session):
 
     ann_value = reactive.Value("# The annotations will appear here.")
     dot_value = reactive.Value("# The dot file will appear here.")
+    msg_value = reactive.Value("Runtime messages will appear here.")
 
     async def create_tree(text):
         mincount = int(input.mincount())
@@ -156,6 +162,8 @@ def server(input, output, session):
 
         index = res.find_index(code=code)
 
+        #msg = utils.index_stats(index=index, verbose=False)[-1]
+        msg = "OK"
         graph, ann = tree.parse_input(inp=inp, index=index, mincount=mincount, pattern=pattern, root=root)
 
         dot = tree.write_tree(graph, ann, out=None)
@@ -164,6 +172,7 @@ def server(input, output, session):
 
         ann_value.set(text)
         dot_value.set(dot)
+        msg_value.set(msg)
 
         async def trigger():
             await session.send_custom_message("trigger", 1)
@@ -194,6 +203,11 @@ def server(input, output, session):
 
     @output
     @render.text
+    def msg_elem():
+        return msg_value.get()
+
+    @output
+    @render.text
     def demo_elem():
         return dot_value.get()
 
@@ -214,11 +228,11 @@ def server(input, output, session):
                 p.set(i)
                 await asyncio.sleep(0.1)
 
-            dot, text = await create_tree(input.terms())
+            # Generate the tree
+            await create_tree(input.terms())
 
 
 app = App(app_ui, server)
-
 
 if __name__ == '__main__':
     import shiny
