@@ -6,6 +6,7 @@ import gzip, sys, re, json, csv, textwrap, pickle
 from genescape import resources, utils
 from itertools import islice, takewhile, dropwhile, tee, chain
 import networkx as nx
+import pydot
 
 # Namespace categories
 NS_BP, NS_MF, NS_CC, NS_ALL = "BP", "MF", "CC", "ALL"
@@ -13,6 +14,7 @@ NS_BP, NS_MF, NS_CC, NS_ALL = "BP", "MF", "CC", "ALL"
 # Additional fields
 OUT_DEGREE = "out_degree"
 IN_DEGREE = "in_degree"
+NAMESPACE = "namespace"
 
 # Map the GO categories namespaces.
 NAMESPACE_MAP = {
@@ -32,6 +34,7 @@ TYPEDEFS_KEY = "typedefs"
 INPUT_LIST = "input_list"
 GENE_LIST = "gene_list"
 GENE_LEN = "gene_len"
+TOTAL_COUNT = "total_count"
 
 SINGLE_VALUE = {"id", "name", "namespace", "comment"}
 MULTI_VALUE = {"alt_id", "subset", "replaced_by", "consider"}
@@ -49,11 +52,11 @@ def build_graph(data):
     # nodes = islice(nodes, 100)
     nodes = list(nodes)
 
-    # Add all the nodes
+    # Add individual nodes to the
     for node in nodes:
         oid = node["id"]
         name = node["name"]
-        namespace = utils.NAMESPACE_MAP.get(node["namespace"], "?")
+        namespace = utils.NAMESPACE_MAP.get(node[NAMESPACE], "?")
         graph.add_node(oid, id=oid, name=name, namespace=namespace, **utils.NODE_ATTRS)
 
     for node in nodes:
@@ -275,7 +278,7 @@ def read_graph():
         text = fp.read().decode('utf-8')
         gaf = json.loads(text)
 
-    tgt = "ABTB3 BCAS4 C3P1 GRTP1 FOO CYP2D7 MCTS2".split()
+    tgt = "ABTB3 BCAS4 C3P1 GRTP1 SPOP ABCA2 PSMD3".split()
 
     tgt2set = set(tgt)
 
@@ -303,6 +306,7 @@ def read_graph():
     # Initialize the subtree
     for goid in tree.nodes():
         node = tree.nodes[goid]
+        node[TOTAL_COUNT] = len(gaf[GO2SYM].get(goid, []))
         node[INPUT_LIST] = False
         node[GENE_LIST] = set()
 
@@ -344,6 +348,16 @@ def read_graph():
 
     return s_tree
 
+def fix_text(text):
+    return f'"{text}"'
+
+def human_readable(value, digits=0):
+    try:
+        newval = int(round(float(value)/1000, digits))
+    except ValueError:
+        newval = 0
+    newval = f"{newval:d}K" if newval > 1 else value
+    return newval
 
 def run():
     res = resources.init()
@@ -362,8 +376,44 @@ def run():
 
     tree = read_graph()
 
+    # Create the pydot graph.
+    pg = pydot.Dot("genescape", graph_type="digraph")
+    for goid in tree.nodes():
+        node = tree.nodes[goid]
+        name = node["name"]
+        if node[OUT_DEGREE] == 0:
+            fillcolor = utils.LEAF_COLOR
+        elif node[INPUT_LIST]:
+            fillcolor = utils.INPUT_COLOR
+        else:
+            key = node[NAMESPACE]
+            fillcolor = utils.NAMESPACE_COLORS.get(key, utils.BG_COLOR)
 
-    print (tree)
+        node_id = fix_text(goid)
+        text = textwrap.fill(name, width=20)
+        t_count = human_readable(node[TOTAL_COUNT])
+        g_count = len(node[GENE_LIST])
+        if node[INPUT_LIST]:
+            label = f"{goid}\n{text} [{t_count}]\n({g_count}/100)"
+        else:
+            label = f"{goid}\n{text} [{t_count}]"
+        label = fix_text(label)
+        pnode = pydot.Node(node_id, label=label, fillcolor=fillcolor, shape="box", style="filled")
+        pg.add_node(pnode)
+
+    for edge in tree.edges():
+        edge1 = fix_text(edge[0])
+        edge2 = fix_text(edge[1])
+        pedge = pydot.Edge(edge1, edge2)
+        pg.add_edge(pedge)
+
+    print(pg)
+
+    pg.set_graph_defaults()
+    pg.set_node_defaults(shape="box", style="filled")
+    pg.write_pdf("../../output.pdf")
+
+
 
 
 if __name__ == '__main__':
