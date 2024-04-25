@@ -37,6 +37,24 @@ def init_logger(logger):
     logger.addHandler(handler)
 
 
+def memoize(func):
+    cache = {}
+
+    def wrapper(*args, **kwargs):
+        # Create a key based on the function's arguments
+        key = (args, tuple(kwargs.items()))
+
+        # If the result is already in the cache, return it
+        if key in cache:
+            return cache[key]
+
+        # Call the function and store the result in the cache
+        result = func(*args, **kwargs)
+        cache[key] = result
+        return result
+
+    return wrapper
+
 # Set the log level
 def verbosity(flag=False):
     global logger
@@ -237,7 +255,7 @@ def timer(func):
     """
 
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+    def timer(*args, **kwargs):
         start = time.time()
         result = func(*args, **kwargs)
         end = time.time()
@@ -245,7 +263,7 @@ def timer(func):
         info(f"{func.__name__}:  {elapsed:.2f} seconds")
         return result
 
-    return wrapper
+    return timer
 
 
 def index_stats(index, verbose=False):
