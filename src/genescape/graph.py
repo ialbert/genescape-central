@@ -36,10 +36,17 @@ OBO_KEY = "obo"
 # Mapping keys.
 SYM2GO, GO2SYM, NAME2SYM = "sym2go", "go2sym", "name2sym"
 
+# The ID is in the input
+SRC_FLAG = "src_flag"
 
-INPUT_LIST = "input_list"
-SOURCE_SYM = "sources"
-SOURCE_LEN = "src_len"
+# The symbols in the input
+SRC_SYMB = "src_sym"
+
+# The number of symbols in the input
+SRC_SIZE = "src_len"
+
+# The total number of symbols in the input
+SRC_TOT = "src_tot"
 
 # The number of descendants for the GO term.
 DESC_COUNT = "desc_count"
@@ -198,6 +205,10 @@ def parse_obo(stream):
 @utils.timer
 def make_subgraph(idx, graph, tgt=None, root=NS_MF):
 
+    #tgt="GO:0035639 GO:0035639 GO:0097159  ".split()
+
+    #tgt = "GO:0035639 GO:0035639 GO:0043168 GO:0043168 GO:0043168 GO:0097159 GO:0005488  GO:1901265  GO:0035639  GO:0035639".split()
+
     tgt = tgt or "ABTB3 BCAS4 C3P1 GRTP1 SPOP ABCA2 PSMD3 GO:0046983 GO:1901265".split()
 
     # Unique targets
@@ -214,9 +225,15 @@ def make_subgraph(idx, graph, tgt=None, root=NS_MF):
     valid2sym = list(filter(lambda x: x in sym2go or x in obo, tgt))
 
     # Map the symbols to GO terms
-    goids = map(lambda x: sym2go.get(x, [x]), valid2sym)
-    goids = chain.from_iterable(goids)
-    goids = list(set(goids))
+    goids, go2tgt = [], dict()
+    for sym in valid2sym:
+        values = sym2go.get(sym, []) or [sym]
+        for goid in values:
+            go2tgt.setdefault(goid, []).append(sym)
+            goids.append(goid)
+
+    # Map the symbols to GO terms
+
 
     # Terms not found in the OBO
     miss2go = set(filter(lambda x: x not in graph.nodes, goids))
@@ -242,14 +259,28 @@ def make_subgraph(idx, graph, tgt=None, root=NS_MF):
     # Initialize the subtree
     for node_id in tree.nodes():
         node = tree.nodes[node_id]
-        is_input = node_id in valid2tgt
-        if is_input:
-            sources = list(set(go2sym.get(node_id, [])) & tgt2set)
-        else:
-            sources = []
-        node[INPUT_LIST] = is_input
-        node[SOURCE_SYM] = sources
-        node[SOURCE_LEN] = len(sources)
+        srcs = go2tgt.get(node_id, [])
+        node[SRC_FLAG] = node_id in valid2tgt
+        node[SRC_SYMB] = list(srcs)
+        node[SRC_SIZE] = len(srcs)
+
+    # Travers and update the cumulative totals
+    def traverse(tree, node_id, store):
+        store[node_id] = [ node_id ]
+        for child in tree.successors(node_id):
+            if child not in store:
+                traverse(tree, child, store)
+                store[node_id].extend(store[child])
+
+        src_sym = []
+        for sub_id in store[node_id]:
+            src_sym += tree.nodes[sub_id][SRC_SYMB]
+        tree.nodes[node_id][SRC_TOT] = len(src_sym)
+
+    roots = filter(lambda x: tree.in_degree(x) == 0, tree.nodes())
+    for root in roots:
+        store = dict()
+        traverse(tree, root, store=store)
 
     # Sort nodes
     s_nodes = sorted(tree.nodes(data=True))
@@ -309,6 +340,7 @@ def compute_graph_measures(idx):
         obo[node_id][OUT_DEGREE] = out_degree
         obo[node_id][IN_DEGREE] = in_degree
 
+    # Compute the number of descendants and cumulative annotations.
     def traverse(tree, node_id, store):
         desc_total = 0
         anno_total = obo[node_id][ANNO_COUNT]
@@ -360,6 +392,7 @@ def run(cnf=None, obo_fname=None, gaf_fname=None):
         for node_id in obo[OBO_KEY]:
             values = gaf[GO2SYM].get(node_id, [])
             obo[OBO_KEY][node_id][ANNO_COUNT] = len(values)
+            obo[OBO_KEY][node_id][ANNO_TOTAL] = 0
 
         idx = dict(obo)
         idx.update(gaf)
@@ -381,7 +414,7 @@ def run(cnf=None, obo_fname=None, gaf_fname=None):
         node = tree.nodes[goid]
         name = node["name"]
         out_degree = node[OUT_DEGREE]
-        is_input = node[INPUT_LIST]
+        is_input = node[SRC_FLAG]
         is_leaf = out_degree == 0
 
         key = node[NAMESPACE]
@@ -393,13 +426,15 @@ def run(cnf=None, obo_fname=None, gaf_fname=None):
         ann_total = human_readable(node[ANNO_TOTAL])
         desc_count = human_readable(node[DESC_COUNT])
         out_degree = node[OUT_DEGREE]
+        src_sym = node[SRC_SYMB]
+        src_tot = node[SRC_TOT]
+        print(goid, src_tot, src_sym)
 
-        src_count = node[SOURCE_LEN]
         valid_len = len(valid2sym)
         label = f"{goid}\n{text} [{ann_count}]"
         if is_input:
             fillcolor = utils.LEAF_COLOR if is_leaf else utils.INPUT_COLOR
-            label = f"{label}\n({src_count}/{valid_len})"
+            label = f"{label}\n({src_tot}/{valid_len})"
 
         label = fix_text(label)
         pnode = pydot.Node(node_id, label=label, fillcolor=fillcolor, shape="box", style="filled")
@@ -410,6 +445,7 @@ def run(cnf=None, obo_fname=None, gaf_fname=None):
         edge2 = fix_text(edge[1])
         pedge = pydot.Edge(edge1, edge2)
         pg.add_edge(pedge)
+
 
     #print(pg)
 
