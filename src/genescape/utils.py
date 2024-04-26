@@ -46,6 +46,7 @@ def memoize(func):
 
         # If the result is already in the cache, return it
         if key in cache:
+            print("# Cache hit")
             return cache[key]
 
         # Call the function and store the result in the cache
@@ -260,7 +261,7 @@ def timer(func):
         result = func(*args, **kwargs)
         end = time.time()
         elapsed = end - start
-        info(f"{func.__name__}:  {elapsed:.2f} seconds")
+        info(f"{func.__name__}: {elapsed:.2f} seconds")
         return result
 
     return timer

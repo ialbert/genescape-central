@@ -26,59 +26,68 @@ NAMESPACE_MAP = {
 # Set the default attributes for the nodes
 # NODE_ATTRS = dict(fillcolor=BG_COLOR, shape=SHAPE, style="filled")
 
-NODE_ATTRS = {OUT_DEGREE: 0}
 
-HEADER_KEY = "header"
-TERMS_KEY = "terms"
-TYPEDEFS_KEY = "typedefs"
+# Data keys in the index.
+HEADER_KEY = "info"
+
+# Ontology key.
+OBO_KEY = "obo"
+
+# Mapping keys.
+SYM2GO, GO2SYM, NAME2SYM = "sym2go", "go2sym", "name2sym"
+
+
 INPUT_LIST = "input_list"
-GENE_LIST = "gene_list"
-GENE_LEN = "gene_len"
-TOTAL_COUNT = "total_count"
+SOURCE_SYM = "sources"
+SOURCE_LEN = "src_len"
 
-SINGLE_VALUE = {"id", "name", "namespace", "comment"}
-MULTI_VALUE = {"alt_id", "subset", "replaced_by", "consider"}
+# The number of descendants for the GO term.
+DESC_COUNT = "desc_count"
 
-SYM2GO, GO2SYM, GO2NAME = "sym2go", "go2sym", "go2name"
+# The number of annotation for the GO term.
+ANNO_COUNT = "anno_count"
 
+# The cumulative sum of annotations for GO term.
+ANNO_TOTAL = "anno_total"
+
+# Node attributes
+NODE_ATTRS = {OUT_DEGREE: 0, DESC_COUNT: 0, ANNO_COUNT: 0, ANNO_TOTAL: 0}
 
 @utils.timer
 def build_graph(data):
+    """
+    Build an ontology graph from a JSON data structure.
+    """
     # The complete ontology graph
     graph = nx.DiGraph()
-    terms = data[TERMS_KEY]
+    terms = data[OBO_KEY]
 
-    nodes = filter(lambda x: not x.get("is_obsolete"), terms.values())
+    terms = filter(lambda x: not x.get("is_obsolete"), terms.values())
     # nodes = islice(nodes, 100)
-    nodes = list(nodes)
+    terms = list(terms)
 
     # Add individual nodes to the
-    for node in nodes:
-        oid = node["id"]
-        name = node["name"]
-        namespace = utils.NAMESPACE_MAP.get(node[NAMESPACE], "?")
-        graph.add_node(oid, id=oid, name=name, namespace=namespace, **utils.NODE_ATTRS)
+    for row in terms:
+        oid = row["id"]
+        name = row["name"]
+        namespace = utils.NAMESPACE_MAP.get(row[NAMESPACE], "?")
+        anno_count = row.get(ANNO_COUNT, -1)
+        anno_total = row.get(ANNO_TOTAL, -1)
+        desc_count = row.get(DESC_COUNT, -1)
+        out_degree = row.get(OUT_DEGREE, -1)
+        in_degree = row.get(IN_DEGREE, -1)
+        kwargs = {OUT_DEGREE: out_degree, IN_DEGREE: in_degree, DESC_COUNT: desc_count, ANNO_COUNT: anno_count, ANNO_TOTAL: anno_total}
+        graph.add_node(oid, id=oid, name=name, namespace=namespace, **kwargs)
 
-    for node in nodes:
-        child = node["id"]
-        for elem in node.get("is_a", []):
-            parent = elem["target"]
+    for row in terms:
+        child = row["id"]
+        for parent in row.get("is_a", []):
             if graph.has_node(parent):
                 graph.add_edge(parent, child)
             else:
-                utils.warn(f"# Missing parent: {parent} for {node}")
+                utils.warn(f"# Missing parent: {parent} for {row}")
 
-    # Add the degree to the nodes
-    for node in graph.nodes():
-        out_degree = graph.out_degree(node)
-        in_degree = graph.in_degree(node)
-        graph.nodes[node][OUT_DEGREE] = out_degree
-        graph.nodes[node][IN_DEGREE] = in_degree
-
-    # save with cpickle
-    with open("../../graph.pkl", "wb") as fp:
-        pickle.dump(graph, fp)
-
+    return graph
 
 @utils.timer
 def parse_gaf(fname):
@@ -87,7 +96,7 @@ def parse_gaf(fname):
     stream = map(lambda x: x.strip(), stream)
     stream = csv.reader(stream, delimiter="\t")
     # stream = islice(stream, 1000)
-    sym2go, go2sym, go2name = {}, {}, {}
+    sym2go, go2sym, name2sym = {}, {}, {}
     for row in stream:
         name, symb, goid, synon = row[1], row[2], row[4], row[10]
 
@@ -95,7 +104,7 @@ def parse_gaf(fname):
         sym2go.setdefault(name, []).append(goid)
 
         go2sym.setdefault(goid, []).append(symb)
-        go2name.setdefault(goid, []).append(name)
+        name2sym[name] = symb
 
     # Remove duplicates in case these exists.
     for key in sym2go:
@@ -103,19 +112,14 @@ def parse_gaf(fname):
 
     for key in go2sym:
         go2sym[key] = list(set(go2sym[key]))
-        go2name[key] = list(set(go2name[key]))
 
-    data = {
+    gaf = {
         SYM2GO: sym2go,
         GO2SYM: go2sym,
-        GO2NAME: go2name,
+        NAME2SYM: name2sym
     }
 
-    # Save data as json in a gzip
-    with gzip.open("../../gaf.json.gz", "wb") as fp:
-        text = json.dumps(data, indent=4)
-        fp.write(text.encode('utf-8'))
-
+    return gaf
 
 def parse_refs(text):
     text = text.strip('[').strip(']').strip()
@@ -142,199 +146,110 @@ def parse_obo(stream):
     term_stream = dropwhile(lambda x: x[0] != "[Term]", term_stream)
 
     head = dict()
-    subs = dict()
     terms = dict()
-    typedefs = []
 
-    data = {HEADER_KEY: head, TERMS_KEY: terms, TYPEDEFS_KEY: typedefs}
+    data = {HEADER_KEY: head, OBO_KEY: terms}
 
+    INCLUDE = [ "format-version", "data-version", "ontology" ]
+    INCLUDE = set(INCLUDE)
+
+    # Fill the headers
     for elems in head_stream:
         code = elems[0].strip(":")
-        if code == "subsetdef":
-            subs[elems[1]] = elems[2]
-        else:
+        if code in INCLUDE:
             head[code] = elems[1]
-
-    # Add the subsetdef
-    head["subsetdef"] = subs
 
     term = {}
     for elems in term_stream:
-
         code = elems[0].strip(":")
 
         # Exit this loop at the typedef stanza
         if code == "[Typedef]":
             break
 
-        # Term stanza
-        if code == "[Term]":
-            # Yield the term if it exists
-            if term:
-                term["is_obsolete"] = term.get("is_obsolete", False)
-                terms[term["id"]] = term
-                term = {}
+        if code == "[Term]" and term:
+            term["is_obsolete"] = term.get("is_obsolete", False)
+            terms[term["id"]] = term
+            term = {}
             continue
 
         if code == "is_a":
             target = elems[1]
-            label = " ".join(elems[3:])
-            term.setdefault("is_a", []).append(dict(target=target, label=label))
+            term.setdefault("is_a", []).append(target)
             continue
 
-        if code in SINGLE_VALUE:
-            term[code] = " ".join(elems[1:])
-            continue
-
-        if code == "def":
-            text = elems[1]
-            refs = parse_refs(elems[2])
-            term[code] = dict(text=text, refs=refs)
-            continue
-
-        if code == "synonym":
-            text = elems[1]
-            scope = elems[2]
-            refs = parse_refs(elems[3])
-            term.setdefault(code, []).append(dict(text=text, scope=scope, refs=refs))
-            continue
-
-        if code in MULTI_VALUE:
-            value = elems[1]
-            term.setdefault(code, []).append(value)
+        if code == "id" or code == "name" or code == "namespace":
+            term[code] = elems[1]
             continue
 
         if code == "is_obsolete":
             term["is_obsolete"] = True
             continue
 
-        if code == "relationship":
-            key = elems[1]
-            target = elems[2]
-            label = " ".join(elems[4:])
-            term.setdefault(code, []).append(dict(target=target, type=key, label=label))
-            continue
+        continue
 
-    # Parse the typdefs
-    term_stream = chain([["[Typedef]"]], term_stream)
-
-    type_obj = dict()
-    for elems in term_stream:
-        code = elems[0].strip(":")
-        if code == "[Typedef]":
-            if type_obj:
-                typedefs.append(type_obj)
-            type_obj = {}
-            continue
-
-        if code in ("id", "namespace"):
-            type_obj[code] = elems[1]
-            continue
-
-        if code == "is_a":
-            target = elems[1]
-            label = " ".join(elems[3:])
-            type_obj.setdefault(code, []).append(dict(target=target, label=label))
-            continue
-
-        if code == "name":
-            type_obj[code] = " ".join(elems[1:])
-            continue
-
-        if code.startswith("is_"):
-            type_obj[code] = elems[1] == 'true'
-            continue
+    # Last term needs to be added
+    terms[term["id"]] = term
 
     return data
 
 
-@utils.timer
-def save_json(obo_name, json_name):
-    stream = utils.get_stream(obo_name)
-
-    data = parse_obo(stream)
-
-    text = json.dumps(data, indent=4)
-
-    with gzip.open(json_name, "wb") as fp:
-        fp.write(text.encode('utf-8'))
-
 
 @utils.timer
-def load_json(json_name):
-    with gzip.open(json_name, "rb") as fp:
-        text = fp.read().decode('utf-8')
-        data = json.loads(text)
+def make_subgraph(idx, graph, tgt=None, root=NS_MF):
 
-    return data
+    tgt = tgt or "ABTB3 BCAS4 C3P1 GRTP1 SPOP ABCA2 PSMD3 GO:0046983 GO:1901265".split()
 
-
-@utils.timer
-def read_graph():
-    with open("../../graph.pkl", "rb") as fp:
-        obo = pickle.load(fp)
-
-    with gzip.open("../../gaf.json.gz", "rb") as fp:
-        text = fp.read().decode('utf-8')
-        gaf = json.loads(text)
-
-    tgt = "ABTB3 BCAS4 C3P1 GRTP1 SPOP ABCA2 PSMD3".split()
-
+    # Unique targets
     tgt2set = set(tgt)
 
-    sym2go = gaf[SYM2GO]
+    obo = idx[OBO_KEY]
+    sym2go = idx[SYM2GO]
+    go2sym = idx[GO2SYM]
 
+    # Symbols not found in the association file.
     miss2sym = set(filter(lambda x: x not in sym2go, tgt))
-    valid2sym = list(filter(lambda x: x in sym2go, tgt))
 
-    goids = map(sym2go.get, valid2sym)
+    # Symbols found in the association file.
+    valid2sym = list(filter(lambda x: x in sym2go or x in obo, tgt))
+
+    # Map the symbols to GO terms
+    goids = map(lambda x: sym2go.get(x, [x]), valid2sym)
     goids = chain.from_iterable(goids)
     goids = list(set(goids))
 
-    # Check GOIds not found in the BOB
-    miss2go = set(filter(lambda x: x not in obo.nodes, goids))
-    valid2go = list(filter(lambda x: x in obo.nodes, goids))
+    # Terms not found in the OBO
+    miss2go = set(filter(lambda x: x not in graph.nodes, goids))
+
+    # Valid GO terms
+    valid2go = filter(lambda x: x in graph.nodes, goids)
+
+    # Keep only terms where the root is the same as the namespace
+    if root:
+        valid2go = filter(lambda x: graph.nodes[x][NAMESPACE] == root, valid2go)
+
+    valid2go = list(valid2go)
+    valid2tgt = set(valid2go)
 
     anc = set()
     for node in valid2go:
-        anc = anc.union(nx.ancestors(obo, node))
+        anc = anc.union(nx.ancestors(graph, node))
     anc = anc.union(valid2go)
 
     # Subset the graph to the ancestors only.
-    tree = obo.subgraph(anc)
+    tree = graph.subgraph(anc)
 
     # Initialize the subtree
-    for goid in tree.nodes():
-        node = tree.nodes[goid]
-        node[TOTAL_COUNT] = len(gaf[GO2SYM].get(goid, []))
-        node[INPUT_LIST] = False
-        node[GENE_LIST] = set()
-
-    # Update the subtree with the gene list
-    for goid in valid2go:
-        node = tree.nodes[goid]
-        symbs = set(gaf[GO2SYM].get(goid, []) + gaf[GO2NAME].get(goid, []))
-        annot = tgt2set & symbs
-        node[INPUT_LIST] = True
-        node[GENE_LIST] = annot
-
-    # The leaf nodes of the subtree.
-    leaf = list(filter(lambda x: tree.out_degree(x) == 0, valid2go))
-
-    for goid in leaf:
-        node = tree.nodes[goid]
-        genes = node[GENE_LIST]
-        anc = nx.ancestors(tree, goid)
-        for anc_id in anc:
-            anc_node = tree.nodes[anc_id]
-            anc_node[GENE_LIST] = anc_node[GENE_LIST] | genes
-
-    # Annotate subtree with gene counts
-    for goid in tree.nodes():
-        node = tree.nodes[goid]
-        node[GENE_LEN] = len(node[GENE_LIST])
-
-    # Sort the graph nodes to make the output deterministic.
+    for node_id in tree.nodes():
+        node = tree.nodes[node_id]
+        is_input = node_id in valid2tgt
+        if is_input:
+            sources = list(set(go2sym.get(node_id, [])) & tgt2set)
+        else:
+            sources = []
+        node[INPUT_LIST] = is_input
+        node[SOURCE_SYM] = sources
+        node[SOURCE_LEN] = len(sources)
 
     # Sort nodes
     s_nodes = sorted(tree.nodes(data=True))
@@ -346,57 +261,146 @@ def read_graph():
     s_tree.add_nodes_from(s_nodes)
     s_tree.add_edges_from(s_edges)
 
-    return s_tree
+    return s_tree, valid2sym
+
 
 def fix_text(text):
     return f'"{text}"'
 
+
 def human_readable(value, digits=0):
     try:
-        newval = int(round(float(value)/1000, digits))
+        newval = int(round(float(value) / 1000, digits))
     except ValueError:
         newval = 0
     newval = f"{newval:d}K" if newval > 1 else value
     return newval
 
-def run():
-    res = resources.init()
-    obo_name = res.OBO_FILE
-    json_name = "../../data.json.gz"
+@utils.timer
+def load_json(fname):
+    stream = gzip.open(fname, "rb") if fname.endswith(".gz") else open(fname, "rt")
+    with stream as fp:
+        text = fp.read().decode('utf-8')
+        data = json.loads(text)
 
-    # save_json(obo_name, json_name)
+    return data
 
-    # data = load_json(json_name)
+@utils.timer
+def save_json(data, fname):
+    stream = gzip.open(fname, "wb") if fname.endswith(".gz") else open(fname, "wb")
+    with stream as fp:
+        text = json.dumps(data, indent=4)
+        fp.write(text.encode('utf-8'))
 
-    # build_graph(data)
+@utils.timer
+def compute_graph_measures(idx):
+    """
+    Fills the index with additional information
+    """
 
-    gaf_fname = res.GAF_FILE
+    graph = build_graph(idx)
 
-    # parse_gaf(gaf_fname)
+    obo = idx[OBO_KEY]
 
-    tree = read_graph()
+    # Add the degree to the nodes
+    for node_id in graph.nodes():
+        out_degree = graph.out_degree(node_id)
+        in_degree = graph.in_degree(node_id)
+        obo[node_id][OUT_DEGREE] = out_degree
+        obo[node_id][IN_DEGREE] = in_degree
+
+    def traverse(tree, node_id, store):
+        desc_total = 0
+        anno_total = obo[node_id][ANNO_COUNT]
+        for child in tree.successors(node_id):
+            if child not in store:
+                traverse(tree, child, store)
+            desc_total += store[child] + 1
+            anno_total += obo[child][ANNO_COUNT]
+        store[node_id] = desc_total
+        obo[node_id][DESC_COUNT] = desc_total
+        obo[node_id][ANNO_TOTAL] = anno_total
+
+    # From the roots backfill graph measures
+    roots = filter(lambda x: graph.in_degree(x) == 0, graph.nodes())
+    for root in roots:
+        store = dict()
+        traverse(graph, root, store=store)
+
+    return obo
+
+@utils.memoize
+def load_index(fname):
+    idx = load_json(fname)
+    return idx
+
+@utils.memoize
+def load_graph(fname):
+    idx = load_json(fname)
+    graph = build_graph(idx)
+    return idx, graph
+
+def run(cnf=None, obo_fname=None, gaf_fname=None):
+
+    res = resources.init(cnf)
+    obo_fname = obo_fname or res.OBO_FILE
+    gaf_fname = gaf_fname or res.GAF_FILE
+
+    obo_json = "../../tmp/obo.json.gz"
+    gaf_json = "../../tmp/gaf.json.gz"
+    idx_json = "../../tmp/index.json.gz"
+
+    if 0:
+        stream = utils.get_stream(obo_fname)
+
+        obo = parse_obo(stream)
+        gaf = parse_gaf(gaf_fname)
+
+        # Fill in annotation counts
+        for node_id in obo[OBO_KEY]:
+            values = gaf[GO2SYM].get(node_id, [])
+            obo[OBO_KEY][node_id][ANNO_COUNT] = len(values)
+
+        idx = dict(obo)
+        idx.update(gaf)
+
+        compute_graph_measures(idx=idx)
+
+        save_json(idx, idx_json)
+
+    idx, graph = load_graph(idx_json)
+
+    idx, graph = load_graph(idx_json)
+
+    tree, valid2sym = make_subgraph(idx=idx, graph=graph)
+
 
     # Create the pydot graph.
     pg = pydot.Dot("genescape", graph_type="digraph")
     for goid in tree.nodes():
         node = tree.nodes[goid]
         name = node["name"]
-        if node[OUT_DEGREE] == 0:
-            fillcolor = utils.LEAF_COLOR
-        elif node[INPUT_LIST]:
-            fillcolor = utils.INPUT_COLOR
-        else:
-            key = node[NAMESPACE]
-            fillcolor = utils.NAMESPACE_COLORS.get(key, utils.BG_COLOR)
+        out_degree = node[OUT_DEGREE]
+        is_input = node[INPUT_LIST]
+        is_leaf = out_degree == 0
+
+        key = node[NAMESPACE]
+        fillcolor = utils.NAMESPACE_COLORS.get(key, utils.BG_COLOR)
 
         node_id = fix_text(goid)
         text = textwrap.fill(name, width=20)
-        t_count = human_readable(node[TOTAL_COUNT])
-        g_count = len(node[GENE_LIST])
-        if node[INPUT_LIST]:
-            label = f"{goid}\n{text} [{t_count}]\n({g_count}/100)"
-        else:
-            label = f"{goid}\n{text} [{t_count}]"
+        ann_count = human_readable(node[ANNO_COUNT])
+        ann_total = human_readable(node[ANNO_TOTAL])
+        desc_count = human_readable(node[DESC_COUNT])
+        out_degree = node[OUT_DEGREE]
+
+        src_count = node[SOURCE_LEN]
+        valid_len = len(valid2sym)
+        label = f"{goid}\n{text} [{ann_count}]"
+        if is_input:
+            fillcolor = utils.LEAF_COLOR if is_leaf else utils.INPUT_COLOR
+            label = f"{label}\n({src_count}/{valid_len})"
+
         label = fix_text(label)
         pnode = pydot.Node(node_id, label=label, fillcolor=fillcolor, shape="box", style="filled")
         pg.add_node(pnode)
@@ -407,13 +411,11 @@ def run():
         pedge = pydot.Edge(edge1, edge2)
         pg.add_edge(pedge)
 
-    print(pg)
+    #print(pg)
 
     pg.set_graph_defaults()
     pg.set_node_defaults(shape="box", style="filled")
     pg.write_pdf("../../output.pdf")
-
-
 
 
 if __name__ == '__main__':
