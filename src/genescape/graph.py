@@ -1,6 +1,8 @@
 """
 Graph representation of an ontology
 """
+import click
+from genescape import cli
 
 import gzip, sys, re, json, csv, textwrap, pickle
 from genescape import resources, utils
@@ -36,29 +38,50 @@ OBO_KEY = "obo"
 # Mapping keys.
 SYM2GO, GO2SYM, NAME2SYM = "sym2go", "go2sym", "name2sym"
 
-# The ID is in the input
-SRC_FLAG = "src_flag"
+# True for a GO term that is present in the input data.
+INP_FLAG = "inp_flag"
 
-# The symbols in the input
-SRC_SYMB = "src_sym"
+# A list that stores the symbols that support a GO term.
+INP_SYM = "inp_sym"
 
-# The number of symbols in the input
-SRC_SIZE = "src_len"
+# The length of the INP_SYMB list.
+INP_LEN = "inp_len"
 
-# The total number of symbols in the input
-SRC_TOT = "src_tot"
+# A list that stores all the of a GO subtree.
+INP_SYM_TOT = "inp_sym_tot"
+
+# The lenght of the INP_SYMB_TOT list.
+INP_LEN_TOT = "inp_len_tot"
+
+# The list of descendant nodes for the GO term.
+DESC_LIST = "desc_list"
 
 # The number of descendants for the GO term.
 DESC_COUNT = "desc_count"
 
-# The number of annotation for the GO term.
+# The number of annotations for the GO term.
 ANNO_COUNT = "anno_count"
 
 # The cumulative sum of annotations for GO term.
 ANNO_TOTAL = "anno_total"
 
+# Status keys
+SYM_VALID = "sym_valid"
+SYM_MISS = "sym_miss"
+GO_VALID = "go_valid"
+GO_MISS = "go_miss"
+
 # Node attributes
 NODE_ATTRS = {OUT_DEGREE: 0, DESC_COUNT: 0, ANNO_COUNT: 0, ANNO_TOTAL: 0}
+
+WIDTH = 16.9
+HEIGHT = 6.0
+
+
+def dpi(size):
+    value = size / WIDTH
+    return value
+
 
 @utils.timer
 def build_graph(data):
@@ -83,7 +106,8 @@ def build_graph(data):
         desc_count = row.get(DESC_COUNT, -1)
         out_degree = row.get(OUT_DEGREE, -1)
         in_degree = row.get(IN_DEGREE, -1)
-        kwargs = {OUT_DEGREE: out_degree, IN_DEGREE: in_degree, DESC_COUNT: desc_count, ANNO_COUNT: anno_count, ANNO_TOTAL: anno_total}
+        kwargs = {OUT_DEGREE: out_degree, IN_DEGREE: in_degree, DESC_COUNT: desc_count, ANNO_COUNT: anno_count,
+                  ANNO_TOTAL: anno_total}
         graph.add_node(oid, id=oid, name=name, namespace=namespace, **kwargs)
 
     for row in terms:
@@ -95,6 +119,7 @@ def build_graph(data):
                 utils.warn(f"# Missing parent: {parent} for {row}")
 
     return graph
+
 
 @utils.timer
 def parse_gaf(fname):
@@ -128,6 +153,7 @@ def parse_gaf(fname):
 
     return gaf
 
+
 def parse_refs(text):
     text = text.strip('[').strip(']').strip()
     refs = [ref for ref in text.split(",") if ref]
@@ -157,7 +183,7 @@ def parse_obo(stream):
 
     data = {HEADER_KEY: head, OBO_KEY: terms}
 
-    INCLUDE = [ "format-version", "data-version", "ontology" ]
+    INCLUDE = ["format-version", "data-version", "ontology"]
     INCLUDE = set(INCLUDE)
 
     # Fill the headers
@@ -201,57 +227,82 @@ def parse_obo(stream):
     return data
 
 
-
 @utils.timer
-def make_subgraph(idx, graph, tgt=None, root=NS_MF):
+def make_subgraph(idx, graph, tgt=[], root=NS_MF, mincount=1, pattern=''):
+    # tgt="GO:0035639 GO:0035639 GO:0097159  ".split()
 
-    #tgt="GO:0035639 GO:0035639 GO:0097159  ".split()
+    # tgt = "GO:0035639 GO:0035639 GO:0043168 GO:0043168 GO:0043168 GO:0097159 GO:0005488  GO:1901265  GO:0035639  GO:0035639".split()
 
-    #tgt = "GO:0035639 GO:0035639 GO:0043168 GO:0043168 GO:0043168 GO:0097159 GO:0005488  GO:1901265  GO:0035639  GO:0035639".split()
+    tgt = "GO:1901265 GO:0097159".split()
 
     tgt = tgt or "ABTB3 BCAS4 C3P1 GRTP1 SPOP ABCA2 PSMD3 GO:0046983 GO:1901265".split()
 
-    # Unique targets
-    tgt2set = set(tgt)
+    # Inputs must be unique.
+    tgt = set(tgt)
 
     obo = idx[OBO_KEY]
     sym2go = idx[SYM2GO]
-    go2sym = idx[GO2SYM]
 
     # Symbols not found in the association file.
-    miss2sym = set(filter(lambda x: x not in sym2go, tgt))
+    sym_miss = set(filter(lambda x: x not in sym2go, tgt))
+
+    # Print notification on missing symbols.
+    if sym_miss:
+        utils.warn(f"Missing symbols: {sym_miss}")
 
     # Symbols found in the association file.
-    valid2sym = list(filter(lambda x: x in sym2go or x in obo, tgt))
+    sym_valid = list(filter(lambda x: x in sym2go or x in obo, tgt))
 
-    # Map the symbols to GO terms
-    goids, go2tgt = [], dict()
-    for sym in valid2sym:
+    # A list of GO terms in the input list.
+    goids = []
+
+    # Maps GO ids to input target symbols.
+    go2inp = dict()
+
+    # Build the symbol mappings.
+    for sym in sym_valid:
         values = sym2go.get(sym, []) or [sym]
         for goid in values:
-            go2tgt.setdefault(goid, []).append(sym)
+            go2inp.setdefault(goid, []).append(sym)
             goids.append(goid)
 
-    # Map the symbols to GO terms
-
-
     # Terms not found in the OBO
-    miss2go = set(filter(lambda x: x not in graph.nodes, goids))
+    go_miss = list(filter(lambda x: x not in graph.nodes, goids))
 
-    # Valid GO terms
-    valid2go = filter(lambda x: x in graph.nodes, goids)
+    # Missing GO terms.
+    if go_miss:
+        utils.warn(f"Missing GO terms: {go_miss}")
 
-    # Keep only terms where the root is the same as the namespace
-    if root:
-        valid2go = filter(lambda x: graph.nodes[x][NAMESPACE] == root, valid2go)
+    # Subselect the valid GO terms
+    go_valid = filter(lambda x: x in graph.nodes, goids)
 
-    valid2go = list(valid2go)
-    valid2tgt = set(valid2go)
+    # Apply the filtering if a root is given.
+    go_valid = filter(lambda x: graph.nodes[x][NAMESPACE] == root, go_valid) if root else go_valid
 
+    # Apply the pattern filter
+    if pattern:
+        try:
+            patt = re.compile(pattern, re.IGNORECASE)
+            go_valid = filter(lambda x: re.search(patt, graph.nodes[x]["name"], re.IGNORECASE), go_valid)
+        except re.error:
+            utils.error(f"Invalid pattern: {pattern}", stop=False)
+
+    # Filter by minimum count
+    go_valid = filter(lambda x: len(go2inp[x]) >= mincount, go_valid)
+
+    # Convert to a list
+    go_valid = list(go_valid)
+
+    # Provides a quick lookup for the valid GO terms.
+    valid2tgt = set(go_valid)
+
+    # Find the ancestors for each node.
     anc = set()
-    for node in valid2go:
+    for node in go_valid:
         anc = anc.union(nx.ancestors(graph, node))
-    anc = anc.union(valid2go)
+
+    # Add the original nodes as well.
+    anc = anc.union(go_valid)
 
     # Subset the graph to the ancestors only.
     tree = graph.subgraph(anc)
@@ -259,23 +310,32 @@ def make_subgraph(idx, graph, tgt=None, root=NS_MF):
     # Initialize the subtree
     for node_id in tree.nodes():
         node = tree.nodes[node_id]
-        srcs = go2tgt.get(node_id, [])
-        node[SRC_FLAG] = node_id in valid2tgt
-        node[SRC_SYMB] = list(srcs)
-        node[SRC_SIZE] = len(srcs)
+        sources = go2inp.get(node_id, [])
+        node[INP_FLAG] = node_id in valid2tgt
+        node[INP_SYM] = list(sources)
+        node[INP_LEN] = len(sources)
 
     # Travers and update the cumulative totals
     def traverse(tree, node_id, store):
-        store[node_id] = [ node_id ]
-        for child in tree.successors(node_id):
-            if child not in store:
-                traverse(tree, child, store)
-                store[node_id].extend(store[child])
 
-        src_sym = []
-        for sub_id in store[node_id]:
-            src_sym += tree.nodes[sub_id][SRC_SYMB]
-        tree.nodes[node_id][SRC_TOT] = len(src_sym)
+        store[node_id] = [node_id]
+
+        for child_id in tree.successors(node_id):
+            if child_id not in store:
+                traverse(tree, child_id, store)
+                store[node_id].extend(store[child_id])
+
+        inp_sym = []
+        for parent_id in store[node_id]:
+            inp_sym += tree.nodes[parent_id][INP_SYM]
+
+        # Shortcut to the node
+        node = tree.nodes[node_id]
+
+        # Store the descendants of the subtree only
+        node[DESC_LIST] = store[node_id]
+        node[INP_SYM_TOT] = list(set(inp_sym))
+        node[INP_LEN_TOT] = len(inp_sym)
 
     roots = filter(lambda x: tree.in_degree(x) == 0, tree.nodes())
     for root in roots:
@@ -292,7 +352,14 @@ def make_subgraph(idx, graph, tgt=None, root=NS_MF):
     s_tree.add_nodes_from(s_nodes)
     s_tree.add_edges_from(s_edges)
 
-    return s_tree, valid2sym
+    # Populate the status
+    status = {
+        SYM_VALID: sym_valid,
+        SYM_MISS: sym_miss,
+        GO_VALID: go_valid,
+        GO_MISS: go_miss,
+    }
+    return s_tree, status
 
 
 def fix_text(text):
@@ -307,6 +374,7 @@ def human_readable(value, digits=0):
     newval = f"{newval:d}K" if newval > 1 else value
     return newval
 
+
 @utils.timer
 def load_json(fname):
     stream = gzip.open(fname, "rb") if fname.endswith(".gz") else open(fname, "rt")
@@ -316,12 +384,14 @@ def load_json(fname):
 
     return data
 
+
 @utils.timer
 def save_json(data, fname):
     stream = gzip.open(fname, "wb") if fname.endswith(".gz") else open(fname, "wb")
     with stream as fp:
         text = json.dumps(data, indent=4)
         fp.write(text.encode('utf-8'))
+
 
 @utils.timer
 def compute_graph_measures(idx):
@@ -361,10 +431,12 @@ def compute_graph_measures(idx):
 
     return obo
 
+
 @utils.memoize
 def load_index(fname):
     idx = load_json(fname)
     return idx
+
 
 @utils.memoize
 def load_graph(fname):
@@ -372,8 +444,8 @@ def load_graph(fname):
     graph = build_graph(idx)
     return idx, graph
 
-def run(cnf=None, obo_fname=None, gaf_fname=None):
 
+def run(cnf=None, obo_fname=None, gaf_fname=None):
     res = resources.init(cnf)
     obo_fname = obo_fname or res.OBO_FILE
     gaf_fname = gaf_fname or res.GAF_FILE
@@ -405,8 +477,55 @@ def run(cnf=None, obo_fname=None, gaf_fname=None):
 
     idx, graph = load_graph(idx_json)
 
-    tree, valid2sym = make_subgraph(idx=idx, graph=graph)
+    tree, status = make_subgraph(idx=idx, graph=graph)
 
+    annot = annotate(tree, status)
+
+    print(status)
+
+    pg = pydot_graph(tree, status)
+
+    save_graph(pg, fname="../../output.pdf", imgsize=2048)
+
+
+def annotate(tree, status):
+
+    inp_nodes = filter(lambda x: tree.nodes[x][INP_FLAG], tree.nodes())
+
+    for node_id in inp_nodes:
+        node = tree.nodes[node_id]
+        name = node["name"]
+        ann_count = human_readable(node[ANNO_COUNT])
+        ann_total = human_readable(node[ANNO_TOTAL])
+        print(node_id, name)
+
+
+    sys.exit()
+
+def save_graph(pgraph, fname="../../output.pdf", imgsize=2048):
+    """
+    Save
+    """
+    if fname is None:
+        text = pgraph.to_string()
+        return text
+
+    pgraph.set_graph_defaults()
+
+    if fname.endswith(".dot"):
+        pgraph.write_raw(f"{fname}")
+    elif fname.endswith(".pdf"):
+        pgraph.write_pdf(fname)
+    elif fname.endswith(".png"):
+        pgraph.set_graph_defaults(size=f"{WIDTH},{HEIGHT}", dpi=dpi(imgsize))
+        pgraph.write_png(fname)
+    else:
+        utils.warn(f"Unknown output format: {fname}")
+
+
+def pydot_graph(tree, status):
+    # Pull the status information
+    sym_valid = status[SYM_VALID]
 
     # Create the pydot graph.
     pg = pydot.Dot("genescape", graph_type="digraph")
@@ -414,7 +533,7 @@ def run(cnf=None, obo_fname=None, gaf_fname=None):
         node = tree.nodes[goid]
         name = node["name"]
         out_degree = node[OUT_DEGREE]
-        is_input = node[SRC_FLAG]
+        is_input = node[INP_FLAG]
         is_leaf = out_degree == 0
 
         key = node[NAMESPACE]
@@ -426,11 +545,10 @@ def run(cnf=None, obo_fname=None, gaf_fname=None):
         ann_total = human_readable(node[ANNO_TOTAL])
         desc_count = human_readable(node[DESC_COUNT])
         out_degree = node[OUT_DEGREE]
-        src_sym = node[SRC_SYMB]
-        src_tot = node[SRC_TOT]
-        print(goid, src_tot, src_sym)
+        src_sym = node[INP_SYM]
+        src_tot = node[INP_LEN_TOT]
 
-        valid_len = len(valid2sym)
+        valid_len = len(sym_valid)
         label = f"{goid}\n{text} [{ann_count}]"
         if is_input:
             fillcolor = utils.LEAF_COLOR if is_leaf else utils.INPUT_COLOR
@@ -446,13 +564,8 @@ def run(cnf=None, obo_fname=None, gaf_fname=None):
         pedge = pydot.Edge(edge1, edge2)
         pg.add_edge(pedge)
 
-
-    #print(pg)
-
-    pg.set_graph_defaults()
-    pg.set_node_defaults(shape="box", style="filled")
-    pg.write_pdf("../../output.pdf")
+    return pg
 
 
 if __name__ == '__main__':
-    run()
+    cli.run()
