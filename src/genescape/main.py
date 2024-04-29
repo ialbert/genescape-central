@@ -52,7 +52,7 @@ def parse_genes(fname):
 )
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, idx_fname=None, root=utils.NS_ALL, verbose=False, test=False, csvout=False, match="", count=1, out=''):
+def annotate(fname, idx_fname=None, root=utils.NS_ALL, verbose=False, test=False, match="", count=1):
     """
     Generates GO terms annotations for a list of genes.
     """
@@ -71,7 +71,7 @@ def annotate(fname, idx_fname=None, root=utils.NS_ALL, verbose=False, test=False
 
     graph.stats(idx)
 
-    subtree, status = graph.subgraph(tgt=targets, idx=idx, graph=tree)
+    subtree, status = graph.subgraph(tgt=targets, idx=idx, graph=tree, root=root, mincount=count, pattern=match)
 
     text = graph.annotate(tree=subtree, status=status)
 

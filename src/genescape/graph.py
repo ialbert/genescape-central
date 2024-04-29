@@ -224,8 +224,8 @@ def parse_obo(stream):
 
     return data
 
-def subgraph(idx, graph, tgt, root=NS_MF, mincount=1, pattern=''):
 
+def subgraph(idx, graph, tgt, root=NS_ALL, mincount=1, pattern=''):
     # Better defaults
     tgt = tgt or []
 
@@ -269,13 +269,14 @@ def subgraph(idx, graph, tgt, root=NS_MF, mincount=1, pattern=''):
     go_valid = filter(lambda x: x in graph.nodes, goids)
 
     # Apply the filtering if a root is given.
-    go_valid = filter(lambda x: graph.nodes[x][NAMESPACE] == root, go_valid) if root else go_valid
+    if root != NS_ALL:
+        go_valid = filter(lambda x: graph.nodes[x][NAMESPACE] == root, go_valid)
 
     # Apply the pattern filter
     if pattern:
         try:
             patt = re.compile(pattern, re.IGNORECASE)
-            go_valid = filter(lambda x: re.search(patt, graph.nodes[x]["name"], re.IGNORECASE), go_valid)
+            go_valid = filter(lambda x: re.search(patt, graph.nodes[x]["name"]), go_valid)
         except re.error:
             utils.error(f"Invalid pattern: {pattern}", stop=False)
 
@@ -366,12 +367,11 @@ def human_readable(value, digits=0):
     newval = f"{newval:d}K" if newval > 1 else value
     return newval
 
+
 @utils.memoize
 def load_json(path):
-
     if not isinstance(path, Path):
         path = Path(path)
-
 
     # Print error if path does not exist
     if not path.exists():
@@ -433,6 +433,7 @@ def fill_graph(idx):
 
     return obo
 
+
 def load_index(fname):
     idx = load_json(fname)
     return idx
@@ -444,6 +445,7 @@ def load_graph(fname):
     graph = build_graph(idx)
     return idx, graph
 
+
 def stats(idx=None):
     if isinstance(idx, str):
         utils.stop("index must be an object not string")
@@ -452,8 +454,8 @@ def stats(idx=None):
     utils.info(msg)
     return map_count, sym_count, go_count
 
-def idx_stats(idx):
 
+def idx_stats(idx):
     go2sym = idx[GO2SYM]
     sym2go = idx[SYM2GO]
 
@@ -464,6 +466,7 @@ def idx_stats(idx):
     go_count = len(go2sym)
 
     return map_count, sym_count, go_count
+
 
 def build_index(obo_fname, gaf_fname, idx_fname):
     """
@@ -507,7 +510,6 @@ def runme(cnf=None, obo_fname=None, gaf_fname=None):
 
     idx, graph = load_graph(idx_json)
 
-
     tree, status = subgraph(idx=idx, graph=graph)
 
     annot = annotate(tree, status)
@@ -520,14 +522,13 @@ def runme(cnf=None, obo_fname=None, gaf_fname=None):
 
 
 def annotate(tree, status):
-
     sym_valid = status[SYM_VALID]
     sym_size = len(sym_valid)
 
     inp_nodes = filter(lambda x: tree.nodes[x][INP_FLAG], tree.nodes())
 
     stream = io.StringIO()
-    writer = csv.DictWriter(stream, fieldnames=["count", "node_id", "name", "source", "size", "ann_count", "ann_total"])
+    writer = csv.DictWriter(stream, fieldnames=["count", "name", "node_id", "source", "size", "ann_count", "ann_total"])
     writer.writeheader()
     for node_id in inp_nodes:
         node = tree.nodes[node_id]
@@ -537,12 +538,14 @@ def annotate(tree, status):
         count = node[INP_LEN]
         ann_count = node[ANNO_COUNT]
         ann_total = node[ANNO_TOTAL]
-        data = dict(count=count, node_id=node_id, name=name, source=source, size=sym_size, ann_count=ann_count, ann_total=ann_total)
+        data = dict(count=count, node_id=node_id, name=name, source=source, size=sym_size, ann_count=ann_count,
+                    ann_total=ann_total)
         writer.writerow(data)
 
     text = stream.getvalue()
 
     return text
+
 
 def save_graph(pgraph, fname=None, imgsize=2048):
     """
@@ -611,6 +614,7 @@ def pydot_graph(tree, status):
 
     return pg
 
+
 def run():
     res = resources.init()
 
@@ -636,12 +640,10 @@ def run():
     # Print the annotations
     stream = annotate(tree=tree, status=status)
 
-
     # Save the graph.
-    #ptree = pydot_graph(tree, status)
+    # ptree = pydot_graph(tree, status)
 
-    #save_graph(ptree, "../../output.pdf")
-
+    # save_graph(ptree, "../../output.pdf")
 
     # tgt="GO:0035639 GO:0035639 GO:0097159  ".split()
 
@@ -651,8 +653,7 @@ def run():
 
     # tgt = tgt or "ABTB3 BCAS4 C3P1 GRTP1 SPOP ABCA2 PSMD3 GO:0046983 GO:1901265".split()
 
-    #print_stats(idx_fname=idx_fname)
-
+    # print_stats(idx_fname=idx_fname)
 
 
 if __name__ == '__main__':
