@@ -85,7 +85,7 @@ class Resource:
         self.DEFAULT_CODE = list(self.INDEX_MAP.keys())[0]
 
         # The default index.
-        self.INDEX = self.find_index()
+        self.INDEX_FILE = self.find_index()
 
     def find_index(self, code=None):
         code = code or self.DEFAULT_CODE

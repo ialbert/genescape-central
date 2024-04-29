@@ -1,9 +1,8 @@
 """
 Graph representation of an ontology
 """
-import click
-from genescape import cli
-
+import io
+from pathlib import Path
 import gzip, sys, re, json, csv, textwrap, pickle
 from genescape import resources, utils
 from itertools import islice, takewhile, dropwhile, tee, chain
@@ -83,7 +82,6 @@ def dpi(size):
     return value
 
 
-@utils.timer
 def build_graph(data):
     """
     Build an ontology graph from a JSON data structure.
@@ -226,16 +224,10 @@ def parse_obo(stream):
 
     return data
 
+def subgraph(idx, graph, tgt, root=NS_MF, mincount=1, pattern=''):
 
-@utils.timer
-def make_subgraph(idx, graph, tgt=[], root=NS_MF, mincount=1, pattern=''):
-    # tgt="GO:0035639 GO:0035639 GO:0097159  ".split()
-
-    # tgt = "GO:0035639 GO:0035639 GO:0043168 GO:0043168 GO:0043168 GO:0097159 GO:0005488  GO:1901265  GO:0035639  GO:0035639".split()
-
-    tgt = "GO:1901265 GO:0097159".split()
-
-    tgt = tgt or "ABTB3 BCAS4 C3P1 GRTP1 SPOP ABCA2 PSMD3 GO:0046983 GO:1901265".split()
+    # Better defaults
+    tgt = tgt or []
 
     # Inputs must be unique.
     tgt = set(tgt)
@@ -244,7 +236,7 @@ def make_subgraph(idx, graph, tgt=[], root=NS_MF, mincount=1, pattern=''):
     sym2go = idx[SYM2GO]
 
     # Symbols not found in the association file.
-    sym_miss = set(filter(lambda x: x not in sym2go, tgt))
+    sym_miss = set(filter(lambda x: x not in sym2go and x not in obo, tgt))
 
     # Print notification on missing symbols.
     if sym_miss:
@@ -374,10 +366,18 @@ def human_readable(value, digits=0):
     newval = f"{newval:d}K" if newval > 1 else value
     return newval
 
+@utils.memoize
+def load_json(path):
 
-@utils.timer
-def load_json(fname):
-    stream = gzip.open(fname, "rb") if fname.endswith(".gz") else open(fname, "rt")
+    if not isinstance(path, Path):
+        path = Path(path)
+
+
+    # Print error if path does not exist
+    if not path.exists():
+        utils.stop(f"file not found: {path}")
+
+    stream = gzip.open(path, "rb") if path.name.endswith(".gz") else open(path, "rt")
     with stream as fp:
         text = fp.read().decode('utf-8')
         data = json.loads(text)
@@ -386,15 +386,17 @@ def load_json(fname):
 
 
 @utils.timer
-def save_json(data, fname):
-    stream = gzip.open(fname, "wb") if fname.endswith(".gz") else open(fname, "wb")
+def save_json(data, path):
+    if not isinstance(path, Path):
+        path = Path(path)
+    stream = gzip.open(path, "wb") if path.name.endswith(".gz") else open(path, "wb")
     with stream as fp:
         text = json.dumps(data, indent=4)
         fp.write(text.encode('utf-8'))
 
 
 @utils.timer
-def compute_graph_measures(idx):
+def fill_graph(idx):
     """
     Fills the index with additional information
     """
@@ -431,8 +433,6 @@ def compute_graph_measures(idx):
 
     return obo
 
-
-@utils.memoize
 def load_index(fname):
     idx = load_json(fname)
     return idx
@@ -444,8 +444,56 @@ def load_graph(fname):
     graph = build_graph(idx)
     return idx, graph
 
+def stats(idx=None):
+    if isinstance(idx, str):
+        utils.stop("index must be an object not string")
+    map_count, sym_count, go_count = idx_stats(idx)
+    msg = f"idx: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms"
+    utils.info(msg)
+    return map_count, sym_count, go_count
 
-def run(cnf=None, obo_fname=None, gaf_fname=None):
+def idx_stats(idx):
+
+    go2sym = idx[GO2SYM]
+    sym2go = idx[SYM2GO]
+
+    map_count = 0
+    for value in go2sym.values():
+        map_count += len(list(set(value)))
+    sym_count = len(sym2go)
+    go_count = len(go2sym)
+
+    return map_count, sym_count, go_count
+
+def build_index(obo_fname, gaf_fname, idx_fname):
+    """
+    Builds an index from an OBO and GAF file.
+    """
+
+    stream = utils.get_stream(obo_fname)
+
+    obo = parse_obo(stream)
+    gaf = parse_gaf(gaf_fname)
+
+    # Fill in annotation counts
+    for node_id in obo[OBO_KEY]:
+        values = gaf[GO2SYM].get(node_id, [])
+        obo[OBO_KEY][node_id][ANNO_COUNT] = len(values)
+        obo[OBO_KEY][node_id][ANNO_TOTAL] = 0
+
+    idx = dict(obo)
+    idx.update(gaf)
+
+    fill_graph(idx=idx)
+
+    save_json(idx, idx_fname)
+
+    idx_stats(idx)
+
+    stats(idx=idx)
+
+
+def runme(cnf=None, obo_fname=None, gaf_fname=None):
     res = resources.init(cnf)
     obo_fname = obo_fname or res.OBO_FILE
     gaf_fname = gaf_fname or res.GAF_FILE
@@ -455,29 +503,12 @@ def run(cnf=None, obo_fname=None, gaf_fname=None):
     idx_json = "../../tmp/index.json.gz"
 
     if 0:
-        stream = utils.get_stream(obo_fname)
-
-        obo = parse_obo(stream)
-        gaf = parse_gaf(gaf_fname)
-
-        # Fill in annotation counts
-        for node_id in obo[OBO_KEY]:
-            values = gaf[GO2SYM].get(node_id, [])
-            obo[OBO_KEY][node_id][ANNO_COUNT] = len(values)
-            obo[OBO_KEY][node_id][ANNO_TOTAL] = 0
-
-        idx = dict(obo)
-        idx.update(gaf)
-
-        compute_graph_measures(idx=idx)
-
-        save_json(idx, idx_json)
+        build_index(obo_fname, gaf_fname, idx_json)
 
     idx, graph = load_graph(idx_json)
 
-    idx, graph = load_graph(idx_json)
 
-    tree, status = make_subgraph(idx=idx, graph=graph)
+    tree, status = subgraph(idx=idx, graph=graph)
 
     annot = annotate(tree, status)
 
@@ -490,27 +521,41 @@ def run(cnf=None, obo_fname=None, gaf_fname=None):
 
 def annotate(tree, status):
 
+    sym_valid = status[SYM_VALID]
+    sym_size = len(sym_valid)
+
     inp_nodes = filter(lambda x: tree.nodes[x][INP_FLAG], tree.nodes())
 
+    stream = io.StringIO()
+    writer = csv.DictWriter(stream, fieldnames=["count", "node_id", "name", "source", "size", "ann_count", "ann_total"])
+    writer.writeheader()
     for node_id in inp_nodes:
         node = tree.nodes[node_id]
         name = node["name"]
-        ann_count = human_readable(node[ANNO_COUNT])
-        ann_total = human_readable(node[ANNO_TOTAL])
-        print(node_id, name)
+        source = "|".join(node[INP_SYM])
 
+        count = node[INP_LEN]
+        ann_count = node[ANNO_COUNT]
+        ann_total = node[ANNO_TOTAL]
+        data = dict(count=count, node_id=node_id, name=name, source=source, size=sym_size, ann_count=ann_count, ann_total=ann_total)
+        writer.writerow(data)
 
-    sys.exit()
+    text = stream.getvalue()
 
-def save_graph(pgraph, fname="../../output.pdf", imgsize=2048):
+    return text
+
+def save_graph(pgraph, fname=None, imgsize=2048):
     """
     Save
     """
+
     if fname is None:
         text = pgraph.to_string()
         return text
 
     pgraph.set_graph_defaults()
+
+    utils.info(f"fname: {fname}")
 
     if fname.endswith(".dot"):
         pgraph.write_raw(f"{fname}")
@@ -566,6 +611,49 @@ def pydot_graph(tree, status):
 
     return pg
 
+def run():
+    res = resources.init()
+
+    obo_fname = res.OBO_FILE
+    gaf_fname = res.GAF_FILE
+    idx_fname = res.INDEX_FILE
+
+    utils.info(f"obo: {obo_fname}")
+    utils.info(f"gaf: {gaf_fname}")
+    utils.info(f"idx: {idx_fname}")
+
+    # build_index(obo_fname=obo_fname, gaf_fname=gaf_fname, idx_fname=idx_fname)
+    idx, graph = load_graph(idx_fname)
+
+    # Print the statistics
+    stats(idx)
+
+    tgt = "GO:0035639 GO:0097159  ".split()
+
+    # Select the subgraph
+    tree, status = subgraph(tgt=tgt, idx=idx, graph=graph)
+
+    # Print the annotations
+    stream = annotate(tree=tree, status=status)
+
+
+    # Save the graph.
+    #ptree = pydot_graph(tree, status)
+
+    #save_graph(ptree, "../../output.pdf")
+
+
+    # tgt="GO:0035639 GO:0035639 GO:0097159  ".split()
+
+    # tgt = "GO:0035639 GO:0035639 GO:0043168 GO:0043168 GO:0043168 GO:0097159 GO:0005488  GO:1901265  GO:0035639  GO:0035639".split()
+
+    # tgt = "GO:1901265 GO:0097159".split()
+
+    # tgt = tgt or "ABTB3 BCAS4 C3P1 GRTP1 SPOP ABCA2 PSMD3 GO:0046983 GO:1901265".split()
+
+    #print_stats(idx_fname=idx_fname)
+
+
 
 if __name__ == '__main__':
-    cli.run()
+    run()

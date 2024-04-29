@@ -38,23 +38,23 @@ def init_logger(logger):
 
 
 def memoize(func):
-    cache = {}
+    storage = {}
 
-    def wrapper(*args, **kwargs):
+    def cache(*args, **kwargs):
         # Create a key based on the function's arguments
         key = (args, tuple(kwargs.items()))
 
         # If the result is already in the cache, return it
-        if key in cache:
-            print("# Cache hit")
-            return cache[key]
+        if key in storage:
+            debug("cache hit")
+            return storage[key]
 
         # Call the function and store the result in the cache
         result = func(*args, **kwargs)
-        cache[key] = result
+        storage[key] = result
         return result
 
-    return wrapper
+    return cache
 
 # Set the log level
 def verbosity(flag=False):

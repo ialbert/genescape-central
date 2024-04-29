@@ -1,218 +1,113 @@
-import click
-from pathlib import Path
 from genescape import __version__
 from genescape import resources, utils
-import shiny
-import os
+from genescape import graph
+import click, csv
+import sys, json
+from pathlib import Path
+
+# Valid choices for root
+ROOT_CHOICES = [utils.NS_BP, utils.NS_MF, utils.NS_CC, utils.NS_ALL]
 
 
 HELP  = f"Gene function visualization (v{__version__})."
 
 @click.group(help=HELP)
-def cli():
+def run():
     pass
 
+def parse_genes(fname):
+    if not fname:
+        utils.stop("no input file provided.")
 
-ROOT_CHOICES = [utils.NS_BP, utils.NS_MF, utils.NS_CC, utils.NS_ALL]
+    fname = Path(fname)
 
+    if not fname.exists():
+        utils.info(f"file not found: {fname}")
 
-@cli.command()
+    stream = open(fname, "rt")
+    stream = map(lambda x: x.strip(), stream)
+    stream = filter(lambda x: x, stream)
+    stream = filter(lambda x: not x.startswith("#"), stream)
+    reader = csv.reader(stream)
+    reader = map(lambda x: x[0], reader)
+    reader = list(reader)
+
+    if len(reader) < 1:
+        utils.stop("no genes found in the input file.")
+
+    utils.debug(f"input size: {len(reader)}")
+
+    return reader
+
+@run.command()
 @click.argument("fname", default=None, required=False)
-@click.option("-o", "--out", "out", metavar="TEXT", default="genescape.pdf", help="output graph file")
-@click.option(
-    "-i",
-    "--index",
-    "index",
-    metavar="FILE",
-    help="OBO index file",
-)
-@click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
-@click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal count for a GO term (1)")
-@click.option(
-    '-r',
-    '--root',
-    type=click.Choice(ROOT_CHOICES, case_sensitive=False),
-    default=utils.NS_ALL,
-    help='Select a category: BP, MF, CC, or ALL.',
-)
-@click.option("-t", "--test", "test", is_flag=True, help="run with demo data")
-@click.option("-v", "verbose", is_flag=True, help="verbose output")
-@click.help_option("-h", "--help")
-def tree(fname, out=None, index=None, root=utils.NS_ALL, match=None, count=1, verbose=False, test=False):
-    """
-    Draws a tree from GO terms.
-    """
-    # Import the tree module.
-    from genescape import tree
-
-    # Get the configuration file
-    cnf = resources.get_config()
-
-    # Initialize the resources.
-    res = resources.init(cnf)
-
-    # Get the index
-    index = resources.get_index(index=index, res=res)
-
-    # Set the verbosity level.
-    utils.verbosity(verbose)
-
-    # Override the fname if demo is set.
-    if test:
-        fname = res.TEST_GENES
-        utils.info(f"input: {fname}")
-
-    # Run the tree command.
-    graph, ann = tree.parse_input(inp=fname, index=index, pattern=match, mincount=count, root=root)
-
-    # Write the tree to a file.
-    tree.write_tree(graph, ann, out=out)
-
-
-@cli.command()
-@click.argument("fname", default=None, required=False)
-@click.option("-i", "--index", "index", metavar="TEXT", help="OBO index file.")
-@click.option("-o", "--out", "out", metavar="TEXT", default="", help="output graph file")
+@click.option("-i", "--idx", "idx_fname", metavar="TEXT", help="Genescape index file.")
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
 @click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal count for a GO term (1)")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
-@click.option(
-    '-r',
-    '--root',
+@click.option( '-r', '--root',
     type=click.Choice(ROOT_CHOICES, case_sensitive=False),
     default=utils.NS_ALL,
     help='Select a category: BP, MF, CC, or ALL.',
 )
-@click.option("--csv", "csvout", is_flag=True, help="Produce CSV output instead of JSON")
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, index=None, root=utils.NS_ALL, verbose=False, test=False, csvout=False, match="", count=1, out=''):
+def annotate(fname, idx_fname=None, root=utils.NS_ALL, verbose=False, test=False, csvout=False, match="", count=1, out=''):
     """
-    Generates the GO terms for a list of genes.
+    Generates GO terms annotations for a list of genes.
     """
-    from genescape import annot
-
-    # Get the configuration file
-    cnf = resources.get_config()
-
-    # Initialize the resources.
-    res = resources.init(cnf)
-
-    # Get the index
-    index = resources.get_index(index=index, res=res)
+    res = resources.init()
+    idx_fname = idx_fname or res.INDEX_FILE
 
     if test:
         fname = res.TEST_GENES
         utils.info(f"input: {fname}")
 
-    # Set the verbosity level.
-    utils.verbosity(verbose)
+    targets = parse_genes(fname)
 
-    # Open the input file
-    stream = utils.get_stream(inp=fname)
+    utils.info(f"idx: {idx_fname}")
 
-    # Parse the input into a list
-    data = utils.parse_terms(stream)
+    idx, tree = graph.load_graph(idx_fname)
 
-    # Print the input parameters.
-    utils.debug(f"params c={count} m={match}")
+    graph.stats(idx)
 
-    # Get the annotation output
-    text = annot.run(data=data, index=index, pattern=match, mincount=count, csvout=csvout, root=root)
+    subtree, status = graph.subgraph(tgt=targets, idx=idx, graph=tree)
 
-    # How to deal with outputs.
-    if not out:
+    text = graph.annotate(tree=subtree, status=status)
+
+    print(text)
+
+
+@run.command()
+@click.option("-b", "--obo", "obo_fname", help="Input OBO file (go-basic.obo)")
+@click.option("-g", "--gaf", "gaf_fname", help="Input GAF file (goa_human.gaf.gz)")
+@click.option("-i", "--idx", "idx_fname", default="genescape.json.gz", help="Output index file (genescape.json.gz)")
+@click.option("-s", "--stats", "stats", is_flag=True, help="Print the index stats")
+@click.option("-d", "--dump", "dump", is_flag=True, help="Print the index file to the screen")
+@click.help_option("-h", "--help")
+def build(idx_fname=None, obo_fname=None, gaf_fname=None, stats=False, dump=False):
+    """
+    Builds index file from an OBO and GAF file.
+    """
+    res = resources.init()
+    obo_fname = obo_fname or res.OBO_FILE
+    gaf_fname = gaf_fname or res.GAF_FILE
+    utils.info(f"idx: {idx_fname}")
+
+    if stats:
+        idx = graph.load_index(idx_fname)
+        graph.stats(idx)
+    elif dump:
+        idx = graph.load_index(idx_fname)
+        text = json.dumps(idx, indent=4)
         print(text)
     else:
-        with open(out, "wt",  newline='') as fp:
-            fp.write(text)
+        utils.info(f"obo: {obo_fname}")
+        utils.info(f"gaf: {gaf_fname}")
+        graph.build_index(obo_fname=obo_fname, gaf_fname=gaf_fname, idx_fname=idx_fname)
+        utils.info(f"idx: {idx_fname}")
 
-
-@cli.command()
-@click.option("-b", "--obo", "obo", help="Input OBO file (go-basic.obo)")
-@click.option("-g", "--gaf", "gaf", help="Input GAF file (goa_human.gaf.gz)")
-@click.option("-i", "--index", "index", default="genescape.json.gz", help="Output index file (genescape.json.gz)")
-@click.option("-s", "--synonms", "synon", is_flag=True, help="Include synonyms in the index")
-@click.option("-d", "--dump", "dump", is_flag=True, help="Print the index to stdout")
-@click.help_option("-h", "--help")
-def build(index=None, obo=None, gaf=None, synon=False, dump=False):
-    """
-    Builds a JSON index file from an OBO file.
-    """
-    # click.echo(f"Running with parameter {inp} {out}")
-    from genescape import build
-
-    # Get the configuration file
-    cnf = resources.get_config()
-
-    # Initialize the resources.
-    res = resources.init(cnf)
-
-    # Set the input files.
-    obo = Path(obo) if obo else res.OBO_FILE
-    gaf = Path(gaf) if gaf else res.GAF_FILE
-    ind = Path(index)
-
-    if dump:
-
-        @utils.timer
-        def load_index():
-            retval = resources.get_json(ind)
-            return retval
-
-        obj = load_index()
-        meta = obj[utils.IDX_META_DATA]
-        print(f"# {meta}")
-        sym2go = obj[utils.IDX_SYM2GO]
-        for key, value in sym2go.items():
-            row = [key] + value
-            print("\t".join(row))
-
-    else:
-        # Run the build command.
-        build.make_index(obo=obo, gaf=gaf, index=ind, with_synonyms=synon)
-
-
-host = "127.0.0.1"
-port= 8000,
-
-@cli.command()
-@click.option("--host", "host", default="127.0.0.1", help="hostname to bind to")
-@click.option("--port", "port", default=8000, type=int, help="port number")
-@click.option("-i", "--index", "index", help="Genescape index file")
-@click.option("--reload", "reload", is_flag=True, help="reload the server on changes")
-@click.option("--reset", "reset", is_flag=True, help="resets resources")
-@click.option("-c", "--conf", "conf", help="pass a TOML config file")
-@click.option("-v", "verbose", is_flag=True, help="Verbose output.")
-@click.help_option("-h", "--help")
-def web(index=None, host=None, port=None, reload=False, reset=False, conf=None, verbose=False):
-    """
-    Run the web interface.
-    """
-    from genescape.shiny.app import app
-
-    # TODO: Implement the configuration file.
-    if conf:
-        utils.stop(f"Config not yet implemented")
-
-    # Reset the resource directory
-    if reset:
-        resources.reset_dir()
-
-    # Set the verbosity level.
-    utils.verbosity(verbose)
-
-    # Insert the index into the environment.
-    if index:
-        if not os.path.isfile(index):
-            utils.stop(f"# Index not found: {index}")
-        key = "idx"
-        label = str(Path(index).name).split(".")[0].title()
-        os.environ['GENESCAPE_INDEX'] = f'{key}:{label}:{index}'
-
-    # Run the server.
-    shiny.run_app("genescape.shiny.app:app", host=host, port=port, reload=reload)
-
-
-if __name__ == "__main__":
-    cli()
+if __name__ =='__main__':
+    #sys.argv.extend( ("build", "--stats"))
+    sys.argv.extend([ "annotate", "--test" ] )
+    run()
