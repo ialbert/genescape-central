@@ -1,8 +1,11 @@
-import difflib
-import subprocess
+import difflib, sys
+import pytest, click
+from pathlib import Path
+from genescape import main
+from click.testing import CliRunner
 
-import pytest
-
+# Testing directory
+TEST_DIR = Path(__file__).parent
 
 def read_file(fname):
     """
@@ -12,66 +15,42 @@ def read_file(fname):
         data = fp.read()
     return data
 
+def show_diff(exp, gen, cmd):
+    diffs = difflib.unified_diff(exp.splitlines(), gen.splitlines())
+    diffs = list(diffs)[:10]
+    print("\n".join(diffs))
+    print(f"# Command: genescape {cmd}")
 
-def run_command(text):
-
-    # The command split
-    elems = text.split()
-
-    # The last element is the expected output file
-    cmd = elems[:-1]
-
-    # Execute the command
-    subprocess.run(cmd, check=True)
-
-    # Define the path to the expected and generated output files
-    fname_exp = elems[-1]
-    fname_gen = elems[-2]
-
-    # Read the contents of the expected and generated output files
-    exp = read_file(fname_exp)
-    gen = read_file(fname_gen)
-
-    if exp != gen:
-        diffs = difflib.unified_diff(exp.splitlines(), gen.splitlines(), fromfile=fname_exp, tofile=fname_gen)
-        diffs = list(diffs)[:10]
-        print("\n".join(diffs))
-        print(f"# Generated file: {fname_gen}")
-        print(f"# Expected file: {fname_exp}")
-        print(f"# Command: {' '.join(cmd)}")
-        msg = "# Content mismatch"
-        raise AssertionError(msg)
+    # Fix up the command to show the fix
+    fix = cmd.replace("/out/", "/files/")
+    print(f"# Replace: genescape {fix}")
 
 
-def test_tree_hs_genes1():
-    cmd = "genescape tree test/files/hs_genes1.txt -o test/out/hs_genes1.tree.dot test/files/hs_genes1.tree.dot"
-    run_command(cmd)
+@pytest.mark.parametrize("inp_name, out_name, cmd", [
+    ("test_genes.txt", "test_genes.csv", "annotate"),
+    ("hs_genes1.txt", "hs_genes1.csv", "annotate"),
+])
+def test_annotate(inp_name, out_name, cmd):
 
+    inp_path = Path("test/files") / inp_name
+    exp_path = Path("test/files") / out_name
+    gen_path = Path("test/out") / out_name
 
-def test_tree_hs_genes2():
-    cmd = "genescape tree test/files/hs_genes2.txt -o test/out/hs_genes2.tree.dot test/files/hs_genes2.tree.dot"
-    run_command(cmd)
+    full = f"{cmd} -o {gen_path} {inp_path}"
 
+    runner = CliRunner()
 
-def test_annotate_hs_genes1_json():
-    cmd = "genescape annotate test/files/hs_genes1.txt -o test/out/hs_genes1.annot.json test/files/hs_genes1.annot.json"
-    run_command(cmd)
+    res = runner.invoke(main.run, full.split())
 
+    # Check that the command completed correctly
+    assert res.exit_code == 0
 
-def test_annotate_hs_genes2_json():
-    cmd = "genescape annotate test/files/hs_genes2.txt -o test/out/hs_genes2.annot.json test/files/hs_genes2.annot.json"
-    run_command(cmd)
+    exp_value = read_file(exp_path)
+    gen_value = read_file(gen_path)
 
-
-def test_annotate_hs_genes1_csv():
-    cmd = "genescape annotate test/files/hs_genes1.txt --csv -o test/out/hs_genes1.annot.csv test/files/hs_genes1.annot.csv"
-    run_command(cmd)
-
-
-def test_annotate_hs_genes2_csv():
-    cmd = "genescape annotate test/files/hs_genes2.txt --csv -o test/out/hs_genes2.annot.csv test/files/hs_genes2.annot.csv"
-    run_command(cmd)
-
+    if exp_value != gen_value:
+        show_diff(exp_value, gen_value, full)
+        raise AssertionError(f"content mismatch: {out_name}")
 
 if __name__ == "__main__":
-    pass
+    pytest.main([__file__, '--verbose'])

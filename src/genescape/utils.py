@@ -80,7 +80,6 @@ def stop(msg):
     logger.error(msg)
     sys.exit(1)
 
-
 # The keys in the data annotation object.
 STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "data", "code", "errors", "unknown_terms"
 
@@ -248,6 +247,30 @@ def get_goterms(graph):
     goterms = dict(goterms)
 
     return goterms
+
+def parse_genes(fname):
+    if not fname:
+        stop("no input file provided")
+
+    fname = Path(fname)
+
+    if not fname.exists():
+        info(f"file not found: {fname}")
+
+    stream = open(fname, "rt")
+    stream = map(lambda x: x.strip(), stream)
+    stream = filter(lambda x: x, stream)
+    stream = filter(lambda x: not x.startswith("#"), stream)
+    reader = csv.reader(stream)
+    reader = map(lambda x: x[0], reader)
+    reader = list(reader)
+
+    if len(reader) < 1:
+        stop("no genes found in the input file.")
+
+    debug(f"input size: {len(reader)}")
+
+    return reader
 
 
 def timer(func):

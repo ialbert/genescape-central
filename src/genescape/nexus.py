@@ -225,25 +225,25 @@ def parse_obo(stream):
     return data
 
 
-def subgraph(idx, graph, tgt, root=NS_ALL, mincount=1, pattern=''):
+def make_graph(idx, graph, targets, root=NS_ALL, mincount=1, pattern=''):
     # Better defaults
-    tgt = tgt or []
+    targets = targets or []
 
     # Inputs must be unique.
-    tgt = set(tgt)
+    targets = set(map(lambda x: x.upper(), targets))
 
     obo = idx[OBO_KEY]
     sym2go = idx[SYM2GO]
 
     # Symbols not found in the association file.
-    sym_miss = set(filter(lambda x: x not in sym2go and x not in obo, tgt))
+    sym_miss = set(filter(lambda x: x not in sym2go and x not in obo, targets))
 
     # Print notification on missing symbols.
     if sym_miss:
         utils.warn(f"Missing symbols: {sym_miss}")
 
     # Symbols found in the association file.
-    sym_valid = list(filter(lambda x: x in sym2go or x in obo, tgt))
+    sym_valid = list(filter(lambda x: x in sym2go or x in obo, targets))
 
     # A list of GO terms in the input list.
     goids = []
@@ -352,8 +352,55 @@ def subgraph(idx, graph, tgt, root=NS_ALL, mincount=1, pattern=''):
         GO_VALID: go_valid,
         GO_MISS: go_miss,
     }
+
+    utils.info(f"graph: {len(s_tree.nodes)} nodes and {len(s_tree.edges)} edges")
+
+
     return s_tree, status
 
+
+def make_pydot(tree, status):
+    # Pull the status information
+    sym_valid = status[SYM_VALID]
+
+    # Create the pydot graph.
+    pg = pydot.Dot("genescape", graph_type="digraph")
+    for goid in tree.nodes():
+        node = tree.nodes[goid]
+        name = node["name"]
+        out_degree = node[OUT_DEGREE]
+        is_input = node[INP_FLAG]
+        is_leaf = out_degree == 0
+
+        key = node[NAMESPACE]
+        fillcolor = utils.NAMESPACE_COLORS.get(key, utils.BG_COLOR)
+
+        node_id = fix_text(goid)
+        text = textwrap.fill(name, width=20)
+        ann_count = human_readable(node[ANNO_COUNT])
+        ann_total = human_readable(node[ANNO_TOTAL])
+        desc_count = human_readable(node[DESC_COUNT])
+        out_degree = node[OUT_DEGREE]
+        src_sym = node[INP_SYM]
+        src_tot = node[INP_LEN_TOT]
+
+        valid_len = len(sym_valid)
+        label = f"{goid}\n{text} [{ann_count}]"
+        if is_input:
+            fillcolor = utils.LEAF_COLOR if is_leaf else utils.INPUT_COLOR
+            label = f"{label}\n({src_tot}/{valid_len})"
+
+        label = fix_text(label)
+        pnode = pydot.Node(node_id, label=label, fillcolor=fillcolor, shape="box", style="filled")
+        pg.add_node(pnode)
+
+    for edge in tree.edges():
+        edge1 = fix_text(edge[0])
+        edge2 = fix_text(edge[1])
+        pedge = pydot.Edge(edge1, edge2)
+        pg.add_edge(pedge)
+
+    return pg
 
 def fix_text(text):
     return f'"{text}"'
@@ -450,7 +497,7 @@ def stats(idx=None):
     if isinstance(idx, str):
         utils.stop("index must be an object not string")
     map_count, sym_count, go_count = idx_stats(idx)
-    msg = f"idx: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms"
+    msg = f"index: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms"
     utils.info(msg)
     return map_count, sym_count, go_count
 
@@ -495,32 +542,6 @@ def build_index(obo_fname, gaf_fname, idx_fname):
 
     stats(idx=idx)
 
-
-def runme(cnf=None, obo_fname=None, gaf_fname=None):
-    res = resources.init(cnf)
-    obo_fname = obo_fname or res.OBO_FILE
-    gaf_fname = gaf_fname or res.GAF_FILE
-
-    obo_json = "../../tmp/obo.json.gz"
-    gaf_json = "../../tmp/gaf.json.gz"
-    idx_json = "../../tmp/index.json.gz"
-
-    if 0:
-        build_index(obo_fname, gaf_fname, idx_json)
-
-    idx, graph = load_graph(idx_json)
-
-    tree, status = subgraph(idx=idx, graph=graph)
-
-    annot = annotate(tree, status)
-
-    print(status)
-
-    pg = pydot_graph(tree, status)
-
-    save_graph(pg, fname="../../output.pdf", imgsize=2048)
-
-
 def annotate(tree, status):
     sym_valid = status[SYM_VALID]
     sym_size = len(sym_valid)
@@ -533,8 +554,7 @@ def annotate(tree, status):
     for node_id in inp_nodes:
         node = tree.nodes[node_id]
         name = node["name"]
-        source = "|".join(node[INP_SYM])
-
+        source = "|".join(sorted(node[INP_SYM]))
         count = node[INP_LEN]
         ann_count = node[ANNO_COUNT]
         ann_total = node[ANNO_TOTAL]
@@ -547,18 +567,13 @@ def annotate(tree, status):
     return text
 
 
-def save_graph(pgraph, fname=None, imgsize=2048):
+def save_graph(pgraph, fname, imgsize=2048):
     """
-    Save
+    Saves the pydot graph to a file
     """
-
-    if fname is None:
-        text = pgraph.to_string()
-        return text
+    utils.info(f"file: {fname}")
 
     pgraph.set_graph_defaults()
-
-    utils.info(f"fname: {fname}")
 
     if fname.endswith(".dot"):
         pgraph.write_raw(f"{fname}")
@@ -571,60 +586,12 @@ def save_graph(pgraph, fname=None, imgsize=2048):
         utils.warn(f"Unknown output format: {fname}")
 
 
-def pydot_graph(tree, status):
-    # Pull the status information
-    sym_valid = status[SYM_VALID]
+def run(idx_fname, genes, root=utils.NS_ALL,  pattern="", mincount=1):
+    """
+    Creates a tree and an annotation
+    """
 
-    # Create the pydot graph.
-    pg = pydot.Dot("genescape", graph_type="digraph")
-    for goid in tree.nodes():
-        node = tree.nodes[goid]
-        name = node["name"]
-        out_degree = node[OUT_DEGREE]
-        is_input = node[INP_FLAG]
-        is_leaf = out_degree == 0
-
-        key = node[NAMESPACE]
-        fillcolor = utils.NAMESPACE_COLORS.get(key, utils.BG_COLOR)
-
-        node_id = fix_text(goid)
-        text = textwrap.fill(name, width=20)
-        ann_count = human_readable(node[ANNO_COUNT])
-        ann_total = human_readable(node[ANNO_TOTAL])
-        desc_count = human_readable(node[DESC_COUNT])
-        out_degree = node[OUT_DEGREE]
-        src_sym = node[INP_SYM]
-        src_tot = node[INP_LEN_TOT]
-
-        valid_len = len(sym_valid)
-        label = f"{goid}\n{text} [{ann_count}]"
-        if is_input:
-            fillcolor = utils.LEAF_COLOR if is_leaf else utils.INPUT_COLOR
-            label = f"{label}\n({src_tot}/{valid_len})"
-
-        label = fix_text(label)
-        pnode = pydot.Node(node_id, label=label, fillcolor=fillcolor, shape="box", style="filled")
-        pg.add_node(pnode)
-
-    for edge in tree.edges():
-        edge1 = fix_text(edge[0])
-        edge2 = fix_text(edge[1])
-        pedge = pydot.Edge(edge1, edge2)
-        pg.add_edge(pedge)
-
-    return pg
-
-
-def run():
-    res = resources.init()
-
-    obo_fname = res.OBO_FILE
-    gaf_fname = res.GAF_FILE
-    idx_fname = res.INDEX_FILE
-
-    utils.info(f"obo: {obo_fname}")
-    utils.info(f"gaf: {gaf_fname}")
-    utils.info(f"idx: {idx_fname}")
+    utils.info(f"index: {idx_fname}")
 
     # build_index(obo_fname=obo_fname, gaf_fname=gaf_fname, idx_fname=idx_fname)
     idx, graph = load_graph(idx_fname)
@@ -632,29 +599,35 @@ def run():
     # Print the statistics
     stats(idx)
 
-    tgt = "GO:0035639 GO:0097159  ".split()
-
     # Select the subgraph
-    tree, status = subgraph(tgt=tgt, idx=idx, graph=graph)
+    tree, status = make_graph(targets=genes, idx=idx, graph=graph, root=root, mincount=mincount, pattern=pattern)
 
-    # Print the annotations
-    stream = annotate(tree=tree, status=status)
 
-    # Save the graph.
-    # ptree = pydot_graph(tree, status)
+    # Generate the annotations.
+    ann = annotate(tree=tree, status=status)
 
-    # save_graph(ptree, "../../output.pdf")
+    # Transform the tree into a pydot graph
+    pd = make_pydot(tree, status)
 
-    # tgt="GO:0035639 GO:0035639 GO:0097159  ".split()
+    return pd, tree, ann
 
-    # tgt = "GO:0035639 GO:0035639 GO:0043168 GO:0043168 GO:0043168 GO:0097159 GO:0005488  GO:1901265  GO:0035639  GO:0035639".split()
-
-    # tgt = "GO:1901265 GO:0097159".split()
-
-    # tgt = tgt or "ABTB3 BCAS4 C3P1 GRTP1 SPOP ABCA2 PSMD3 GO:0046983 GO:1901265".split()
-
-    # print_stats(idx_fname=idx_fname)
 
 
 if __name__ == '__main__':
-    run()
+    res = resources.init()
+
+    genes = "GO:0035639 GO:0097159  ".split()
+
+    obo_fname = res.OBO_FILE
+    gaf_fname = res.GAF_FILE
+    idx_fname = res.INDEX_FILE
+
+    pattern = ""
+    mincount = 1
+    root = utils.NS_ALL
+
+    pd, tree, ann = run(genes=genes, idx_fname=idx_fname,  root=root, pattern=pattern, mincount=mincount)
+
+    save_graph(pd, fname="output.pdf", imgsize=2048)
+
+    print(ann)
