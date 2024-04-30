@@ -1,0 +1,9 @@
+count,name,node_id,source,size,ann_count,ann_total
+1,endopeptidase,GO:0004866,C3P1,4,39,201
+1,GTPase,GO:0005096,GRTP1,4,274,274
+1,extracellular,GO:0005615,C3P1,4,1668,1668
+1,cytoplasm,GO:0005737,BCAS4,4,5078,5254
+1,membrane,GO:0016020,ABTB3,4,3238,8534
+1,BLOC-1,GO:0031083,BCAS4,4,15,15
+1,protein,GO:0046982,ABTB3,4,313,313
+1,activation,GO:0090630,GRTP1,4,100,100

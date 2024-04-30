@@ -1,0 +1,2509 @@
+digraph genescape {
+"GO:0000137" [fillcolor="#17DA15", label="GO:0000137
+Golgi [28]
+(1/5)", shape=box, style=filled];
+"GO:0000139" [fillcolor="#17DA15", label="GO:0000139
+Golgi [670]
+(1/5)", shape=box, style=filled];
+"GO:0000166" [fillcolor="#A2CDF6", label="GO:0000166
+nucleotide [62]", shape=box, style=filled];
+"GO:0000280" [fillcolor="#F6CBA2", label="GO:0000280
+nuclear [0]", shape=box, style=filled];
+"GO:0000302" [fillcolor="#F6CBA2", label="GO:0000302
+response [14]", shape=box, style=filled];
+"GO:0000786" [fillcolor="#A3F6A2", label="GO:0000786
+nucleosome [102]
+(1/5)", shape=box, style=filled];
+"GO:0001503" [fillcolor="#F6CBA2", label="GO:0001503
+ossification [76]", shape=box, style=filled];
+"GO:0001523" [fillcolor="#F6CBA2", label="GO:0001523
+retinoid [28]", shape=box, style=filled];
+"GO:0001558" [fillcolor="#F6CBA2", label="GO:0001558
+regulation [74]", shape=box, style=filled];
+"GO:0001568" [fillcolor="#A3F6A2", label="GO:0001568
+blood [45]
+(1/5)", shape=box, style=filled];
+"GO:0001654" [fillcolor="#F6CBA2", label="GO:0001654
+eye [44]", shape=box, style=filled];
+"GO:0001666" [fillcolor="#A3F6A2", label="GO:0001666
+response [168]
+(1/5)", shape=box, style=filled];
+"GO:0001676" [fillcolor="#A3F6A2", label="GO:0001676
+long-chain [27]
+(1/5)", shape=box, style=filled];
+"GO:0001727" [fillcolor="#A2CDF6", label="GO:0001727
+lipid [1]", shape=box, style=filled];
+"GO:0001786" [fillcolor="#17DA15", label="GO:0001786
+phosphatidylserine [70]
+(1/5)", shape=box, style=filled];
+"GO:0001817" [fillcolor="#F6CBA2", label="GO:0001817
+regulation [66]", shape=box, style=filled];
+"GO:0001819" [fillcolor="#F6CBA2", label="GO:0001819
+positive [63]", shape=box, style=filled];
+"GO:0001932" [fillcolor="#A3F6A2", label="GO:0001932
+regulation [47]
+(1/5)", shape=box, style=filled];
+"GO:0001958" [fillcolor="#17DA15", label="GO:0001958
+endochondral [31]
+(1/5)", shape=box, style=filled];
+"GO:0002063" [fillcolor="#F6CBA2", label="GO:0002063
+chondrocyte [17]", shape=box, style=filled];
+"GO:0002138" [fillcolor="#F6CBA2", label="GO:0002138
+retinoic [4]", shape=box, style=filled];
+"GO:0002178" [fillcolor="#F5A2F6", label="GO:0002178
+palmitoyltransferase [3]", shape=box, style=filled];
+"GO:0002237" [fillcolor="#F6CBA2", label="GO:0002237
+response [8]", shape=box, style=filled];
+"GO:0002244" [fillcolor="#A3F6A2", label="GO:0002244
+hematopoietic [69]
+(1/5)", shape=box, style=filled];
+"GO:0002682" [fillcolor="#F6CBA2", label="GO:0002682
+regulation [41]", shape=box, style=filled];
+"GO:0002684" [fillcolor="#F6CBA2", label="GO:0002684
+positive [1]", shape=box, style=filled];
+"GO:0002685" [fillcolor="#A3F6A2", label="GO:0002685
+regulation [3]
+(1/5)", shape=box, style=filled];
+"GO:0002694" [fillcolor="#F6CBA2", label="GO:0002694
+regulation [0]", shape=box, style=filled];
+"GO:0002696" [fillcolor="#F6CBA2", label="GO:0002696
+positive [0]", shape=box, style=filled];
+"GO:0002697" [fillcolor="#F6CBA2", label="GO:0002697
+regulation [0]", shape=box, style=filled];
+"GO:0002699" [fillcolor="#F6CBA2", label="GO:0002699
+positive [0]", shape=box, style=filled];
+"GO:0002700" [fillcolor="#F6CBA2", label="GO:0002700
+regulation [0]", shape=box, style=filled];
+"GO:0002702" [fillcolor="#F6CBA2", label="GO:0002702
+positive [0]", shape=box, style=filled];
+"GO:0002703" [fillcolor="#F6CBA2", label="GO:0002703
+regulation [0]", shape=box, style=filled];
+"GO:0002718" [fillcolor="#F6CBA2", label="GO:0002718
+regulation [3]", shape=box, style=filled];
+"GO:0002720" [fillcolor="#A3F6A2", label="GO:0002720
+positive [15]
+(1/5)", shape=box, style=filled];
+"GO:0002790" [fillcolor="#F6CBA2", label="GO:0002790
+peptide [3]", shape=box, style=filled];
+"GO:0002886" [fillcolor="#F6CBA2", label="GO:0002886
+regulation [0]", shape=box, style=filled];
+"GO:0002933" [fillcolor="#17DA15", label="GO:0002933
+lipid [7]
+(1/5)", shape=box, style=filled];
+"GO:0003376" [fillcolor="#17DA15", label="GO:0003376
+sphingosine-1-
+phosphate [15]
+(1/5)", shape=box, style=filled];
+"GO:0003433" [fillcolor="#A3F6A2", label="GO:0003433
+chondrocyte [2]
+(1/5)", shape=box, style=filled];
+"GO:0003674" [fillcolor="#A2CDF6", label="GO:0003674
+molecular_function [715]", shape=box, style=filled];
+"GO:0003824" [fillcolor="#A2CDF6", label="GO:0003824
+catalytic [19]", shape=box, style=filled];
+"GO:0004497" [fillcolor="#A3F6A2", label="GO:0004497
+monooxygenase [45]
+(8/5)", shape=box, style=filled];
+"GO:0004620" [fillcolor="#A2CDF6", label="GO:0004620
+phospholipase [16]", shape=box, style=filled];
+"GO:0004758" [fillcolor="#17DA15", label="GO:0004758
+serine [5]
+(1/5)", shape=box, style=filled];
+"GO:0004767" [fillcolor="#A3F6A2", label="GO:0004767
+sphingomyelin [7]
+(2/5)", shape=box, style=filled];
+"GO:0004888" [fillcolor="#A2CDF6", label="GO:0004888
+transmembrane [145]", shape=box, style=filled];
+"GO:0004930" [fillcolor="#A2CDF6", label="GO:0004930
+G [696]", shape=box, style=filled];
+"GO:0005488" [fillcolor="#A2CDF6", label="GO:0005488
+binding [0]", shape=box, style=filled];
+"GO:0005506" [fillcolor="#A3F6A2", label="GO:0005506
+iron [129]
+(1/5)", shape=box, style=filled];
+"GO:0005515" [fillcolor="#A3F6A2", label="GO:0005515
+protein [13K]
+(9/5)", shape=box, style=filled];
+"GO:0005524" [fillcolor="#17DA15", label="GO:0005524
+ATP [1479]
+(1/5)", shape=box, style=filled];
+"GO:0005537" [fillcolor="#17DA15", label="GO:0005537
+mannose [25]
+(1/5)", shape=box, style=filled];
+"GO:0005543" [fillcolor="#A2CDF6", label="GO:0005543
+phospholipid [117]", shape=box, style=filled];
+"GO:0005575" [fillcolor="#F5A2F6", label="GO:0005575
+cellular_component [415]", shape=box, style=filled];
+"GO:0005576" [fillcolor="#A3F6A2", label="GO:0005576
+extracellular [2K]
+(1/5)", shape=box, style=filled];
+"GO:0005634" [fillcolor="#A3F6A2", label="GO:0005634
+nucleus [6K]
+(1/5)", shape=box, style=filled];
+"GO:0005654" [fillcolor="#17DA15", label="GO:0005654
+nucleoplasm [4K]
+(1/5)", shape=box, style=filled];
+"GO:0005737" [fillcolor="#A3F6A2", label="GO:0005737
+cytoplasm [5K]
+(2/5)", shape=box, style=filled];
+"GO:0005739" [fillcolor="#17DA15", label="GO:0005739
+mitochondrion [1357]
+(1/5)", shape=box, style=filled];
+"GO:0005743" [fillcolor="#17DA15", label="GO:0005743
+mitochondrial [464]
+(2/5)", shape=box, style=filled];
+"GO:0005765" [fillcolor="#A3F6A2", label="GO:0005765
+lysosomal [372]
+(1/5)", shape=box, style=filled];
+"GO:0005774" [fillcolor="#F5A2F6", label="GO:0005774
+vacuolar [17]", shape=box, style=filled];
+"GO:0005783" [fillcolor="#A3F6A2", label="GO:0005783
+endoplasmic [1079]
+(1/5)", shape=box, style=filled];
+"GO:0005789" [fillcolor="#A3F6A2", label="GO:0005789
+endoplasmic [1096]
+(2/5)", shape=box, style=filled];
+"GO:0005829" [fillcolor="#A3F6A2", label="GO:0005829
+cytosol [5K]
+(1/5)", shape=box, style=filled];
+"GO:0005886" [fillcolor="#A3F6A2", label="GO:0005886
+plasma [5K]
+(1/5)", shape=box, style=filled];
+"GO:0006066" [fillcolor="#F6CBA2", label="GO:0006066
+alcohol [6]", shape=box, style=filled];
+"GO:0006082" [fillcolor="#F6CBA2", label="GO:0006082
+organic [7]", shape=box, style=filled];
+"GO:0006109" [fillcolor="#F6CBA2", label="GO:0006109
+regulation [0]", shape=box, style=filled];
+"GO:0006139" [fillcolor="#F6CBA2", label="GO:0006139
+nucleobase-
+containing [31]", shape=box, style=filled];
+"GO:0006140" [fillcolor="#F6CBA2", label="GO:0006140
+regulation [0]", shape=box, style=filled];
+"GO:0006259" [fillcolor="#F6CBA2", label="GO:0006259
+DNA [22]", shape=box, style=filled];
+"GO:0006325" [fillcolor="#F6CBA2", label="GO:0006325
+chromatin [161]", shape=box, style=filled];
+"GO:0006338" [fillcolor="#F6CBA2", label="GO:0006338
+chromatin [322]", shape=box, style=filled];
+"GO:0006629" [fillcolor="#F6CBA2", label="GO:0006629
+lipid [173]", shape=box, style=filled];
+"GO:0006631" [fillcolor="#A3F6A2", label="GO:0006631
+fatty [83]
+(2/5)", shape=box, style=filled];
+"GO:0006633" [fillcolor="#F6CBA2", label="GO:0006633
+fatty [41]", shape=box, style=filled];
+"GO:0006643" [fillcolor="#F6CBA2", label="GO:0006643
+membrane [2]", shape=box, style=filled];
+"GO:0006644" [fillcolor="#F6CBA2", label="GO:0006644
+phospholipid [50]", shape=box, style=filled];
+"GO:0006665" [fillcolor="#F6CBA2", label="GO:0006665
+sphingolipid [16]", shape=box, style=filled];
+"GO:0006667" [fillcolor="#F6CBA2", label="GO:0006667
+sphinganine [1]", shape=box, style=filled];
+"GO:0006668" [fillcolor="#F6CBA2", label="GO:0006668
+sphinganine-1-
+phosphate [1]", shape=box, style=filled];
+"GO:0006669" [fillcolor="#17DA15", label="GO:0006669
+sphinganine-1-
+phosphate [1]
+(1/5)", shape=box, style=filled];
+"GO:0006670" [fillcolor="#A3F6A2", label="GO:0006670
+sphingosine [9]
+(1/5)", shape=box, style=filled];
+"GO:0006672" [fillcolor="#A3F6A2", label="GO:0006672
+ceramide [23]
+(1/5)", shape=box, style=filled];
+"GO:0006684" [fillcolor="#A3F6A2", label="GO:0006684
+sphingomyelin [5]
+(2/5)", shape=box, style=filled];
+"GO:0006685" [fillcolor="#17DA15", label="GO:0006685
+sphingomyelin [6]
+(1/5)", shape=box, style=filled];
+"GO:0006686" [fillcolor="#17DA15", label="GO:0006686
+sphingomyelin [11]
+(1/5)", shape=box, style=filled];
+"GO:0006690" [fillcolor="#F6CBA2", label="GO:0006690
+icosanoid [9]", shape=box, style=filled];
+"GO:0006694" [fillcolor="#A3F6A2", label="GO:0006694
+steroid [25]
+(1/5)", shape=box, style=filled];
+"GO:0006720" [fillcolor="#F6CBA2", label="GO:0006720
+isoprenoid [3]", shape=box, style=filled];
+"GO:0006721" [fillcolor="#F6CBA2", label="GO:0006721
+terpenoid [0]", shape=box, style=filled];
+"GO:0006725" [fillcolor="#F6CBA2", label="GO:0006725
+cellular [0]", shape=box, style=filled];
+"GO:0006766" [fillcolor="#F6CBA2", label="GO:0006766
+vitamin [6]", shape=box, style=filled];
+"GO:0006775" [fillcolor="#F6CBA2", label="GO:0006775
+fat-soluble [0]", shape=box, style=filled];
+"GO:0006778" [fillcolor="#A3F6A2", label="GO:0006778
+porphyrin-containing [4]
+(1/5)", shape=box, style=filled];
+"GO:0006793" [fillcolor="#F6CBA2", label="GO:0006793
+phosphorus [0]", shape=box, style=filled];
+"GO:0006796" [fillcolor="#F6CBA2", label="GO:0006796
+phosphate-containing [17]", shape=box, style=filled];
+"GO:0006805" [fillcolor="#A3F6A2", label="GO:0006805
+xenobiotic [108]
+(1/5)", shape=box, style=filled];
+"GO:0006807" [fillcolor="#F6CBA2", label="GO:0006807
+nitrogen [4]", shape=box, style=filled];
+"GO:0006810" [fillcolor="#F6CBA2", label="GO:0006810
+transport [18]", shape=box, style=filled];
+"GO:0006950" [fillcolor="#F6CBA2", label="GO:0006950
+response [0]", shape=box, style=filled];
+"GO:0006979" [fillcolor="#F6CBA2", label="GO:0006979
+response [111]", shape=box, style=filled];
+"GO:0006996" [fillcolor="#F6CBA2", label="GO:0006996
+organelle [9]", shape=box, style=filled];
+"GO:0007088" [fillcolor="#F6CBA2", label="GO:0007088
+regulation [22]", shape=box, style=filled];
+"GO:0007165" [fillcolor="#F6CBA2", label="GO:0007165
+signal [1114]", shape=box, style=filled];
+"GO:0007166" [fillcolor="#F6CBA2", label="GO:0007166
+cell [292]", shape=box, style=filled];
+"GO:0007167" [fillcolor="#F6CBA2", label="GO:0007167
+enzyme-linked [9]", shape=box, style=filled];
+"GO:0007169" [fillcolor="#F6CBA2", label="GO:0007169
+transmembrane [105]", shape=box, style=filled];
+"GO:0007178" [fillcolor="#F6CBA2", label="GO:0007178
+transmembrane [11]", shape=box, style=filled];
+"GO:0007186" [fillcolor="#F6CBA2", label="GO:0007186
+G [938]", shape=box, style=filled];
+"GO:0007346" [fillcolor="#F6CBA2", label="GO:0007346
+regulation [65]", shape=box, style=filled];
+"GO:0007420" [fillcolor="#17DA15", label="GO:0007420
+brain [196]
+(1/5)", shape=box, style=filled];
+"GO:0007423" [fillcolor="#F6CBA2", label="GO:0007423
+sensory [20]", shape=box, style=filled];
+"GO:0007584" [fillcolor="#F6CBA2", label="GO:0007584
+response [57]", shape=box, style=filled];
+"GO:0008081" [fillcolor="#A3F6A2", label="GO:0008081
+phosphoric [14]
+(1/5)", shape=box, style=filled];
+"GO:0008150" [fillcolor="#F6CBA2", label="GO:0008150
+biological_process [564]", shape=box, style=filled];
+"GO:0008152" [fillcolor="#F6CBA2", label="GO:0008152
+metabolic [8]", shape=box, style=filled];
+"GO:0008202" [fillcolor="#A3F6A2", label="GO:0008202
+steroid [45]
+(2/5)", shape=box, style=filled];
+"GO:0008210" [fillcolor="#A3F6A2", label="GO:0008210
+estrogen [30]
+(1/5)", shape=box, style=filled];
+"GO:0008283" [fillcolor="#A3F6A2", label="GO:0008283
+cell [129]
+(1/5)", shape=box, style=filled];
+"GO:0008284" [fillcolor="#A3F6A2", label="GO:0008284
+positive [478]
+(2/5)", shape=box, style=filled];
+"GO:0008289" [fillcolor="#A2CDF6", label="GO:0008289
+lipid [150]", shape=box, style=filled];
+"GO:0008299" [fillcolor="#F6CBA2", label="GO:0008299
+isoprenoid [9]", shape=box, style=filled];
+"GO:0008391" [fillcolor="#A3F6A2", label="GO:0008391
+arachidonic [3]
+(1/5)", shape=box, style=filled];
+"GO:0008395" [fillcolor="#A2CDF6", label="GO:0008395
+steroid [12]", shape=box, style=filled];
+"GO:0008481" [fillcolor="#17DA15", label="GO:0008481
+sphinganine [2]
+(1/5)", shape=box, style=filled];
+"GO:0008610" [fillcolor="#F6CBA2", label="GO:0008610
+lipid [15]", shape=box, style=filled];
+"GO:0008643" [fillcolor="#F6CBA2", label="GO:0008643
+carbohydrate [22]", shape=box, style=filled];
+"GO:0008654" [fillcolor="#F6CBA2", label="GO:0008654
+phospholipid [24]", shape=box, style=filled];
+"GO:0009056" [fillcolor="#F6CBA2", label="GO:0009056
+catabolic [3]", shape=box, style=filled];
+"GO:0009058" [fillcolor="#F6CBA2", label="GO:0009058
+biosynthetic [15]", shape=box, style=filled];
+"GO:0009059" [fillcolor="#F6CBA2", label="GO:0009059
+macromolecule [3]", shape=box, style=filled];
+"GO:0009308" [fillcolor="#A3F6A2", label="GO:0009308
+amine [8]
+(1/5)", shape=box, style=filled];
+"GO:0009395" [fillcolor="#F6CBA2", label="GO:0009395
+phospholipid [14]", shape=box, style=filled];
+"GO:0009404" [fillcolor="#F6CBA2", label="GO:0009404
+toxin [6]", shape=box, style=filled];
+"GO:0009605" [fillcolor="#F6CBA2", label="GO:0009605
+response [0]", shape=box, style=filled];
+"GO:0009607" [fillcolor="#F6CBA2", label="GO:0009607
+response [0]", shape=box, style=filled];
+"GO:0009624" [fillcolor="#17DA15", label="GO:0009624
+response [7]
+(1/5)", shape=box, style=filled];
+"GO:0009628" [fillcolor="#F6CBA2", label="GO:0009628
+response [0]", shape=box, style=filled];
+"GO:0009635" [fillcolor="#17DA15", label="GO:0009635
+response [4]
+(1/5)", shape=box, style=filled];
+"GO:0009636" [fillcolor="#F6CBA2", label="GO:0009636
+response [75]", shape=box, style=filled];
+"GO:0009653" [fillcolor="#F6CBA2", label="GO:0009653
+anatomical [123]", shape=box, style=filled];
+"GO:0009692" [fillcolor="#A3F6A2", label="GO:0009692
+ethylene [1]
+(1/5)", shape=box, style=filled];
+"GO:0009698" [fillcolor="#F6CBA2", label="GO:0009698
+phenylpropanoid [0]", shape=box, style=filled];
+"GO:0009719" [fillcolor="#F6CBA2", label="GO:0009719
+response [0]", shape=box, style=filled];
+"GO:0009804" [fillcolor="#A3F6A2", label="GO:0009804
+coumarin [7]
+(1/5)", shape=box, style=filled];
+"GO:0009812" [fillcolor="#A3F6A2", label="GO:0009812
+flavonoid [5]
+(1/5)", shape=box, style=filled];
+"GO:0009887" [fillcolor="#F6CBA2", label="GO:0009887
+animal [108]", shape=box, style=filled];
+"GO:0009888" [fillcolor="#F6CBA2", label="GO:0009888
+tissue [9]", shape=box, style=filled];
+"GO:0009889" [fillcolor="#F6CBA2", label="GO:0009889
+regulation [0]", shape=box, style=filled];
+"GO:0009890" [fillcolor="#F6CBA2", label="GO:0009890
+negative [2]", shape=box, style=filled];
+"GO:0009891" [fillcolor="#F6CBA2", label="GO:0009891
+positive [0]", shape=box, style=filled];
+"GO:0009892" [fillcolor="#F6CBA2", label="GO:0009892
+negative [0]", shape=box, style=filled];
+"GO:0009893" [fillcolor="#F6CBA2", label="GO:0009893
+positive [1]", shape=box, style=filled];
+"GO:0009894" [fillcolor="#F6CBA2", label="GO:0009894
+regulation [0]", shape=box, style=filled];
+"GO:0009896" [fillcolor="#F6CBA2", label="GO:0009896
+positive [0]", shape=box, style=filled];
+"GO:0009914" [fillcolor="#F6CBA2", label="GO:0009914
+hormone [1]", shape=box, style=filled];
+"GO:0009966" [fillcolor="#F6CBA2", label="GO:0009966
+regulation [39]", shape=box, style=filled];
+"GO:0009967" [fillcolor="#F6CBA2", label="GO:0009967
+positive [10]", shape=box, style=filled];
+"GO:0009987" [fillcolor="#F6CBA2", label="GO:0009987
+cellular [0]", shape=box, style=filled];
+"GO:0009991" [fillcolor="#F6CBA2", label="GO:0009991
+response [4]", shape=box, style=filled];
+"GO:0010033" [fillcolor="#F6CBA2", label="GO:0010033
+response [25]", shape=box, style=filled];
+"GO:0010035" [fillcolor="#F6CBA2", label="GO:0010035
+response [14]", shape=box, style=filled];
+"GO:0010038" [fillcolor="#F6CBA2", label="GO:0010038
+response [10]", shape=box, style=filled];
+"GO:0010039" [fillcolor="#F6CBA2", label="GO:0010039
+response [15]", shape=box, style=filled];
+"GO:0010041" [fillcolor="#A3F6A2", label="GO:0010041
+response [3]
+(1/5)", shape=box, style=filled];
+"GO:0010155" [fillcolor="#F6CBA2", label="GO:0010155
+regulation [3]", shape=box, style=filled];
+"GO:0010243" [fillcolor="#F6CBA2", label="GO:0010243
+response [13]", shape=box, style=filled];
+"GO:0010468" [fillcolor="#F6CBA2", label="GO:0010468
+regulation [186]", shape=box, style=filled];
+"GO:0010506" [fillcolor="#F6CBA2", label="GO:0010506
+regulation [70]", shape=box, style=filled];
+"GO:0010508" [fillcolor="#F6CBA2", label="GO:0010508
+positive [81]", shape=box, style=filled];
+"GO:0010556" [fillcolor="#F6CBA2", label="GO:0010556
+regulation [0]", shape=box, style=filled];
+"GO:0010557" [fillcolor="#F6CBA2", label="GO:0010557
+positive [1]", shape=box, style=filled];
+"GO:0010558" [fillcolor="#F6CBA2", label="GO:0010558
+negative [0]", shape=box, style=filled];
+"GO:0010564" [fillcolor="#F6CBA2", label="GO:0010564
+regulation [14]", shape=box, style=filled];
+"GO:0010604" [fillcolor="#F6CBA2", label="GO:0010604
+positive [0]", shape=box, style=filled];
+"GO:0010605" [fillcolor="#F6CBA2", label="GO:0010605
+negative [0]", shape=box, style=filled];
+"GO:0010628" [fillcolor="#F6CBA2", label="GO:0010628
+positive [444]", shape=box, style=filled];
+"GO:0010638" [fillcolor="#F6CBA2", label="GO:0010638
+positive [4]", shape=box, style=filled];
+"GO:0010646" [fillcolor="#F6CBA2", label="GO:0010646
+regulation [0]", shape=box, style=filled];
+"GO:0010647" [fillcolor="#F6CBA2", label="GO:0010647
+positive [0]", shape=box, style=filled];
+"GO:0010817" [fillcolor="#F6CBA2", label="GO:0010817
+regulation [4]", shape=box, style=filled];
+"GO:0010959" [fillcolor="#F6CBA2", label="GO:0010959
+regulation [0]", shape=box, style=filled];
+"GO:0014070" [fillcolor="#F6CBA2", label="GO:0014070
+response [58]", shape=box, style=filled];
+"GO:0015774" [fillcolor="#A3F6A2", label="GO:0015774
+polysaccharide [1]
+(1/5)", shape=box, style=filled];
+"GO:0015833" [fillcolor="#F6CBA2", label="GO:0015833
+peptide [5]", shape=box, style=filled];
+"GO:0016020" [fillcolor="#A3F6A2", label="GO:0016020
+membrane [3K]
+(8/5)", shape=box, style=filled];
+"GO:0016042" [fillcolor="#F6CBA2", label="GO:0016042
+lipid [67]", shape=box, style=filled];
+"GO:0016043" [fillcolor="#F6CBA2", label="GO:0016043
+cellular [0]", shape=box, style=filled];
+"GO:0016053" [fillcolor="#F6CBA2", label="GO:0016053
+organic [0]", shape=box, style=filled];
+"GO:0016101" [fillcolor="#F6CBA2", label="GO:0016101
+diterpenoid [3]", shape=box, style=filled];
+"GO:0016102" [fillcolor="#F6CBA2", label="GO:0016102
+diterpenoid [0]", shape=box, style=filled];
+"GO:0016114" [fillcolor="#F6CBA2", label="GO:0016114
+terpenoid [0]", shape=box, style=filled];
+"GO:0016239" [fillcolor="#F6CBA2", label="GO:0016239
+positive [32]", shape=box, style=filled];
+"GO:0016241" [fillcolor="#F6CBA2", label="GO:0016241
+regulation [55]", shape=box, style=filled];
+"GO:0016298" [fillcolor="#A2CDF6", label="GO:0016298
+lipase [8]", shape=box, style=filled];
+"GO:0016301" [fillcolor="#A2CDF6", label="GO:0016301
+kinase [62]", shape=box, style=filled];
+"GO:0016310" [fillcolor="#A3F6A2", label="GO:0016310
+phosphorylation [295]
+(1/5)", shape=box, style=filled];
+"GO:0016408" [fillcolor="#A2CDF6", label="GO:0016408
+C-acyltransferase [0]", shape=box, style=filled];
+"GO:0016409" [fillcolor="#A2CDF6", label="GO:0016409
+palmitoyltransferase [19]", shape=box, style=filled];
+"GO:0016454" [fillcolor="#A2CDF6", label="GO:0016454
+C-
+palmitoyltransferase [0]", shape=box, style=filled];
+"GO:0016491" [fillcolor="#A3F6A2", label="GO:0016491
+oxidoreductase [85]
+(11/5)", shape=box, style=filled];
+"GO:0016679" [fillcolor="#A3F6A2", label="GO:0016679
+oxidoreductase [1]
+(1/5)", shape=box, style=filled];
+"GO:0016705" [fillcolor="#A2CDF6", label="GO:0016705
+oxidoreductase [9]", shape=box, style=filled];
+"GO:0016709" [fillcolor="#A2CDF6", label="GO:0016709
+oxidoreductase [10]", shape=box, style=filled];
+"GO:0016711" [fillcolor="#17DA15", label="GO:0016711
+flavonoid [1]
+(1/5)", shape=box, style=filled];
+"GO:0016712" [fillcolor="#A2CDF6", label="GO:0016712
+oxidoreductase [21]", shape=box, style=filled];
+"GO:0016740" [fillcolor="#A2CDF6", label="GO:0016740
+transferase [36]", shape=box, style=filled];
+"GO:0016746" [fillcolor="#A2CDF6", label="GO:0016746
+acyltransferase [24]", shape=box, style=filled];
+"GO:0016747" [fillcolor="#A2CDF6", label="GO:0016747
+acyltransferase [4]", shape=box, style=filled];
+"GO:0016772" [fillcolor="#A2CDF6", label="GO:0016772
+transferase [0]", shape=box, style=filled];
+"GO:0016773" [fillcolor="#A2CDF6", label="GO:0016773
+phosphotransferase [4]", shape=box, style=filled];
+"GO:0016787" [fillcolor="#A2CDF6", label="GO:0016787
+hydrolase [84]", shape=box, style=filled];
+"GO:0016788" [fillcolor="#A2CDF6", label="GO:0016788
+hydrolase [11]", shape=box, style=filled];
+"GO:0016829" [fillcolor="#A2CDF6", label="GO:0016829
+lyase [19]", shape=box, style=filled];
+"GO:0016835" [fillcolor="#A2CDF6", label="GO:0016835
+carbon-oxygen [0]", shape=box, style=filled];
+"GO:0016836" [fillcolor="#A2CDF6", label="GO:0016836
+hydro-lyase [8]", shape=box, style=filled];
+"GO:0017050" [fillcolor="#17DA15", label="GO:0017050
+D-erythro-
+sphingosine [2]
+(1/5)", shape=box, style=filled];
+"GO:0017059" [fillcolor="#A3F6A2", label="GO:0017059
+serine [5]
+(1/5)", shape=box, style=filled];
+"GO:0017076" [fillcolor="#A2CDF6", label="GO:0017076
+purine [2]", shape=box, style=filled];
+"GO:0017143" [fillcolor="#A3F6A2", label="GO:0017143
+insecticide [1]
+(1/5)", shape=box, style=filled];
+"GO:0017157" [fillcolor="#F6CBA2", label="GO:0017157
+regulation [31]", shape=box, style=filled];
+"GO:0018130" [fillcolor="#F6CBA2", label="GO:0018130
+heterocycle [0]", shape=box, style=filled];
+"GO:0018894" [fillcolor="#F6CBA2", label="GO:0018894
+dibenzo-p-dioxin [3]", shape=box, style=filled];
+"GO:0019216" [fillcolor="#F6CBA2", label="GO:0019216
+regulation [36]", shape=box, style=filled];
+"GO:0019219" [fillcolor="#F6CBA2", label="GO:0019219
+regulation [0]", shape=box, style=filled];
+"GO:0019220" [fillcolor="#F6CBA2", label="GO:0019220
+regulation [0]", shape=box, style=filled];
+"GO:0019222" [fillcolor="#F6CBA2", label="GO:0019222
+regulation [22]", shape=box, style=filled];
+"GO:0019341" [fillcolor="#17DA15", label="GO:0019341
+dibenzo-p-dioxin [1]
+(1/5)", shape=box, style=filled];
+"GO:0019369" [fillcolor="#F6CBA2", label="GO:0019369
+arachidonic [35]", shape=box, style=filled];
+"GO:0019373" [fillcolor="#17DA15", label="GO:0019373
+epoxygenase [18]
+(1/5)", shape=box, style=filled];
+"GO:0019438" [fillcolor="#F6CBA2", label="GO:0019438
+aromatic [0]", shape=box, style=filled];
+"GO:0019439" [fillcolor="#F6CBA2", label="GO:0019439
+aromatic [4]", shape=box, style=filled];
+"GO:0019637" [fillcolor="#F6CBA2", label="GO:0019637
+organophosphate [1]", shape=box, style=filled];
+"GO:0019748" [fillcolor="#F6CBA2", label="GO:0019748
+secondary [1]", shape=box, style=filled];
+"GO:0019751" [fillcolor="#F6CBA2", label="GO:0019751
+polyol [0]", shape=box, style=filled];
+"GO:0019752" [fillcolor="#F6CBA2", label="GO:0019752
+carboxylic [8]", shape=box, style=filled];
+"GO:0019825" [fillcolor="#17DA15", label="GO:0019825
+oxygen [32]
+(1/5)", shape=box, style=filled];
+"GO:0019842" [fillcolor="#A2CDF6", label="GO:0019842
+vitamin [3]", shape=box, style=filled];
+"GO:0019866" [fillcolor="#F5A2F6", label="GO:0019866
+organelle [1]", shape=box, style=filled];
+"GO:0019899" [fillcolor="#A3F6A2", label="GO:0019899
+enzyme [350]
+(2/5)", shape=box, style=filled];
+"GO:0020037" [fillcolor="#17DA15", label="GO:0020037
+heme [143]
+(1/5)", shape=box, style=filled];
+"GO:0022402" [fillcolor="#F6CBA2", label="GO:0022402
+cell [0]", shape=box, style=filled];
+"GO:0022414" [fillcolor="#F6CBA2", label="GO:0022414
+reproductive [5]", shape=box, style=filled];
+"GO:0022607" [fillcolor="#F6CBA2", label="GO:0022607
+cellular [1]", shape=box, style=filled];
+"GO:0022898" [fillcolor="#F6CBA2", label="GO:0022898
+regulation [7]", shape=box, style=filled];
+"GO:0023051" [fillcolor="#F6CBA2", label="GO:0023051
+regulation [4]", shape=box, style=filled];
+"GO:0023056" [fillcolor="#F6CBA2", label="GO:0023056
+positive [0]", shape=box, style=filled];
+"GO:0023061" [fillcolor="#F6CBA2", label="GO:0023061
+signal [1]", shape=box, style=filled];
+"GO:0030072" [fillcolor="#A3F6A2", label="GO:0030072
+peptide [6]
+(1/5)", shape=box, style=filled];
+"GO:0030148" [fillcolor="#A3F6A2", label="GO:0030148
+sphingolipid [52]
+(2/5)", shape=box, style=filled];
+"GO:0030149" [fillcolor="#F6CBA2", label="GO:0030149
+sphingolipid [5]", shape=box, style=filled];
+"GO:0030154" [fillcolor="#F6CBA2", label="GO:0030154
+cell [584]", shape=box, style=filled];
+"GO:0030170" [fillcolor="#17DA15", label="GO:0030170
+pyridoxal [55]
+(1/5)", shape=box, style=filled];
+"GO:0030198" [fillcolor="#F6CBA2", label="GO:0030198
+extracellular [155]", shape=box, style=filled];
+"GO:0030246" [fillcolor="#A2CDF6", label="GO:0030246
+carbohydrate [181]", shape=box, style=filled];
+"GO:0030258" [fillcolor="#F6CBA2", label="GO:0030258
+lipid [7]", shape=box, style=filled];
+"GO:0030282" [fillcolor="#A3F6A2", label="GO:0030282
+bone [55]
+(1/5)", shape=box, style=filled];
+"GO:0030308" [fillcolor="#A3F6A2", label="GO:0030308
+negative [117]
+(1/5)", shape=box, style=filled];
+"GO:0030334" [fillcolor="#F6CBA2", label="GO:0030334
+regulation [99]", shape=box, style=filled];
+"GO:0030509" [fillcolor="#17DA15", label="GO:0030509
+BMP [76]
+(1/5)", shape=box, style=filled];
+"GO:0030544" [fillcolor="#17DA15", label="GO:0030544
+Hsp70 [51]
+(1/5)", shape=box, style=filled];
+"GO:0030554" [fillcolor="#A2CDF6", label="GO:0030554
+adenyl [0]", shape=box, style=filled];
+"GO:0030808" [fillcolor="#F6CBA2", label="GO:0030808
+regulation [0]", shape=box, style=filled];
+"GO:0030855" [fillcolor="#F6CBA2", label="GO:0030855
+epithelial [96]", shape=box, style=filled];
+"GO:0031072" [fillcolor="#A2CDF6", label="GO:0031072
+heat [58]", shape=box, style=filled];
+"GO:0031090" [fillcolor="#F5A2F6", label="GO:0031090
+organelle [25]", shape=box, style=filled];
+"GO:0031211" [fillcolor="#F5A2F6", label="GO:0031211
+endoplasmic [0]", shape=box, style=filled];
+"GO:0031214" [fillcolor="#F6CBA2", label="GO:0031214
+biomineral [25]", shape=box, style=filled];
+"GO:0031267" [fillcolor="#17DA15", label="GO:0031267
+small [284]
+(1/5)", shape=box, style=filled];
+"GO:0031323" [fillcolor="#F6CBA2", label="GO:0031323
+regulation [0]", shape=box, style=filled];
+"GO:0031324" [fillcolor="#F6CBA2", label="GO:0031324
+negative [0]", shape=box, style=filled];
+"GO:0031325" [fillcolor="#F6CBA2", label="GO:0031325
+positive [0]", shape=box, style=filled];
+"GO:0031326" [fillcolor="#F6CBA2", label="GO:0031326
+regulation [0]", shape=box, style=filled];
+"GO:0031327" [fillcolor="#F6CBA2", label="GO:0031327
+negative [0]", shape=box, style=filled];
+"GO:0031328" [fillcolor="#F6CBA2", label="GO:0031328
+positive [3]", shape=box, style=filled];
+"GO:0031329" [fillcolor="#F6CBA2", label="GO:0031329
+regulation [0]", shape=box, style=filled];
+"GO:0031331" [fillcolor="#F6CBA2", label="GO:0031331
+positive [0]", shape=box, style=filled];
+"GO:0031399" [fillcolor="#F6CBA2", label="GO:0031399
+regulation [1]", shape=box, style=filled];
+"GO:0031667" [fillcolor="#F6CBA2", label="GO:0031667
+response [40]", shape=box, style=filled];
+"GO:0031966" [fillcolor="#F5A2F6", label="GO:0031966
+mitochondrial [150]", shape=box, style=filled];
+"GO:0031984" [fillcolor="#F5A2F6", label="GO:0031984
+organelle [0]", shape=box, style=filled];
+"GO:0031985" [fillcolor="#F5A2F6", label="GO:0031985
+Golgi [11]", shape=box, style=filled];
+"GO:0032026" [fillcolor="#F6CBA2", label="GO:0032026
+response [13]", shape=box, style=filled];
+"GO:0032094" [fillcolor="#A3F6A2", label="GO:0032094
+response [22]
+(1/5)", shape=box, style=filled];
+"GO:0032409" [fillcolor="#F6CBA2", label="GO:0032409
+regulation [0]", shape=box, style=filled];
+"GO:0032412" [fillcolor="#F6CBA2", label="GO:0032412
+regulation [2]", shape=box, style=filled];
+"GO:0032451" [fillcolor="#A3F6A2", label="GO:0032451
+demethylase [5]
+(1/5)", shape=box, style=filled];
+"GO:0032496" [fillcolor="#A3F6A2", label="GO:0032496
+response [133]
+(1/5)", shape=box, style=filled];
+"GO:0032501" [fillcolor="#F6CBA2", label="GO:0032501
+multicellular [0]", shape=box, style=filled];
+"GO:0032502" [fillcolor="#F6CBA2", label="GO:0032502
+developmental [20]", shape=box, style=filled];
+"GO:0032553" [fillcolor="#A2CDF6", label="GO:0032553
+ribonucleotide [1]", shape=box, style=filled];
+"GO:0032555" [fillcolor="#A2CDF6", label="GO:0032555
+purine [1]", shape=box, style=filled];
+"GO:0032559" [fillcolor="#A2CDF6", label="GO:0032559
+adenyl [1]", shape=box, style=filled];
+"GO:0032656" [fillcolor="#F6CBA2", label="GO:0032656
+regulation [0]", shape=box, style=filled];
+"GO:0032675" [fillcolor="#F6CBA2", label="GO:0032675
+regulation [10]", shape=box, style=filled];
+"GO:0032680" [fillcolor="#F6CBA2", label="GO:0032680
+regulation [10]", shape=box, style=filled];
+"GO:0032736" [fillcolor="#17DA15", label="GO:0032736
+positive [14]
+(1/5)", shape=box, style=filled];
+"GO:0032755" [fillcolor="#17DA15", label="GO:0032755
+positive [98]
+(1/5)", shape=box, style=filled];
+"GO:0032760" [fillcolor="#17DA15", label="GO:0032760
+positive [105]
+(1/5)", shape=box, style=filled];
+"GO:0032787" [fillcolor="#F6CBA2", label="GO:0032787
+monocarboxylic [3]", shape=box, style=filled];
+"GO:0032879" [fillcolor="#F6CBA2", label="GO:0032879
+regulation [1]", shape=box, style=filled];
+"GO:0032881" [fillcolor="#F6CBA2", label="GO:0032881
+regulation [0]", shape=box, style=filled];
+"GO:0032885" [fillcolor="#F6CBA2", label="GO:0032885
+regulation [0]", shape=box, style=filled];
+"GO:0032940" [fillcolor="#F6CBA2", label="GO:0032940
+secretion [10]", shape=box, style=filled];
+"GO:0032963" [fillcolor="#A3F6A2", label="GO:0032963
+collagen [13]
+(1/5)", shape=box, style=filled];
+"GO:0032991" [fillcolor="#F5A2F6", label="GO:0032991
+protein-containing [614]", shape=box, style=filled];
+"GO:0032993" [fillcolor="#F5A2F6", label="GO:0032993
+protein-DNA [38]", shape=box, style=filled];
+"GO:0033003" [fillcolor="#F6CBA2", label="GO:0033003
+regulation [2]", shape=box, style=filled];
+"GO:0033005" [fillcolor="#F6CBA2", label="GO:0033005
+positive [5]", shape=box, style=filled];
+"GO:0033006" [fillcolor="#F6CBA2", label="GO:0033006
+regulation [0]", shape=box, style=filled];
+"GO:0033008" [fillcolor="#17DA15", label="GO:0033008
+positive [1]
+(1/5)", shape=box, style=filled];
+"GO:0033013" [fillcolor="#F6CBA2", label="GO:0033013
+tetrapyrrole [1]", shape=box, style=filled];
+"GO:0033043" [fillcolor="#F6CBA2", label="GO:0033043
+regulation [2]", shape=box, style=filled];
+"GO:0033189" [fillcolor="#A3F6A2", label="GO:0033189
+response [15]
+(1/5)", shape=box, style=filled];
+"GO:0033273" [fillcolor="#F6CBA2", label="GO:0033273
+response [2]", shape=box, style=filled];
+"GO:0033554" [fillcolor="#F6CBA2", label="GO:0033554
+cellular [13]", shape=box, style=filled];
+"GO:0033559" [fillcolor="#F6CBA2", label="GO:0033559
+unsaturated [1]", shape=box, style=filled];
+"GO:0033993" [fillcolor="#F6CBA2", label="GO:0033993
+response [8]", shape=box, style=filled];
+"GO:0034097" [fillcolor="#F6CBA2", label="GO:0034097
+response [45]", shape=box, style=filled];
+"GO:0034248" [fillcolor="#F6CBA2", label="GO:0034248
+regulation [0]", shape=box, style=filled];
+"GO:0034250" [fillcolor="#F6CBA2", label="GO:0034250
+positive [0]", shape=box, style=filled];
+"GO:0034308" [fillcolor="#F6CBA2", label="GO:0034308
+primary [0]", shape=box, style=filled];
+"GO:0034311" [fillcolor="#F6CBA2", label="GO:0034311
+diol [1]", shape=box, style=filled];
+"GO:0034312" [fillcolor="#F6CBA2", label="GO:0034312
+diol [0]", shape=box, style=filled];
+"GO:0034599" [fillcolor="#F6CBA2", label="GO:0034599
+cellular [93]", shape=box, style=filled];
+"GO:0034612" [fillcolor="#F6CBA2", label="GO:0034612
+response [29]", shape=box, style=filled];
+"GO:0034614" [fillcolor="#F6CBA2", label="GO:0034614
+cellular [47]", shape=box, style=filled];
+"GO:0034641" [fillcolor="#F6CBA2", label="GO:0034641
+cellular [0]", shape=box, style=filled];
+"GO:0034654" [fillcolor="#F6CBA2", label="GO:0034654
+nucleobase-
+containing [0]", shape=box, style=filled];
+"GO:0034762" [fillcolor="#F6CBA2", label="GO:0034762
+regulation [0]", shape=box, style=filled];
+"GO:0034765" [fillcolor="#F6CBA2", label="GO:0034765
+regulation [23]", shape=box, style=filled];
+"GO:0035264" [fillcolor="#17DA15", label="GO:0035264
+multicellular [86]
+(1/5)", shape=box, style=filled];
+"GO:0035265" [fillcolor="#F6CBA2", label="GO:0035265
+organ [22]", shape=box, style=filled];
+"GO:0035295" [fillcolor="#F6CBA2", label="GO:0035295
+tube [2]", shape=box, style=filled];
+"GO:0035556" [fillcolor="#F6CBA2", label="GO:0035556
+intracellular [371]", shape=box, style=filled];
+"GO:0035639" [fillcolor="#A2CDF6", label="GO:0035639
+purine [2]", shape=box, style=filled];
+"GO:0035902" [fillcolor="#A3F6A2", label="GO:0035902
+response [23]
+(1/5)", shape=box, style=filled];
+"GO:0036075" [fillcolor="#F6CBA2", label="GO:0036075
+replacement [0]", shape=box, style=filled];
+"GO:0036094" [fillcolor="#A2CDF6", label="GO:0036094
+small [31]", shape=box, style=filled];
+"GO:0036293" [fillcolor="#F6CBA2", label="GO:0036293
+response [2]", shape=box, style=filled];
+"GO:0036296" [fillcolor="#F6CBA2", label="GO:0036296
+response [0]", shape=box, style=filled];
+"GO:0038023" [fillcolor="#A2CDF6", label="GO:0038023
+signaling [187]", shape=box, style=filled];
+"GO:0038036" [fillcolor="#17DA15", label="GO:0038036
+sphingosine-1-
+phosphate [8]
+(1/5)", shape=box, style=filled];
+"GO:0040007" [fillcolor="#F6CBA2", label="GO:0040007
+growth [0]", shape=box, style=filled];
+"GO:0040008" [fillcolor="#F6CBA2", label="GO:0040008
+regulation [15]", shape=box, style=filled];
+"GO:0040012" [fillcolor="#F6CBA2", label="GO:0040012
+regulation [6]", shape=box, style=filled];
+"GO:0042127" [fillcolor="#F6CBA2", label="GO:0042127
+regulation [137]", shape=box, style=filled];
+"GO:0042178" [fillcolor="#F6CBA2", label="GO:0042178
+xenobiotic [22]", shape=box, style=filled];
+"GO:0042221" [fillcolor="#F6CBA2", label="GO:0042221
+response [0]", shape=box, style=filled];
+"GO:0042325" [fillcolor="#F6CBA2", label="GO:0042325
+regulation [14]", shape=box, style=filled];
+"GO:0042359" [fillcolor="#A3F6A2", label="GO:0042359
+vitamin [10]
+(1/5)", shape=box, style=filled];
+"GO:0042393" [fillcolor="#A3F6A2", label="GO:0042393
+histone [171]
+(1/5)", shape=box, style=filled];
+"GO:0042445" [fillcolor="#F6CBA2", label="GO:0042445
+hormone [15]", shape=box, style=filled];
+"GO:0042475" [fillcolor="#F6CBA2", label="GO:0042475
+odontogenesis [58]", shape=box, style=filled];
+"GO:0042476" [fillcolor="#F6CBA2", label="GO:0042476
+odontogenesis [30]", shape=box, style=filled];
+"GO:0042542" [fillcolor="#F6CBA2", label="GO:0042542
+response [35]", shape=box, style=filled];
+"GO:0042572" [fillcolor="#17DA15", label="GO:0042572
+retinol [52]
+(1/5)", shape=box, style=filled];
+"GO:0042573" [fillcolor="#F6CBA2", label="GO:0042573
+retinoic [25]", shape=box, style=filled];
+"GO:0042578" [fillcolor="#A2CDF6", label="GO:0042578
+phosphoric [0]", shape=box, style=filled];
+"GO:0042743" [fillcolor="#F6CBA2", label="GO:0042743
+hydrogen [5]", shape=box, style=filled];
+"GO:0042759" [fillcolor="#A3F6A2", label="GO:0042759
+long-chain [19]
+(1/5)", shape=box, style=filled];
+"GO:0042802" [fillcolor="#A3F6A2", label="GO:0042802
+identical [2K]
+(1/5)", shape=box, style=filled];
+"GO:0042886" [fillcolor="#F6CBA2", label="GO:0042886
+amide [0]", shape=box, style=filled];
+"GO:0042904" [fillcolor="#17DA15", label="GO:0042904
+9-cis-retinoic [4]
+(1/5)", shape=box, style=filled];
+"GO:0042905" [fillcolor="#F6CBA2", label="GO:0042905
+9-cis-retinoic [0]", shape=box, style=filled];
+"GO:0042981" [fillcolor="#F6CBA2", label="GO:0042981
+regulation [192]", shape=box, style=filled];
+"GO:0043010" [fillcolor="#A3F6A2", label="GO:0043010
+camera-type [43]
+(1/5)", shape=box, style=filled];
+"GO:0043062" [fillcolor="#F6CBA2", label="GO:0043062
+extracellular [1]", shape=box, style=filled];
+"GO:0043065" [fillcolor="#A3F6A2", label="GO:0043065
+positive [285]
+(1/5)", shape=box, style=filled];
+"GO:0043067" [fillcolor="#F6CBA2", label="GO:0043067
+regulation [7]", shape=box, style=filled];
+"GO:0043068" [fillcolor="#F6CBA2", label="GO:0043068
+positive [14]", shape=box, style=filled];
+"GO:0043122" [fillcolor="#A3F6A2", label="GO:0043122
+regulation [32]
+(1/5)", shape=box, style=filled];
+"GO:0043167" [fillcolor="#A2CDF6", label="GO:0043167
+ion [8]", shape=box, style=filled];
+"GO:0043168" [fillcolor="#A2CDF6", label="GO:0043168
+anion [0]", shape=box, style=filled];
+"GO:0043169" [fillcolor="#A2CDF6", label="GO:0043169
+cation [2]", shape=box, style=filled];
+"GO:0043170" [fillcolor="#F6CBA2", label="GO:0043170
+macromolecule [1]", shape=box, style=filled];
+"GO:0043207" [fillcolor="#F6CBA2", label="GO:0043207
+response [2]", shape=box, style=filled];
+"GO:0043226" [fillcolor="#F5A2F6", label="GO:0043226
+organelle [0]", shape=box, style=filled];
+"GO:0043227" [fillcolor="#F5A2F6", label="GO:0043227
+membrane-bounded [4]", shape=box, style=filled];
+"GO:0043229" [fillcolor="#F5A2F6", label="GO:0043229
+intracellular [7]", shape=box, style=filled];
+"GO:0043231" [fillcolor="#A3F6A2", label="GO:0043231
+intracellular [863]
+(5/5)", shape=box, style=filled];
+"GO:0043255" [fillcolor="#F6CBA2", label="GO:0043255
+regulation [0]", shape=box, style=filled];
+"GO:0043269" [fillcolor="#F6CBA2", label="GO:0043269
+regulation [7]", shape=box, style=filled];
+"GO:0043270" [fillcolor="#F6CBA2", label="GO:0043270
+positive [5]", shape=box, style=filled];
+"GO:0043300" [fillcolor="#F6CBA2", label="GO:0043300
+regulation [0]", shape=box, style=filled];
+"GO:0043302" [fillcolor="#F6CBA2", label="GO:0043302
+positive [0]", shape=box, style=filled];
+"GO:0043304" [fillcolor="#F6CBA2", label="GO:0043304
+regulation [8]", shape=box, style=filled];
+"GO:0043306" [fillcolor="#A3F6A2", label="GO:0043306
+positive [10]
+(1/5)", shape=box, style=filled];
+"GO:0043436" [fillcolor="#F6CBA2", label="GO:0043436
+oxoacid [0]", shape=box, style=filled];
+"GO:0043449" [fillcolor="#F6CBA2", label="GO:0043449
+cellular [0]", shape=box, style=filled];
+"GO:0043467" [fillcolor="#F6CBA2", label="GO:0043467
+regulation [3]", shape=box, style=filled];
+"GO:0043491" [fillcolor="#17DA15", label="GO:0043491
+phosphatidylinositol [76]
+(1/5)", shape=box, style=filled];
+"GO:0043603" [fillcolor="#F6CBA2", label="GO:0043603
+amide [1]", shape=box, style=filled];
+"GO:0043604" [fillcolor="#F6CBA2", label="GO:0043604
+amide [1]", shape=box, style=filled];
+"GO:0043933" [fillcolor="#F6CBA2", label="GO:0043933
+protein-containing [1]", shape=box, style=filled];
+"GO:0044087" [fillcolor="#F6CBA2", label="GO:0044087
+regulation [0]", shape=box, style=filled];
+"GO:0044089" [fillcolor="#F6CBA2", label="GO:0044089
+positive [1]", shape=box, style=filled];
+"GO:0044237" [fillcolor="#F6CBA2", label="GO:0044237
+cellular [0]", shape=box, style=filled];
+"GO:0044238" [fillcolor="#F6CBA2", label="GO:0044238
+primary [0]", shape=box, style=filled];
+"GO:0044242" [fillcolor="#F6CBA2", label="GO:0044242
+cellular [3]", shape=box, style=filled];
+"GO:0044248" [fillcolor="#F6CBA2", label="GO:0044248
+cellular [0]", shape=box, style=filled];
+"GO:0044249" [fillcolor="#F6CBA2", label="GO:0044249
+cellular [0]", shape=box, style=filled];
+"GO:0044255" [fillcolor="#F6CBA2", label="GO:0044255
+cellular [13]", shape=box, style=filled];
+"GO:0044271" [fillcolor="#F6CBA2", label="GO:0044271
+cellular [0]", shape=box, style=filled];
+"GO:0044281" [fillcolor="#F6CBA2", label="GO:0044281
+small [1]", shape=box, style=filled];
+"GO:0044282" [fillcolor="#F6CBA2", label="GO:0044282
+small [0]", shape=box, style=filled];
+"GO:0044283" [fillcolor="#F6CBA2", label="GO:0044283
+small [0]", shape=box, style=filled];
+"GO:0044419" [fillcolor="#F6CBA2", label="GO:0044419
+biological [10]", shape=box, style=filled];
+"GO:0045125" [fillcolor="#A2CDF6", label="GO:0045125
+bioactive [3]", shape=box, style=filled];
+"GO:0045229" [fillcolor="#F6CBA2", label="GO:0045229
+external [0]", shape=box, style=filled];
+"GO:0045787" [fillcolor="#F6CBA2", label="GO:0045787
+positive [34]", shape=box, style=filled];
+"GO:0045815" [fillcolor="#A3F6A2", label="GO:0045815
+transcription [36]
+(1/5)", shape=box, style=filled];
+"GO:0045834" [fillcolor="#F6CBA2", label="GO:0045834
+positive [1]", shape=box, style=filled];
+"GO:0045840" [fillcolor="#A3F6A2", label="GO:0045840
+positive [30]
+(1/5)", shape=box, style=filled];
+"GO:0045912" [fillcolor="#F6CBA2", label="GO:0045912
+negative [0]", shape=box, style=filled];
+"GO:0045921" [fillcolor="#F6CBA2", label="GO:0045921
+positive [22]", shape=box, style=filled];
+"GO:0045926" [fillcolor="#F6CBA2", label="GO:0045926
+negative [18]", shape=box, style=filled];
+"GO:0045931" [fillcolor="#F6CBA2", label="GO:0045931
+positive [32]", shape=box, style=filled];
+"GO:0046165" [fillcolor="#F6CBA2", label="GO:0046165
+alcohol [0]", shape=box, style=filled];
+"GO:0046173" [fillcolor="#F6CBA2", label="GO:0046173
+polyol [0]", shape=box, style=filled];
+"GO:0046394" [fillcolor="#F6CBA2", label="GO:0046394
+carboxylic [0]", shape=box, style=filled];
+"GO:0046434" [fillcolor="#F6CBA2", label="GO:0046434
+organophosphate [1]", shape=box, style=filled];
+"GO:0046466" [fillcolor="#F6CBA2", label="GO:0046466
+membrane [4]", shape=box, style=filled];
+"GO:0046467" [fillcolor="#F6CBA2", label="GO:0046467
+membrane [0]", shape=box, style=filled];
+"GO:0046483" [fillcolor="#F6CBA2", label="GO:0046483
+heterocycle [6]", shape=box, style=filled];
+"GO:0046511" [fillcolor="#17DA15", label="GO:0046511
+sphinganine [2]
+(1/5)", shape=box, style=filled];
+"GO:0046512" [fillcolor="#17DA15", label="GO:0046512
+sphingosine [14]
+(2/5)", shape=box, style=filled];
+"GO:0046513" [fillcolor="#A3F6A2", label="GO:0046513
+ceramide [33]
+(1/5)", shape=box, style=filled];
+"GO:0046519" [fillcolor="#F6CBA2", label="GO:0046519
+sphingoid [0]", shape=box, style=filled];
+"GO:0046520" [fillcolor="#F6CBA2", label="GO:0046520
+sphingoid [1]", shape=box, style=filled];
+"GO:0046685" [fillcolor="#A3F6A2", label="GO:0046685
+response [13]
+(1/5)", shape=box, style=filled];
+"GO:0046688" [fillcolor="#F6CBA2", label="GO:0046688
+response [10]", shape=box, style=filled];
+"GO:0046700" [fillcolor="#F6CBA2", label="GO:0046700
+heterocycle [0]", shape=box, style=filled];
+"GO:0046872" [fillcolor="#A3F6A2", label="GO:0046872
+metal [2K]
+(2/5)", shape=box, style=filled];
+"GO:0046879" [fillcolor="#F6CBA2", label="GO:0046879
+hormone [4]", shape=box, style=filled];
+"GO:0046889" [fillcolor="#F6CBA2", label="GO:0046889
+positive [19]", shape=box, style=filled];
+"GO:0046890" [fillcolor="#F6CBA2", label="GO:0046890
+regulation [5]", shape=box, style=filled];
+"GO:0046903" [fillcolor="#F6CBA2", label="GO:0046903
+secretion [8]", shape=box, style=filled];
+"GO:0046906" [fillcolor="#A2CDF6", label="GO:0046906
+tetrapyrrole [1]", shape=box, style=filled];
+"GO:0046914" [fillcolor="#A2CDF6", label="GO:0046914
+transition [18]", shape=box, style=filled];
+"GO:0048008" [fillcolor="#A3F6A2", label="GO:0048008
+platelet-derived [30]
+(1/5)", shape=box, style=filled];
+"GO:0048029" [fillcolor="#A2CDF6", label="GO:0048029
+monosaccharide [9]", shape=box, style=filled];
+"GO:0048285" [fillcolor="#F6CBA2", label="GO:0048285
+organelle [0]", shape=box, style=filled];
+"GO:0048286" [fillcolor="#17DA15", label="GO:0048286
+lung [41]
+(1/5)", shape=box, style=filled];
+"GO:0048468" [fillcolor="#F6CBA2", label="GO:0048468
+cell [20]", shape=box, style=filled];
+"GO:0048513" [fillcolor="#F6CBA2", label="GO:0048513
+animal [21]", shape=box, style=filled];
+"GO:0048518" [fillcolor="#F6CBA2", label="GO:0048518
+positive [0]", shape=box, style=filled];
+"GO:0048519" [fillcolor="#F6CBA2", label="GO:0048519
+negative [0]", shape=box, style=filled];
+"GO:0048522" [fillcolor="#F6CBA2", label="GO:0048522
+positive [0]", shape=box, style=filled];
+"GO:0048523" [fillcolor="#F6CBA2", label="GO:0048523
+negative [0]", shape=box, style=filled];
+"GO:0048565" [fillcolor="#A3F6A2", label="GO:0048565
+digestive [25]
+(1/5)", shape=box, style=filled];
+"GO:0048583" [fillcolor="#F6CBA2", label="GO:0048583
+regulation [0]", shape=box, style=filled];
+"GO:0048584" [fillcolor="#F6CBA2", label="GO:0048584
+positive [0]", shape=box, style=filled];
+"GO:0048589" [fillcolor="#F6CBA2", label="GO:0048589
+developmental [23]", shape=box, style=filled];
+"GO:0048609" [fillcolor="#F6CBA2", label="GO:0048609
+multicellular [3]", shape=box, style=filled];
+"GO:0048646" [fillcolor="#F6CBA2", label="GO:0048646
+anatomical [7]", shape=box, style=filled];
+"GO:0048660" [fillcolor="#F6CBA2", label="GO:0048660
+regulation [10]", shape=box, style=filled];
+"GO:0048661" [fillcolor="#A3F6A2", label="GO:0048661
+positive [53]
+(1/5)", shape=box, style=filled];
+"GO:0048856" [fillcolor="#F6CBA2", label="GO:0048856
+anatomical [43]", shape=box, style=filled];
+"GO:0048869" [fillcolor="#F6CBA2", label="GO:0048869
+cellular [0]", shape=box, style=filled];
+"GO:0050665" [fillcolor="#17DA15", label="GO:0050665
+hydrogen [10]
+(1/5)", shape=box, style=filled];
+"GO:0050776" [fillcolor="#F6CBA2", label="GO:0050776
+regulation [27]", shape=box, style=filled];
+"GO:0050778" [fillcolor="#F6CBA2", label="GO:0050778
+positive [35]", shape=box, style=filled];
+"GO:0050789" [fillcolor="#F6CBA2", label="GO:0050789
+regulation [0]", shape=box, style=filled];
+"GO:0050790" [fillcolor="#F6CBA2", label="GO:0050790
+regulation [13]", shape=box, style=filled];
+"GO:0050793" [fillcolor="#F6CBA2", label="GO:0050793
+regulation [8]", shape=box, style=filled];
+"GO:0050794" [fillcolor="#F6CBA2", label="GO:0050794
+regulation [0]", shape=box, style=filled];
+"GO:0050865" [fillcolor="#F6CBA2", label="GO:0050865
+regulation [1]", shape=box, style=filled];
+"GO:0050867" [fillcolor="#F6CBA2", label="GO:0050867
+positive [2]", shape=box, style=filled];
+"GO:0050896" [fillcolor="#F6CBA2", label="GO:0050896
+response [64]", shape=box, style=filled];
+"GO:0051020" [fillcolor="#A2CDF6", label="GO:0051020
+GTPase [35]", shape=box, style=filled];
+"GO:0051046" [fillcolor="#F6CBA2", label="GO:0051046
+regulation [4]", shape=box, style=filled];
+"GO:0051047" [fillcolor="#F6CBA2", label="GO:0051047
+positive [4]", shape=box, style=filled];
+"GO:0051049" [fillcolor="#F6CBA2", label="GO:0051049
+regulation [3]", shape=box, style=filled];
+"GO:0051050" [fillcolor="#F6CBA2", label="GO:0051050
+positive [1]", shape=box, style=filled];
+"GO:0051087" [fillcolor="#A2CDF6", label="GO:0051087
+protein-folding [100]", shape=box, style=filled];
+"GO:0051128" [fillcolor="#F6CBA2", label="GO:0051128
+regulation [3]", shape=box, style=filled];
+"GO:0051130" [fillcolor="#F6CBA2", label="GO:0051130
+positive [0]", shape=box, style=filled];
+"GO:0051171" [fillcolor="#F6CBA2", label="GO:0051171
+regulation [5]", shape=box, style=filled];
+"GO:0051172" [fillcolor="#F6CBA2", label="GO:0051172
+negative [0]", shape=box, style=filled];
+"GO:0051173" [fillcolor="#F6CBA2", label="GO:0051173
+positive [2]", shape=box, style=filled];
+"GO:0051174" [fillcolor="#F6CBA2", label="GO:0051174
+regulation [1]", shape=box, style=filled];
+"GO:0051179" [fillcolor="#F6CBA2", label="GO:0051179
+localization [24]", shape=box, style=filled];
+"GO:0051234" [fillcolor="#F6CBA2", label="GO:0051234
+establishment [0]", shape=box, style=filled];
+"GO:0051239" [fillcolor="#F6CBA2", label="GO:0051239
+regulation [0]", shape=box, style=filled];
+"GO:0051240" [fillcolor="#F6CBA2", label="GO:0051240
+positive [0]", shape=box, style=filled];
+"GO:0051246" [fillcolor="#F6CBA2", label="GO:0051246
+regulation [8]", shape=box, style=filled];
+"GO:0051341" [fillcolor="#F6CBA2", label="GO:0051341
+regulation [1]", shape=box, style=filled];
+"GO:0051707" [fillcolor="#F6CBA2", label="GO:0051707
+response [3]", shape=box, style=filled];
+"GO:0051716" [fillcolor="#F6CBA2", label="GO:0051716
+cellular [0]", shape=box, style=filled];
+"GO:0051726" [fillcolor="#F6CBA2", label="GO:0051726
+regulation [224]", shape=box, style=filled];
+"GO:0051775" [fillcolor="#F6CBA2", label="GO:0051775
+response [11]", shape=box, style=filled];
+"GO:0051783" [fillcolor="#F6CBA2", label="GO:0051783
+regulation [0]", shape=box, style=filled];
+"GO:0051785" [fillcolor="#F6CBA2", label="GO:0051785
+positive [0]", shape=box, style=filled];
+"GO:0051879" [fillcolor="#17DA15", label="GO:0051879
+Hsp90 [42]
+(1/5)", shape=box, style=filled];
+"GO:0051924" [fillcolor="#F6CBA2", label="GO:0051924
+regulation [23]", shape=box, style=filled];
+"GO:0051928" [fillcolor="#F6CBA2", label="GO:0051928
+positive [25]", shape=box, style=filled];
+"GO:0055093" [fillcolor="#A3F6A2", label="GO:0055093
+response [15]
+(1/5)", shape=box, style=filled];
+"GO:0055094" [fillcolor="#F6CBA2", label="GO:0055094
+response [0]", shape=box, style=filled];
+"GO:0060089" [fillcolor="#A2CDF6", label="GO:0060089
+molecular [0]", shape=box, style=filled];
+"GO:0060137" [fillcolor="#17DA15", label="GO:0060137
+maternal [5]
+(1/5)", shape=box, style=filled];
+"GO:0060255" [fillcolor="#F6CBA2", label="GO:0060255
+regulation [4]", shape=box, style=filled];
+"GO:0060612" [fillcolor="#A3F6A2", label="GO:0060612
+adipose [34]
+(1/5)", shape=box, style=filled];
+"GO:0060627" [fillcolor="#F6CBA2", label="GO:0060627
+regulation [15]", shape=box, style=filled];
+"GO:0061035" [fillcolor="#A3F6A2", label="GO:0061035
+regulation [3]
+(1/5)", shape=box, style=filled];
+"GO:0061448" [fillcolor="#F6CBA2", label="GO:0061448
+connective [4]", shape=box, style=filled];
+"GO:0061751" [fillcolor="#17DA15", label="GO:0061751
+neutral [1]
+(1/5)", shape=box, style=filled];
+"GO:0062012" [fillcolor="#F6CBA2", label="GO:0062012
+regulation [0]", shape=box, style=filled];
+"GO:0062197" [fillcolor="#F6CBA2", label="GO:0062197
+cellular [2]", shape=box, style=filled];
+"GO:0065007" [fillcolor="#F6CBA2", label="GO:0065007
+biological [0]", shape=box, style=filled];
+"GO:0065008" [fillcolor="#F6CBA2", label="GO:0065008
+regulation [1]", shape=box, style=filled];
+"GO:0065009" [fillcolor="#F6CBA2", label="GO:0065009
+regulation [0]", shape=box, style=filled];
+"GO:0070279" [fillcolor="#A2CDF6", label="GO:0070279
+vitamin [1]", shape=box, style=filled];
+"GO:0070300" [fillcolor="#17DA15", label="GO:0070300
+phosphatidic [23]
+(1/5)", shape=box, style=filled];
+"GO:0070301" [fillcolor="#17DA15", label="GO:0070301
+cellular [63]
+(1/5)", shape=box, style=filled];
+"GO:0070314" [fillcolor="#A3F6A2", label="GO:0070314
+G1 [10]
+(1/5)", shape=box, style=filled];
+"GO:0070330" [fillcolor="#17DA15", label="GO:0070330
+aromatase [26]
+(1/5)", shape=box, style=filled];
+"GO:0070365" [fillcolor="#17DA15", label="GO:0070365
+hepatocyte [13]
+(1/5)", shape=box, style=filled];
+"GO:0070482" [fillcolor="#F6CBA2", label="GO:0070482
+response [4]", shape=box, style=filled];
+"GO:0070576" [fillcolor="#A3F6A2", label="GO:0070576
+vitamin [2]
+(1/5)", shape=box, style=filled];
+"GO:0070887" [fillcolor="#F6CBA2", label="GO:0070887
+cellular [0]", shape=box, style=filled];
+"GO:0071241" [fillcolor="#F6CBA2", label="GO:0071241
+cellular [3]", shape=box, style=filled];
+"GO:0071248" [fillcolor="#F6CBA2", label="GO:0071248
+cellular [4]", shape=box, style=filled];
+"GO:0071280" [fillcolor="#17DA15", label="GO:0071280
+cellular [27]
+(1/5)", shape=box, style=filled];
+"GO:0071286" [fillcolor="#17DA15", label="GO:0071286
+cellular [7]
+(1/5)", shape=box, style=filled];
+"GO:0071310" [fillcolor="#F6CBA2", label="GO:0071310
+cellular [17]", shape=box, style=filled];
+"GO:0071345" [fillcolor="#F6CBA2", label="GO:0071345
+cellular [30]", shape=box, style=filled];
+"GO:0071356" [fillcolor="#17DA15", label="GO:0071356
+cellular [127]
+(1/5)", shape=box, style=filled];
+"GO:0071396" [fillcolor="#F6CBA2", label="GO:0071396
+cellular [4]", shape=box, style=filled];
+"GO:0071402" [fillcolor="#F6CBA2", label="GO:0071402
+cellular [0]", shape=box, style=filled];
+"GO:0071404" [fillcolor="#F6CBA2", label="GO:0071404
+cellular [17]", shape=box, style=filled];
+"GO:0071407" [fillcolor="#A3F6A2", label="GO:0071407
+cellular [31]
+(1/5)", shape=box, style=filled];
+"GO:0071417" [fillcolor="#F6CBA2", label="GO:0071417
+cellular [5]", shape=box, style=filled];
+"GO:0071461" [fillcolor="#17DA15", label="GO:0071461
+cellular [3]
+(1/5)", shape=box, style=filled];
+"GO:0071495" [fillcolor="#F6CBA2", label="GO:0071495
+cellular [0]", shape=box, style=filled];
+"GO:0071702" [fillcolor="#F6CBA2", label="GO:0071702
+organic [4]", shape=box, style=filled];
+"GO:0071704" [fillcolor="#F6CBA2", label="GO:0071704
+organic [0]", shape=box, style=filled];
+"GO:0071705" [fillcolor="#F6CBA2", label="GO:0071705
+nitrogen [6]", shape=box, style=filled];
+"GO:0071824" [fillcolor="#F6CBA2", label="GO:0071824
+protein-DNA [0]", shape=box, style=filled];
+"GO:0071840" [fillcolor="#F6CBA2", label="GO:0071840
+cellular [0]", shape=box, style=filled];
+"GO:0071897" [fillcolor="#A3F6A2", label="GO:0071897
+DNA [27]
+(1/5)", shape=box, style=filled];
+"GO:0072330" [fillcolor="#F6CBA2", label="GO:0072330
+monocarboxylic [0]", shape=box, style=filled];
+"GO:0072341" [fillcolor="#A2CDF6", label="GO:0072341
+modified [6]", shape=box, style=filled];
+"GO:0072593" [fillcolor="#F6CBA2", label="GO:0072593
+reactive [33]", shape=box, style=filled];
+"GO:0080090" [fillcolor="#F6CBA2", label="GO:0080090
+regulation [5]", shape=box, style=filled];
+"GO:0085029" [fillcolor="#A3F6A2", label="GO:0085029
+extracellular [14]
+(1/5)", shape=box, style=filled];
+"GO:0090036" [fillcolor="#F6CBA2", label="GO:0090036
+regulation [5]", shape=box, style=filled];
+"GO:0090037" [fillcolor="#17DA15", label="GO:0090037
+positive [9]
+(1/5)", shape=box, style=filled];
+"GO:0090068" [fillcolor="#F6CBA2", label="GO:0090068
+positive [3]", shape=box, style=filled];
+"GO:0090153" [fillcolor="#F6CBA2", label="GO:0090153
+regulation [0]", shape=box, style=filled];
+"GO:0090154" [fillcolor="#F6CBA2", label="GO:0090154
+positive [0]", shape=box, style=filled];
+"GO:0090279" [fillcolor="#F6CBA2", label="GO:0090279
+regulation [8]", shape=box, style=filled];
+"GO:0090280" [fillcolor="#17DA15", label="GO:0090280
+positive [16]
+(1/5)", shape=box, style=filled];
+"GO:0090304" [fillcolor="#F6CBA2", label="GO:0090304
+nucleic [12]", shape=box, style=filled];
+"GO:0090407" [fillcolor="#F6CBA2", label="GO:0090407
+organophosphate [0]", shape=box, style=filled];
+"GO:0090520" [fillcolor="#A3F6A2", label="GO:0090520
+sphingolipid [1]
+(1/5)", shape=box, style=filled];
+"GO:0097159" [fillcolor="#A2CDF6", label="GO:0097159
+organic [2]", shape=box, style=filled];
+"GO:0097187" [fillcolor="#17DA15", label="GO:0097187
+dentinogenesis [5]
+(1/5)", shape=box, style=filled];
+"GO:0097267" [fillcolor="#17DA15", label="GO:0097267
+omega-hydroxylase [11]
+(1/5)", shape=box, style=filled];
+"GO:0097305" [fillcolor="#F6CBA2", label="GO:0097305
+response [4]", shape=box, style=filled];
+"GO:0097306" [fillcolor="#F6CBA2", label="GO:0097306
+cellular [0]", shape=box, style=filled];
+"GO:0097367" [fillcolor="#A2CDF6", label="GO:0097367
+carbohydrate [7]", shape=box, style=filled];
+"GO:0098588" [fillcolor="#F5A2F6", label="GO:0098588
+bounding [0]", shape=box, style=filled];
+"GO:0098791" [fillcolor="#F5A2F6", label="GO:0098791
+Golgi [0]", shape=box, style=filled];
+"GO:0098852" [fillcolor="#F5A2F6", label="GO:0098852
+lytic [0]", shape=box, style=filled];
+"GO:0098868" [fillcolor="#A3F6A2", label="GO:0098868
+bone [4]
+(1/5)", shape=box, style=filled];
+"GO:0101020" [fillcolor="#17DA15", label="GO:0101020
+estrogen [8]
+(1/5)", shape=box, style=filled];
+"GO:0101021" [fillcolor="#17DA15", label="GO:0101021
+estrogen [5]
+(1/5)", shape=box, style=filled];
+"GO:0102033" [fillcolor="#17DA15", label="GO:0102033
+long-chain [7]
+(1/5)", shape=box, style=filled];
+"GO:0106256" [fillcolor="#17DA15", label="GO:0106256
+hydroperoxy [7]
+(1/5)", shape=box, style=filled];
+"GO:0110165" [fillcolor="#F5A2F6", label="GO:0110165
+cellular [2]", shape=box, style=filled];
+"GO:0120250" [fillcolor="#A2CDF6", label="GO:0120250
+fatty [0]", shape=box, style=filled];
+"GO:0120252" [fillcolor="#F6CBA2", label="GO:0120252
+hydrocarbon [0]", shape=box, style=filled];
+"GO:0120254" [fillcolor="#F6CBA2", label="GO:0120254
+olefinic [0]", shape=box, style=filled];
+"GO:0120319" [fillcolor="#17DA15", label="GO:0120319
+long-chain [3]
+(1/5)", shape=box, style=filled];
+"GO:0140014" [fillcolor="#A3F6A2", label="GO:0140014
+mitotic [5]
+(1/5)", shape=box, style=filled];
+"GO:0140052" [fillcolor="#17DA15", label="GO:0140052
+cellular [12]
+(1/5)", shape=box, style=filled];
+"GO:0140352" [fillcolor="#F6CBA2", label="GO:0140352
+export [0]", shape=box, style=filled];
+"GO:0140534" [fillcolor="#F5A2F6", label="GO:0140534
+endoplasmic [0]", shape=box, style=filled];
+"GO:0141091" [fillcolor="#F6CBA2", label="GO:0141091
+transforming [0]", shape=box, style=filled];
+"GO:1900087" [fillcolor="#A3F6A2", label="GO:1900087
+positive [40]
+(1/5)", shape=box, style=filled];
+"GO:1900125" [fillcolor="#F6CBA2", label="GO:1900125
+regulation [0]", shape=box, style=filled];
+"GO:1900126" [fillcolor="#17DA15", label="GO:1900126
+negative [4]
+(1/5)", shape=box, style=filled];
+"GO:1900371" [fillcolor="#F6CBA2", label="GO:1900371
+regulation [0]", shape=box, style=filled];
+"GO:1900542" [fillcolor="#F6CBA2", label="GO:1900542
+regulation [1]", shape=box, style=filled];
+"GO:1900673" [fillcolor="#F6CBA2", label="GO:1900673
+olefin [0]", shape=box, style=filled];
+"GO:1901265" [fillcolor="#A2CDF6", label="GO:1901265
+nucleoside [0]", shape=box, style=filled];
+"GO:1901360" [fillcolor="#F6CBA2", label="GO:1901360
+organic [0]", shape=box, style=filled];
+"GO:1901361" [fillcolor="#F6CBA2", label="GO:1901361
+organic [0]", shape=box, style=filled];
+"GO:1901362" [fillcolor="#F6CBA2", label="GO:1901362
+organic [0]", shape=box, style=filled];
+"GO:1901363" [fillcolor="#A2CDF6", label="GO:1901363
+heterocyclic [13]", shape=box, style=filled];
+"GO:1901564" [fillcolor="#F6CBA2", label="GO:1901564
+organonitrogen [0]", shape=box, style=filled];
+"GO:1901565" [fillcolor="#F6CBA2", label="GO:1901565
+organonitrogen [1]", shape=box, style=filled];
+"GO:1901566" [fillcolor="#F6CBA2", label="GO:1901566
+organonitrogen [0]", shape=box, style=filled];
+"GO:1901575" [fillcolor="#F6CBA2", label="GO:1901575
+organic [0]", shape=box, style=filled];
+"GO:1901576" [fillcolor="#F6CBA2", label="GO:1901576
+organic [0]", shape=box, style=filled];
+"GO:1901615" [fillcolor="#F6CBA2", label="GO:1901615
+organic [0]", shape=box, style=filled];
+"GO:1901617" [fillcolor="#F6CBA2", label="GO:1901617
+organic [0]", shape=box, style=filled];
+"GO:1901652" [fillcolor="#F6CBA2", label="GO:1901652
+response [2]", shape=box, style=filled];
+"GO:1901653" [fillcolor="#A3F6A2", label="GO:1901653
+cellular [11]
+(1/5)", shape=box, style=filled];
+"GO:1901654" [fillcolor="#F6CBA2", label="GO:1901654
+response [0]", shape=box, style=filled];
+"GO:1901655" [fillcolor="#F6CBA2", label="GO:1901655
+cellular [1]", shape=box, style=filled];
+"GO:1901698" [fillcolor="#F6CBA2", label="GO:1901698
+response [0]", shape=box, style=filled];
+"GO:1901699" [fillcolor="#F6CBA2", label="GO:1901699
+cellular [0]", shape=box, style=filled];
+"GO:1901700" [fillcolor="#F6CBA2", label="GO:1901700
+response [0]", shape=box, style=filled];
+"GO:1901701" [fillcolor="#F6CBA2", label="GO:1901701
+cellular [0]", shape=box, style=filled];
+"GO:1901987" [fillcolor="#F6CBA2", label="GO:1901987
+regulation [3]", shape=box, style=filled];
+"GO:1901989" [fillcolor="#F6CBA2", label="GO:1901989
+positive [1]", shape=box, style=filled];
+"GO:1901990" [fillcolor="#F6CBA2", label="GO:1901990
+regulation [9]", shape=box, style=filled];
+"GO:1901992" [fillcolor="#F6CBA2", label="GO:1901992
+positive [3]", shape=box, style=filled];
+"GO:1902074" [fillcolor="#F6CBA2", label="GO:1902074
+response [3]", shape=box, style=filled];
+"GO:1902494" [fillcolor="#F5A2F6", label="GO:1902494
+catalytic [22]", shape=box, style=filled];
+"GO:1902531" [fillcolor="#F6CBA2", label="GO:1902531
+regulation [3]", shape=box, style=filled];
+"GO:1902533" [fillcolor="#F6CBA2", label="GO:1902533
+positive [11]", shape=box, style=filled];
+"GO:1902806" [fillcolor="#F6CBA2", label="GO:1902806
+regulation [9]", shape=box, style=filled];
+"GO:1902808" [fillcolor="#F6CBA2", label="GO:1902808
+positive [13]", shape=box, style=filled];
+"GO:1903047" [fillcolor="#F6CBA2", label="GO:1903047
+mitotic [0]", shape=box, style=filled];
+"GO:1903305" [fillcolor="#F6CBA2", label="GO:1903305
+regulation [2]", shape=box, style=filled];
+"GO:1903307" [fillcolor="#F6CBA2", label="GO:1903307
+positive [5]", shape=box, style=filled];
+"GO:1903409" [fillcolor="#F6CBA2", label="GO:1903409
+reactive [5]", shape=box, style=filled];
+"GO:1903426" [fillcolor="#A3F6A2", label="GO:1903426
+regulation [8]
+(1/5)", shape=box, style=filled];
+"GO:1903530" [fillcolor="#F6CBA2", label="GO:1903530
+regulation [0]", shape=box, style=filled];
+"GO:1903532" [fillcolor="#F6CBA2", label="GO:1903532
+positive [0]", shape=box, style=filled];
+"GO:1903541" [fillcolor="#F6CBA2", label="GO:1903541
+regulation [2]", shape=box, style=filled];
+"GO:1903543" [fillcolor="#17DA15", label="GO:1903543
+positive [15]
+(1/5)", shape=box, style=filled];
+"GO:1903555" [fillcolor="#F6CBA2", label="GO:1903555
+regulation [0]", shape=box, style=filled];
+"GO:1903557" [fillcolor="#F6CBA2", label="GO:1903557
+positive [0]", shape=box, style=filled];
+"GO:1903578" [fillcolor="#F6CBA2", label="GO:1903578
+regulation [2]", shape=box, style=filled];
+"GO:1904062" [fillcolor="#F6CBA2", label="GO:1904062
+regulation [7]", shape=box, style=filled];
+"GO:1904502" [fillcolor="#F6CBA2", label="GO:1904502
+regulation [0]", shape=box, style=filled];
+"GO:1904504" [fillcolor="#17DA15", label="GO:1904504
+positive [5]
+(1/5)", shape=box, style=filled];
+"GO:1904627" [fillcolor="#F6CBA2", label="GO:1904627
+response [0]", shape=box, style=filled];
+"GO:1904628" [fillcolor="#17DA15", label="GO:1904628
+cellular [9]
+(1/5)", shape=box, style=filled];
+"GO:1904732" [fillcolor="#F6CBA2", label="GO:1904732
+regulation [0]", shape=box, style=filled];
+"GO:1904959" [fillcolor="#A3F6A2", label="GO:1904959
+regulation [2]
+(1/5)", shape=box, style=filled];
+"GO:1905038" [fillcolor="#F6CBA2", label="GO:1905038
+regulation [0]", shape=box, style=filled];
+"GO:1990234" [fillcolor="#F5A2F6", label="GO:1990234
+transferase [11]", shape=box, style=filled];
+"GO:2000026" [fillcolor="#F6CBA2", label="GO:2000026
+regulation [0]", shape=box, style=filled];
+"GO:2000045" [fillcolor="#F6CBA2", label="GO:2000045
+regulation [52]", shape=box, style=filled];
+"GO:2000145" [fillcolor="#F6CBA2", label="GO:2000145
+regulation [15]", shape=box, style=filled];
+"GO:2000303" [fillcolor="#F6CBA2", label="GO:2000303
+regulation [2]", shape=box, style=filled];
+"GO:2000304" [fillcolor="#A3F6A2", label="GO:2000304
+positive [6]
+(1/5)", shape=box, style=filled];
+"GO:2000377" [fillcolor="#F6CBA2", label="GO:2000377
+regulation [21]", shape=box, style=filled];
+"GO:2001169" [fillcolor="#A3F6A2", label="GO:2001169
+regulation [1]
+(1/5)", shape=box, style=filled];
+"GO:0000166" -> "GO:0017076";
+"GO:0000166" -> "GO:0032553";
+"GO:0000280" -> "GO:0140014";
+"GO:0000302" -> "GO:0034614";
+"GO:0000302" -> "GO:0042542";
+"GO:0001503" -> "GO:0036075";
+"GO:0001523" -> "GO:0042572";
+"GO:0001523" -> "GO:0042573";
+"GO:0001558" -> "GO:0030308";
+"GO:0001654" -> "GO:0043010";
+"GO:0001676" -> "GO:0019369";
+"GO:0001676" -> "GO:0042759";
+"GO:0001727" -> "GO:0008481";
+"GO:0001727" -> "GO:0017050";
+"GO:0001817" -> "GO:0001819";
+"GO:0001817" -> "GO:0002718";
+"GO:0001817" -> "GO:0032656";
+"GO:0001817" -> "GO:0032675";
+"GO:0001817" -> "GO:1903555";
+"GO:0001819" -> "GO:0002720";
+"GO:0001819" -> "GO:0032736";
+"GO:0001819" -> "GO:0032755";
+"GO:0001819" -> "GO:1903557";
+"GO:0002063" -> "GO:0003433";
+"GO:0002138" -> "GO:0042904";
+"GO:0002178" -> "GO:0031211";
+"GO:0002237" -> "GO:0032496";
+"GO:0002682" -> "GO:0002684";
+"GO:0002682" -> "GO:0002685";
+"GO:0002682" -> "GO:0002694";
+"GO:0002682" -> "GO:0002697";
+"GO:0002682" -> "GO:0050776";
+"GO:0002684" -> "GO:0002696";
+"GO:0002684" -> "GO:0002699";
+"GO:0002684" -> "GO:0050778";
+"GO:0002694" -> "GO:0002696";
+"GO:0002694" -> "GO:0033003";
+"GO:0002696" -> "GO:0033005";
+"GO:0002697" -> "GO:0002699";
+"GO:0002697" -> "GO:0002700";
+"GO:0002697" -> "GO:0002703";
+"GO:0002697" -> "GO:0043300";
+"GO:0002699" -> "GO:0002702";
+"GO:0002699" -> "GO:0033006";
+"GO:0002699" -> "GO:0043302";
+"GO:0002700" -> "GO:0002702";
+"GO:0002700" -> "GO:0002718";
+"GO:0002702" -> "GO:0002720";
+"GO:0002703" -> "GO:0002886";
+"GO:0002718" -> "GO:0002720";
+"GO:0002790" -> "GO:0030072";
+"GO:0002886" -> "GO:0043304";
+"GO:0003674" -> "GO:0003824";
+"GO:0003674" -> "GO:0005488";
+"GO:0003674" -> "GO:0060089";
+"GO:0003824" -> "GO:0016491";
+"GO:0003824" -> "GO:0016740";
+"GO:0003824" -> "GO:0016787";
+"GO:0003824" -> "GO:0016829";
+"GO:0003824" -> "GO:0032451";
+"GO:0004497" -> "GO:0008391";
+"GO:0004497" -> "GO:0008395";
+"GO:0004497" -> "GO:0016709";
+"GO:0004497" -> "GO:0016712";
+"GO:0004497" -> "GO:0070576";
+"GO:0004620" -> "GO:0004767";
+"GO:0004767" -> "GO:0061751";
+"GO:0004888" -> "GO:0004930";
+"GO:0004930" -> "GO:0045125";
+"GO:0005488" -> "GO:0005515";
+"GO:0005488" -> "GO:0008289";
+"GO:0005488" -> "GO:0030246";
+"GO:0005488" -> "GO:0036094";
+"GO:0005488" -> "GO:0043167";
+"GO:0005488" -> "GO:0072341";
+"GO:0005488" -> "GO:0097159";
+"GO:0005488" -> "GO:0097367";
+"GO:0005515" -> "GO:0019899";
+"GO:0005515" -> "GO:0031072";
+"GO:0005515" -> "GO:0042393";
+"GO:0005515" -> "GO:0042802";
+"GO:0005515" -> "GO:0051087";
+"GO:0005543" -> "GO:0001786";
+"GO:0005543" -> "GO:0070300";
+"GO:0005575" -> "GO:0032991";
+"GO:0005575" -> "GO:0110165";
+"GO:0005774" -> "GO:0098852";
+"GO:0006066" -> "GO:0019751";
+"GO:0006066" -> "GO:0034308";
+"GO:0006066" -> "GO:0046165";
+"GO:0006082" -> "GO:0016053";
+"GO:0006082" -> "GO:0043436";
+"GO:0006109" -> "GO:0032881";
+"GO:0006109" -> "GO:0043255";
+"GO:0006109" -> "GO:0045912";
+"GO:0006139" -> "GO:0034654";
+"GO:0006139" -> "GO:0090304";
+"GO:0006140" -> "GO:0030808";
+"GO:0006140" -> "GO:1900542";
+"GO:0006259" -> "GO:0071897";
+"GO:0006325" -> "GO:0006338";
+"GO:0006338" -> "GO:0045815";
+"GO:0006629" -> "GO:0008202";
+"GO:0006629" -> "GO:0008610";
+"GO:0006629" -> "GO:0016042";
+"GO:0006629" -> "GO:0044255";
+"GO:0006631" -> "GO:0001676";
+"GO:0006631" -> "GO:0006633";
+"GO:0006631" -> "GO:0033559";
+"GO:0006633" -> "GO:0042759";
+"GO:0006643" -> "GO:0006665";
+"GO:0006643" -> "GO:0046466";
+"GO:0006643" -> "GO:0046467";
+"GO:0006644" -> "GO:0006668";
+"GO:0006644" -> "GO:0006684";
+"GO:0006644" -> "GO:0008654";
+"GO:0006644" -> "GO:0009395";
+"GO:0006665" -> "GO:0006668";
+"GO:0006665" -> "GO:0006672";
+"GO:0006665" -> "GO:0006684";
+"GO:0006665" -> "GO:0030148";
+"GO:0006665" -> "GO:0030149";
+"GO:0006665" -> "GO:0046519";
+"GO:0006667" -> "GO:0046511";
+"GO:0006668" -> "GO:0006669";
+"GO:0006670" -> "GO:0046512";
+"GO:0006672" -> "GO:0046513";
+"GO:0006684" -> "GO:0006685";
+"GO:0006684" -> "GO:0006686";
+"GO:0006690" -> "GO:0019369";
+"GO:0006720" -> "GO:0006721";
+"GO:0006720" -> "GO:0008299";
+"GO:0006721" -> "GO:0016101";
+"GO:0006721" -> "GO:0016114";
+"GO:0006725" -> "GO:0006139";
+"GO:0006725" -> "GO:0009698";
+"GO:0006725" -> "GO:0018894";
+"GO:0006725" -> "GO:0019438";
+"GO:0006725" -> "GO:0019439";
+"GO:0006725" -> "GO:0033013";
+"GO:0006766" -> "GO:0006775";
+"GO:0006775" -> "GO:0042359";
+"GO:0006793" -> "GO:0006796";
+"GO:0006793" -> "GO:0019637";
+"GO:0006796" -> "GO:0006644";
+"GO:0006796" -> "GO:0016310";
+"GO:0006805" -> "GO:0017143";
+"GO:0006805" -> "GO:0042178";
+"GO:0006807" -> "GO:0034641";
+"GO:0006807" -> "GO:0043603";
+"GO:0006807" -> "GO:1901564";
+"GO:0006810" -> "GO:0009914";
+"GO:0006810" -> "GO:0046903";
+"GO:0006810" -> "GO:0071702";
+"GO:0006810" -> "GO:0071705";
+"GO:0006810" -> "GO:0140352";
+"GO:0006950" -> "GO:0001666";
+"GO:0006950" -> "GO:0006979";
+"GO:0006950" -> "GO:0009635";
+"GO:0006950" -> "GO:0033554";
+"GO:0006950" -> "GO:0035902";
+"GO:0006950" -> "GO:0055093";
+"GO:0006979" -> "GO:0000302";
+"GO:0006979" -> "GO:0034599";
+"GO:0006996" -> "GO:0048285";
+"GO:0007088" -> "GO:0045840";
+"GO:0007165" -> "GO:0007166";
+"GO:0007165" -> "GO:0007186";
+"GO:0007165" -> "GO:0035556";
+"GO:0007165" -> "GO:0090520";
+"GO:0007166" -> "GO:0007167";
+"GO:0007167" -> "GO:0007169";
+"GO:0007167" -> "GO:0007178";
+"GO:0007169" -> "GO:0048008";
+"GO:0007178" -> "GO:0141091";
+"GO:0007186" -> "GO:0003376";
+"GO:0007346" -> "GO:0007088";
+"GO:0007346" -> "GO:0045931";
+"GO:0007346" -> "GO:1901990";
+"GO:0007423" -> "GO:0001654";
+"GO:0007584" -> "GO:0033273";
+"GO:0008081" -> "GO:0004767";
+"GO:0008150" -> "GO:0008152";
+"GO:0008150" -> "GO:0009987";
+"GO:0008150" -> "GO:0022414";
+"GO:0008150" -> "GO:0032501";
+"GO:0008150" -> "GO:0032502";
+"GO:0008150" -> "GO:0040007";
+"GO:0008150" -> "GO:0044419";
+"GO:0008150" -> "GO:0050896";
+"GO:0008150" -> "GO:0051179";
+"GO:0008150" -> "GO:0065007";
+"GO:0008152" -> "GO:0006807";
+"GO:0008152" -> "GO:0009056";
+"GO:0008152" -> "GO:0009058";
+"GO:0008152" -> "GO:0019748";
+"GO:0008152" -> "GO:0032963";
+"GO:0008152" -> "GO:0042445";
+"GO:0008152" -> "GO:0044237";
+"GO:0008152" -> "GO:0044238";
+"GO:0008152" -> "GO:0044281";
+"GO:0008152" -> "GO:0071704";
+"GO:0008202" -> "GO:0006694";
+"GO:0008202" -> "GO:0008210";
+"GO:0008202" -> "GO:0042359";
+"GO:0008284" -> "GO:0048661";
+"GO:0008289" -> "GO:0005543";
+"GO:0008299" -> "GO:0016114";
+"GO:0008395" -> "GO:0101020";
+"GO:0008395" -> "GO:0101021";
+"GO:0008610" -> "GO:0006633";
+"GO:0008610" -> "GO:0006694";
+"GO:0008610" -> "GO:0008299";
+"GO:0008610" -> "GO:0008654";
+"GO:0008610" -> "GO:0046467";
+"GO:0008643" -> "GO:0015774";
+"GO:0008654" -> "GO:0006669";
+"GO:0008654" -> "GO:0006686";
+"GO:0009056" -> "GO:0044248";
+"GO:0009056" -> "GO:0044282";
+"GO:0009056" -> "GO:1901575";
+"GO:0009058" -> "GO:0044249";
+"GO:0009058" -> "GO:0044283";
+"GO:0009058" -> "GO:1901576";
+"GO:0009058" -> "GO:1903409";
+"GO:0009059" -> "GO:0071897";
+"GO:0009395" -> "GO:0006685";
+"GO:0009404" -> "GO:0017143";
+"GO:0009605" -> "GO:0009991";
+"GO:0009605" -> "GO:0043207";
+"GO:0009607" -> "GO:0043207";
+"GO:0009628" -> "GO:0070482";
+"GO:0009636" -> "GO:0009635";
+"GO:0009653" -> "GO:0009887";
+"GO:0009698" -> "GO:0009804";
+"GO:0009719" -> "GO:0055094";
+"GO:0009719" -> "GO:0071495";
+"GO:0009887" -> "GO:0042476";
+"GO:0009888" -> "GO:0031214";
+"GO:0009888" -> "GO:0061448";
+"GO:0009889" -> "GO:0009890";
+"GO:0009889" -> "GO:0009891";
+"GO:0009889" -> "GO:0031326";
+"GO:0009889" -> "GO:0043255";
+"GO:0009889" -> "GO:0046890";
+"GO:0009889" -> "GO:1903426";
+"GO:0009890" -> "GO:0031327";
+"GO:0009891" -> "GO:0031328";
+"GO:0009891" -> "GO:0046889";
+"GO:0009892" -> "GO:0009890";
+"GO:0009892" -> "GO:0010605";
+"GO:0009892" -> "GO:0031324";
+"GO:0009892" -> "GO:0045912";
+"GO:0009892" -> "GO:0051172";
+"GO:0009893" -> "GO:0009891";
+"GO:0009893" -> "GO:0009896";
+"GO:0009893" -> "GO:0010604";
+"GO:0009893" -> "GO:0031325";
+"GO:0009893" -> "GO:0045834";
+"GO:0009893" -> "GO:0051173";
+"GO:0009894" -> "GO:0009896";
+"GO:0009894" -> "GO:0031329";
+"GO:0009896" -> "GO:0031331";
+"GO:0009914" -> "GO:0046879";
+"GO:0009966" -> "GO:0009967";
+"GO:0009966" -> "GO:1902531";
+"GO:0009967" -> "GO:1902533";
+"GO:0009987" -> "GO:0007165";
+"GO:0009987" -> "GO:0008283";
+"GO:0009987" -> "GO:0022402";
+"GO:0009987" -> "GO:0044237";
+"GO:0009987" -> "GO:0048869";
+"GO:0009987" -> "GO:0051716";
+"GO:0009987" -> "GO:0071840";
+"GO:0009987" -> "GO:0140352";
+"GO:0009991" -> "GO:0031667";
+"GO:0010033" -> "GO:0002237";
+"GO:0010033" -> "GO:0010243";
+"GO:0010033" -> "GO:0014070";
+"GO:0010033" -> "GO:0033993";
+"GO:0010033" -> "GO:0034097";
+"GO:0010033" -> "GO:0042542";
+"GO:0010033" -> "GO:0071310";
+"GO:0010033" -> "GO:0097305";
+"GO:0010033" -> "GO:1901654";
+"GO:0010035" -> "GO:0010038";
+"GO:0010035" -> "GO:0042542";
+"GO:0010035" -> "GO:0071241";
+"GO:0010038" -> "GO:0010039";
+"GO:0010038" -> "GO:0032026";
+"GO:0010038" -> "GO:0046688";
+"GO:0010038" -> "GO:0071248";
+"GO:0010039" -> "GO:0010041";
+"GO:0010155" -> "GO:1904959";
+"GO:0010243" -> "GO:0055094";
+"GO:0010243" -> "GO:0071417";
+"GO:0010243" -> "GO:1901652";
+"GO:0010468" -> "GO:0001817";
+"GO:0010468" -> "GO:0002700";
+"GO:0010468" -> "GO:0010628";
+"GO:0010506" -> "GO:0010508";
+"GO:0010506" -> "GO:0016241";
+"GO:0010508" -> "GO:0016239";
+"GO:0010556" -> "GO:0010468";
+"GO:0010556" -> "GO:0010557";
+"GO:0010556" -> "GO:0010558";
+"GO:0010556" -> "GO:0032885";
+"GO:0010556" -> "GO:0090153";
+"GO:0010557" -> "GO:0010628";
+"GO:0010558" -> "GO:1900126";
+"GO:0010564" -> "GO:0007088";
+"GO:0010564" -> "GO:0090068";
+"GO:0010564" -> "GO:1901987";
+"GO:0010604" -> "GO:0010557";
+"GO:0010605" -> "GO:0010558";
+"GO:0010628" -> "GO:0001819";
+"GO:0010628" -> "GO:0002702";
+"GO:0010638" -> "GO:0051785";
+"GO:0010646" -> "GO:0009966";
+"GO:0010646" -> "GO:0010647";
+"GO:0010647" -> "GO:0009967";
+"GO:0010817" -> "GO:0009914";
+"GO:0010817" -> "GO:0042445";
+"GO:0010959" -> "GO:0051924";
+"GO:0014070" -> "GO:0071407";
+"GO:0015833" -> "GO:0002790";
+"GO:0016020" -> "GO:0005886";
+"GO:0016020" -> "GO:0031090";
+"GO:0016042" -> "GO:0044242";
+"GO:0016043" -> "GO:0006996";
+"GO:0016043" -> "GO:0022607";
+"GO:0016043" -> "GO:0043062";
+"GO:0016043" -> "GO:0043933";
+"GO:0016043" -> "GO:0045229";
+"GO:0016053" -> "GO:0046394";
+"GO:0016101" -> "GO:0001523";
+"GO:0016101" -> "GO:0016102";
+"GO:0016102" -> "GO:0002138";
+"GO:0016114" -> "GO:0016102";
+"GO:0016239" -> "GO:1904504";
+"GO:0016241" -> "GO:0016239";
+"GO:0016241" -> "GO:1904502";
+"GO:0016298" -> "GO:0004620";
+"GO:0016301" -> "GO:0001727";
+"GO:0016408" -> "GO:0016454";
+"GO:0016409" -> "GO:0016454";
+"GO:0016454" -> "GO:0004758";
+"GO:0016491" -> "GO:0004497";
+"GO:0016491" -> "GO:0016679";
+"GO:0016491" -> "GO:0016705";
+"GO:0016705" -> "GO:0008391";
+"GO:0016705" -> "GO:0016709";
+"GO:0016705" -> "GO:0016712";
+"GO:0016705" -> "GO:0101020";
+"GO:0016705" -> "GO:0101021";
+"GO:0016705" -> "GO:0120319";
+"GO:0016709" -> "GO:0016711";
+"GO:0016712" -> "GO:0070330";
+"GO:0016712" -> "GO:0120250";
+"GO:0016740" -> "GO:0016746";
+"GO:0016740" -> "GO:0016772";
+"GO:0016746" -> "GO:0016747";
+"GO:0016747" -> "GO:0016408";
+"GO:0016747" -> "GO:0016409";
+"GO:0016772" -> "GO:0016301";
+"GO:0016772" -> "GO:0016773";
+"GO:0016773" -> "GO:0008481";
+"GO:0016773" -> "GO:0017050";
+"GO:0016787" -> "GO:0016788";
+"GO:0016788" -> "GO:0016298";
+"GO:0016788" -> "GO:0042578";
+"GO:0016829" -> "GO:0016835";
+"GO:0016835" -> "GO:0016836";
+"GO:0016836" -> "GO:0106256";
+"GO:0017076" -> "GO:0030554";
+"GO:0017076" -> "GO:0032555";
+"GO:0017157" -> "GO:0045921";
+"GO:0017157" -> "GO:1903305";
+"GO:0017157" -> "GO:1903541";
+"GO:0018130" -> "GO:0034654";
+"GO:0018894" -> "GO:0019341";
+"GO:0019216" -> "GO:0045834";
+"GO:0019216" -> "GO:0046890";
+"GO:0019216" -> "GO:1905038";
+"GO:0019219" -> "GO:0006140";
+"GO:0019220" -> "GO:0006140";
+"GO:0019220" -> "GO:0042325";
+"GO:0019222" -> "GO:0009889";
+"GO:0019222" -> "GO:0009892";
+"GO:0019222" -> "GO:0009893";
+"GO:0019222" -> "GO:0009894";
+"GO:0019222" -> "GO:0031323";
+"GO:0019222" -> "GO:0051171";
+"GO:0019222" -> "GO:0060255";
+"GO:0019222" -> "GO:0062012";
+"GO:0019222" -> "GO:0080090";
+"GO:0019369" -> "GO:0019373";
+"GO:0019369" -> "GO:0097267";
+"GO:0019438" -> "GO:0034654";
+"GO:0019439" -> "GO:0019341";
+"GO:0019637" -> "GO:0006644";
+"GO:0019637" -> "GO:0046434";
+"GO:0019637" -> "GO:0090407";
+"GO:0019748" -> "GO:0009404";
+"GO:0019748" -> "GO:0009698";
+"GO:0019751" -> "GO:0034311";
+"GO:0019751" -> "GO:0046173";
+"GO:0019752" -> "GO:0006690";
+"GO:0019752" -> "GO:0032787";
+"GO:0019752" -> "GO:0046394";
+"GO:0019842" -> "GO:0070279";
+"GO:0019866" -> "GO:0005743";
+"GO:0019899" -> "GO:0051020";
+"GO:0022402" -> "GO:0070314";
+"GO:0022402" -> "GO:1903047";
+"GO:0022414" -> "GO:0048609";
+"GO:0022607" -> "GO:0085029";
+"GO:0022898" -> "GO:0032412";
+"GO:0023051" -> "GO:0009966";
+"GO:0023051" -> "GO:0023056";
+"GO:0023056" -> "GO:0009967";
+"GO:0023061" -> "GO:0046879";
+"GO:0030148" -> "GO:0006669";
+"GO:0030148" -> "GO:0006686";
+"GO:0030148" -> "GO:0046513";
+"GO:0030148" -> "GO:0046520";
+"GO:0030149" -> "GO:0006685";
+"GO:0030154" -> "GO:0002244";
+"GO:0030154" -> "GO:0030855";
+"GO:0030198" -> "GO:0085029";
+"GO:0030246" -> "GO:0048029";
+"GO:0030258" -> "GO:0002933";
+"GO:0030334" -> "GO:0002685";
+"GO:0030554" -> "GO:0032559";
+"GO:0030808" -> "GO:1900371";
+"GO:0030855" -> "GO:0070365";
+"GO:0031072" -> "GO:0030544";
+"GO:0031072" -> "GO:0051879";
+"GO:0031090" -> "GO:0005789";
+"GO:0031090" -> "GO:0019866";
+"GO:0031090" -> "GO:0031966";
+"GO:0031090" -> "GO:0098588";
+"GO:0031211" -> "GO:0017059";
+"GO:0031214" -> "GO:0030282";
+"GO:0031323" -> "GO:0019219";
+"GO:0031323" -> "GO:0031324";
+"GO:0031323" -> "GO:0031325";
+"GO:0031323" -> "GO:0031326";
+"GO:0031323" -> "GO:0031329";
+"GO:0031323" -> "GO:0043467";
+"GO:0031323" -> "GO:0051174";
+"GO:0031323" -> "GO:1905038";
+"GO:0031323" -> "GO:2000377";
+"GO:0031324" -> "GO:0031327";
+"GO:0031325" -> "GO:0031328";
+"GO:0031325" -> "GO:0031331";
+"GO:0031326" -> "GO:0010556";
+"GO:0031326" -> "GO:0030808";
+"GO:0031326" -> "GO:0031327";
+"GO:0031326" -> "GO:0031328";
+"GO:0031327" -> "GO:0010558";
+"GO:0031328" -> "GO:0010557";
+"GO:0031328" -> "GO:0090154";
+"GO:0031329" -> "GO:0010506";
+"GO:0031329" -> "GO:0031331";
+"GO:0031331" -> "GO:0010508";
+"GO:0031399" -> "GO:0001932";
+"GO:0031667" -> "GO:0007584";
+"GO:0031667" -> "GO:0032094";
+"GO:0031966" -> "GO:0005743";
+"GO:0031984" -> "GO:0098791";
+"GO:0031985" -> "GO:0000137";
+"GO:0032026" -> "GO:0071286";
+"GO:0032409" -> "GO:0022898";
+"GO:0032412" -> "GO:1904959";
+"GO:0032501" -> "GO:0001503";
+"GO:0032501" -> "GO:0035264";
+"GO:0032501" -> "GO:0035265";
+"GO:0032502" -> "GO:0009653";
+"GO:0032502" -> "GO:0048646";
+"GO:0032502" -> "GO:0048856";
+"GO:0032502" -> "GO:0048869";
+"GO:0032553" -> "GO:0032555";
+"GO:0032555" -> "GO:0032559";
+"GO:0032559" -> "GO:0005524";
+"GO:0032656" -> "GO:0032736";
+"GO:0032675" -> "GO:0032755";
+"GO:0032680" -> "GO:0032760";
+"GO:0032787" -> "GO:0006631";
+"GO:0032787" -> "GO:0042573";
+"GO:0032787" -> "GO:0072330";
+"GO:0032879" -> "GO:0051049";
+"GO:0032881" -> "GO:0032885";
+"GO:0032885" -> "GO:1900125";
+"GO:0032940" -> "GO:0023061";
+"GO:0032991" -> "GO:0032993";
+"GO:0032991" -> "GO:0140534";
+"GO:0032991" -> "GO:1902494";
+"GO:0032993" -> "GO:0000786";
+"GO:0033003" -> "GO:0033005";
+"GO:0033003" -> "GO:0033006";
+"GO:0033005" -> "GO:0033008";
+"GO:0033006" -> "GO:0033008";
+"GO:0033013" -> "GO:0006778";
+"GO:0033043" -> "GO:0010638";
+"GO:0033043" -> "GO:0051783";
+"GO:0033273" -> "GO:0033189";
+"GO:0033554" -> "GO:0062197";
+"GO:0033559" -> "GO:0019369";
+"GO:0033993" -> "GO:0032496";
+"GO:0033993" -> "GO:0033189";
+"GO:0033993" -> "GO:0071396";
+"GO:0033993" -> "GO:1904627";
+"GO:0034097" -> "GO:0034612";
+"GO:0034097" -> "GO:0071345";
+"GO:0034248" -> "GO:0034250";
+"GO:0034248" -> "GO:2000303";
+"GO:0034250" -> "GO:2000304";
+"GO:0034308" -> "GO:0042572";
+"GO:0034311" -> "GO:0006667";
+"GO:0034311" -> "GO:0006670";
+"GO:0034311" -> "GO:0034312";
+"GO:0034312" -> "GO:0046511";
+"GO:0034312" -> "GO:0046512";
+"GO:0034599" -> "GO:0034614";
+"GO:0034612" -> "GO:0071356";
+"GO:0034614" -> "GO:0070301";
+"GO:0034641" -> "GO:0006139";
+"GO:0034641" -> "GO:0044271";
+"GO:0034654" -> "GO:0071897";
+"GO:0034762" -> "GO:0022898";
+"GO:0034762" -> "GO:0034765";
+"GO:0034765" -> "GO:1904062";
+"GO:0035265" -> "GO:0098868";
+"GO:0035295" -> "GO:0048565";
+"GO:0035556" -> "GO:0043491";
+"GO:0035639" -> "GO:0005524";
+"GO:0036075" -> "GO:0001958";
+"GO:0036094" -> "GO:0019825";
+"GO:0036094" -> "GO:0019842";
+"GO:0036094" -> "GO:0048029";
+"GO:0036094" -> "GO:1901363";
+"GO:0036293" -> "GO:0001666";
+"GO:0036296" -> "GO:0055093";
+"GO:0038023" -> "GO:0004888";
+"GO:0040007" -> "GO:0048589";
+"GO:0040008" -> "GO:0001558";
+"GO:0040008" -> "GO:0045926";
+"GO:0040012" -> "GO:2000145";
+"GO:0042127" -> "GO:0008284";
+"GO:0042127" -> "GO:0048660";
+"GO:0042178" -> "GO:0019341";
+"GO:0042221" -> "GO:0007584";
+"GO:0042221" -> "GO:0009636";
+"GO:0042221" -> "GO:0010033";
+"GO:0042221" -> "GO:0010035";
+"GO:0042221" -> "GO:0032094";
+"GO:0042221" -> "GO:0046685";
+"GO:0042221" -> "GO:0070887";
+"GO:0042221" -> "GO:1901698";
+"GO:0042221" -> "GO:1901700";
+"GO:0042221" -> "GO:1902074";
+"GO:0042325" -> "GO:0001932";
+"GO:0042445" -> "GO:0008210";
+"GO:0042445" -> "GO:0042572";
+"GO:0042445" -> "GO:0042573";
+"GO:0042475" -> "GO:0097187";
+"GO:0042476" -> "GO:0042475";
+"GO:0042542" -> "GO:0070301";
+"GO:0042573" -> "GO:0002138";
+"GO:0042573" -> "GO:0042905";
+"GO:0042578" -> "GO:0008081";
+"GO:0042743" -> "GO:0050665";
+"GO:0042886" -> "GO:0015833";
+"GO:0042905" -> "GO:0042904";
+"GO:0042981" -> "GO:0043065";
+"GO:0043062" -> "GO:0030198";
+"GO:0043067" -> "GO:0042981";
+"GO:0043067" -> "GO:0043068";
+"GO:0043068" -> "GO:0043065";
+"GO:0043167" -> "GO:0043168";
+"GO:0043167" -> "GO:0043169";
+"GO:0043168" -> "GO:0030170";
+"GO:0043168" -> "GO:0035639";
+"GO:0043168" -> "GO:0070300";
+"GO:0043169" -> "GO:0046872";
+"GO:0043170" -> "GO:0009059";
+"GO:0043170" -> "GO:0090304";
+"GO:0043207" -> "GO:0002237";
+"GO:0043207" -> "GO:0051707";
+"GO:0043226" -> "GO:0043227";
+"GO:0043226" -> "GO:0043229";
+"GO:0043227" -> "GO:0043231";
+"GO:0043229" -> "GO:0043231";
+"GO:0043231" -> "GO:0005634";
+"GO:0043231" -> "GO:0005739";
+"GO:0043231" -> "GO:0005783";
+"GO:0043255" -> "GO:0032885";
+"GO:0043269" -> "GO:0010959";
+"GO:0043269" -> "GO:0034765";
+"GO:0043269" -> "GO:0043270";
+"GO:0043270" -> "GO:0051928";
+"GO:0043300" -> "GO:0043302";
+"GO:0043300" -> "GO:0043304";
+"GO:0043302" -> "GO:0043306";
+"GO:0043304" -> "GO:0043306";
+"GO:0043436" -> "GO:0019752";
+"GO:0043449" -> "GO:0009692";
+"GO:0043467" -> "GO:1904732";
+"GO:0043603" -> "GO:0006672";
+"GO:0043603" -> "GO:0006684";
+"GO:0043603" -> "GO:0043604";
+"GO:0043604" -> "GO:0006686";
+"GO:0043604" -> "GO:0046513";
+"GO:0043933" -> "GO:0071824";
+"GO:0044087" -> "GO:0044089";
+"GO:0044087" -> "GO:0090153";
+"GO:0044089" -> "GO:1903543";
+"GO:0044237" -> "GO:0006082";
+"GO:0044237" -> "GO:0006725";
+"GO:0044237" -> "GO:0006793";
+"GO:0044237" -> "GO:0006805";
+"GO:0044237" -> "GO:0009404";
+"GO:0044237" -> "GO:0034641";
+"GO:0044237" -> "GO:0043449";
+"GO:0044237" -> "GO:0044248";
+"GO:0044237" -> "GO:0044249";
+"GO:0044237" -> "GO:0044255";
+"GO:0044237" -> "GO:0046483";
+"GO:0044237" -> "GO:0072593";
+"GO:0044238" -> "GO:0006139";
+"GO:0044238" -> "GO:0006629";
+"GO:0044242" -> "GO:0009395";
+"GO:0044242" -> "GO:0046466";
+"GO:0044248" -> "GO:0019439";
+"GO:0044248" -> "GO:0042178";
+"GO:0044248" -> "GO:0044242";
+"GO:0044248" -> "GO:0046700";
+"GO:0044249" -> "GO:0008299";
+"GO:0044249" -> "GO:0009059";
+"GO:0044249" -> "GO:0016053";
+"GO:0044249" -> "GO:0018130";
+"GO:0044249" -> "GO:0019438";
+"GO:0044249" -> "GO:0044271";
+"GO:0044249" -> "GO:0046467";
+"GO:0044249" -> "GO:0050665";
+"GO:0044255" -> "GO:0006631";
+"GO:0044255" -> "GO:0006643";
+"GO:0044255" -> "GO:0006644";
+"GO:0044255" -> "GO:0006720";
+"GO:0044255" -> "GO:0030258";
+"GO:0044255" -> "GO:0044242";
+"GO:0044271" -> "GO:0034654";
+"GO:0044271" -> "GO:0043604";
+"GO:0044271" -> "GO:0046511";
+"GO:0044271" -> "GO:0046512";
+"GO:0044281" -> "GO:0006066";
+"GO:0044281" -> "GO:0006082";
+"GO:0044281" -> "GO:0006766";
+"GO:0044281" -> "GO:0018894";
+"GO:0044281" -> "GO:0044282";
+"GO:0044281" -> "GO:0044283";
+"GO:0044282" -> "GO:0019341";
+"GO:0044283" -> "GO:0016053";
+"GO:0044283" -> "GO:0046165";
+"GO:0044419" -> "GO:0051707";
+"GO:0045125" -> "GO:0038036";
+"GO:0045229" -> "GO:0030198";
+"GO:0045787" -> "GO:0045931";
+"GO:0045787" -> "GO:0090068";
+"GO:0045834" -> "GO:0046889";
+"GO:0045912" -> "GO:1900126";
+"GO:0045921" -> "GO:1903307";
+"GO:0045921" -> "GO:1903543";
+"GO:0045926" -> "GO:0030308";
+"GO:0045931" -> "GO:1901992";
+"GO:0046165" -> "GO:0046173";
+"GO:0046173" -> "GO:0034312";
+"GO:0046394" -> "GO:0072330";
+"GO:0046434" -> "GO:0009395";
+"GO:0046466" -> "GO:0030149";
+"GO:0046467" -> "GO:0030148";
+"GO:0046483" -> "GO:0006139";
+"GO:0046483" -> "GO:0009804";
+"GO:0046483" -> "GO:0018130";
+"GO:0046483" -> "GO:0018894";
+"GO:0046483" -> "GO:0033013";
+"GO:0046483" -> "GO:0046700";
+"GO:0046519" -> "GO:0006667";
+"GO:0046519" -> "GO:0006670";
+"GO:0046519" -> "GO:0046520";
+"GO:0046520" -> "GO:0046511";
+"GO:0046520" -> "GO:0046512";
+"GO:0046688" -> "GO:0071280";
+"GO:0046700" -> "GO:0019341";
+"GO:0046872" -> "GO:0046914";
+"GO:0046879" -> "GO:0030072";
+"GO:0046889" -> "GO:0090154";
+"GO:0046890" -> "GO:0046889";
+"GO:0046890" -> "GO:0090153";
+"GO:0046903" -> "GO:0002790";
+"GO:0046903" -> "GO:0032940";
+"GO:0046906" -> "GO:0020037";
+"GO:0046914" -> "GO:0005506";
+"GO:0048029" -> "GO:0005537";
+"GO:0048285" -> "GO:0000280";
+"GO:0048468" -> "GO:0002063";
+"GO:0048513" -> "GO:0007420";
+"GO:0048513" -> "GO:0007423";
+"GO:0048518" -> "GO:0002684";
+"GO:0048518" -> "GO:0009893";
+"GO:0048518" -> "GO:0023056";
+"GO:0048518" -> "GO:0048522";
+"GO:0048518" -> "GO:0048584";
+"GO:0048518" -> "GO:0051050";
+"GO:0048518" -> "GO:0051240";
+"GO:0048519" -> "GO:0009892";
+"GO:0048519" -> "GO:0045926";
+"GO:0048519" -> "GO:0048523";
+"GO:0048522" -> "GO:0008284";
+"GO:0048522" -> "GO:0010647";
+"GO:0048522" -> "GO:0031325";
+"GO:0048522" -> "GO:0043068";
+"GO:0048522" -> "GO:0044089";
+"GO:0048522" -> "GO:0045787";
+"GO:0048522" -> "GO:0050867";
+"GO:0048522" -> "GO:0051130";
+"GO:0048522" -> "GO:1903532";
+"GO:0048523" -> "GO:0030308";
+"GO:0048523" -> "GO:0031324";
+"GO:0048583" -> "GO:0009966";
+"GO:0048583" -> "GO:0048584";
+"GO:0048583" -> "GO:0050776";
+"GO:0048584" -> "GO:0009967";
+"GO:0048584" -> "GO:0050778";
+"GO:0048589" -> "GO:0035264";
+"GO:0048589" -> "GO:0035265";
+"GO:0048609" -> "GO:0060137";
+"GO:0048646" -> "GO:0097187";
+"GO:0048660" -> "GO:0048661";
+"GO:0048856" -> "GO:0001568";
+"GO:0048856" -> "GO:0009888";
+"GO:0048856" -> "GO:0035295";
+"GO:0048856" -> "GO:0048286";
+"GO:0048856" -> "GO:0048468";
+"GO:0048856" -> "GO:0048513";
+"GO:0048869" -> "GO:0030154";
+"GO:0048869" -> "GO:0048468";
+"GO:0050776" -> "GO:0033006";
+"GO:0050776" -> "GO:0050778";
+"GO:0050778" -> "GO:0033008";
+"GO:0050789" -> "GO:0002682";
+"GO:0050789" -> "GO:0019222";
+"GO:0050789" -> "GO:0023051";
+"GO:0050789" -> "GO:0032879";
+"GO:0050789" -> "GO:0040008";
+"GO:0050789" -> "GO:0040012";
+"GO:0050789" -> "GO:0048518";
+"GO:0050789" -> "GO:0048519";
+"GO:0050789" -> "GO:0048583";
+"GO:0050789" -> "GO:0050793";
+"GO:0050789" -> "GO:0050794";
+"GO:0050789" -> "GO:0051239";
+"GO:0050790" -> "GO:0051341";
+"GO:0050793" -> "GO:2000026";
+"GO:0050794" -> "GO:0007165";
+"GO:0050794" -> "GO:0010646";
+"GO:0050794" -> "GO:0031323";
+"GO:0050794" -> "GO:0034762";
+"GO:0050794" -> "GO:0042127";
+"GO:0050794" -> "GO:0043067";
+"GO:0050794" -> "GO:0044087";
+"GO:0050794" -> "GO:0048522";
+"GO:0050794" -> "GO:0048523";
+"GO:0050794" -> "GO:0050865";
+"GO:0050794" -> "GO:0051128";
+"GO:0050794" -> "GO:0051726";
+"GO:0050794" -> "GO:0060627";
+"GO:0050794" -> "GO:1903530";
+"GO:0050794" -> "GO:2000145";
+"GO:0050865" -> "GO:0002694";
+"GO:0050865" -> "GO:0050867";
+"GO:0050867" -> "GO:0002696";
+"GO:0050896" -> "GO:0006950";
+"GO:0050896" -> "GO:0009605";
+"GO:0050896" -> "GO:0009607";
+"GO:0050896" -> "GO:0009628";
+"GO:0050896" -> "GO:0009719";
+"GO:0050896" -> "GO:0042221";
+"GO:0050896" -> "GO:0051716";
+"GO:0050896" -> "GO:0051775";
+"GO:0051020" -> "GO:0031267";
+"GO:0051046" -> "GO:0051047";
+"GO:0051046" -> "GO:1903530";
+"GO:0051047" -> "GO:1903532";
+"GO:0051049" -> "GO:0034762";
+"GO:0051049" -> "GO:0043269";
+"GO:0051049" -> "GO:0051046";
+"GO:0051049" -> "GO:0051050";
+"GO:0051049" -> "GO:0060627";
+"GO:0051050" -> "GO:0043270";
+"GO:0051050" -> "GO:0051047";
+"GO:0051087" -> "GO:0030544";
+"GO:0051128" -> "GO:0001558";
+"GO:0051128" -> "GO:0033043";
+"GO:0051128" -> "GO:0051130";
+"GO:0051130" -> "GO:0010638";
+"GO:0051171" -> "GO:0019219";
+"GO:0051171" -> "GO:0034248";
+"GO:0051171" -> "GO:0051172";
+"GO:0051171" -> "GO:0051173";
+"GO:0051171" -> "GO:0051246";
+"GO:0051171" -> "GO:0090153";
+"GO:0051171" -> "GO:1900125";
+"GO:0051172" -> "GO:1900126";
+"GO:0051173" -> "GO:0034250";
+"GO:0051173" -> "GO:0090154";
+"GO:0051174" -> "GO:0019220";
+"GO:0051179" -> "GO:0051234";
+"GO:0051234" -> "GO:0006810";
+"GO:0051239" -> "GO:0001817";
+"GO:0051239" -> "GO:0050865";
+"GO:0051239" -> "GO:0051240";
+"GO:0051239" -> "GO:2000026";
+"GO:0051240" -> "GO:0001819";
+"GO:0051240" -> "GO:0050867";
+"GO:0051246" -> "GO:0031399";
+"GO:0051341" -> "GO:1904732";
+"GO:0051707" -> "GO:0009624";
+"GO:0051716" -> "GO:0033554";
+"GO:0051716" -> "GO:0070887";
+"GO:0051716" -> "GO:0071402";
+"GO:0051726" -> "GO:0007346";
+"GO:0051726" -> "GO:0010564";
+"GO:0051726" -> "GO:0045787";
+"GO:0051775" -> "GO:0071461";
+"GO:0051783" -> "GO:0007088";
+"GO:0051783" -> "GO:0051785";
+"GO:0051785" -> "GO:0045840";
+"GO:0051924" -> "GO:0051928";
+"GO:0051924" -> "GO:0090279";
+"GO:0051928" -> "GO:0090280";
+"GO:0055094" -> "GO:0071404";
+"GO:0060089" -> "GO:0038023";
+"GO:0060255" -> "GO:0010556";
+"GO:0060255" -> "GO:0010604";
+"GO:0060255" -> "GO:0010605";
+"GO:0060255" -> "GO:0032881";
+"GO:0060255" -> "GO:0051246";
+"GO:0060627" -> "GO:0017157";
+"GO:0061448" -> "GO:0060612";
+"GO:0062012" -> "GO:0006140";
+"GO:0062197" -> "GO:0034599";
+"GO:0065007" -> "GO:0050789";
+"GO:0065007" -> "GO:0065008";
+"GO:0065007" -> "GO:0065009";
+"GO:0065008" -> "GO:0010817";
+"GO:0065009" -> "GO:0032409";
+"GO:0065009" -> "GO:0050790";
+"GO:0070279" -> "GO:0030170";
+"GO:0070482" -> "GO:0036293";
+"GO:0070482" -> "GO:0036296";
+"GO:0070887" -> "GO:0062197";
+"GO:0070887" -> "GO:0071241";
+"GO:0070887" -> "GO:0071310";
+"GO:0070887" -> "GO:1901699";
+"GO:0070887" -> "GO:1901701";
+"GO:0071241" -> "GO:0071248";
+"GO:0071248" -> "GO:0071280";
+"GO:0071248" -> "GO:0071286";
+"GO:0071310" -> "GO:0071345";
+"GO:0071310" -> "GO:0071396";
+"GO:0071310" -> "GO:0071407";
+"GO:0071310" -> "GO:0071417";
+"GO:0071310" -> "GO:0097306";
+"GO:0071345" -> "GO:0071356";
+"GO:0071396" -> "GO:1904628";
+"GO:0071402" -> "GO:0071404";
+"GO:0071404" -> "GO:0140052";
+"GO:0071417" -> "GO:1901653";
+"GO:0071495" -> "GO:0071417";
+"GO:0071702" -> "GO:0008643";
+"GO:0071702" -> "GO:0015833";
+"GO:0071704" -> "GO:0006082";
+"GO:0071704" -> "GO:0006629";
+"GO:0071704" -> "GO:0009812";
+"GO:0071704" -> "GO:0019637";
+"GO:0071704" -> "GO:0042743";
+"GO:0071704" -> "GO:0043170";
+"GO:0071704" -> "GO:0120252";
+"GO:0071704" -> "GO:0120254";
+"GO:0071704" -> "GO:1901360";
+"GO:0071704" -> "GO:1901564";
+"GO:0071704" -> "GO:1901575";
+"GO:0071704" -> "GO:1901576";
+"GO:0071704" -> "GO:1901615";
+"GO:0071705" -> "GO:0042886";
+"GO:0071824" -> "GO:0006325";
+"GO:0071840" -> "GO:0016043";
+"GO:0072330" -> "GO:0002138";
+"GO:0072330" -> "GO:0006633";
+"GO:0072341" -> "GO:0001786";
+"GO:0072593" -> "GO:0042743";
+"GO:0072593" -> "GO:1903409";
+"GO:0080090" -> "GO:0006109";
+"GO:0080090" -> "GO:0019216";
+"GO:0080090" -> "GO:0019219";
+"GO:0080090" -> "GO:0051246";
+"GO:0090036" -> "GO:0090037";
+"GO:0090068" -> "GO:0045840";
+"GO:0090068" -> "GO:1901989";
+"GO:0090153" -> "GO:0090154";
+"GO:0090153" -> "GO:2000303";
+"GO:0090154" -> "GO:2000304";
+"GO:0090279" -> "GO:0090280";
+"GO:0090304" -> "GO:0006259";
+"GO:0090407" -> "GO:0008654";
+"GO:0090520" -> "GO:0003376";
+"GO:0097159" -> "GO:0046906";
+"GO:0097159" -> "GO:0070279";
+"GO:0097159" -> "GO:1901265";
+"GO:0097305" -> "GO:0097306";
+"GO:0097305" -> "GO:1904627";
+"GO:0097306" -> "GO:1904628";
+"GO:0097367" -> "GO:0032553";
+"GO:0098588" -> "GO:0000139";
+"GO:0098588" -> "GO:0005774";
+"GO:0098791" -> "GO:0031985";
+"GO:0098852" -> "GO:0005765";
+"GO:0110165" -> "GO:0005576";
+"GO:0110165" -> "GO:0005654";
+"GO:0110165" -> "GO:0005737";
+"GO:0110165" -> "GO:0005829";
+"GO:0110165" -> "GO:0016020";
+"GO:0110165" -> "GO:0031984";
+"GO:0110165" -> "GO:0043226";
+"GO:0120250" -> "GO:0102033";
+"GO:0120252" -> "GO:1900673";
+"GO:0120254" -> "GO:0019369";
+"GO:0120254" -> "GO:0042572";
+"GO:0120254" -> "GO:1900673";
+"GO:0140352" -> "GO:0032940";
+"GO:0140534" -> "GO:0031211";
+"GO:0141091" -> "GO:0030509";
+"GO:1900125" -> "GO:1900126";
+"GO:1900371" -> "GO:2001169";
+"GO:1900542" -> "GO:1900371";
+"GO:1900542" -> "GO:1903578";
+"GO:1900673" -> "GO:0043449";
+"GO:1901265" -> "GO:0000166";
+"GO:1901265" -> "GO:0035639";
+"GO:1901360" -> "GO:0006139";
+"GO:1901360" -> "GO:0008202";
+"GO:1901360" -> "GO:0009698";
+"GO:1901360" -> "GO:0018894";
+"GO:1901360" -> "GO:0033013";
+"GO:1901360" -> "GO:1901361";
+"GO:1901360" -> "GO:1901362";
+"GO:1901361" -> "GO:0019341";
+"GO:1901362" -> "GO:0006694";
+"GO:1901362" -> "GO:0034654";
+"GO:1901363" -> "GO:0000166";
+"GO:1901363" -> "GO:0070279";
+"GO:1901564" -> "GO:0006665";
+"GO:1901564" -> "GO:0009308";
+"GO:1901564" -> "GO:0033013";
+"GO:1901564" -> "GO:1901565";
+"GO:1901564" -> "GO:1901566";
+"GO:1901565" -> "GO:0030149";
+"GO:1901566" -> "GO:0030148";
+"GO:1901575" -> "GO:0016042";
+"GO:1901575" -> "GO:0046434";
+"GO:1901575" -> "GO:1901361";
+"GO:1901575" -> "GO:1901565";
+"GO:1901576" -> "GO:0008610";
+"GO:1901576" -> "GO:0009059";
+"GO:1901576" -> "GO:0016053";
+"GO:1901576" -> "GO:0050665";
+"GO:1901576" -> "GO:0090407";
+"GO:1901576" -> "GO:1901362";
+"GO:1901576" -> "GO:1901566";
+"GO:1901576" -> "GO:1901617";
+"GO:1901615" -> "GO:0006066";
+"GO:1901615" -> "GO:0042359";
+"GO:1901615" -> "GO:1901617";
+"GO:1901617" -> "GO:0046165";
+"GO:1901652" -> "GO:1901653";
+"GO:1901654" -> "GO:1901655";
+"GO:1901654" -> "GO:1904627";
+"GO:1901655" -> "GO:1904628";
+"GO:1901698" -> "GO:0010243";
+"GO:1901698" -> "GO:1901699";
+"GO:1901699" -> "GO:0071417";
+"GO:1901700" -> "GO:0000302";
+"GO:1901700" -> "GO:0032496";
+"GO:1901700" -> "GO:0097305";
+"GO:1901700" -> "GO:1901652";
+"GO:1901700" -> "GO:1901654";
+"GO:1901700" -> "GO:1901701";
+"GO:1901701" -> "GO:0034614";
+"GO:1901701" -> "GO:0097306";
+"GO:1901701" -> "GO:1901653";
+"GO:1901701" -> "GO:1901655";
+"GO:1901987" -> "GO:1901989";
+"GO:1901987" -> "GO:1901990";
+"GO:1901987" -> "GO:1902806";
+"GO:1901989" -> "GO:1901992";
+"GO:1901989" -> "GO:1902808";
+"GO:1901990" -> "GO:1901992";
+"GO:1901990" -> "GO:2000045";
+"GO:1901992" -> "GO:1900087";
+"GO:1902074" -> "GO:0010041";
+"GO:1902494" -> "GO:1990234";
+"GO:1902531" -> "GO:0043122";
+"GO:1902531" -> "GO:0090036";
+"GO:1902531" -> "GO:1902533";
+"GO:1902533" -> "GO:0090037";
+"GO:1902806" -> "GO:1902808";
+"GO:1902806" -> "GO:2000045";
+"GO:1902808" -> "GO:1900087";
+"GO:1903047" -> "GO:0140014";
+"GO:1903305" -> "GO:0043300";
+"GO:1903305" -> "GO:1903307";
+"GO:1903307" -> "GO:0043302";
+"GO:1903409" -> "GO:0050665";
+"GO:1903530" -> "GO:0017157";
+"GO:1903530" -> "GO:1903532";
+"GO:1903532" -> "GO:0045921";
+"GO:1903541" -> "GO:1903543";
+"GO:1903555" -> "GO:0032680";
+"GO:1903555" -> "GO:1903557";
+"GO:1903557" -> "GO:0032760";
+"GO:1903578" -> "GO:2001169";
+"GO:1904062" -> "GO:0010155";
+"GO:1904502" -> "GO:1904504";
+"GO:1904627" -> "GO:1904628";
+"GO:1904732" -> "GO:1904959";
+"GO:1905038" -> "GO:0090153";
+"GO:1990234" -> "GO:0002178";
+"GO:2000026" -> "GO:0061035";
+"GO:2000045" -> "GO:1900087";
+"GO:2000145" -> "GO:0030334";
+"GO:2000303" -> "GO:2000304";
+"GO:2000377" -> "GO:1903426";
+
+}

@@ -8,6 +8,7 @@ from genescape import resources, utils
 from itertools import islice, takewhile, dropwhile, tee, chain
 import networkx as nx
 import pydot
+from pprint import pprint
 
 # Namespace categories
 NS_BP, NS_MF, NS_CC, NS_ALL = "BP", "MF", "CC", "ALL"
@@ -88,14 +89,16 @@ def build_graph(data):
     """
     # The complete ontology graph
     graph = nx.DiGraph()
-    terms = data[OBO_KEY]
+    obo = data[OBO_KEY]
 
-    terms = filter(lambda x: not x.get("is_obsolete"), terms.values())
+    # Remove obsolete terms.
+    obo = filter(lambda x: not x.get("is_obsolete"), obo.values())
+
     # nodes = islice(nodes, 100)
-    terms = list(terms)
+    obo = list(obo)
 
     # Add individual nodes to the
-    for row in terms:
+    for row in obo:
         oid = row["id"]
         name = row["name"]
         namespace = utils.NAMESPACE_MAP.get(row[NAMESPACE], "?")
@@ -108,7 +111,7 @@ def build_graph(data):
                   ANNO_TOTAL: anno_total}
         graph.add_node(oid, id=oid, name=name, namespace=namespace, **kwargs)
 
-    for row in terms:
+    for row in obo:
         child = row["id"]
         for parent in row.get("is_a", []):
             if graph.has_node(parent):
@@ -209,7 +212,11 @@ def parse_obo(stream):
             term.setdefault("is_a", []).append(target)
             continue
 
-        if code == "id" or code == "name" or code == "namespace":
+        if code == "name":
+            term[code] = " ".join(elems[1:])
+            continue
+
+        if code == "id" or code == "namespace":
             term[code] = elems[1]
             continue
 
@@ -385,7 +392,7 @@ def make_pydot(tree, status):
         src_tot = node[INP_LEN_TOT]
 
         valid_len = len(sym_valid)
-        label = f"{goid}\n{text} [{ann_count}]"
+        label = f"{goid}\n{text} [{ann_count}] [{ann_total}]"
         if is_input:
             fillcolor = utils.LEAF_COLOR if is_leaf else utils.INPUT_COLOR
             label = f"{label}\n({src_tot}/{valid_len})"
@@ -442,43 +449,7 @@ def save_json(data, path):
         fp.write(text.encode('utf-8'))
 
 
-@utils.timer
-def fill_graph(idx):
-    """
-    Fills the index with additional information
-    """
 
-    graph = build_graph(idx)
-
-    obo = idx[OBO_KEY]
-
-    # Add the degree to the nodes
-    for node_id in graph.nodes():
-        out_degree = graph.out_degree(node_id)
-        in_degree = graph.in_degree(node_id)
-        obo[node_id][OUT_DEGREE] = out_degree
-        obo[node_id][IN_DEGREE] = in_degree
-
-    # Compute the number of descendants and cumulative annotations.
-    def traverse(tree, node_id, store):
-        desc_total = 0
-        anno_total = obo[node_id][ANNO_COUNT]
-        for child in tree.successors(node_id):
-            if child not in store:
-                traverse(tree, child, store)
-            desc_total += store[child] + 1
-            anno_total += obo[child][ANNO_COUNT]
-        store[node_id] = desc_total
-        obo[node_id][DESC_COUNT] = desc_total
-        obo[node_id][ANNO_TOTAL] = anno_total
-
-    # From the roots backfill graph measures
-    roots = filter(lambda x: graph.in_degree(x) == 0, graph.nodes())
-    for root in roots:
-        store = dict()
-        traverse(graph, root, store=store)
-
-    return obo
 
 
 def load_index(fname):
@@ -522,25 +493,63 @@ def build_index(obo_fname, gaf_fname, idx_fname):
 
     stream = utils.get_stream(obo_fname)
 
-    obo = parse_obo(stream)
-    gaf = parse_gaf(gaf_fname)
+    obo_obj = parse_obo(stream)
+    gaf_obj = parse_gaf(gaf_fname)
+
+    # Shortcut to the obo dictionary.
+    obo = obo_obj[OBO_KEY]
 
     # Fill in annotation counts
-    for node_id in obo[OBO_KEY]:
-        values = gaf[GO2SYM].get(node_id, [])
-        obo[OBO_KEY][node_id][ANNO_COUNT] = len(values)
-        obo[OBO_KEY][node_id][ANNO_TOTAL] = 0
+    for node_id in obo_obj[OBO_KEY]:
+        values = gaf_obj[GO2SYM].get(node_id, [])
+        obo[node_id][ANNO_COUNT] = len(values)
+        obo[node_id][ANNO_TOTAL] = len(values)
 
-    idx = dict(obo)
-    idx.update(gaf)
+    # Merge the two dictionaries.
+    idx = dict(obo_obj)
+    idx.update(gaf_obj)
 
+    # Fill missing graph measures.
     fill_graph(idx=idx)
 
+    # Print database stats.
+    stats(idx=idx)
+
+    # Save the index to the file.
     save_json(idx, idx_fname)
 
-    idx_stats(idx)
 
-    stats(idx=idx)
+@utils.timer
+def fill_graph(idx):
+    """
+    Fills the index with additional information
+    """
+
+    # Build an incomplete graph from the index.
+    graph = build_graph(idx)
+
+    obo = idx[OBO_KEY]
+    gaf = idx[GO2SYM]
+
+    # Add the degree to the nodes
+    for node_id in graph.nodes():
+        out_degree = graph.out_degree(node_id)
+        in_degree = graph.in_degree(node_id)
+        obo[node_id][OUT_DEGREE] = out_degree
+        obo[node_id][IN_DEGREE] = in_degree
+        obo[node_id][DESC_COUNT] = out_degree
+
+    # Update annotations for each node
+    topo_nodes = list(nx.topological_sort(graph))
+
+    for node_id in reversed(topo_nodes):
+        total = obo[node_id][ANNO_TOTAL]
+        desc_count = obo[node_id][DESC_COUNT]
+        for predecessor in graph.predecessors(node_id):
+            obo[predecessor][ANNO_TOTAL] += total
+            obo[predecessor][DESC_COUNT] += desc_count
+
+    return obo
 
 def annotate(tree, status):
     sym_valid = status[SYM_VALID]
@@ -549,7 +558,7 @@ def annotate(tree, status):
     inp_nodes = filter(lambda x: tree.nodes[x][INP_FLAG], tree.nodes())
 
     stream = io.StringIO()
-    writer = csv.DictWriter(stream, fieldnames=["count", "name", "node_id", "source", "size", "ann_count", "ann_total"])
+    writer = csv.DictWriter(stream, fieldnames=["count", "name", "node_id", "source", "size", "ann_count", "ann_total", "desc_count"])
     writer.writeheader()
     for node_id in inp_nodes:
         node = tree.nodes[node_id]
@@ -558,8 +567,14 @@ def annotate(tree, status):
         count = node[INP_LEN]
         ann_count = node[ANNO_COUNT]
         ann_total = node[ANNO_TOTAL]
-        data = dict(count=count, node_id=node_id, name=name, source=source, size=sym_size, ann_count=ann_count,
-                    ann_total=ann_total)
+        desc_count = node[DESC_COUNT]
+
+        data = dict(count=count, node_id=node_id, name=name,
+                    source=source, size=sym_size,
+                    ann_count=ann_count,
+                    ann_total=ann_total,
+                    desc_count=desc_count)
+
         writer.writerow(data)
 
     text = stream.getvalue()
@@ -607,14 +622,24 @@ def run(idx_fname, genes, root=utils.NS_ALL,  pattern="", mincount=1):
     ann = annotate(tree=tree, status=status)
 
     # Transform the tree into a pydot graph
-    pd = make_pydot(tree, status)
+    dot = make_pydot(tree, status)
 
-    return pd, tree, ann
+    return dot, tree, ann
 
+def build_test():
+    res = resources.init()
 
+    obo_fname = res.OBO_FILE
+    gaf_fname = res.GAF_FILE
+    idx_fname = "demo.json.gz"
+
+    build_index(obo_fname=obo_fname, gaf_fname=gaf_fname, idx_fname=idx_fname)
 
 if __name__ == '__main__':
-    res = resources.init()
+
+    build_test()
+
+    sys.exit()
 
     genes = "GO:0035639 GO:0097159  ".split()
 
@@ -626,8 +651,8 @@ if __name__ == '__main__':
     mincount = 1
     root = utils.NS_ALL
 
-    pd, tree, ann = run(genes=genes, idx_fname=idx_fname,  root=root, pattern=pattern, mincount=mincount)
+    dot, tree, ann = run(genes=genes, idx_fname=idx_fname,  root=root, pattern=pattern, mincount=mincount)
 
-    save_graph(pd, fname="output.pdf", imgsize=2048)
+    save_graph(dot, fname="output.pdf", imgsize=2048)
 
     print(ann)

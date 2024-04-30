@@ -1,7 +1,9 @@
-import sys, json
+import sys, json, os
+from pathlib import Path
 import click
 from genescape import __version__
 from genescape import resources, utils, nexus
+from pprint import pprint
 
 # Valid choices for root
 ROOT_CHOICES = [utils.NS_BP, utils.NS_MF, utils.NS_CC, utils.NS_ALL]
@@ -39,7 +41,7 @@ def annotate(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=Fal
 
     targets = utils.parse_genes(fname)
 
-    pd, tree, ann = nexus.run(genes=targets, idx_fname=idx_fname, root=root,  pattern=match, mincount=count)
+    dot, tree, ann = nexus.run(genes=targets, idx_fname=idx_fname, root=root,  pattern=match, mincount=count)
 
     if out_fname:
         utils.info(f"output: {out_fname}")
@@ -75,9 +77,9 @@ def tree(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=False, 
 
     targets = utils.parse_genes(fname)
 
-    pd, tree, ann = nexus.run(genes=targets, idx_fname=idx_fname, root=root,  pattern=match, mincount=count)
+    dot, tree, ann = nexus.run(genes=targets, idx_fname=idx_fname, root=root,  pattern=match, mincount=count)
 
-    nexus.save_graph(pd, fname=out_fname, imgsize=2048)
+    nexus.save_graph(dot, fname=out_fname, imgsize=2048)
 
 
 @run.command()
@@ -109,10 +111,51 @@ def build(idx_fname=None, obo_fname=None, gaf_fname=None, stats=False, dump=Fals
         nexus.build_index(obo_fname=obo_fname, gaf_fname=gaf_fname, idx_fname=idx_fname)
         utils.info(f"idx: {idx_fname}")
 
+@run.command()
+@click.option("-i", "--idx", "idx_fname", default="", help="Index file (genescape.json.gz)")
+@click.option("--host", "host", default="127.0.0.1", help="Hostname to bind to")
+@click.option("--port", "port", default=8000, type=int, help="Port number")
+@click.option("-r", "--reload", "reload", is_flag=True, help="Reload the webserver on changes")
+@click.help_option("-h", "--help")
+def web(idx_fname='', host='localhost', port=8000, reload=False):
+    import shiny
+
+    # Insert the index into the environment.
+    if idx_fname:
+        if not os.path.isfile(idx_fname):
+            utils.stop(f"# Index not found: {idx_fname}")
+        key = "idx"
+        label = str(Path(idx_fname).name).split(".")[0].title()
+        os.environ['GENESCAPE_INDEX'] = f'{key}:{label}:{idx_fname}'
+    shiny.run_app("genescape.shiny.app:app", host=host, port=port, reload=reload)
+
+@run.command()
+@click.argument("words", default=None, nargs=-1)
+@click.option("-i", "--idx", "idx_fname", default="", help="Index file (genescape.json.gz)")
+@click.help_option("-h", "--help")
+def show(words, idx_fname=''):
+    res = resources.init()
+    idx_fname = idx_fname or res.INDEX_FILE
+
+    idx = nexus.load_index(idx_fname)
+    obo = idx[nexus.OBO_KEY]
+
+    valid = list(filter(lambda x: x in obo, words))
+    missing = set(words) - set(valid)
+
+    if missing:
+        utils.error(f"Words not found: {missing}")
+
+
+    for word in valid:
+        node = obo[word]
+        pprint(node)
+
+
 if __name__ =='__main__':
     #sys.argv.extend( ("build", "--stats"))
 
-    cmd = "tree -t"
+    cmd = "show GO:0005737"
 
     sys.argv.extend(cmd.split())
     run()

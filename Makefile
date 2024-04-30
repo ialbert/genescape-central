@@ -91,11 +91,7 @@ index: ${IDX_FILE}
 
 # Performs a python-only test.
 test:
-	hatch run test
-
-# A full test with file generation.
-testall: test
-	(cd test && make testall)
+	hatch run test 
 
 clean:
 	rm -rf build dist ${IDX_FILE}

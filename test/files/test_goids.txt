@@ -1,0 +1,4 @@
+#
+# Input may contain both genes and GO terms.
+#
+GO:0062091

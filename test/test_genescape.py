@@ -1,4 +1,6 @@
-import difflib, sys
+import difflib, sys, subprocess
+import os
+
 import pytest, click
 from pathlib import Path
 from genescape import main
@@ -25,12 +27,16 @@ def show_diff(exp, gen, cmd):
     fix = cmd.replace("/out/", "/files/")
     print(f"# Replace: genescape {fix}")
 
-
-@pytest.mark.parametrize("inp_name, out_name, cmd", [
+PARAMS = [
     ("test_genes.txt", "test_genes.csv", "annotate"),
     ("hs_genes1.txt", "hs_genes1.csv", "annotate"),
-])
-def test_annotate(inp_name, out_name, cmd):
+    ("hs_genes2.txt", "hs_genes2.csv", "annotate"),
+    ("hs_genes1.txt", "hs_genes1.dot", "tree"),
+    ("hs_genes2.txt", "hs_genes2.dot", "tree"),
+]
+
+@pytest.mark.parametrize("inp_name, out_name, cmd", PARAMS)
+def test_genescape(inp_name, out_name, cmd):
 
     inp_path = Path("test/files") / inp_name
     exp_path = Path("test/files") / out_name
@@ -51,6 +57,19 @@ def test_annotate(inp_name, out_name, cmd):
     if exp_value != gen_value:
         show_diff(exp_value, gen_value, full)
         raise AssertionError(f"content mismatch: {out_name}")
+
+
+@pytest.mark.parametrize("cmd", ["build -s", "annotate -t", "tree -t -o test/out/genescape.pdf"])
+def test_run(cmd):
+
+    full = f"{cmd}"
+
+    runner = CliRunner()
+
+    res = runner.invoke(main.run, full.split())
+
+    # Check that the command completed correctly
+    assert res.exit_code == 0
 
 if __name__ == "__main__":
     pytest.main([__file__, '--verbose'])

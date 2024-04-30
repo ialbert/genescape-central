@@ -1,9 +1,0 @@
-count,function,root,goid,source,size,label
-1,activation of GTPase activity,BP,GO:0090630,GRTP1,4,(1/4)
-1,protein heterodimerization activity,MF,GO:0046982,ABTB3,4,(1/4)
-1,BLOC-1 complex,CC,GO:0031083,BCAS4,4,(1/4)
-1,membrane,CC,GO:0016020,ABTB3,4,(1/4)
-1,cytoplasm,CC,GO:0005737,BCAS4,4,(1/4)
-1,extracellular space,CC,GO:0005615,C3P1,4,(1/4)
-1,GTPase activator activity,MF,GO:0005096,GRTP1,4,(1/4)
-1,endopeptidase inhibitor activity,MF,GO:0004866,C3P1,4,(1/4)

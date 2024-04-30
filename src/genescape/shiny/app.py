@@ -2,7 +2,7 @@ from shiny import reactive
 from shiny import App, render, ui
 import asyncio, os
 from genescape import icons
-from genescape import __version__, annot, resources, tree, utils
+from genescape import __version__, nexus, utils, resources
 
 # Get a resource configuration file.
 cnf_fname = os.environ.get("GENESCAPE_CONFIG", None)
@@ -156,22 +156,22 @@ def server(input, output, session):
         pattern = input.pattern()
         code = input.database()
 
-        inp = text2list(text)
+        genes = text2list(text)
 
         root = input.root()
 
-        index = res.find_index(code=code)
+        idx_fname = res.INDEX_FILE
+
+        #index = res.find_index(code=code)
 
         #msg = utils.index_stats(index=index, verbose=False)[-1]
+
         msg = "OK"
-        graph, ann = tree.parse_input(inp=inp, index=index, mincount=mincount, pattern=pattern, root=root)
 
-        dot = tree.write_tree(graph, ann, out=None)
+        dot, tree, ann = nexus.run(genes=genes, idx_fname=idx_fname, mincount=mincount, pattern=pattern, root=root)
 
-        text = annot.ann2csv(ann)
-
-        ann_value.set(text)
-        dot_value.set(dot)
+        ann_value.set(ann)
+        dot_value.set(dot.to_string())
         msg_value.set(msg)
 
         async def trigger():

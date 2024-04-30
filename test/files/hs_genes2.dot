@@ -2,121 +2,88 @@ digraph genescape {
 "GO:0003674" [fillcolor="#A2CDF6", label="GO:0003674
 molecular_function [715]", shape=box, style=filled];
 "GO:0004857" [fillcolor="#A2CDF6", label="GO:0004857
-enzyme inhibitor
-activity [35]", shape=box, style=filled];
+enzyme [35]", shape=box, style=filled];
 "GO:0004866" [fillcolor="#A3F6A2", label="GO:0004866
-endopeptidase
-inhibitor activity [39]
+endopeptidase [39]
 (1/4)", shape=box, style=filled];
 "GO:0005096" [fillcolor="#17DA15", label="GO:0005096
-GTPase activator
-activity [274]
+GTPase [274]
 (1/4)", shape=box, style=filled];
 "GO:0005488" [fillcolor="#A2CDF6", label="GO:0005488
 binding [0]", shape=box, style=filled];
 "GO:0005515" [fillcolor="#A2CDF6", label="GO:0005515
-protein binding [13K]", shape=box, style=filled];
+protein [13K]", shape=box, style=filled];
 "GO:0005575" [fillcolor="#F5A2F6", label="GO:0005575
 cellular_component [415]", shape=box, style=filled];
 "GO:0005615" [fillcolor="#17DA15", label="GO:0005615
-extracellular space [2K]
+extracellular [2K]
 (1/4)", shape=box, style=filled];
 "GO:0005737" [fillcolor="#A3F6A2", label="GO:0005737
 cytoplasm [5K]
 (1/4)", shape=box, style=filled];
 "GO:0008047" [fillcolor="#A2CDF6", label="GO:0008047
-enzyme activator
-activity [59]", shape=box, style=filled];
+enzyme [59]", shape=box, style=filled];
 "GO:0008150" [fillcolor="#F6CBA2", label="GO:0008150
 biological_process [564]", shape=box, style=filled];
 "GO:0016020" [fillcolor="#A3F6A2", label="GO:0016020
 membrane [3K]
 (1/4)", shape=box, style=filled];
 "GO:0030234" [fillcolor="#A2CDF6", label="GO:0030234
-enzyme regulator
-activity [23]", shape=box, style=filled];
+enzyme [23]", shape=box, style=filled];
 "GO:0030414" [fillcolor="#A2CDF6", label="GO:0030414
-peptidase inhibitor
-activity [14]", shape=box, style=filled];
+peptidase [14]", shape=box, style=filled];
 "GO:0030695" [fillcolor="#A2CDF6", label="GO:0030695
-GTPase regulator
-activity [15]", shape=box, style=filled];
+GTPase [15]", shape=box, style=filled];
 "GO:0031082" [fillcolor="#F5A2F6", label="GO:0031082
-BLOC complex [0]", shape=box, style=filled];
+BLOC [0]", shape=box, style=filled];
 "GO:0031083" [fillcolor="#17DA15", label="GO:0031083
-BLOC-1 complex [15]
+BLOC-1 [15]
 (1/4)", shape=box, style=filled];
 "GO:0032991" [fillcolor="#F5A2F6", label="GO:0032991
-protein-containing
-complex [614]", shape=box, style=filled];
+protein-containing [614]", shape=box, style=filled];
 "GO:0043085" [fillcolor="#F6CBA2", label="GO:0043085
-positive regulation
-of catalytic
-activity [20]", shape=box, style=filled];
+positive [20]", shape=box, style=filled];
 "GO:0043087" [fillcolor="#F6CBA2", label="GO:0043087
-regulation of GTPase
-activity [61]", shape=box, style=filled];
+regulation [61]", shape=box, style=filled];
 "GO:0043547" [fillcolor="#F6CBA2", label="GO:0043547
-positive regulation
-of GTPase activity [143]", shape=box, style=filled];
+positive [143]", shape=box, style=filled];
 "GO:0044093" [fillcolor="#F6CBA2", label="GO:0044093
-positive regulation
-of molecular
-function [0]", shape=box, style=filled];
+positive [0]", shape=box, style=filled];
 "GO:0046982" [fillcolor="#17DA15", label="GO:0046982
-protein
-heterodimerization
-activity [313]
+protein [313]
 (1/4)", shape=box, style=filled];
 "GO:0046983" [fillcolor="#A2CDF6", label="GO:0046983
-protein dimerization
-activity [144]", shape=box, style=filled];
+protein [144]", shape=box, style=filled];
 "GO:0050790" [fillcolor="#F6CBA2", label="GO:0050790
-regulation of
-catalytic activity [13]", shape=box, style=filled];
+regulation [13]", shape=box, style=filled];
 "GO:0051336" [fillcolor="#F6CBA2", label="GO:0051336
-regulation of
-hydrolase activity [0]", shape=box, style=filled];
+regulation [0]", shape=box, style=filled];
 "GO:0051345" [fillcolor="#F6CBA2", label="GO:0051345
-positive regulation
-of hydrolase
-activity [2]", shape=box, style=filled];
+positive [2]", shape=box, style=filled];
 "GO:0060589" [fillcolor="#A2CDF6", label="GO:0060589
 nucleoside-
-triphosphatase
-regulator activity [0]", shape=box, style=filled];
+triphosphatase [0]", shape=box, style=filled];
 "GO:0061134" [fillcolor="#A2CDF6", label="GO:0061134
-peptidase regulator
-activity [0]", shape=box, style=filled];
+peptidase [0]", shape=box, style=filled];
 "GO:0061135" [fillcolor="#A2CDF6", label="GO:0061135
-endopeptidase
-regulator activity [2]", shape=box, style=filled];
+endopeptidase [2]", shape=box, style=filled];
 "GO:0065007" [fillcolor="#F6CBA2", label="GO:0065007
-biological
-regulation [0]", shape=box, style=filled];
+biological [0]", shape=box, style=filled];
 "GO:0065009" [fillcolor="#F6CBA2", label="GO:0065009
-regulation of
-molecular function [0]", shape=box, style=filled];
+regulation [0]", shape=box, style=filled];
 "GO:0090630" [fillcolor="#17DA15", label="GO:0090630
-activation of GTPase
-activity [100]
+activation [100]
 (1/4)", shape=box, style=filled];
 "GO:0098772" [fillcolor="#A2CDF6", label="GO:0098772
-molecular function
-regulator activity [0]", shape=box, style=filled];
+molecular [0]", shape=box, style=filled];
 "GO:0110165" [fillcolor="#F5A2F6", label="GO:0110165
-cellular anatomical
-entity [2]", shape=box, style=filled];
+cellular [2]", shape=box, style=filled];
 "GO:0140535" [fillcolor="#F5A2F6", label="GO:0140535
-intracellular
-protein-containing
-complex [2]", shape=box, style=filled];
+intracellular [2]", shape=box, style=filled];
 "GO:0140677" [fillcolor="#A2CDF6", label="GO:0140677
-molecular function
-activator activity [24]", shape=box, style=filled];
+molecular [24]", shape=box, style=filled];
 "GO:0140678" [fillcolor="#A2CDF6", label="GO:0140678
-molecular function
-inhibitor activity [27]", shape=box, style=filled];
+molecular [27]", shape=box, style=filled];
 "GO:0003674" -> "GO:0005488";
 "GO:0003674" -> "GO:0098772";
 "GO:0004857" -> "GO:0030414";
