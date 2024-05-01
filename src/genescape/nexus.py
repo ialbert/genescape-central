@@ -2,6 +2,7 @@
 Graph representation of an ontology
 """
 import io
+import itertools
 from pathlib import Path
 import gzip, sys, re, json, csv, textwrap, pickle
 from genescape import resources, utils
@@ -9,6 +10,7 @@ from itertools import islice, takewhile, dropwhile, tee, chain
 import networkx as nx
 import pydot
 from pprint import pprint
+from genescape.__about__ import __version__
 
 # Namespace categories
 NS_BP, NS_MF, NS_CC, NS_ALL = "BP", "MF", "CC", "ALL"
@@ -30,12 +32,12 @@ NAMESPACE_MAP = {
 
 
 # Data keys in the index.
-HEADER_KEY = "info"
+INFO_KEY = "info"
 
 # Ontology key.
 OBO_KEY = "obo"
 
-# Mapping keys.
+# Symbol to GO, GO to symbol, and name to symbol mappings.
 SYM2GO, GO2SYM, NAME2SYM = "sym2go", "go2sym", "name2sym"
 
 # True for a GO term that is present in the input data.
@@ -60,10 +62,10 @@ DESC_LIST = "desc_list"
 DESC_COUNT = "desc_count"
 
 # The number of annotations for the GO term.
-ANNO_COUNT = "anno_count"
+ANNO_COUNT = "ann_count"
 
 # The cumulative sum of annotations for GO term.
-ANNO_TOTAL = "anno_total"
+ANNO_TOTAL = "ann_total"
 
 # Status keys
 SYM_VALID = "sym_valid"
@@ -124,14 +126,39 @@ def build_graph(data):
 
 @utils.timer
 def parse_gaf(fname):
+
     stream = gzip.open(fname, mode="rt", encoding="UTF-8")
-    stream = filter(lambda x: not x.startswith("!"), stream)
+
+    stream, header = itertools.tee(stream, 2)
+
+    # Parse the headers
+    header = takewhile(lambda x: x.startswith("!"), header)
+    header = map(lambda x: x.strip("!"), header)
+    header = map(lambda x: x.strip(""), header)
+    header = filter(None, header)
+    header = csv.reader(header, delimiter=" ")
+    header = filter(lambda x: len(x)>1, header)
+    info = dict(gaf_fname=Path(fname).name)
+    for row in header:
+        key = row[0].strip(":")
+        if key == "gaf-version" or key == "go-version":
+            info[key] = row[1]
+        elif key == "generated-by" or key == "date-generated":
+            info.setdefault(key, []).append(row[1])
+
+    # Iterate over the body
+    stream = dropwhile(lambda x: x.startswith("!"), stream)
     stream = map(lambda x: x.strip(), stream)
     stream = csv.reader(stream, delimiter="\t")
     # stream = islice(stream, 1000)
     sym2go, go2sym, name2sym = {}, {}, {}
     for row in stream:
         name, symb, goid, synon = row[1], row[2], row[4], row[10]
+
+        # Convert to uppercase.
+        name = name.upper()
+        symb = symb.upper()
+        goid = goid.upper()
 
         sym2go.setdefault(symb, []).append(goid)
         sym2go.setdefault(name, []).append(goid)
@@ -152,7 +179,7 @@ def parse_gaf(fname):
         NAME2SYM: name2sym
     }
 
-    return gaf
+    return gaf, info
 
 
 def parse_refs(text):
@@ -163,7 +190,11 @@ def parse_refs(text):
 
 # Parse a stream to an OBO file and for
 @utils.timer
-def parse_obo(stream):
+def parse_obo(obo_fname):
+
+    # Open the file
+    stream = utils.get_stream(obo_fname)
+
     # Remove empty rows
     stream = filter(None, stream)
 
@@ -179,10 +210,10 @@ def parse_obo(stream):
     # Drop until you reach term and take until you reach the typedef
     term_stream = dropwhile(lambda x: x[0] != "[Term]", term_stream)
 
-    head = dict()
+    info = dict(obo_fname=Path(obo_fname).name)
     terms = dict()
 
-    data = {HEADER_KEY: head, OBO_KEY: terms}
+    data = {OBO_KEY: terms}
 
     INCLUDE = ["format-version", "data-version", "ontology"]
     INCLUDE = set(INCLUDE)
@@ -191,7 +222,7 @@ def parse_obo(stream):
     for elems in head_stream:
         code = elems[0].strip(":")
         if code in INCLUDE:
-            head[code] = elems[1]
+            info[code] = elems[1]
 
     term = {}
     for elems in term_stream:
@@ -202,8 +233,9 @@ def parse_obo(stream):
             break
 
         if code == "[Term]" and term:
-            term["is_obsolete"] = term.get("is_obsolete", False)
-            terms[term["id"]] = term
+            is_obsolete = term.get("is_obsolete", False)
+            if not is_obsolete:
+                terms[term["id"]] = term
             term = {}
             continue
 
@@ -229,7 +261,7 @@ def parse_obo(stream):
     # Last term needs to be added
     terms[term["id"]] = term
 
-    return data
+    return data, info
 
 
 def make_graph(idx, graph, targets, root=NS_ALL, mincount=1, pattern=''):
@@ -468,7 +500,8 @@ def stats(idx=None):
     if isinstance(idx, str):
         utils.stop("index must be an object not string")
     map_count, sym_count, go_count = idx_stats(idx)
-    msg = f"index: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms"
+    source = idx.get(INFO_KEY, {}).get("gaf_fname", "unknown")
+    msg = f"index: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms ({source})"
     utils.info(msg)
     return map_count, sym_count, go_count
 
@@ -491,10 +524,8 @@ def build_index(obo_fname, gaf_fname, idx_fname):
     Builds an index from an OBO and GAF file.
     """
 
-    stream = utils.get_stream(obo_fname)
-
-    obo_obj = parse_obo(stream)
-    gaf_obj = parse_gaf(gaf_fname)
+    obo_obj, info1 = parse_obo(obo_fname)
+    gaf_obj, info2 = parse_gaf(gaf_fname)
 
     # Shortcut to the obo dictionary.
     obo = obo_obj[OBO_KEY]
@@ -505,8 +536,14 @@ def build_index(obo_fname, gaf_fname, idx_fname):
         obo[node_id][ANNO_COUNT] = len(values)
         obo[node_id][ANNO_TOTAL] = len(values)
 
+    # Create the info dictionary
+    info = { "genescape-version": __version__ }
+    info.update(info1)
+    info.update(info2)
+
     # Merge the two dictionaries.
-    idx = dict(obo_obj)
+    idx = { INFO_KEY:info }
+    idx.update(obo_obj)
     idx.update(gaf_obj)
 
     # Fill missing graph measures.
