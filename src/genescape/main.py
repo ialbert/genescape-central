@@ -161,7 +161,7 @@ def build(idx_fname=None, obo_fname=None, gaf_fname=None, stats=False, dump=Fals
 
 
 @run.command()
-@click.option("-i", "--index", "idx_fname", default="genescape.json.gz", help="Index file")
+@click.option("-i", "--index", "idx_fname", default="", help="Index file")
 @click.option("--host", "host", default="127.0.0.1", help="Hostname to bind to")
 @click.option("--port", "port", default=8000, type=int, help="Port number")
 @click.option("-r", "--reload", "reload", is_flag=True, help="Reload the webserver on changes")

@@ -9,7 +9,7 @@
 }
 
 #annot_elem {
-    height: 250px;
+    min-height: 250px;
 }
 
 #dot_elem {

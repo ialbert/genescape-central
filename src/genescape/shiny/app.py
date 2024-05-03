@@ -69,8 +69,6 @@ app_ui = ui.page_sidebar(
                ),
         ui.input_action_button("submit", "Draw Tree", class_="btn-success", icon=icons.icon_play),
 
-        ui.output_code("annot_elem"),
-        ui.download_link("download_csv", "Download annotations", icon=icons.icon_down),
         ui.output_code("dot_elem"),
         ui.download_link("download_dot", "Download dot file", icon=icons.icon_down),
 
@@ -115,7 +113,10 @@ app_ui = ui.page_sidebar(
         #    align="center",
         # ),
     ),
-
+    ui.tags.p(
+        ui.output_code("annot_elem"),
+        ui.download_link("download_csv", "Download annotations", icon=icons.icon_down),
+    ),
     ui.tags.div(
         ui.tags.hr(),
         ui.tags.p(
@@ -147,7 +148,7 @@ def server(input, output, session):
     """
     global res
 
-    ann_value = reactive.Value("# The annotations will appear here.")
+    ann_value = reactive.Value("# The annotations will appear under the visualization.")
     dot_value = reactive.Value("# The dot file will appear here.")
     msg_value = reactive.Value("Runtime messages will appear here.")
 
@@ -162,9 +163,9 @@ def server(input, output, session):
 
         idx_fname = res.INDEX_FILE
 
-        #index = res.find_index(code=code)
+        # index = res.find_index(code=code)
 
-        #msg = utils.index_stats(index=index, verbose=False)[-1]
+        # msg = utils.index_stats(index=index, verbose=False)[-1]
 
         msg = "OK"
 
