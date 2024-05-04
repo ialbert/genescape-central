@@ -123,6 +123,8 @@ All the above options may be applied in the user interface.
 
 Filters are applied during the annotation step and will filter the GO terms derived from the gene list.
 
+Use the **Mincount** filter to remove functions that are not well represented in the input list. `mincount` represents the number of genes in the input list that carry that function. If the graph is large set it to 2 or higher. You can see the maximum count in the **Function Annotations** box in the first column.
+
 ## Command line requirements
 
 To generate images from command line the `graphviz` software must be installed. You can install it via `conda`
