@@ -125,7 +125,7 @@ The filtering conditions that users can apply are:
 
 Filters are applied during the annotation step and will filter the GO terms derived from the gene list.
 
-Use the **Mincount** filter to remove functions that are not well represented in the input list. `mincount` represents the number of genes in the input list that carry that function. If the graph is large set it to 2 or higher. You can see the maximum count in the **Function Annotations** box in the first column.
+In the Shiny interface use the **Mincount** filter to remove functions that are not well represented in the input list. Recall that `mincount` represents the number of genes in the input list that carry that function. You can see the counts for each annotation in the **Function Annotations** box as the first column.
 
 ## Command line requirements
 
