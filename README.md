@@ -113,13 +113,15 @@ Numbers such as 1/4 mean how many genes in the input carry that function.
 
 The trees can get huge, even for a small number of genes. 
 
-Note the information in the box titles **Function Annotations** you can filter the terms in that box by:
+Users can greatly reduce the size of the graph by removing functions that are not well represented in the input list or by focusing the graph to contain only functions that match a pattern.
+
+Just by setting the `mincount` to 2 or higher is often enough to simplify the graph to a manageable size.
+
+The filtering conditions that users can apply are:
 
 1. a pattern that matches the **function** columns
-2. a minimum number of genes that carry that function shown in the **count** column
+2. a minimum number of genes that carry that function
 3. the GO subtree shown in the **root** column
-
-All the above options may be applied in the user interface.
 
 Filters are applied during the annotation step and will filter the GO terms derived from the gene list.
 
