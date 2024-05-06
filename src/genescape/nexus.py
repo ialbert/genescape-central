@@ -617,7 +617,8 @@ def annotate(tree, status, nodes=None):
 
     df = pd.DataFrame(rows)
 
-    df = df.sort_values(by='coverage', ascending=False)
+    if not df.empty:
+        df = df.sort_values(by='coverage', ascending=False)
 
     return df
 

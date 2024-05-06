@@ -2,7 +2,7 @@
 store = "~/.genescape"
 
 # A versioned directory for the data files
-tag = "v0.9.3"
+tag = "v0.9.4"
 
 # Minimum count
 MINCOUNT = 1

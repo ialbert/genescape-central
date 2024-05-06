@@ -95,7 +95,7 @@ test:
 	hatch run test 
 
 clean:
-	rm -rf build dist ${IDX_FILE}
+	rm -rf build dist ${IDX}
 
 env:
 	micromamba create -n shiny python=3.11 rsconnect-python graphviz make -y
