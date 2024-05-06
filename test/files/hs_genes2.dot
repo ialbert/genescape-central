@@ -1,9 +1,9 @@
 digraph genescape {
 "GO:0003674" [fillcolor="#A2CDF6", label="GO:0003674
-molecular_function [715]", shape=box, style=filled];
+molecular_function [714]", shape=box, style=filled];
 "GO:0004857" [fillcolor="#A2CDF6", label="GO:0004857
 enzyme inhibitor
-activity [35]", shape=box, style=filled];
+activity [39]", shape=box, style=filled];
 "GO:0004866" [fillcolor="#A3F6A2", label="GO:0004866
 endopeptidase
 inhibitor activity [39]
@@ -24,13 +24,34 @@ extracellular space [2K]
 "GO:0005737" [fillcolor="#A3F6A2", label="GO:0005737
 cytoplasm [5K]
 (1/4)", shape=box, style=filled];
+"GO:0007154" [fillcolor="#F6CBA2", label="GO:0007154
+cell communication [18]", shape=box, style=filled];
+"GO:0007267" [fillcolor="#F6CBA2", label="GO:0007267
+cell-cell signaling [229]", shape=box, style=filled];
+"GO:0007268" [fillcolor="#F6CBA2", label="GO:0007268
+chemical synaptic
+transmission [222]", shape=box, style=filled];
+"GO:0007610" [fillcolor="#F6CBA2", label="GO:0007610
+behavior [4]", shape=box, style=filled];
 "GO:0008047" [fillcolor="#A2CDF6", label="GO:0008047
 enzyme activator
-activity [59]", shape=box, style=filled];
+activity [61]", shape=box, style=filled];
 "GO:0008150" [fillcolor="#F6CBA2", label="GO:0008150
 biological_process [564]", shape=box, style=filled];
+"GO:0009987" [fillcolor="#F6CBA2", label="GO:0009987
+cellular process [0]", shape=box, style=filled];
 "GO:0016020" [fillcolor="#A3F6A2", label="GO:0016020
 membrane [3K]
+(1/4)", shape=box, style=filled];
+"GO:0019904" [fillcolor="#A2CDF6", label="GO:0019904
+protein domain
+specific binding [204]", shape=box, style=filled];
+"GO:0023052" [fillcolor="#F6CBA2", label="GO:0023052
+signaling [8]", shape=box, style=filled];
+"GO:0030054" [fillcolor="#F5A2F6", label="GO:0030054
+cell junction [179]", shape=box, style=filled];
+"GO:0030165" [fillcolor="#17DA15", label="GO:0030165
+PDZ domain binding [86]
 (1/4)", shape=box, style=filled];
 "GO:0030234" [fillcolor="#A2CDF6", label="GO:0030234
 enzyme regulator
@@ -46,34 +67,57 @@ BLOC complex [0]", shape=box, style=filled];
 "GO:0031083" [fillcolor="#17DA15", label="GO:0031083
 BLOC-1 complex [15]
 (1/4)", shape=box, style=filled];
+"GO:0031647" [fillcolor="#F6CBA2", label="GO:0031647
+regulation of
+protein stability [86]", shape=box, style=filled];
+"GO:0032501" [fillcolor="#F6CBA2", label="GO:0032501
+multicellular
+organismal process [0]", shape=box, style=filled];
 "GO:0032991" [fillcolor="#F5A2F6", label="GO:0032991
 protein-containing
-complex [614]", shape=box, style=filled];
+complex [611]", shape=box, style=filled];
+"GO:0035249" [fillcolor="#17DA15", label="GO:0035249
+synaptic
+transmission,
+glutamatergic [42]
+(1/4)", shape=box, style=filled];
+"GO:0035640" [fillcolor="#A3F6A2", label="GO:0035640
+exploration behavior [19]
+(1/4)", shape=box, style=filled];
 "GO:0043085" [fillcolor="#F6CBA2", label="GO:0043085
 positive regulation
 of catalytic
-activity [20]", shape=box, style=filled];
+activity [14]", shape=box, style=filled];
 "GO:0043087" [fillcolor="#F6CBA2", label="GO:0043087
 regulation of GTPase
 activity [61]", shape=box, style=filled];
 "GO:0043547" [fillcolor="#F6CBA2", label="GO:0043547
 positive regulation
-of GTPase activity [143]", shape=box, style=filled];
+of GTPase activity [123]", shape=box, style=filled];
 "GO:0044093" [fillcolor="#F6CBA2", label="GO:0044093
 positive regulation
 of molecular
 function [0]", shape=box, style=filled];
+"GO:0045202" [fillcolor="#F5A2F6", label="GO:0045202
+synapse [471]", shape=box, style=filled];
 "GO:0046982" [fillcolor="#17DA15", label="GO:0046982
 protein
 heterodimerization
-activity [313]
+activity [319]
 (1/4)", shape=box, style=filled];
 "GO:0046983" [fillcolor="#A2CDF6", label="GO:0046983
 protein dimerization
 activity [144]", shape=box, style=filled];
+"GO:0050789" [fillcolor="#F6CBA2", label="GO:0050789
+regulation of
+biological process [0]", shape=box, style=filled];
 "GO:0050790" [fillcolor="#F6CBA2", label="GO:0050790
 regulation of
-catalytic activity [13]", shape=box, style=filled];
+catalytic activity [11]", shape=box, style=filled];
+"GO:0050821" [fillcolor="#17DA15", label="GO:0050821
+protein
+stabilization [219]
+(1/4)", shape=box, style=filled];
 "GO:0051336" [fillcolor="#F6CBA2", label="GO:0051336
 regulation of
 hydrolase activity [0]", shape=box, style=filled];
@@ -94,6 +138,9 @@ regulator activity [2]", shape=box, style=filled];
 "GO:0065007" [fillcolor="#F6CBA2", label="GO:0065007
 biological
 regulation [0]", shape=box, style=filled];
+"GO:0065008" [fillcolor="#F6CBA2", label="GO:0065008
+regulation of
+biological quality [0]", shape=box, style=filled];
 "GO:0065009" [fillcolor="#F6CBA2", label="GO:0065009
 regulation of
 molecular function [0]", shape=box, style=filled];
@@ -104,16 +151,28 @@ activity [100]
 "GO:0098772" [fillcolor="#A2CDF6", label="GO:0098772
 molecular function
 regulator activity [0]", shape=box, style=filled];
+"GO:0098916" [fillcolor="#F6CBA2", label="GO:0098916
+anterograde trans-
+synaptic signaling [0]", shape=box, style=filled];
+"GO:0098978" [fillcolor="#A3F6A2", label="GO:0098978
+glutamatergic
+synapse [412]
+(1/4)", shape=box, style=filled];
+"GO:0099536" [fillcolor="#F6CBA2", label="GO:0099536
+synaptic signaling [7]", shape=box, style=filled];
+"GO:0099537" [fillcolor="#F6CBA2", label="GO:0099537
+trans-synaptic
+signaling [1]", shape=box, style=filled];
 "GO:0110165" [fillcolor="#F5A2F6", label="GO:0110165
 cellular anatomical
-entity [2]", shape=box, style=filled];
+entity [0]", shape=box, style=filled];
 "GO:0140535" [fillcolor="#F5A2F6", label="GO:0140535
 intracellular
 protein-containing
 complex [2]", shape=box, style=filled];
 "GO:0140677" [fillcolor="#A2CDF6", label="GO:0140677
 molecular function
-activator activity [24]", shape=box, style=filled];
+activator activity [25]", shape=box, style=filled];
 "GO:0140678" [fillcolor="#A2CDF6", label="GO:0140678
 molecular function
 inhibitor activity [27]", shape=box, style=filled];
@@ -121,11 +180,22 @@ inhibitor activity [27]", shape=box, style=filled];
 "GO:0003674" -> "GO:0098772";
 "GO:0004857" -> "GO:0030414";
 "GO:0005488" -> "GO:0005515";
+"GO:0005515" -> "GO:0019904";
 "GO:0005515" -> "GO:0046983";
 "GO:0005575" -> "GO:0032991";
 "GO:0005575" -> "GO:0110165";
+"GO:0007154" -> "GO:0007267";
+"GO:0007267" -> "GO:0099536";
+"GO:0007268" -> "GO:0035249";
+"GO:0007610" -> "GO:0035640";
 "GO:0008047" -> "GO:0005096";
+"GO:0008150" -> "GO:0009987";
+"GO:0008150" -> "GO:0032501";
 "GO:0008150" -> "GO:0065007";
+"GO:0009987" -> "GO:0007154";
+"GO:0019904" -> "GO:0030165";
+"GO:0023052" -> "GO:0007267";
+"GO:0030054" -> "GO:0045202";
 "GO:0030234" -> "GO:0004857";
 "GO:0030234" -> "GO:0008047";
 "GO:0030234" -> "GO:0060589";
@@ -133,12 +203,16 @@ inhibitor activity [27]", shape=box, style=filled];
 "GO:0030414" -> "GO:0004866";
 "GO:0030695" -> "GO:0005096";
 "GO:0031082" -> "GO:0031083";
+"GO:0031647" -> "GO:0050821";
+"GO:0032501" -> "GO:0007610";
 "GO:0032991" -> "GO:0140535";
 "GO:0043085" -> "GO:0051345";
 "GO:0043087" -> "GO:0043547";
 "GO:0043547" -> "GO:0090630";
 "GO:0044093" -> "GO:0043085";
+"GO:0045202" -> "GO:0098978";
 "GO:0046983" -> "GO:0046982";
+"GO:0050789" -> "GO:0023052";
 "GO:0050790" -> "GO:0043085";
 "GO:0050790" -> "GO:0051336";
 "GO:0051336" -> "GO:0043087";
@@ -148,15 +222,22 @@ inhibitor activity [27]", shape=box, style=filled];
 "GO:0061134" -> "GO:0030414";
 "GO:0061134" -> "GO:0061135";
 "GO:0061135" -> "GO:0004866";
+"GO:0065007" -> "GO:0050789";
+"GO:0065007" -> "GO:0065008";
 "GO:0065007" -> "GO:0065009";
+"GO:0065008" -> "GO:0031647";
 "GO:0065009" -> "GO:0044093";
 "GO:0065009" -> "GO:0050790";
 "GO:0098772" -> "GO:0030234";
 "GO:0098772" -> "GO:0140677";
 "GO:0098772" -> "GO:0140678";
+"GO:0098916" -> "GO:0007268";
+"GO:0099536" -> "GO:0099537";
+"GO:0099537" -> "GO:0098916";
 "GO:0110165" -> "GO:0005615";
 "GO:0110165" -> "GO:0005737";
 "GO:0110165" -> "GO:0016020";
+"GO:0110165" -> "GO:0030054";
 "GO:0140535" -> "GO:0031082";
 "GO:0140677" -> "GO:0008047";
 "GO:0140678" -> "GO:0004857";

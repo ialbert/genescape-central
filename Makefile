@@ -6,14 +6,14 @@
 
 # Default OBO file.
 OBO_URL = http://current.geneontology.org/ontology/go-basic.obo
-OBO_FILE = obo/go-basic.obo
+OBO = obo/go-basic.obo.gz
 
 # The gene association file.
 GAF_URL = https://current.geneontology.org/annotations/goa_human.gaf.gz
-GAF_FILE = obo/goa_human.gaf.gz
+GAF = obo/goa_human.gaf.gz
 
 # The index file.
-IDX_FILE = obo/genescape.index.gz
+IDX = genescape.index.gz
 
 # Makefile customizations
 SHELL := bash
@@ -69,36 +69,33 @@ publish: build
 	hatch publish
 
 # Download the gene ontology file
-${OBO_FILE}:
-	mkdir -p $(dir ${OBO_FILE})
-	curl -L ${OBO_URL} > ${OBO_FILE}
+${OBO}:
+	mkdir -p $(dir ${OBO})
+	curl -L ${OBO_URL} | gzip -c > ${OBO}
 
-${GAF_FILE}:
-	mkdir -p $(dir ${GAF_FILE})
-	curl -L ${GAF_URL} > ${GAF_FILE}
+${GAF}:
+	mkdir -p $(dir ${GAF})
+	curl -L ${GAF_URL} > ${GAF}
 
-${IDX_FILE}: ${OBO_FILE} ${GAF_FILE}
-	hatch run genescape build --obo ${OBO_FILE} --gaf ${GAF_FILE} --index ${IDX_FILE}
+${IDX}: ${OBO} ${GAF}
+	hatch run genescape build --obo ${OBO} --gaf ${GAF} --index ${IDX}
 
-obo: ${OBO_FILE}
-	ls -lh ${OBO_FILE}
+obo: ${OBO}
+	ls -lh ${OBO}
 
-gaf: ${GAF_FILE}
-	ls -lh ${GAF_FILE}
+gaf: ${GAF}
+	ls -lh ${GAF}
 
-index: ${IDX_FILE}
-	ls -lh ${IDX_FILE}
+index: ${IDX}
+	ls -lh ${IDX}
+	genescape build -s --index ${IDX}
 
 # Performs a python-only test.
 test:
-	hatch run test
-
-# A full test with file generation.
-testall: test
-	(cd test && make testall)
+	hatch run test 
 
 clean:
-	rm -rf build dist ${IDX_FILE}
+	rm -rf build dist ${IDX}
 
 env:
 	micromamba create -n shiny python=3.11 rsconnect-python graphviz make -y

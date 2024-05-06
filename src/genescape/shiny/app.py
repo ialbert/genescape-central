@@ -2,7 +2,8 @@ from shiny import reactive
 from shiny import App, render, ui
 import asyncio, os
 from genescape import icons
-from genescape import __version__, annot, resources, tree, utils
+from genescape import __version__, nexus, utils, resources
+import pandas as pd
 
 # Get a resource configuration file.
 cnf_fname = os.environ.get("GENESCAPE_CONFIG", None)
@@ -42,6 +43,20 @@ SIDEBAR_BG = res.config.get("SIDEBAR_WIDTH", "#f9f9f9")
 # Home page link
 HOME = "https://github.com/ialbert/genescape-central/"
 
+HELP = """
+Press "Draw Tree" to generate the graph.  The annotations will appear in the table below. 
+        
+Reduce the graph size by filtering for coverage or words in the functions (regex ok).
+"""
+
+DOCS = """
+* The coverage indicates how many genes in the input cover that function.
+* Green nodes indicate functions present in input genes.
+* Dark green nodes indicate leaf nodes in the ontology (highest possible granularity).
+* Subtrees are colored by Ontology namespace: Cellular Component (pink), Molecular Function (blue), Biological Process (beige).
+* The number `[234]` in a node indicates the number of annotation for that GO term in total.
+* The number `(1/5)` in a node indicates how many input genes carry that function.
+"""
 app_ui = ui.page_sidebar(
 
     ui.sidebar(
@@ -54,7 +69,7 @@ app_ui = ui.page_sidebar(
                    "Organism", DATABASE_CHOICES,
                ),
 
-               ui.input_text("mincount", label="Mincount", value=MINCOUNT),
+               ui.input_text("mincount", label="Coverage", value=MINCOUNT),
                ui.input_text("pattern", label="Pattern", value=PATTERN),
 
                ui.input_select(
@@ -69,10 +84,14 @@ app_ui = ui.page_sidebar(
                ),
         ui.input_action_button("submit", "Draw Tree", class_="btn-success", icon=icons.icon_play),
 
-        ui.output_code("annot_elem"),
-        ui.download_link("download_csv", "Download annotations", icon=icons.icon_down),
+        ui.tags.p(
+            ui.download_link("download_csv", "Download annotations as CSV", icon=icons.icon_down),
+        ),
+        ui.tags.p(
+            ui.download_link("download_dot", "Download graph as a DOT file", icon=icons.icon_down),
+        ),
+        ui.output_code("annot_csv"),
         ui.output_code("dot_elem"),
-        ui.download_link("download_dot", "Download dot file", icon=icons.icon_down),
 
         width=SIDEBAR_WIDTH, bg=SIDEBAR_BG,
     ),
@@ -102,19 +121,29 @@ app_ui = ui.page_sidebar(
                                data_action="zoom-out"),
         ui.tags.span(" "),
         ui.input_action_button("saveImage", "Save", class_="btn btn-light btn-sm", icon=icons.icon_down),
+
         align="center",
     ),
 
-    ui.tags.hr(),
+    ui.tags.p(
+        # ui.tags.hr(),
+        ui.output_text("err_label"),
+        ui.p(
+            id="graph_elem", align="center"),
+    ),
 
     ui.tags.p(
-
-        ui.p("""Press "Draw Tree" to generate the graph""", id="graph_elem", align="center"),
-        # TODO ui.div(
-        #    ui.output_text("msg_elem"),
-        #    align="center",
-        # ),
+        ui.tags.div(
+            ui.output_text("msg_elem"),
+            align="center"),
     ),
+
+    ui.tags.p(
+        ui.output_data_frame("annot_table"),
+    ),
+
+    ui.tags.hr(),
+    ui.markdown(DOCS),
 
     ui.tags.div(
         ui.tags.hr(),
@@ -124,6 +153,7 @@ app_ui = ui.page_sidebar(
         ui.tags.p(f"GeneScape {__version__}"),
         align="center",
     ),
+
     ui.output_text("run_elem"),
 
     title=PAGE_TITLE, id="main",
@@ -147,32 +177,60 @@ def server(input, output, session):
     """
     global res
 
-    ann_value = reactive.Value("# The annotations will appear here.")
+    # The annotation table.
+    ann_table = reactive.Value(pd.DataFrame())
+
+    # Runtime messages
+    msg_value = reactive.Value(HELP)
+
+    # Runtime error message
+    err_value = reactive.Value("")
+
+    # Annotation as a CSV string (invisible)
+    ann_csv = reactive.Value("# The annotation table will appear here.")
+
+    # The dot file as a text (invisible)
     dot_value = reactive.Value("# The dot file will appear here.")
-    msg_value = reactive.Value("Runtime messages will appear here.")
 
     async def create_tree(text):
         mincount = int(input.mincount())
         pattern = input.pattern()
         code = input.database()
 
-        inp = text2list(text)
+        genes = text2list(text)
 
         root = input.root()
 
-        index = res.find_index(code=code)
+        # idx_fname = res.INDEX_FILE
 
-        #msg = utils.index_stats(index=index, verbose=False)[-1]
-        msg = "OK"
-        graph, ann = tree.parse_input(inp=inp, index=index, mincount=mincount, pattern=pattern, root=root)
+        idx_fname = res.find_index(code=code)
 
-        dot = tree.write_tree(graph, ann, out=None)
+        # msg = utils.index_stats(index=index, verbose=False)[-1]
 
-        text = annot.ann2csv(ann)
+        idx, dot, tree, ann, status = nexus.run(genes=genes, idx_fname=idx_fname, mincount=mincount, pattern=pattern,
+                                                root=root)
 
-        ann_value.set(text)
-        dot_value.set(dot)
+        ann_table.set(ann)
+        ann_csv.set(ann.to_csv(index=False))
+        dot_value.set(dot.to_string())
+
+        nodes = len(tree.nodes())
+        edges = len(tree.edges())
+        stats = nexus.stats(idx)
+
+        valid_count = len(status.get('sym_valid',[]))
+
+        # Set main message.
+        msg = f"Recognized {valid_count} symbols. Subgraph with {nodes} nodes and {edges} edges. Index: {stats[0]:,d} mappings of {stats[1]:,d} genes,over {stats[2]} terms."
         msg_value.set(msg)
+
+        # Set the error message
+        miss = status.get("sym_miss")
+        if miss:
+            msg = f"Unknown symbols: {', '.join(miss)}"
+            err_value.set(msg)
+        else:
+            err_value.set("")
 
         async def trigger():
             await session.send_custom_message("trigger", 1)
@@ -184,7 +242,7 @@ def server(input, output, session):
     @render.download(filename=lambda: "genescape.csv")
     async def download_csv():
         await asyncio.sleep(0.5)
-        yield ann_value.get()
+        yield ann_csv.get()
 
     @render.download(filename=lambda: "genescape.dot.txt")
     async def download_dot():
@@ -192,9 +250,20 @@ def server(input, output, session):
         yield dot_value.get()
 
     @output
+    @render.data_frame
+    def annot_table():
+        df = ann_table.get()
+        return render.DataTable(df, width='fit-content')
+
+    @output
     @render.text
-    def annot_elem():
-        return ann_value.get()
+    def annot_csv():
+        return ann_csv.get()
+
+    @output
+    @render.text
+    def err_label():
+        return err_value.get()
 
     @output
     @render.text

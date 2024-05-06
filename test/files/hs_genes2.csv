@@ -1,0 +1,14 @@
+coverage,function,node_id,source,size,ann_count,ann_total,desc_count
+1,endopeptidase inhibitor activity,GO:0004866,C3P1,4,39,199,5
+1,GTPase activator activity,GO:0005096,GRTP1,4,274,274,0
+1,extracellular space,GO:0005615,C3P1,4,1669,1669,0
+1,cytoplasm,GO:0005737,BCAS4,4,5118,5452,44
+1,membrane,GO:0016020,ABTB3,4,3268,20199,360
+1,PDZ domain binding,GO:0030165,ABTB3,4,86,86,0
+1,BLOC-1 complex,GO:0031083,BCAS4,4,15,15,0
+1,"synaptic transmission, glutamatergic",GO:0035249,ABTB3,4,42,42,0
+1,exploration behavior,GO:0035640,ABTB3,4,19,35,1
+1,protein heterodimerization activity,GO:0046982,ABTB3,4,319,319,0
+1,protein stabilization,GO:0050821,ABTB3,4,219,219,0
+1,activation of GTPase activity,GO:0090630,GRTP1,4,100,100,0
+1,glutamatergic synapse,GO:0098978,ABTB3,4,412,428,3

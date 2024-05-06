@@ -37,6 +37,25 @@ def init_logger(logger):
     logger.addHandler(handler)
 
 
+def memoize(func):
+    storage = {}
+
+    def cache(*args, **kwargs):
+        # Create a key based on the function's arguments
+        key = (args, tuple(kwargs.items()))
+
+        # If the result is already in the cache, return it
+        if key in storage:
+            debug("cache hit")
+            return storage[key]
+
+        # Call the function and store the result in the cache
+        result = func(*args, **kwargs)
+        storage[key] = result
+        return result
+
+    return cache
+
 # Set the log level
 def verbosity(flag=False):
     global logger
@@ -60,7 +79,6 @@ error = logger.error
 def stop(msg):
     logger.error(msg)
     sys.exit(1)
-
 
 # The keys in the data annotation object.
 STATUS_FIELD, DATA_FIELD, CODE_FIELD, ERROR_FIELD, INVALID_FIELD = "status", "data", "code", "errors", "unknown_terms"
@@ -230,6 +248,30 @@ def get_goterms(graph):
 
     return goterms
 
+def parse_genes(fname):
+    if not fname:
+        stop("no input file provided")
+
+    fname = Path(fname)
+
+    if not fname.exists():
+        info(f"file not found: {fname}")
+
+    stream = open(fname, "rt")
+    stream = map(lambda x: x.strip(), stream)
+    stream = filter(lambda x: x, stream)
+    stream = filter(lambda x: not x.startswith("#"), stream)
+    reader = csv.reader(stream)
+    reader = map(lambda x: x[0], reader)
+    reader = list(reader)
+
+    if len(reader) < 1:
+        stop("no genes found in the input file.")
+
+    debug(f"input size: {len(reader)}")
+
+    return reader
+
 
 def timer(func):
     """
@@ -237,15 +279,15 @@ def timer(func):
     """
 
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+    def timer(*args, **kwargs):
         start = time.time()
         result = func(*args, **kwargs)
         end = time.time()
         elapsed = end - start
-        info(f"{func.__name__}:  {elapsed:.2f} seconds")
+        info(f"{func.__name__}: {elapsed:.2f} seconds")
         return result
 
-    return wrapper
+    return timer
 
 
 def index_stats(index, verbose=False):

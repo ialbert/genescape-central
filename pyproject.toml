@@ -30,6 +30,7 @@ dependencies = [
   "pydot",
   "shiny",
   "faicons",
+  "pandas",
 ]
 
 [project.urls]
@@ -38,7 +39,7 @@ Issues = "https://github.com/ialbert/genescape-central/issues"
 Source = "https://github.com/ialbert/genescape-central"
 
 [project.scripts]
-"genescape" = "genescape.main:cli"
+"genescape" = "genescape.main:run"
 
 [tool.hatch.metadata]
 include = [
