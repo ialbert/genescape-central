@@ -14,8 +14,10 @@
 }
 
 #graph_elem {
-    max-height: 500px;
+    max-height: 600px;
     overflow-y: auto;
+    border: var(--border-color) solid 1px;
+    padding:20px;
 }
 
 #dot_elem {

@@ -425,7 +425,7 @@ def make_pydot(tree, status):
         src_tot = node[INP_LEN_TOT]
 
         valid_len = len(sym_valid)
-        label = f"{goid}\n{text} [{ann_count}] [{ann_total}]"
+        label = f"{goid}\n{text} [{ann_count}]"
         if is_input:
             fillcolor = utils.LEAF_COLOR if is_leaf else utils.INPUT_COLOR
             label = f"{label}\n({src_tot}/{valid_len})"

@@ -50,10 +50,12 @@ Reduce the graph size by filtering for coverage or words in the functions (regex
 """
 
 DOCS = """
-* Coverage indicates how many genes in the input cover that function.
+* The coverage indicates how many genes in the input cover that function.
 * Green nodes indicate functions present in input genes.
 * Dark green nodes indicate leaf nodes in the ontology (highest possible granularity).
-* Subtrees are colored by Ontology namespace: Cellular Component (blue), Molecular Function (beige), Biological Process (pink).
+* Subtrees are colored by Ontology namespace: Cellular Component (pink), Molecular Function (blue), Biological Process (beige).
+* The number `[234]` in a node indicates the number of annotation for that GO term in total.
+* The number `(1/5)` indicates how many input genes carry that function.
 """
 app_ui = ui.page_sidebar(
 
@@ -67,7 +69,7 @@ app_ui = ui.page_sidebar(
                    "Organism", DATABASE_CHOICES,
                ),
 
-               ui.input_text("mincount", label="Mincount", value=MINCOUNT),
+               ui.input_text("mincount", label="Coverage", value=MINCOUNT),
                ui.input_text("pattern", label="Pattern", value=PATTERN),
 
                ui.input_select(
@@ -123,10 +125,10 @@ app_ui = ui.page_sidebar(
         align="center",
     ),
 
-    ui.tags.hr(),
+
 
     ui.tags.p(
-
+        #ui.tags.hr(),
         ui.p(
             ui.markdown(HELP),
             id="graph_elem", align="center"),
@@ -135,11 +137,14 @@ app_ui = ui.page_sidebar(
         #    align="center",
         # ),
     ),
-    ui.tags.hr(),
+
+ui.tags.hr(),
+
     ui.tags.p(
         ui.output_data_frame("annot_table"),
     ),
 
+ui.tags.hr(),
     ui.markdown(DOCS),
 
     ui.tags.div(
