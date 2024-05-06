@@ -44,7 +44,7 @@ SIDEBAR_BG = res.config.get("SIDEBAR_WIDTH", "#f9f9f9")
 HOME = "https://github.com/ialbert/genescape-central/"
 
 HELP = """
-**Instructions**: Press **Draw Tree** to generate the graph.  The annotations will appear in the table below. 
+Press "Draw Tree" to generate the graph.  The annotations will appear in the table below. 
         
 Reduce the graph size by filtering for coverage or words in the functions (regex ok).
 """
@@ -55,7 +55,7 @@ DOCS = """
 * Dark green nodes indicate leaf nodes in the ontology (highest possible granularity).
 * Subtrees are colored by Ontology namespace: Cellular Component (pink), Molecular Function (blue), Biological Process (beige).
 * The number `[234]` in a node indicates the number of annotation for that GO term in total.
-* The number `(1/5)` indicates how many input genes carry that function.
+* The number `(1/5)` in a node indicates how many input genes carry that function.
 """
 app_ui = ui.page_sidebar(
 
@@ -125,26 +125,24 @@ app_ui = ui.page_sidebar(
         align="center",
     ),
 
-
-
     ui.tags.p(
-        #ui.tags.hr(),
+        # ui.tags.hr(),
+        ui.output_text("err_label"),
         ui.p(
-            ui.markdown(HELP),
             id="graph_elem", align="center"),
-        # TODO ui.div(
-        #    ui.output_text("msg_elem"),
-        #    align="center",
-        # ),
     ),
 
-ui.tags.hr(),
+    ui.tags.p(
+        ui.tags.div(
+            ui.output_text("msg_elem"),
+            align="center"),
+    ),
 
     ui.tags.p(
         ui.output_data_frame("annot_table"),
     ),
 
-ui.tags.hr(),
+    ui.tags.hr(),
     ui.markdown(DOCS),
 
     ui.tags.div(
@@ -183,7 +181,10 @@ def server(input, output, session):
     ann_table = reactive.Value(pd.DataFrame())
 
     # Runtime messages
-    msg_value = reactive.Value("Runtime messages will appear here.")
+    msg_value = reactive.Value(HELP)
+
+    # Runtime error message
+    err_value = reactive.Value("")
 
     # Annotation as a CSV string (invisible)
     ann_csv = reactive.Value("# The annotation table will appear here.")
@@ -200,20 +201,36 @@ def server(input, output, session):
 
         root = input.root()
 
-        idx_fname = res.INDEX_FILE
+        # idx_fname = res.INDEX_FILE
 
-        # index = res.find_index(code=code)
+        idx_fname = res.find_index(code=code)
 
         # msg = utils.index_stats(index=index, verbose=False)[-1]
 
-        msg = "OK"
-
-        dot, tree, ann = nexus.run(genes=genes, idx_fname=idx_fname, mincount=mincount, pattern=pattern, root=root)
+        idx, dot, tree, ann, status = nexus.run(genes=genes, idx_fname=idx_fname, mincount=mincount, pattern=pattern,
+                                                root=root)
 
         ann_table.set(ann)
         ann_csv.set(ann.to_csv(index=False))
         dot_value.set(dot.to_string())
+
+        nodes = len(tree.nodes())
+        edges = len(tree.edges())
+        stats = nexus.stats(idx)
+
+        valid_count = len(status.get('sym_valid',[]))
+
+        # Set main message.
+        msg = f"Recognized {valid_count} symbols. Subgraph with {nodes} nodes and {edges} edges. Index: {stats[0]:,d} mappings of {stats[1]:,d} genes,over {stats[2]} terms."
         msg_value.set(msg)
+
+        # Set the error message
+        miss = status.get("sym_miss")
+        if miss:
+            msg = f"Unknown symbols: {', '.join(miss)}"
+            err_value.set(msg)
+        else:
+            err_value.set("")
 
         async def trigger():
             await session.send_custom_message("trigger", 1)
@@ -241,8 +258,12 @@ def server(input, output, session):
     @output
     @render.text
     def annot_csv():
-        text = ann_csv.get()
-        return text
+        return ann_csv.get()
+
+    @output
+    @render.text
+    def err_label():
+        return err_value.get()
 
     @output
     @render.text

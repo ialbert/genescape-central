@@ -49,7 +49,9 @@ def test_genescape(inp_name, out_name, cmd):
     res = runner.invoke(main.run, full.split())
 
     # Check that the command completed correctly
-    assert res.exit_code == 0
+    if res.exit_code != 0:
+        print (f"Command: genescape {full}")
+        assert res.exit_code == 0
 
     exp_value = read_file(exp_path)
     gen_value = read_file(gen_path)

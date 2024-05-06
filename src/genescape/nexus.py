@@ -617,6 +617,8 @@ def annotate(tree, status, nodes=None):
 
     df = pd.DataFrame(rows)
 
+    df = df.sort_values(by='coverage', ascending=False)
+
     return df
 
 
@@ -655,14 +657,13 @@ def run(idx_fname, genes, root=utils.NS_ALL,  pattern="", mincount=1):
     # Select the subgraph
     tree, status = make_graph(targets=genes, idx=idx, graph=graph, root=root, mincount=mincount, pattern=pattern)
 
-
     # Generate the annotations.
     ann = annotate(tree=tree, status=status)
 
     # Transform the tree into a pydot graph
     dot = make_pydot(tree, status)
 
-    return dot, tree, ann
+    return idx, dot, tree, ann, status
 
 def build_test():
     res = resources.init()

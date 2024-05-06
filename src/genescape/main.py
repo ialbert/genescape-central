@@ -50,7 +50,7 @@ def run():
 @click.option("-i", "--idx", "idx_fname", metavar="TEXT", help="Genescape index file.")
 @click.option("-o", "--out", "out_fname", default="", metavar="TEXT", help="Output file (default: screen).")
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
-@click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal count for a GO term (1)")
+@click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal coverage for a GO term (1)")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
 @click.option('-r', '--root',
               type=click.Choice(ROOT_CHOICES, case_sensitive=False),
@@ -72,14 +72,16 @@ def annotate(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=Fal
 
     targets = utils.parse_genes(fname)
 
-    dot, tree, ann = nexus.run(genes=targets, idx_fname=idx_fname, root=root, pattern=match, mincount=count)
+    idx, dot, tree, ann, status = nexus.run(genes=targets, idx_fname=idx_fname, root=root, pattern=match, mincount=count)
+
+    text = ann.to_csv(index=False)
 
     if out_fname:
         utils.info(f"output: {out_fname}")
         with open(out_fname, "wt") as fp:
-            fp.write(ann)
+            fp.write(text)
     else:
-        print(ann, end='')
+        print(text, end='')
 
 
 @run.command()
@@ -87,7 +89,7 @@ def annotate(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=Fal
 @click.option("-i", "--idx", "idx_fname", metavar="TEXT", help="Genescape index file.")
 @click.option("-o", "--out", "out_fname", default="output.pdf", metavar="TEXT", help="Output image file.")
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
-@click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal count for a GO term (1)")
+@click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal coverage for a GO term (1)")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
 @click.option('-r', '--root',
               type=click.Choice(ROOT_CHOICES, case_sensitive=False),
@@ -109,7 +111,7 @@ def tree(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=False, 
 
     targets = utils.parse_genes(fname)
 
-    dot, tree, ann = nexus.run(genes=targets, idx_fname=idx_fname, root=root, pattern=match, mincount=count)
+    idx, dot, tree, ann, status = nexus.run(genes=targets, idx_fname=idx_fname, root=root, pattern=match, mincount=count)
 
     nexus.save_graph(dot, fname=out_fname, imgsize=2048)
 
@@ -117,7 +119,7 @@ def tree(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=False, 
 @run.command()
 @click.option("-b", "--obo", "obo_fname", help="Input OBO file (go-basic.obo)")
 @click.option("-g", "--gaf", "gaf_fname", help="Input GAF file (goa_human.gaf.gz)")
-@click.option("-i", "--index", "idx_fname", default="genescape.index.gz", help="Output index file (genescape.json.gz)")
+@click.option("-i", "--index", "idx_fname", default="", help="Output index file (genescape.json.gz)")
 @click.option("-s", "--stats", "stats", is_flag=True, help="Print the index stats")
 @click.option("-d", "--dump", "dump", is_flag=True, help="Print the index file to the screen")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
@@ -127,7 +129,7 @@ def build(idx_fname=None, obo_fname=None, gaf_fname=None, stats=False, dump=Fals
     Builds index file from an OBO and GAF file.
     """
     res = resources.init()
-
+    idx_fname = idx_fname or res.INDEX_FILE
     if stats:
         idx = nexus.load_index(idx_fname)
         nexus.stats(idx)

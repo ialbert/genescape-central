@@ -2,7 +2,7 @@
 store = "~/.genescape"
 
 # A versioned directory for the data files
-tag = "v0.9.2"
+tag = "v0.9.3"
 
 # Minimum count
 MINCOUNT = 1
@@ -29,38 +29,66 @@ GRTP1
 
 # A listing of the files used by GeneScape
 [[files]]
-target = "genescape.human.json.gz"
+target = "human.index.gz"
 type = "index"
 label = "Human"
 code = "human"
 package = 'genescape.data'
 
 [[files]]
-target = "genescape.mouse.json.gz"
+target = "mouse.index.gz"
 type = "index"
 label = "Mouse"
 code = "mouse"
 package = 'genescape.data'
 
 [[files]]
-target = "genescape.rat.json.gz"
+target = "rat.index.gz"
 type = "index"
 label = "Rat"
 code = "rat"
 package = 'genescape.data'
 
 [[files]]
-target = "genescape.flybase.json.gz"
+target = "fly.index.gz"
 type = "index"
 label = "Fruitfly"
 code = "fly"
 package = 'genescape.data'
 
 [[files]]
-target = "genescape.zebrafish.json.gz"
+target = "zebrafish.index.gz"
 type = "index"
 label = "Zebrafish"
 code = "zfish"
+package = 'genescape.data'
+
+[[files]]
+target = "worm.index.gz"
+type = "index"
+label = "Worm"
+code = "worm"
+package = 'genescape.data'
+
+[[files]]
+target = "ecoli.index.gz"
+type = "index"
+label = "E.Coli"
+code = "ecoli"
+package = 'genescape.data'
+
+[[files]]
+target = "yeast.index.gz"
+type = "index"
+label = "Yeast"
+code = "yeast"
+package = 'genescape.data'
+
+[[files]]
+target = "arabidopsis.index.gz"
+type = "index"
+label = "Arabidopsis"
+code = "arabidopsis"
 package = 'genescape.data'
 
 [[files]]

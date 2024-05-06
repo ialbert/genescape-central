@@ -189,6 +189,7 @@ When filtered as shown above, the output is much more manageable:
 
 ![GeneScape output][out3]
 
+
 [out3]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/genescape-output3.png
 
 ## genetrack annotation
@@ -205,21 +206,26 @@ Smpd3
 The command:
 
 ```console
-genescape annotate --test --csv
+genescape annotate --test 
 ```
 
 will produce the output:
 
 ```
-count,function,root,goid,source,size,label
-1,activation of GTPase activity,BP,GO:0090630,GRTP1,4,(1/4)
-1,protein heterodimerization activity,MF,GO:0046982,ABTB3,4,(1/4)
-1,BLOC-1 complex,CC,GO:0031083,BCAS4,4,(1/4)
-1,membrane,CC,GO:0016020,ABTB3,4,(1/4)
-1,cytoplasm,CC,GO:0005737,BCAS4,4,(1/4)
-1,extracellular space,CC,GO:0005615,C3P1,4,(1/4)
-1,GTPase activator activity,MF,GO:0005096,GRTP1,4,(1/4)
-1,endopeptidase inhibitor activity,MF,GO:0004866,C3P1,4,(1/4)
+coverage,function,node_id,source,size,ann_count,ann_total,desc_count
+1,endopeptidase inhibitor activity,GO:0004866,C3P1,4,39,199,5
+1,GTPase activator activity,GO:0005096,GRTP1,4,274,274,0
+1,extracellular space,GO:0005615,C3P1,4,1669,1669,0
+1,cytoplasm,GO:0005737,BCAS4,4,5118,5452,44
+1,membrane,GO:0016020,ABTB3,4,3268,20199,360
+1,PDZ domain binding,GO:0030165,ABTB3,4,86,86,0
+1,BLOC-1 complex,GO:0031083,BCAS4,4,15,15,0
+1,"synaptic transmission, glutamatergic",GO:0035249,ABTB3,4,42,42,0
+1,exploration behavior,GO:0035640,ABTB3,4,19,35,1
+1,protein heterodimerization activity,GO:0046982,ABTB3,4,319,319,0
+1,protein stabilization,GO:0050821,ABTB3,4,219,219,0
+1,activation of GTPase activity,GO:0090630,GRTP1,4,100,100,0
+1,glutamatergic synapse,GO:0098978,ABTB3,4,412,428,3
 ```
 
 ## genescape build
@@ -233,7 +239,7 @@ To build an index for a different organism, download the GAF association file fr
 To build the new index use:
 
 ```console
-genescape build --gaf mydata.gaf.gz -i mydata.index.gz 
+genescape build --gaf mydata.gaf.gz --obo go.basic.gz -i mydata.index.gz 
 ```
 
 To use the custom index, pass the `-i` (`--index`) option to any of the commands, `web`, `tree` and `annotate` like so:
@@ -265,14 +271,6 @@ Tests are run via a `Makefile` as:
 ```console
 make test
 ```
-
-A more comprehensive test suite is available in the `tests` directory and can be run in that directory via:
-
-```console  
-make testall
-```
-
-The `testall` command requires that `graphviz` is installed and available on the `PATH`.
 
 ## Additional customizations
 
