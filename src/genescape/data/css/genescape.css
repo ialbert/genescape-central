@@ -8,12 +8,19 @@
     border: var(--border-color) solid 1px;
 }
 
-#annot_elem {
-    min-height: 250px;
+#annot_csv {
+    min-height: 10px;
+    visibility: hidden;
+}
+
+#graph_elem {
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 #dot_elem {
-    height: 250px;
+    height: 10px;
+    visibility: hidden;
 }
 
 #main {

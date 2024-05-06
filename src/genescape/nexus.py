@@ -11,6 +11,7 @@ import networkx as nx
 import pydot
 from pprint import pprint
 from genescape.__about__ import __version__
+import pandas as pd
 
 # Namespace categories
 NS_BP, NS_MF, NS_CC, NS_ALL = "BP", "MF", "CC", "ALL"
@@ -588,35 +589,35 @@ def fill_graph(idx):
 
     return obo
 
-def annotate(tree, status):
+def annotate(tree, status, nodes=None):
     sym_valid = status[SYM_VALID]
     sym_size = len(sym_valid)
 
     inp_nodes = filter(lambda x: tree.nodes[x][INP_FLAG], tree.nodes())
 
-    stream = io.StringIO()
-    writer = csv.DictWriter(stream, fieldnames=["count", "name", "node_id", "source", "size", "ann_count", "ann_total", "desc_count"])
-    writer.writeheader()
+    rows = []
     for node_id in inp_nodes:
         node = tree.nodes[node_id]
-        name = node["name"]
+        func_name = node["name"]
         source = "|".join(sorted(node[INP_SYM]))
         count = node[INP_LEN]
         ann_count = node[ANNO_COUNT]
         ann_total = node[ANNO_TOTAL]
         desc_count = node[DESC_COUNT]
 
-        data = dict(count=count, node_id=node_id, name=name,
-                    source=source, size=sym_size,
+        data = dict(coverage=count, function=func_name,
+                    node_id=node_id,
+                    source=source,
+                    size=sym_size,
                     ann_count=ann_count,
                     ann_total=ann_total,
-                    desc_count=desc_count)
+                    desc_count=desc_count
+                    )
+        rows.append(data)
 
-        writer.writerow(data)
+    df = pd.DataFrame(rows)
 
-    text = stream.getvalue()
-
-    return text
+    return df
 
 
 def save_graph(pgraph, fname, imgsize=2048):
@@ -674,12 +675,13 @@ def build_test():
 
 if __name__ == '__main__':
 
-    build_test()
+    #build_test()
 
-    sys.exit()
+    #sys.exit()
 
     genes = "GO:0035639 GO:0097159  ".split()
 
+    res = resources.init()
     obo_fname = res.OBO_FILE
     gaf_fname = res.GAF_FILE
     idx_fname = res.INDEX_FILE
@@ -690,6 +692,8 @@ if __name__ == '__main__':
 
     dot, tree, ann = run(genes=genes, idx_fname=idx_fname,  root=root, pattern=pattern, mincount=mincount)
 
-    save_graph(dot, fname="output.pdf", imgsize=2048)
+    #save_graph(dot, fname="output.pdf", imgsize=2048)
 
-    print(ann)
+    text = ann.to_csv(index=False)
+
+    print(text)

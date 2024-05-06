@@ -30,6 +30,7 @@ dependencies = [
   "pydot",
   "shiny",
   "faicons",
+  "pandas",
 ]
 
 [project.urls]
