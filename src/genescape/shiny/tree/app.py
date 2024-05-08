@@ -44,12 +44,11 @@ SIDEBAR_BG = res.config.get("SIDEBAR_WIDTH", "#f9f9f9")
 HOME = "https://github.com/ialbert/genescape-central/"
 
 HELP = """
-Press "Draw Tree" to generate the graph.  The annotations will appear in the table below. 
-        
-Reduce the graph size by filtering for coverage or words in the functions (regex ok).
+The functional annotations will be shown in the table below. 
 """
 
 DOCS = """
+* Reduce the graph size by filtering for coverage or words in the functions (regex ok).
 * The coverage indicates how many genes in the input cover that function.
 * Green nodes indicate functions present in input genes.
 * Dark green nodes indicate leaf nodes in the ontology (highest possible granularity).
@@ -57,6 +56,9 @@ DOCS = """
 * The number `[234]` in a node indicates the number of annotation for that GO term in total.
 * The number `(1/5)` in a node indicates how many input genes carry that function.
 """
+
+ANN_COLUMNS = "coverage,function,node_id,source,size,ann_count,ann_total,desc_count".split(",")
+
 app_ui = ui.page_sidebar(
 
     ui.sidebar(
@@ -129,6 +131,7 @@ app_ui = ui.page_sidebar(
         # ui.tags.hr(),
         ui.output_text("err_label"),
         ui.p(
+            ui.tags.b('Press "Draw Tree" to generate the graph.  '),
             id="graph_elem", align="center"),
     ),
 
@@ -178,7 +181,7 @@ def server(input, output, session):
     global res
 
     # The annotation table.
-    ann_table = reactive.Value(pd.DataFrame())
+    ann_table = reactive.Value(pd.DataFrame(columns=ANN_COLUMNS))
 
     # Runtime messages
     msg_value = reactive.Value(HELP)

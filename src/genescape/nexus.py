@@ -617,6 +617,7 @@ def annotate(tree, status, nodes=None):
 
     df = pd.DataFrame(rows)
 
+    # Sort the results.
     if not df.empty:
         df = df.sort_values(by='coverage', ascending=False)
 
@@ -647,6 +648,7 @@ def run(idx_fname, genes, root=utils.NS_ALL,  pattern="", mincount=1):
     Creates a tree and an annotation
     """
 
+    # Log to the screen.
     utils.info(f"index: {idx_fname}")
 
     # build_index(obo_fname=obo_fname, gaf_fname=gaf_fname, idx_fname=idx_fname)
@@ -655,17 +657,19 @@ def run(idx_fname, genes, root=utils.NS_ALL,  pattern="", mincount=1):
     # Print the statistics
     stats(idx)
 
-    # Select the subgraph
+    # Compute the subgraph and the status
     tree, status = make_graph(targets=genes, idx=idx, graph=graph, root=root, mincount=mincount, pattern=pattern)
 
-    # Generate the annotations.
+    # Generate the annotations from the tree.
     ann = annotate(tree=tree, status=status)
 
-    # Transform the tree into a pydot graph
+    # Transform the tree into a pydot graph.
     dot = make_pydot(tree, status)
 
+    # Return all the derived objects.
     return idx, dot, tree, ann, status
 
+# Used in testing.
 def build_test():
     res = resources.init()
 

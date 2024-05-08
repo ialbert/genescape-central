@@ -100,8 +100,10 @@ clean:
 env:
 	micromamba create -n shiny python=3.11 rsconnect-python graphviz make -y
 
-shiny:
-	#pip install rsconnect-python
-	rsconnect deploy shiny src/genescape/shiny --name biostar --title GeneScape
+shiny-tree:
+	rsconnect deploy shiny src/genescape/shiny/tree --name biostar --title GeneScape
+
+install:
+	pip install rsconnect-python
 
 .PHONY: test lint fix push clean build publish obo docimg web
