@@ -643,10 +643,13 @@ def save_graph(pgraph, fname, imgsize=2048):
         utils.warn(f"Unknown output format: {fname}")
 
 
-def run(idx_fname, genes, root=utils.NS_ALL,  pattern="", mincount=1):
+def run(idx_fname, genes, root=None,  pattern="", mincount=1):
     """
     Creates a tree and an annotation
     """
+
+    # Select defaults
+    root = root or utils.NS_ALL
 
     # Log to the screen.
     utils.info(f"index: {idx_fname}")
