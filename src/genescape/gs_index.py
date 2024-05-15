@@ -1,3 +1,6 @@
+"""
+Represents a GeneScape index.
+"""
 import csv, gzip, json, os
 from pathlib import Path
 from itertools import tee, takewhile, dropwhile, islice
@@ -35,6 +38,12 @@ class Index:
         # Maps names to symbols (synonyms).
         self.name2sym = self.data.get(self.NAME2SYM) or dict()
 
+        # The graph representation of the ontology.
+        self.graph = nx.DiGraph()
+
+    def init_graph(self):
+        self.graph = build_graph(self)
+
     def stats(self):
         map_count = 0
         for value in self.go2sym.values():
@@ -48,6 +57,8 @@ class Index:
         map_count, sym_count, go_count = self.stats()
         source = self.info.get("gaf_fname", "unknown")
         return f"Index: {map_count:,d} associations of {sym_count:,d} genes over {go_count:,d} GO terms ({source})"
+
+
 
 # Parse a stream to an OBO file and for
 @utils.timer
@@ -318,8 +329,8 @@ def build_index():
 
     idx = load_index(fname)
     print (idx)
-    print(idx.stats())
 
+    print (idx.name2sym)
 
 
 if __name__ == '__main__':
