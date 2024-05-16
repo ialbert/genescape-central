@@ -13,8 +13,6 @@ class Index:
     ANNO_COUNT = "anno_count"
     ANNO_TOTAL = "anno_total"
     DESC_COUNT = "desc_count"
-    OUT_DEGREE = "out_degree"
-    IN_DEGREE = "in_degree"
     NAMESPACE = "namespace"
 
     SYM2GO, GO2SYM, NAME2SYM = "sym2go", "go2sym", "name2sym"
@@ -262,26 +260,15 @@ def build_graph(idx):
     # nodes = islice(nodes, 100)
     nodes = list(nodes)
 
-    # Set up shortcuts
-    ANNO_COUNT = idx.ANNO_COUNT
-    ANNO_TOTAL = idx.ANNO_TOTAL
-    DESC_COUNT = idx.DESC_COUNT
-    OUT_DEGREE = idx.OUT_DEGREE
-    IN_DEGREE = idx.IN_DEGREE
-    NAMESPACE = idx.NAMESPACE
-
     # Add individual nodes to the
     for row in nodes:
         oid = row["id"]
         name = row["name"]
-        namespace = utils.NAMESPACE_MAP.get(row[NAMESPACE], "?")
-        anno_count = row.get(ANNO_COUNT, -1)
-        anno_total = row.get(ANNO_TOTAL, -1)
-        desc_count = row.get(DESC_COUNT, -1)
-        out_degree = row.get(OUT_DEGREE, -1)
-        in_degree = row.get(IN_DEGREE, -1)
-        kwargs = {OUT_DEGREE: out_degree, IN_DEGREE: in_degree, DESC_COUNT: desc_count, ANNO_COUNT: anno_count,
-                  ANNO_TOTAL: anno_total}
+        namespace = utils.NAMESPACE_MAP.get(row[idx.NAMESPACE], "?")
+        anno_count = row.get(idx.ANNO_COUNT, -1)
+        anno_total = row.get(idx.ANNO_TOTAL, -1)
+        desc_count = row.get(idx.DESC_COUNT, -1)
+        kwargs = {idx.DESC_COUNT: desc_count, idx.ANNO_COUNT: anno_count, idx.ANNO_TOTAL: anno_total}
 
         graph.add_node(oid, id=oid, name=name, namespace=namespace, **kwargs)
 
@@ -310,11 +297,7 @@ def finalize_index(idx):
 
     # Add the degree to the nodes
     for node_id in graph.nodes():
-        out_degree = graph.out_degree(node_id)
-        in_degree = graph.in_degree(node_id)
-        obo[node_id][idx.OUT_DEGREE] = out_degree
-        obo[node_id][idx.IN_DEGREE] = in_degree
-        obo[node_id][idx.DESC_COUNT] = out_degree
+        obo[node_id][idx.DESC_COUNT] = graph.out_degree(node_id)
 
     # Update annotations for each node
     topo_nodes = list(nx.topological_sort(graph))
@@ -322,9 +305,9 @@ def finalize_index(idx):
     for node_id in reversed(topo_nodes):
         total = obo[node_id][idx.ANNO_TOTAL]
         desc_count = obo[node_id][idx.DESC_COUNT]
-        for predecessor in graph.predecessors(node_id):
-            obo[predecessor][idx.ANNO_TOTAL] += total
-            obo[predecessor][idx.DESC_COUNT] += desc_count
+        for pre in graph.predecessors(node_id):
+            obo[pre][idx.ANNO_TOTAL] += total
+            obo[pre][idx.DESC_COUNT] += desc_count
 
     return idx
 
