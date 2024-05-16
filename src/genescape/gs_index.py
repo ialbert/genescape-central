@@ -59,6 +59,18 @@ class Index:
         return f"Index: {map_count:,d} associations of {sym_count:,d} genes over {go_count:,d} GO terms ({source})"
 
 
+class IndexGraph:
+    """
+    Represents a GeneScape index with a graph.
+    """
+    def __init__(self, idx):
+
+        # Store the index.
+        self.idx = idx
+
+        # Generate the graph.
+        self.graph = build_graph(idx)
+
 
 # Parse a stream to an OBO file and for
 @utils.timer
@@ -270,6 +282,7 @@ def build_graph(idx):
         in_degree = row.get(IN_DEGREE, -1)
         kwargs = {OUT_DEGREE: out_degree, IN_DEGREE: in_degree, DESC_COUNT: desc_count, ANNO_COUNT: anno_count,
                   ANNO_TOTAL: anno_total}
+
         graph.add_node(oid, id=oid, name=name, namespace=namespace, **kwargs)
 
     for row in nodes:
@@ -283,9 +296,14 @@ def build_graph(idx):
     return graph
 
 def finalize_index(idx):
+    """
+    Modify the index with additional information.
+    """
+    # Build the initial graph
+    gs = IndexGraph(idx=idx)
 
     # Build the initial graph
-    graph =  build_graph(idx)
+    graph = gs.graph
 
     # Shortcut to the OBO object.
     obo = idx.obo
