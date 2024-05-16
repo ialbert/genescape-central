@@ -1,6 +1,7 @@
 from genescape import utils, resources
 from genescape import gs_index
 import networkx as nx
+import pandas as pd
 import re, textwrap
 import pydot
 
@@ -200,6 +201,42 @@ class Result:
 
         return pg
 
+    def as_df(self):
+
+        # Find the input nodes
+        nodes = filter(lambda x: self.tree.nodes[x][ATTR_KEY].is_input, self.tree.nodes())
+
+        inp_size = len(self.valid_targets)
+
+        rows = []
+        for node_id in nodes:
+            node = self.tree.nodes[node_id]
+            attr = node[ATTR_KEY]
+            func_name = node["name"]
+            source = "|".join(sorted(attr.sources))
+            count = attr.src_len
+            ann_count = node[self.idx.ANNO_COUNT]
+            ann_total = node[self.idx.ANNO_TOTAL]
+            desc_count = node[self.idx.DESC_COUNT]
+
+            data = dict(coverage=count, function=func_name,
+                        node_id=node_id,
+                        source=source,
+                        size=inp_size,
+                        ann_count=ann_count,
+                        ann_total=ann_total,
+                        desc_count=desc_count
+                        )
+            rows.append(data)
+
+        df = pd.DataFrame(rows)
+
+        # Sort the results.
+        if not df.empty:
+            df = df.sort_values(by='coverage', ascending=False)
+
+        return df
+
 WIDTH = 16.9
 HEIGHT = 6.0
 
@@ -224,7 +261,6 @@ def save_graph(pg, fname, imgsize=2048, width=WIDTH):
         pg.write_png(fname)
     else:
         utils.warn(f"Unknown output format: {fname}")
-
 
 # Double quote text for dot
 def fix_text(text):
@@ -257,18 +293,19 @@ def main(idx):
 
     targets = "ABTB3 BCAS4 C3P1 GRTP1".split()
 
-    gs = Result(idx=idx, targets=targets)
+    res = Result(idx=idx, targets=targets)
 
-    pg = gs.as_pydot()
+    pg = res.as_pydot()
 
-    save_graph(pg, "../../output.pdf")
+    df = res.as_df()
 
-    print(pg)
+    print(df)
 
-    return gs
+    #save_graph(pg, "../../output.pdf")
 
 
 
+    return res
 
 
 def run():
