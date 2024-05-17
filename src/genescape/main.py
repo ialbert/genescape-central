@@ -193,7 +193,7 @@ def web(idx_fname='', host='localhost', port=8000, reload=False):
         key = "idx"
         label = str(Path(idx_fname).name).split(".")[0].title()
         os.environ['GENESCAPE_INDEX'] = f'{key}:{label}:{idx_fname}'
-    shiny.run_app("genescape.shiny.tree.app:app", host=host, port=port, reload=reload)
+    shiny.run_app("genescape.shiny.tree.app_new", host=host, port=port, reload=reload)
 
 
 @run.command()
