@@ -2,7 +2,7 @@ import sys, json, os
 from pathlib import Path
 import click
 from genescape import __version__
-from genescape import resources, utils, nexus
+from genescape import resources, utils, gs_graph, gs_index, nexus
 from pprint import pprint
 
 # Valid choices for root
@@ -10,7 +10,7 @@ ROOT_CHOICES = [utils.NS_BP, utils.NS_MF, utils.NS_CC, utils.NS_ALL]
 
 HELP = f"Gene function visualization (v{__version__})."
 
-def check_params(it):
+def require_params(it):
     errflag = False
     for name, fname in it:
         if not fname:
@@ -19,11 +19,14 @@ def check_params(it):
     if errflag:
         sys.exit(1)
 
-def find_file(it):
-
+def check_files(it):
     errflag = False
+
     for name, fname in it:
-        if not os.path.isfile(fname):
+        if not fname:
+            utils.error(f"parameter --{name} must be specified")
+            errflag = True
+        elif not os.path.isfile(fname):
             utils.error(f"file for --{name} not found: {fname}")
             errflag = True
 
@@ -72,9 +75,11 @@ def annotate(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=Fal
 
     targets = utils.parse_genes(fname)
 
-    idx, dot, tree, ann, status = nexus.run(genes=targets, idx_fname=idx_fname, root=root, pattern=match, mincount=count)
+    run = gs_graph.subgraph(idx_fname, targets=targets, root=root, mincount=count, pattern=match)
 
-    text = ann.to_csv(index=False)
+    df = run.as_df()
+
+    text = df.to_csv(index=False)
 
     if out_fname:
         utils.info(f"output: {out_fname}")
@@ -111,15 +116,17 @@ def tree(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=False, 
 
     targets = utils.parse_genes(fname)
 
-    idx, dot, tree, ann, status = nexus.run(genes=targets, idx_fname=idx_fname, root=root, pattern=match, mincount=count)
+    run = gs_graph.subgraph(idx_fname, targets=targets, root=root, mincount=count, pattern=match)
 
-    nexus.save_graph(dot, fname=out_fname, imgsize=2048)
+    pg = run.as_pydot()
+
+    gs_graph.save_graph(pg, fname=out_fname, imgsize=2048)
 
 
 @run.command()
 @click.option("-b", "--obo", "obo_fname", help="Input OBO file (go-basic.obo)")
 @click.option("-g", "--gaf", "gaf_fname", help="Input GAF file (goa_human.gaf.gz)")
-@click.option("-i", "--index", "idx_fname", default="", help="Output index file (genescape.json.gz)")
+@click.option("-i", "--idx", "idx_fname", default="genescape.index.gz", help="Output index file (genescape.json.gz)")
 @click.option("-s", "--stats", "stats", is_flag=True, help="Print the index stats")
 @click.option("-d", "--dump", "dump", is_flag=True, help="Print the index file to the screen")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
@@ -129,15 +136,15 @@ def build(idx_fname=None, obo_fname=None, gaf_fname=None, stats=False, dump=Fals
     Builds index file from an OBO and GAF file.
     """
     res = resources.init()
-    idx_fname = idx_fname or res.INDEX_FILE
+
     if stats:
-        idx = nexus.load_index(idx_fname)
-        nexus.stats(idx)
+        idg = gs_graph.load_index_graph(idx_fname)
+        print(idg)
         return
 
     if dump:
-        idx = nexus.load_index(idx_fname)
-        text = json.dumps(idx, indent=4)
+        idg = gs_graph.load_index_graph(idx_fname)
+        text = json.dumps(idg.idx.data, indent=4)
         print(text)
         return
 
@@ -149,17 +156,22 @@ def build(idx_fname=None, obo_fname=None, gaf_fname=None, stats=False, dump=Fals
     fnames = [
         ('obo', obo_fname),
         ('gaf', gaf_fname),
+        ('idx', idx_fname),
     ]
 
-    check_params(fnames)
-
-    find_file(fnames)
+    check_files(fnames)
 
     utils.info(f"obo: {obo_fname}")
     utils.info(f"gaf: {gaf_fname}")
     utils.info(f"index: {idx_fname}")
-    nexus.build_index(obo_fname=obo_fname, gaf_fname=gaf_fname, idx_fname=idx_fname)
-    utils.info(f"index: {idx_fname}")
+    idx = gs_index.build_index(obo_fname=obo_fname, gaf_fname=gaf_fname, fname=idx_fname)
+    gs_index.save_index(idx, idx_fname)
+
+    utils.info(str(idx))
+
+    # Print file size in megabytes
+    size = Path(idx_fname).stat().st_size / 1024 / 1024
+    utils.info(f"index: {idx_fname} ({size:.2f} MB)")
 
 
 @run.command()

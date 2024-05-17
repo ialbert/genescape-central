@@ -8,6 +8,9 @@ import pydot
 ATTR_KEY = 'attr'
 
 class NodeAttr:
+    """
+    Represents additional attributes for a node in the graph.
+    """
     def __init__(self):
         self.is_input = False
         self.sources = []
@@ -26,16 +29,17 @@ class NodeAttr:
     def desc_count(self):
         return len(self.descendants)
 
-class Result:
+class Run:
 
-    def __init__(self, idx, targets=[], root=utils.NS_ALL, mincount=1, pattern=''):
+    def __init__(self, idg, targets=[], root=utils.NS_ALL, mincount=1, pattern=''):
 
         # Collects errors
         self.errors = []
 
         # The index object
-        self.idx = idx
-        self.graph = idx.graph
+        self.idx = idg.idx
+
+        self.graph = idg.graph
 
         # The input targets
         self.targets = set(map(lambda x: x.upper(), targets))
@@ -136,8 +140,8 @@ class Result:
             # Shortcut to the node
             node = tree.nodes[node_id]
 
-            # Store the descendants from the subtree only
-            node[ATTR_KEY].descendants = store[node_id]
+            # Store the descendants from the subtree only.
+            node[ATTR_KEY].descendants = set(store[node_id])
 
             # Add the cumulative totals
             node[ATTR_KEY].sources_all = list(set(totals))
@@ -276,44 +280,45 @@ def human_readable(value, digits=0):
     return newval
 
 @utils.memoize
-def load_graph(fname):
+def load_index_graph(fname):
     """
     Loads and index and initializes the graph.
     """
     # Load the index.
     idx = gs_index.load_index(fname)
 
-    # initialize the graph
-    idx.init_graph()
+    # Produce the index graph
+    idx = gs_index.IndexGraph(idx)
 
     return idx
 
-def main(idx):
+def subgraph(idx_fname, targets, root, mincount, pattern):
+    idg = load_index_graph(idx_fname)
+    utils.info(str(idg.idx))
+    res = Run(idg=idg, targets=targets, root=root, mincount=mincount, pattern=pattern)
+    return res
+
+
+def demo():
     # Initialize the graph datastructure.
+    from genescape import resources
+    res = resources.init()
+    idx_fname = res.INDEX_FILE
+
+    idg = load_index_graph(idx_fname)
 
     targets = "ABTB3 BCAS4 C3P1 GRTP1".split()
 
-    res = Result(idx=idx, targets=targets)
+    res = Run(idg=idg, targets=targets)
 
-    pg = res.as_pydot()
+    #pg = res.as_pydot()
 
     df = res.as_df()
 
     print(df)
 
-    #save_graph(pg, "../../output.pdf")
 
-
-
-    return res
-
-
-def run():
-    fname = "../../genescape.index.gz"
-
-    idx = load_graph(fname=fname)
-    main(idx=idx)
 
 
 if __name__ == "__main__":
-    run()
+    demo()

@@ -8,33 +8,46 @@ from genescape import utils
 import networkx as nx
 
 class Index:
-    INFO_KEY = "info"
-    OBO_KEY = "obo"
+
+    # Keys for the index.
+    INFO_KEY, OBO_KEY = "info", "obo"
+    SYM2GO, GO2SYM = "sym2go", "go2sym"
+    NAME2SYM = "name2sym"
+
+    # Precalculated attributes.
     ANNO_COUNT = "anno_count"
     ANNO_TOTAL = "anno_total"
     DESC_COUNT = "desc_count"
     NAMESPACE = "namespace"
 
-    SYM2GO, GO2SYM, NAME2SYM = "sym2go", "go2sym", "name2sym"
-
     def __init__(self, data=None):
+
+        # The empty data structure.
+        empty = {
+            self.INFO_KEY: {},
+            self.OBO_KEY: {},
+            self.SYM2GO: {},
+            self.GO2SYM: {},
+            self.NAME2SYM: {}
+        }
+
         # The data storage.
-        self.data = data or dict()
+        self.data = data or empty
 
         # Information on the index.
-        self.info = self.data.get(self.INFO_KEY) or dict()
+        self.info = self.data.get(self.INFO_KEY)
 
         # The OBO data.
-        self.obo = self.data.get(self.OBO_KEY) or dict()
+        self.obo = self.data.get(self.OBO_KEY)
 
         # Maps symbols to GO terms.
-        self.sym2go = self.data.get(self.SYM2GO) or dict()
+        self.sym2go = self.data.get(self.SYM2GO)
 
         # Maps GO terms to symbols.
-        self.go2sym = self.data.get(self.GO2SYM) or dict()
+        self.go2sym = self.data.get(self.GO2SYM)
 
         # Maps names to symbols (synonyms).
-        self.name2sym = self.data.get(self.NAME2SYM) or dict()
+        self.name2sym = self.data.get(self.NAME2SYM)
 
         # The graph representation of the ontology.
         self.graph = nx.DiGraph()
@@ -54,7 +67,7 @@ class Index:
     def __str__(self):
         map_count, sym_count, go_count = self.stats()
         source = self.info.get("gaf_fname", "unknown")
-        return f"Index: {map_count:,d} associations of {sym_count:,d} genes over {go_count:,d} GO terms ({source})"
+        return f"index: {map_count:,d} associations of {sym_count:,d} genes over {go_count:,d} GO terms ({source})"
 
 
 class IndexGraph:
@@ -68,7 +81,6 @@ class IndexGraph:
 
         # Generate the graph.
         self.graph = build_graph(idx)
-
 
 # Parse a stream to an OBO file and for
 @utils.timer
@@ -216,7 +228,6 @@ def parse_gaf(fname, idx):
 
     return idx
 
-@utils.memoize
 def load_index(path):
     if not isinstance(path, Path):
         path = Path(path)
@@ -233,18 +244,14 @@ def load_index(path):
     idx = Index(data=data)
     return idx
 
-@utils.timer
 def save_index(idx, path):
+
     if not isinstance(path, Path):
         path = Path(path)
     stream = gzip.open(path, "wb") if path.name.endswith(".gz") else open(path, "wb")
     with stream as fp:
         text = json.dumps(idx.data, indent=4)
         fp.write(text.encode('utf-8'))
-
-    # print file size in megabyites
-    size = path.stat().st_size / 1024 / 1024
-    utils.info(f"Index: {path} ({size:.2f} MB)")
 
 
 def build_graph(idx):
@@ -312,27 +319,20 @@ def finalize_index(idx):
     return idx
 
 
-def build_index():
-    from genescape import resources
-
-    res = resources.init()
-    obo_fname = res.OBO_FILE
-    gaf_fname = res.GAF_FILE
-
-    fname = "../../genescape.index.gz"
-
-    if 0:
-        idx = Index()
-        idx = parse_obo(obo_fname, idx=idx)
-        idx = parse_gaf(gaf_fname, idx=idx)
-        idx = finalize_index(idx)
-        save_index(idx=idx, path=fname)
-
-    idx = load_index(fname)
-    print (idx)
-
-    print (idx.name2sym)
-
+def build_index(obo_fname, gaf_fname, fname):
+    """
+    Build an index from an OBO and GAF file.
+    """
+    idx = Index()
+    idx = parse_obo(obo_fname, idx=idx)
+    idx = parse_gaf(gaf_fname, idx=idx)
+    idx = finalize_index(idx)
+    return idx
 
 if __name__ == '__main__':
-    build_index()
+    from genescape import resources
+    res = resources.init()
+    fname = res.INDEX_FILE
+    idx = load_index(fname)
+
+    print(idx)
