@@ -365,7 +365,7 @@ def server(input, output, session):
     @render.data_frame
     async def df_data():
         df = df_value.get()
-        dg = render.DataGrid(df, filters=True)
+        dg = render.DataGrid(df, filters=True, width="100%")
         return dg
 
     @render.download(filename=lambda: "genescape.csv")
