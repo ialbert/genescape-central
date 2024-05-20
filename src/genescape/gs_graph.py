@@ -292,7 +292,7 @@ def load_index_graph(fname):
 
     return idx
 
-def subgraph(idx_fname, targets, root, mincount, pattern):
+def subgraph(idx_fname, targets, root=utils.NS_ALL, mincount=1, pattern=''):
     idg = load_index_graph(idx_fname)
     utils.info(str(idg.idx))
     res = Run(idg=idg, targets=targets, root=root, mincount=mincount, pattern=pattern)

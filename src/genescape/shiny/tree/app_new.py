@@ -1,6 +1,6 @@
 from shiny import reactive
 from shiny import App, render, ui
-import asyncio, os
+import asyncio, os, time
 from genescape import icons
 from genescape import __version__, gs_graph, utils, resources
 import pandas as pd
@@ -78,7 +78,6 @@ Green nodes indicate functions present in input genes.
 
 Dark green nodes indicate leaf nodes in the ontology (highest possible granularity).
 
-
 * Subtrees are colored by Ontology namespace: Cellular Component (pink), Molecular Function (blue), Biological Process (beige).
 * The number `[234]` in a node indicates the number of annotation for that GO term in total.
 * The number `(1/5)` in a node indicates how many input genes carry that function.
@@ -120,10 +119,10 @@ app_ui = ui.page_sidebar(
         ),
 
         # The annotation data as csv.
-        ui.output_code("data_csv"),
+        ui.output_code("csv_data"),
 
         # The dot file as text.
-        ui.output_code("data_dot"),
+        ui.output_code("dot_data"),
 
         width=SIDEBAR_WIDTH, bg=SIDEBAR_BG,
     ),
@@ -155,17 +154,26 @@ app_ui = ui.page_sidebar(
                 # Error message label.
                 ui.tags.div(
                     ui.output_text(id="error_msg"),
+                    class_="error_msg",
                 ),
 
                 # Info message label.
                 ui.tags.div(
-                    ui.output_text("info_msg"),
-                    align="center"),
+                    ui.output_text(id="info_msg1"),
+                    class_="info_msg", align="center",
+                ),
 
                 # The graph root object.
-                ui.p(
+                ui.div(
                     ui.tags.b(GRAPH_TAB),
                     id="graph_root", align="center"),
+
+                # Info message label.
+                ui.tags.div(
+                    ui.output_text(id="info_msg2"),
+                    class_="info_msg", align="center",
+                ),
+                class_="graph_root",
             ),
         ),
 
@@ -181,7 +189,7 @@ app_ui = ui.page_sidebar(
         ui.nav_panel(
             "Help", ui.tags.p(
                 ui.markdown(HELP_TAB)),
-            ui.img(src="node-colors.png", ),
+
         ),
         id="tabs", selected="Graph"
     ),
@@ -197,6 +205,7 @@ app_ui = ui.page_sidebar(
     ui.head_content(
         ui.tags.script(
             """
+            // Page complete trigger.
             $(function() {
                 Shiny.addCustomMessageHandler("trigger", function(message) {
                     render_graph();
@@ -210,13 +219,159 @@ app_ui = ui.page_sidebar(
     title=PAGE_TITLE, id="main",
 )
 
+def text2list(text):
+    """
+    Parses a text inptu into a list of terms
+    """
+    terms = map(lambda x: x.strip(), text.splitlines())
+    terms = filter(None, terms)
+    terms = list(terms)
+    return terms
 
 def server(input, output, session):
-    pass
+    # The annotation table.
+    ann_df = reactive.Value(pd.DataFrame())
 
+    # Runtime messages
+    info_value1 = reactive.Value("")
+
+    # Runtime messages
+    info_value2 = reactive.Value("")
+
+    # Runtime error message
+    err_value = reactive.Value("")
+
+    # Annotation as a CSV string (invisible)
+    csv_value = reactive.Value("# The annotation CSV will appear here.")
+
+    # The dot file as a text (invisible)
+    dot_value = reactive.Value("# The dot file will appear here.")
+
+    @reactive.effect
+    @reactive.event(input.submit)
+    async def submit():
+        await create_tree()
+
+    async def create_tree():
+        limit = 10
+        # Emulate some sort of progress bar
+        with ui.Progress(min=1, max=limit) as p:
+            p.set(message="Generating the image", detail="Please wait...")
+            for i in range(1, limit):
+                p.set(i)
+                await asyncio.sleep(0.1)
+
+        coverage = input.coverage()
+
+        res = resources.init()
+
+        idx_fname = res.INDEX_FILE
+
+        # The input gene list.
+        targets = text2list(input.input_list())
+
+        print (targets)
+
+        # Create the subgraph.
+        run = gs_graph.subgraph(idx_fname, targets=targets)
+
+        # get the dataframe
+        df = run.as_df()
+
+        # Create the pydot object.
+        pg = run.as_pydot()
+
+        # Set the dot data.
+        dot_value.set(str(pg))
+
+        # Set the CSV data.
+        csv_value.set(df.to_csv(index=False))
+
+        # Set the info messages.
+        info_str1 = f"Graph: {run.tree.number_of_nodes()} nodes and {run.tree.number_of_edges()} edges."
+        info_value1.set(info_str1)
+
+        info_str2 = str(run.idx)
+        info_value2.set(info_str2)
+
+        # Set the error message.
+        if run.errors:
+            err_str = ",".join(run.errors)
+            err_value.set(err_str)
+
+
+
+        # The trigger function.
+        async def trigger():
+            await session.send_custom_message("trigger", 1)
+
+        # Send a custom message to trigger the graph rendering.
+        session.on_flushed(trigger, once=True)
+
+    @render.text
+    async def error_msg():
+        return err_value.get()
+
+    @render.text
+    async def info_msg1():
+        return info_value1.get()
+
+    @render.text
+    async def info_msg2():
+        return info_value2.get()
+
+    @render.text
+    async def csv_data():
+        return csv_value.get()
+
+    @output
+    @render.text
+    async def dot_data():
+        return dot_value.get()
+
+    @render.download(filename=lambda: "genescape.csv")
+    async def download_csv():
+        await asyncio.sleep(0.5)
+        yield csv_value.get()
+
+    @render.download(filename=lambda: "genescape.dot.txt")
+    async def download_dot():
+        await asyncio.sleep(0.5)
+        yield dot_value.get()
 
 # The Static app
 app_static = StaticFiles(directory=Path(__file__).parent / "static")
+
+# Define UI
+app_ui2 = ui.page_fluid(
+    ui.input_action_button(
+        "submit", "Draw Tree", class_="btn-success"
+    ),
+    ui.output_text("output")
+)
+# Define Server
+def server2(input, output, session):
+
+    info_value = reactive.Value("")
+
+    #@reactive.effect
+    @reactive.event(input.submit)
+    def submit():
+        print("HERE")
+
+        # The trigger function.
+        def trigger():
+            session.send_custom_message("trigger", 1)
+
+        # Send a custom message to trigger the graph rendering.
+        session.on_flushed(trigger, once=True)
+
+        info_value.set("SUBMIT")
+
+    @render.text
+    def output():
+        # Access the reactive value
+        return info_value.get()
 
 # The shiny app
 app_shiny = App(app_ui, server)

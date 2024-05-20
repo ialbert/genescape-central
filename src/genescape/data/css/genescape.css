@@ -8,7 +8,7 @@
     border: var(--border-color) solid 1px;
 }
 
-#annot_csv {
+#csv_data {
     min-height: 10px;
     visibility: hidden;
 }
@@ -19,12 +19,12 @@
 
 #graph_root {
     max-height: 700px;
-    overflow-y: auto;
+    overflow: auto;
     border: var(--border-color) solid 1px;
     padding: 20px;
 }
 
-#dot_elem {
+#dot_data {
     height: 10px;
     visibility: hidden;
 }
