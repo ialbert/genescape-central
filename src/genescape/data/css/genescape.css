@@ -41,6 +41,17 @@
     color: red;
 }
 
+#zoom_buttons .btn {
+    margin: 0.5em;
+}
+
+.shiny-data-grid-summary {
+    color: deeppink;
+}
+
+code {
+    font-size: inherit;
+}
 
 .left-aligned {
     display: grid;

@@ -223,21 +223,19 @@ class Run:
             ann_total = node[self.idx.ANNO_TOTAL]
             desc_count = node[self.idx.DESC_COUNT]
 
-            data = dict(coverage=count, function=func_name,
-                        node_id=node_id,
-                        source=source,
-                        size=inp_size,
-                        ann_count=ann_count,
-                        ann_total=ann_total,
-                        desc_count=desc_count
-                        )
+            data = {
+                'Coverage':count, 'Function':func_name,
+                'GO': node_id, 'Genes':source,
+               # 'Size': inp_size, 'Ann Count':ann_count,
+               # 'Ann Total':ann_total, 'Desc Count':desc_count
+            }
             rows.append(data)
 
         df = pd.DataFrame(rows)
 
         # Sort the results.
         if not df.empty:
-            df = df.sort_values(by='coverage', ascending=False)
+            df = df.sort_values(by='Coverage', ascending=False)
 
         return df
 

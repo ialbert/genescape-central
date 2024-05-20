@@ -49,30 +49,38 @@ Press "Draw Tree" to generate the graph.
 
 ANNOT_TAB = """
 
-## Functional annotations
+Genes may be annotated with Gene Ontology functions. 
 
-This panel shows the functional annotations for the input genes.
+This panel shows the cumulative functional annotations across the list.
 
-Each gene is annotated with GO terms. The coverage indicates how many genes in the input cover that function.
+The coverage column indicates how many genes in the input cover that function.
 
-You can filter the table by entering a regular expression in the pattern field.
+How to reduce the graph size:
+
+1. The **Coverage** filter will select for the minimum coverage.
+1. The **Filtering pattern** will keep only functions that match.
+
+Examples: 
+
+* `Coverage=5` at least 5 genes carrying the function
+* `Filter=GTP|kinase` keep only functions that match both `GTP` and `kinase`.
+
 """
 
 HELP_TAB = """
-
-## How to use GeneScape
+Type a list of genes of GO terms then press "Draw Tree".
 
 Tips for making graphs smaller:
 
 1. Filter for minimum coverage in the functions. You can use regular expressions in the pattern.
 
-## Legend
+**Legend**
 
 <img src="/static/node-help.png" class="img-fluid helpimg" alt="Alt text">
 
 The coverage indicates how many genes in the input cover that function.
 
-## Colors
+**Colors**
 
 Green nodes indicate functions present in input genes.
 
@@ -99,14 +107,26 @@ app_ui = ui.page_sidebar(
         # Select the database.
         ui.input_select(
             "database",
-            "Organism", DATABASE_CHOICES,
+            label="Organism:", choices=DATABASE_CHOICES,
+        ),
+
+        # Select the root
+        ui.input_select(
+            "root",
+            "Domain:", {
+                utils.NS_ALL: "All domains",
+                utils.NS_BP: "Biological Process",
+                utils.NS_MF: "Molecular Function",
+                utils.NS_CC: "Cellular Component"
+            },
+            selected=utils.NS_BP,
         ),
 
         # Minimum count.
-        ui.input_text("coverage", label="Coverage", value=MINCOUNT),
+        ui.input_text("coverage", label="Coverage:", value=MINCOUNT),
 
         # Filtering pattern.
-        ui.input_text("pattern", label="Pattern (regex ok)", value=PATTERN),
+        ui.input_text("pattern", label="Word filter (regex ok):", value=PATTERN),
 
         # Download button for annotation CSV.
         ui.tags.p(
@@ -133,22 +153,22 @@ app_ui = ui.page_sidebar(
         ui.nav_panel(
             "Graph", ui.tags.p(
 
-                ui.tags.p(
+                ui.tags.div(
                     ui.input_action_button("zoom_in", label="Zoom", icon=icons.icon_zoom_in,
-                                           class_="btn btn-light",
+                                           class_="btn btn-light btn-sm",
                                            data_action="zoom_in"),
                     ui.tags.span(" "),
-                    ui.input_action_button("zoom_reset", label="Reset", icon=icons.zoom_reset,
-                                           class_="btn btn-light",
+                    ui.input_action_button("zoom_reset", label=" Reset", icon=icons.zoom_reset,
+                                           class_="btn btn-light btn-sm",
                                            data_action="zoom_reset"),
                     ui.tags.span(" "),
                     ui.input_action_button("zoom_out", label="Zoom", icon=icons.icon_zoom_out,
-                                           class_="btn btn-light ",
+                                           class_="btn btn-light btn-sm",
                                            data_action="zoom_out"),
                     ui.tags.span(" "),
-                    ui.input_action_button("save_image", "Save", class_="btn btn-light", icon=icons.icon_down),
+                    ui.input_action_button("save_image", "Save", class_="btn btn-light btn-sm", icon=icons.icon_down),
 
-                    align="center",
+                    align="center", id="zoom_buttons",
                 ),
 
                 # Error message label.
@@ -179,8 +199,10 @@ app_ui = ui.page_sidebar(
 
         ui.nav_panel(
             "Annotations", ui.tags.p(
-                ui.tags.p(
-                    ui.output_data_frame("annot_root"),
+                ui.div(
+
+                    ui.output_data_frame("df_data"),
+
                 ),
                 ui.markdown(ANNOT_TAB),
             ),
@@ -219,6 +241,7 @@ app_ui = ui.page_sidebar(
     title=PAGE_TITLE, id="main",
 )
 
+
 def text2list(text):
     """
     Parses a text inptu into a list of terms
@@ -228,10 +251,8 @@ def text2list(text):
     terms = list(terms)
     return terms
 
-def server(input, output, session):
-    # The annotation table.
-    ann_df = reactive.Value(pd.DataFrame())
 
+def server(input, output, session):
     # Runtime messages
     info_value1 = reactive.Value("")
 
@@ -243,6 +264,9 @@ def server(input, output, session):
 
     # Annotation as a CSV string (invisible)
     csv_value = reactive.Value("# The annotation CSV will appear here.")
+
+    # Default dataframe.
+    df_value = reactive.Value(pd.DataFrame())
 
     # The dot file as a text (invisible)
     dot_value = reactive.Value("# The dot file will appear here.")
@@ -263,6 +287,17 @@ def server(input, output, session):
 
         coverage = input.coverage()
 
+        if coverage in ('autodetect', 'auto'):
+            coverage = 0
+        else:
+            try:
+                coverage = int(coverage)
+            except ValueError:
+                coverage = 1
+
+        pattern = input.pattern()
+        root = input.root()
+
         res = resources.init()
 
         idx_fname = res.INDEX_FILE
@@ -270,13 +305,17 @@ def server(input, output, session):
         # The input gene list.
         targets = text2list(input.input_list())
 
-        print (targets)
-
         # Create the subgraph.
-        run = gs_graph.subgraph(idx_fname, targets=targets)
+        run = gs_graph.subgraph(idx_fname, targets=targets, pattern=pattern, root=root, mincount=coverage)
 
-        # get the dataframe
+        # Get the dataframe
         df = run.as_df()
+
+        # Set the dataframe value.
+        df_value.set(df)
+
+        # Set the CSV data.
+        csv_value.set(df.to_csv(index=False))
 
         # Create the pydot object.
         pg = run.as_pydot()
@@ -284,22 +323,17 @@ def server(input, output, session):
         # Set the dot data.
         dot_value.set(str(pg))
 
-        # Set the CSV data.
-        csv_value.set(df.to_csv(index=False))
-
         # Set the info messages.
         info_str1 = f"Graph: {run.tree.number_of_nodes()} nodes and {run.tree.number_of_edges()} edges."
-        info_value1.set(info_str1)
+        # info_value1.set(info_str1)
 
         info_str2 = str(run.idx)
-        info_value2.set(info_str2)
+        info_value2.set(f"{info_str1} {info_str2}")
 
         # Set the error message.
         if run.errors:
             err_str = ",".join(run.errors)
             err_value.set(err_str)
-
-
 
         # The trigger function.
         async def trigger():
@@ -324,10 +358,15 @@ def server(input, output, session):
     async def csv_data():
         return csv_value.get()
 
-    @output
     @render.text
     async def dot_data():
         return dot_value.get()
+
+    @render.data_frame
+    async def df_data():
+        df = df_value.get()
+        dg = render.DataGrid(df, filters=True)
+        return dg
 
     @render.download(filename=lambda: "genescape.csv")
     async def download_csv():
@@ -339,43 +378,12 @@ def server(input, output, session):
         await asyncio.sleep(0.5)
         yield dot_value.get()
 
+
 # The Static app
 app_static = StaticFiles(directory=Path(__file__).parent / "static")
 
-# Define UI
-app_ui2 = ui.page_fluid(
-    ui.input_action_button(
-        "submit", "Draw Tree", class_="btn-success"
-    ),
-    ui.output_text("output")
-)
-# Define Server
-def server2(input, output, session):
-
-    info_value = reactive.Value("")
-
-    #@reactive.effect
-    @reactive.event(input.submit)
-    def submit():
-        print("HERE")
-
-        # The trigger function.
-        def trigger():
-            session.send_custom_message("trigger", 1)
-
-        # Send a custom message to trigger the graph rendering.
-        session.on_flushed(trigger, once=True)
-
-        info_value.set("SUBMIT")
-
-    @render.text
-    def output():
-        # Access the reactive value
-        return info_value.get()
-
 # The shiny app
 app_shiny = App(app_ui, server)
-
 
 def app():
     routes = [
