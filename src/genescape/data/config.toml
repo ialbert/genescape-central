@@ -5,7 +5,7 @@ store = "~/.genescape"
 tag = "v0.9.4"
 
 # Minimum count
-MINCOUNT = 1
+MINCOUNT = "autodetect"
 
 # Default pattern in the interface
 PATTERN = ''

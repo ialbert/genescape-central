@@ -28,7 +28,7 @@ GENE_LIST = res.config.get("GENE_LIST", "ABTB3\nBCAS4\nC3P1\nGRTP1")
 PATTERN = res.config.get("PATTERN", "")
 
 # Default mincount.
-MINCOUNT = res.config.get("MINCOUNT", 1)
+MINCOUNT = res.config.get("MINCOUNT", "autodetect")
 
 # Load the sidebar width.
 SIDEBAR_WIDTH = res.config.get("SIDEBAR_WIDTH", 300)
@@ -43,22 +43,36 @@ HELP = """
 The functional annotations will be shown in the table below. 
 """
 
-DOCS = """
+GRAPH_TAB = """
+Press "Draw Tree" to generate the graph.
+"""
 
-**Welcome to GeneScape**
+ANNOT_TAB = """
 
-Press Draw Tree to render the graph.
+## Functional annotations
 
+This panel shows the functional annotations for the input genes.
+
+Each gene is annotated with GO terms. The coverage indicates how many genes in the input cover that function.
+
+You can filter the table by entering a regular expression in the pattern field.
+"""
+
+HELP_TAB = """
+
+## How to use GeneScape
 
 Tips for making graphs smaller:
 
 1. Filter for minimum coverage in the functions. You can use regular expressions in the pattern.
 
-### Legend
+## Legend
 
 <img src="/static/node-help.png" class="img-fluid helpimg" alt="Alt text">
 
 The coverage indicates how many genes in the input cover that function.
+
+## Colors
 
 Green nodes indicate functions present in input genes.
 
@@ -74,20 +88,110 @@ print(os.getcwd())
 
 app_ui = ui.page_sidebar(
     ui.sidebar(
-        ui.input_text_area("terms", label="Gene List", value=GENE_LIST),
+
+        # The gene list.
+        ui.input_text_area("input_list", label="Gene List", value=GENE_LIST),
+
+        # The main submit button.
+        ui.input_action_button(
+            "submit", "Draw Tree", class_="btn-success", icon=icons.icon_play
+        ),
+
+        # Select the database.
+        ui.input_select(
+            "database",
+            "Organism", DATABASE_CHOICES,
+        ),
+
+        # Minimum count.
+        ui.input_text("coverage", label="Coverage", value=MINCOUNT),
+
+        # Filtering pattern.
+        ui.input_text("pattern", label="Pattern (regex ok)", value=PATTERN),
+
+        # Download button for annotation CSV.
+        ui.tags.p(
+            ui.download_link("download_csv", "Download CSV file", icon=icons.icon_down),
+        ),
+
+        # Download button for the dot data
+        ui.tags.p(
+            ui.download_link("download_dot", "Download DOT file", icon=icons.icon_down),
+        ),
+
+        # The annotation data as csv.
+        ui.output_code("data_csv"),
+
+        # The dot file as text.
+        ui.output_code("data_dot"),
+
         width=SIDEBAR_WIDTH, bg=SIDEBAR_BG,
     ),
 
     ui.navset_tab(
-        ui.nav_panel("Graph", "Panel A content"),
-        ui.nav_panel("Annotations", "Panel B content"),
-        ui.nav_panel("Help",
-                     ui.tags.p(
-                         ui.markdown(DOCS)),
-                     ui.img(src="node-colors.png", ),
-                     ),
 
-        id="tab", selected="Graph"
+        # Graph panel.
+        ui.nav_panel(
+            "Graph", ui.tags.p(
+
+                ui.tags.p(
+                    ui.input_action_button("zoom_in", label="Zoom", icon=icons.icon_zoom_in,
+                                           class_="btn btn-light",
+                                           data_action="zoom_in"),
+                    ui.tags.span(" "),
+                    ui.input_action_button("zoom_reset", label="Reset", icon=icons.zoom_reset,
+                                           class_="btn btn-light",
+                                           data_action="zoom_reset"),
+                    ui.tags.span(" "),
+                    ui.input_action_button("zoom_out", label="Zoom", icon=icons.icon_zoom_out,
+                                           class_="btn btn-light ",
+                                           data_action="zoom_out"),
+                    ui.tags.span(" "),
+                    ui.input_action_button("save_image", "Save", class_="btn btn-light", icon=icons.icon_down),
+
+                    align="center",
+                ),
+
+                # Error message label.
+                ui.tags.div(
+                    ui.output_text(id="error_msg"),
+                ),
+
+                # Info message label.
+                ui.tags.div(
+                    ui.output_text("info_msg"),
+                    align="center"),
+
+                # The graph root object.
+                ui.p(
+                    ui.tags.b(GRAPH_TAB),
+                    id="graph_root", align="center"),
+            ),
+        ),
+
+        ui.nav_panel(
+            "Annotations", ui.tags.p(
+                ui.tags.p(
+                    ui.output_data_frame("annot_root"),
+                ),
+                ui.markdown(ANNOT_TAB),
+            ),
+        ),
+
+        ui.nav_panel(
+            "Help", ui.tags.p(
+                ui.markdown(HELP_TAB)),
+            ui.img(src="node-colors.png", ),
+        ),
+        id="tabs", selected="Graph"
+    ),
+
+    ui.tags.div(
+        ui.tags.p(
+            ui.tags.a(HOME, href=HOME),
+        ),
+        ui.tags.p(f"GeneScape {__version__}"),
+        align="center",
     ),
 
     ui.head_content(
@@ -117,8 +221,8 @@ app_static = StaticFiles(directory=Path(__file__).parent / "static")
 # The shiny app
 app_shiny = App(app_ui, server)
 
-def app():
 
+def app():
     routes = [
         Mount('/static', app=app_static),
         Mount('/', app=app_shiny)
@@ -127,6 +231,7 @@ def app():
     webapp = Starlette(routes=routes)
 
     return webapp
+
 
 if __name__ == '__main__':
     import shiny

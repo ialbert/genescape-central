@@ -3,7 +3,7 @@
     --input-back-color: #fcfcfc;
 }
 
-#terms {
+#input_list {
     min-height: 200px;
     border: var(--border-color) solid 1px;
 }
@@ -13,15 +13,15 @@
     visibility: hidden;
 }
 
-#err_label {
+#error_msg {
     color: red;
 }
 
-#graph_elem {
+#graph_root {
     max-height: 700px;
     overflow-y: auto;
     border: var(--border-color) solid 1px;
-    padding:20px;
+    padding: 20px;
 }
 
 #dot_elem {
@@ -37,8 +37,8 @@
     float: left;
     margin-right: 10px;
     margin-top: 5px;
-    width:6em;
-    color:red;
+    width: 6em;
+    color: red;
 }
 
 
@@ -62,5 +62,10 @@
     width: 100%; /* Fills the cell allocated by the grid */
 }
 
+h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom:1em;
+}
 
 
