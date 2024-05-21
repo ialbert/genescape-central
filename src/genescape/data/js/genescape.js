@@ -44,7 +44,7 @@ function render_graph() {
         var svg = viz.renderSVGElement(dot);
         svg.setAttribute("id", "svgtree");
         svg.setAttribute("width", "100%");
-		svg.setAttribute("height", "100%");
+		svg.setAttribute("max-height", "1200px");
 		graph.innerHTML = '';
         graph.appendChild(svg);
 

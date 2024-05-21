@@ -49,7 +49,7 @@ class Run:
 
         # Store the missing targets
         if self.missing_targets:
-            msg = f"Missing symbols: {','.join(self.missing_targets)}"
+            msg = f"{len(self.missing_targets)} unkown symbols: {','.join(self.missing_targets)}"
             self.errors.append(msg)
 
         # The valid targets.
@@ -99,8 +99,10 @@ class Run:
 
         # Check for input.
         if not self.valid_goids:
-            msg = f"No GO terms pass filtering conditions: Coverage>={mincount} Pattern={pattern}"
-            self.errors.append(msg)
+            msg1 = f"No GO terms pass all filtering conditions."
+            msg2 = f"Coverage>={mincount} Pattern={pattern}"
+            self.errors.append(msg1)
+            self.errors.append(msg2)
 
         # Find the ancestors for each node.
         anc = set()

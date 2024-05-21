@@ -23,8 +23,8 @@
 
 #graph_root {
     width: 100%;
-    min-height: 150px;
-    //max-height: 800px;
+    min-height: 50px;
+    max-height: 1200px;
     overflow: visible;
     border-top: var(--border-color) solid 1px;
     padding: 10px;

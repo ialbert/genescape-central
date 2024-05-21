@@ -133,7 +133,7 @@ app_ui = ui.page_sidebar(
                 utils.NS_MF: "Molecular Function",
                 utils.NS_CC: "Cellular Component"
             },
-            selected=utils.NS_BP,
+            selected=utils.NS_ALL,
         ),
 
         # Minimum count.
@@ -187,10 +187,16 @@ app_ui = ui.page_sidebar(
                     align="center", id="zoom_buttons",
                 ),
 
-                # Error message label.
+                # Error message.
                 ui.tags.div(
                     ui.output_ui(id="error_msg"),
                     class_="error_msg",
+                ),
+
+                # Notification message
+                ui.tags.div(
+                    ui.output_ui(id="note_msg"),
+                    class_="note_msg",
                 ),
 
                 # The graph root object.
@@ -266,8 +272,11 @@ def text2list(text):
 
 def server(input, output, session):
 
-    # Runtime messages
-    info_value = reactive.Value([])
+    # Runtime info messages
+    info_list = reactive.Value([])
+
+    # Runtime notification messages
+    note_list = reactive.Value([])
 
     # The list of errors.
     error_list = reactive.Value([])
@@ -319,9 +328,16 @@ def server(input, output, session):
         # Load the index.
         idg = gs_graph.load_index_graph(idx_fname)
 
+        note_list.set([])
+        error_list.set([])
+
         # Guess the coverage
         if not coverage:
             coverage = gs_graph.estimate(idg, targets=targets, pattern=pattern, root=root)
+            cover_msg = f"Estimated coverage cutoff {coverage}"
+            note_list.set([cover_msg])
+        else:
+            cover_msg = f"Coverage set to {coverage}"
 
         # Create the subgraph.
         run = gs_graph.subgraph(idg, targets=targets, pattern=pattern, root=root, coverage=coverage)
@@ -342,14 +358,12 @@ def server(input, output, session):
         dot_value.set(str(pg))
 
         # Set the info messages.
-        info1 = f"Coverage={coverage}"
         info2 = f"Graph: {run.tree.number_of_nodes()} nodes and {run.tree.number_of_edges()} edges."
         info3 = f"{run.idx}"
-        info_value.set([ info1, info2, info3])
+        info_list.set([ cover_msg, info2, info3])
 
         # Set the error message.
-        if run.errors:
-            error_list.set(run.errors)
+        error_list.set(run.errors)
 
 
         # The trigger function.
@@ -366,7 +380,11 @@ def server(input, output, session):
 
     @render.ui
     async def info_msg():
-        return create_list(info_value())
+        return create_list(info_list())
+
+    @render.ui
+    async def note_msg():
+        return create_list(note_list())
 
     @render.text
     async def csv_data():
