@@ -2,11 +2,11 @@
 
 **GeneScape** is a software tool for visualizing gene functions. Users enter a list of genes, the software then draws a subgraph of the Gene Ontology (GO) terms associated with the genes.
 
-![GeneScape Tree][tree]
-
-[tree]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_web_interface.png
-
 **GeneScape** is a Python-based [Shiny][pyshiny] application that be run both at the command line and also via a graphical user interface.
+
+![GeneScape Tree][interface]
+
+[interface]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_web_interface.png
 
 The public version of the software can be accessed at:
 
@@ -28,25 +28,19 @@ After installation, the Shiny interface can be started via:
 genescape web
 ``` 
 
-Visit the [http://localhost:8000][local] URL in your browser to see the interface.
+Visit the url [http://localhost:8000][local] URL in your browser to see the interface.
 
 [local]: http://localhost:8000
 
-## Command line use
+Once you are done running the web interface, press CTRL+C to stop the program from running.
 
-The program is distributed as an executable called `genescape` with the following subcommands:
+### Command line use
+
+The program can also be used at the command line to generate images or annotations:
 
 * `genescape tree` draws informative Gene Ontology (GO) subgraphs
 * `genescape annotate` annotates a list of genes with GO functions
 * `genescape web` provides a web interface for the `tree` command
-
-After installation, users launch the graphical user interface with:
-
-The user interface is browser-based via the URL:
-
-* [http://localhost:8000][local]
-
-Once you are done running with the program, you will need to close the terminal that started the program or press CTRL+C to stop the program from running.
 
 ### What does GeneScape do?
 
@@ -56,9 +50,9 @@ Once you are done running with the program, you will need to close the terminal 
 1. Then extracts the **Annotations** associated with the input genes 
 1. Finally it builds and visualizes the functional subtree tree based on these Annotations. 
 
-> **Note**: Even short lists of genes (under ten genes) can create large trees. Filter by minimum counts (how many genes share the function) or functional patterns (functions that match a pattern). 
+**Note**: Even short lists of genes (under ten genes) can create large trees. Filter by minimum counts (how many genes share the function) or functional patterns (functions that match a pattern). 
 
-When not explicitly specified, GeneScape will try to find reasonable coverage threshold for the input genes.
+When not explicitly specified, GeneScape will try to find a reasonable coverage threshold for the input genes.
 
 ### Node Labeling 
 
@@ -238,8 +232,6 @@ Cyp1a1
 Sphk2
 Sptlc2
 ```
-
-Listing the same gene or GO term multiple times will count it multiple times.
 
 ### Testing
 
