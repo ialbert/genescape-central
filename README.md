@@ -151,7 +151,7 @@ We run the `tree` command to visualize the relationships between the GO terms th
 genescape tree genes.txt --mincov 1 
 ```
 
-For most gene list the result might be a huge tree
+For many (most) gene lists resulting functional graph might be huge. If no coverage is specified, the software will try to find a reasonable coverage threshold for the input genes.
 
 ![GeneScape output][out2]
 
