@@ -143,7 +143,7 @@ def tree(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=False, 
 
     utils.info(f"graph: {run.tree.number_of_nodes()} nodes, {run.tree.number_of_edges()} edges")
 
-    gs_graph.save_graph(pg, fname=out_fname, imgsize=2048)
+    gs_graph.save_graph(pg, fname=out_fname, imgsize=4096)
 
 
 @run.command()

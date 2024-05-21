@@ -40,9 +40,9 @@ tag: test
 
 # Generate images for the documentation
 docimg:
-	genescape tree -o docs/images/genescape-output1a.png src/genescape/data/test_genes.txt
-	genescape tree -o docs/images/genescape-output2a.png src/genescape/data/test_goids.txt
-	genescape tree -m lipid -o docs/images/genescape-output3a.png src/genescape/data/test_goids.txt
+	genescape tree -o docs/images/gs_output_1.png src/genescape/data/test_genes.txt
+	genescape tree -o docs/images/gs_output_2.png src/genescape/data/test_genes.txt --mincov 1
+	genescape tree -m repair --mincov 2 -o docs/images/gs_output_3.png src/genescape/data/test_genes.txt
 
 # Runs a linter.
 lint:

@@ -4,17 +4,17 @@
 
 ![GeneScape Tree][tree]
 
-[tree]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-tree.png
+[tree]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_web_interface.png
 
 **GeneScape** is a Python-based [Shiny][pyshiny] application that be run both at the command line and also via a graphical user interface.
-
-## Quickstart
 
 The public version of the software can be accessed at:
 
 * https://biostar.shinyapps.io/genescape/
 
 [pyshiny]: https://shiny.posit.co/py/
+
+## Local installation
 
 Users can also run the program on their system by installing the software via `pip`:
 
@@ -46,25 +46,9 @@ The user interface is browser-based via the URL:
 
 * [http://localhost:8000][local]
 
-The page you see should look similar to the image below:
-
-![GeneScape interface][iface1]
-
-[iface1]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-empty.png
-
 Once you are done running with the program, you will need to close the terminal that started the program or press CTRL+C to stop the program from running.
 
-## Using the interface
-
-Fill in the text box with a list of genes names or GO terms or gene names and click the `Draw Tree` button to visualize the relationships between the GO terms.
-
-![GeneScape interface][iface2]
-
-[iface2]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/interface-help.png
-
-The program will generate a tree visualization of the functional elements of the gene names that are inputted.
-
-![GeneScape][tree]
+## What does GeneScape do?
 
 **GeneScape** works the following way:
 
@@ -73,6 +57,8 @@ The program will generate a tree visualization of the functional elements of the
 1. Finally it builds and visualizes the functional subtree tree based on these Annotations. 
 
 > **Note**: Even short lists of genes (under ten genes) can create large trees. Filter by minimum counts (how many genes share the function) or functional patterns (functions that match a pattern). 
+
+When not explicitly specified, GeneScape will try to find reasonable coverage treshold for the input genes.
 
 ## Node Labeling 
 
@@ -119,8 +105,8 @@ Just by setting the `mincount` to 2 or higher is often enough to simplify the gr
 
 The filtering conditions that users can apply are:
 
-1. a pattern that matches the **function** columns
-2. a minimum number of genes that carry that function
+1. a pattern that matches the **Function** columns
+2. a minimum **Coverage** that means the minimum number of genes that carry that function
 3. the GO subtree shown in the **root** column
 
 Filters are applied during the annotation step and will filter the GO terms derived from the gene list.
@@ -159,34 +145,28 @@ Which will generate a tree visualization of the test data.
 
 ![GeneScape output][out1]
 
-[out1]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/genescape-output1.png
+[out1]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_output_1.png
 
 ## Reducing the graph size
 
-We can pass the tree visualizer a list of genes or a list of GO ids, or even a mix of both. Here is an example.
+We can pass the tree visualizer a list of genes or a list of GO ids, or even a mix of both. 
 
-```
-Cyp1a1
-Sphk2
-Sptlc2
-```
-
-We run the `tree` command to visualize the relationships between the GO terms 
+We run the `tree` command to visualize the relationships between the GO terms that includes all coverages:
 
 ```console
-genescape tree genes.txt
+genescape tree genes.txt --mincov 1 
 ```
 
-Note that we had only three genes in the input yet even that produces a huge tree of terms.
+For most gene list the result might be a huge tree
 
 ![GeneScape output][out2]
 
-[out2]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/genescape-output2.png
+[out2]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_output_2.png
 
 We can narrow down the visualization in multiple ways, for example, we can select only terms that match the word `lipid` :
 
 ```console
-genescape tree -m lipid genes.txt 
+genescape tree -m signal genes.txt 
 ```
 
 When filtered as shown above, the output is much more manageable:
@@ -194,7 +174,7 @@ When filtered as shown above, the output is much more manageable:
 ![GeneScape output][out3]
 
 
-[out3]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/genescape-output3.png
+[out3]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_output_3.png
 
 ## genetrack annotation
 

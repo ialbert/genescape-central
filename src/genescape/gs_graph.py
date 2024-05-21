@@ -239,14 +239,14 @@ class Run:
 
         return df
 
-WIDTH = 16.9
-HEIGHT = 6.0
+WIDTH = 35.0
+HEIGHT = 12.0
 
-def dpi(size, width):
+def get_dpi(size, width):
     value = size / width
     return value
 
-def save_graph(pg, fname, imgsize=2048, width=WIDTH):
+def save_graph(pg, fname, imgsize=4048, width=WIDTH):
     """
     Saves the pydot graph to a file
     """
@@ -259,7 +259,9 @@ def save_graph(pg, fname, imgsize=2048, width=WIDTH):
     elif fname.endswith(".pdf"):
         pg.write_pdf(fname)
     elif fname.endswith(".png"):
-        pg.set_graph_defaults(size=f"{WIDTH},{HEIGHT}", dpi=dpi(imgsize, width=width))
+        dpi = get_dpi(size=imgsize, width=width)
+        print(dpi)
+        pg.set_graph_defaults(size=f"{WIDTH},{HEIGHT}", dpi=dpi)
         pg.write_png(fname)
     else:
         utils.warn(f"Unknown output format: {fname}")
