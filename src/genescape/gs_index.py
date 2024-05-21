@@ -67,7 +67,7 @@ class Index:
     def __str__(self):
         map_count, sym_count, go_count = self.stats()
         source = self.info.get("gaf_fname", "unknown")
-        return f"index: {map_count:,d} associations of {sym_count:,d} genes over {go_count:,d} GO terms ({source})"
+        return f"Index: {map_count:,d} associations of {sym_count:,d} genes over {go_count:,d} GO terms ({source})"
 
 
 class IndexGraph:

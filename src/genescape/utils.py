@@ -288,26 +288,5 @@ def timer(func):
     return timer
 
 
-def index_stats(index, verbose=False):
-    """
-    Returns the number of mappings, symbols and terms in the index.
-    """
-    go2sym = index[IDX_GO2SYM]
-    sym2go = index[IDX_SYM2GO]
-
-    map_count = 0
-    for value in go2sym.values():
-        map_count += len(list(set(value)))
-    sym_count = len(sym2go)
-    go_count = len(go2sym)
-
-    msg = f"index: {map_count:,} mappings,  {sym_count:,} symbols, {go_count:,} terms"
-
-    if verbose:
-        info(msg)
-
-    return map_count, sym_count, go_count, msg
-
-
 if __name__ == "__main__":
     print(get_date())

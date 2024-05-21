@@ -84,7 +84,7 @@ gaf: ${GAF}
 
 index: ${IDX}
 	ls -lh ${IDX}
-	genescape build -s --index ${IDX}
+	genescape build --obo ${OBO} --gaf ${GAF} --idx ${IDX}
 
 # Performs a python-only test.
 test:

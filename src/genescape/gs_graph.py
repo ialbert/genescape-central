@@ -224,7 +224,7 @@ class Run:
             desc_count = node[self.idx.DESC_COUNT]
 
             data = {
-                'Coverage':count, 'Function':func_name,
+                'Coverage':count, 'Function':func_name, 'Domain':node[self.idx.NAMESPACE],
                 'GO': node_id, 'Genes':source,
                # 'Size': inp_size, 'Ann Count':ann_count,
                # 'Ann Total':ann_total, 'Desc Count':desc_count
@@ -310,8 +310,11 @@ def estimate(idg, targets, root=utils.NS_ALL, coverage=1, pattern=''):
     """
     res = Run(idg=idg, targets=targets, root=root, mincount=coverage, pattern=pattern)
     df = res.as_df()
-    uniq = df['Coverage'].nunique()
-    cov = max( [1, uniq - 1] )
+    if df.empty:
+        return 1
+    else:
+        uniq = df['Coverage'].nunique()
+        cov = max( [1, uniq - 1] )
     utils.info(f"coverage={cov}")
     return cov
 

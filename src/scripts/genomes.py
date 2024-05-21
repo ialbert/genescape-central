@@ -12,9 +12,9 @@ GENOMES = [
 
 def main():
     for name, url in GENOMES:
+        idx = f"obo/{name}.index.gz"
         gaf = url.split("/")[-1]
         gaf = f"obo/{gaf}"
-        idx = f"obo/{name}.index.gz"
         cmd = f"make index GAF_URL={url} GAF={gaf} IDX={idx}"
         print(cmd)
 

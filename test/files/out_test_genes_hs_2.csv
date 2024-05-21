@@ -1,8 +1,8 @@
-Coverage,Function,GO,Genes
-3,protein binding,GO:0005515,CYP1A1|SMPD3|SPHK2
-2,cytoplasm,GO:0005737,SMPD3|SPHK2
-2,mitochondrial inner membrane,GO:0005743,CYP1A1|SPHK2
-2,endoplasmic reticulum membrane,GO:0005789,CYP1A1|SPTLC2
-2,sphingolipid biosynthetic process,GO:0030148,SPHK2|SPTLC2
-2,intracellular membrane-bounded organelle,GO:0043231,CYP1A1|SPHK2
-2,sphingosine biosynthetic process,GO:0046512,SPHK2|SPTLC2
+Coverage,Function,Domain,GO,Genes
+3,protein binding,MF,GO:0005515,CYP1A1|SMPD3|SPHK2
+2,cytoplasm,CC,GO:0005737,SMPD3|SPHK2
+2,mitochondrial inner membrane,CC,GO:0005743,CYP1A1|SPHK2
+2,endoplasmic reticulum membrane,CC,GO:0005789,CYP1A1|SPTLC2
+2,sphingolipid biosynthetic process,BP,GO:0030148,SPHK2|SPTLC2
+2,intracellular membrane-bounded organelle,CC,GO:0043231,CYP1A1|SPHK2
+2,sphingosine biosynthetic process,BP,GO:0046512,SPHK2|SPTLC2

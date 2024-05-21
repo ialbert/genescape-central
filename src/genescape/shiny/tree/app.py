@@ -64,17 +64,20 @@ This panel shows the cumulative functional annotations across genes in the list.
 
 The **Coverage** column indicates how many genes in the input cover that function.
 
-> When the **Coverage** is not specified the program will guess a reasonable value for it.
 
 How to reduce the graph size:
 
 1. The **Coverage** filter will select for the minimum coverage.
-1. The **Filtering pattern** will keep only functions that match.
+1. The **World filter pattern** will keep only functions that match.
 
 Examples:
 
 * **Coverage=5** at least 5 genes carrying the function
 * **Filter=GTP|kinase** keep only functions that match both `GTP` and `kinase`.
+
+Notes:
+
+1. When the **Coverage** is not specified the program will guess a reasonable value for it.
 
 """
 
@@ -101,6 +104,13 @@ Dark green nodes indicate leaf nodes in the ontology (highest possible granulari
 * The number `[234]` in a node indicates the number of annotation for that GO term in total.
 * The number `(1/5)` in a node indicates how many input genes carry that function.
 """
+
+# Dynamic list element
+def create_list(elems):
+    return ui.tags.ul(
+        *[ui.tags.li(elem) for elem in elems]
+    )
+
 
 app_ui = ui.page_sidebar(
     ui.sidebar(
@@ -179,7 +189,7 @@ app_ui = ui.page_sidebar(
 
                 # Error message label.
                 ui.tags.div(
-                    ui.output_text(id="error_msg"),
+                    ui.output_ui(id="error_msg"),
                     class_="error_msg",
                 ),
 
@@ -195,7 +205,7 @@ app_ui = ui.page_sidebar(
             "Annotations", ui.tags.p(
                 # Info message label.
                 ui.tags.p(
-                    ui.output_text(id="info_msg"),
+                    ui.output_ui(id="info_msg"),
                     class_="info_msg",
                 ),
 
@@ -255,11 +265,12 @@ def text2list(text):
 
 
 def server(input, output, session):
-    # Runtime messages
-    info_value = reactive.Value("")
 
-    # Runtime error message
-    err_value = reactive.Value("")
+    # Runtime messages
+    info_value = reactive.Value([])
+
+    # The list of errors.
+    error_list = reactive.Value([])
 
     # Annotation as a CSV string (invisible)
     csv_value = reactive.Value("# The annotation CSV will appear here.")
@@ -292,12 +303,15 @@ def server(input, output, session):
             except ValueError:
                 coverage = 1
 
+        db_code = input.database()
         pattern = input.pattern()
         root = input.root()
 
+        # Initialize the resources.
         res = resources.init()
 
-        idx_fname = res.INDEX_FILE
+        # Locate the database from the index.
+        idx_fname = res.find_index(db_code)
 
         # The input gene list.
         targets = text2list(input.input_list())
@@ -328,16 +342,15 @@ def server(input, output, session):
         dot_value.set(str(pg))
 
         # Set the info messages.
-        info_str1 = f"Coverage={coverage}; Graph: {run.tree.number_of_nodes()} nodes and {run.tree.number_of_edges()} edges."
-        # info_value1.set(info_str1)
-
-        info_str2 = str(run.idx)
-        info_value.set(f"{info_str1} {info_str2}")
+        info1 = f"Coverage={coverage}"
+        info2 = f"Graph: {run.tree.number_of_nodes()} nodes and {run.tree.number_of_edges()} edges."
+        info3 = f"{run.idx}"
+        info_value.set([ info1, info2, info3])
 
         # Set the error message.
         if run.errors:
-            err_str = ",".join(run.errors)
-            err_value.set(err_str)
+            error_list.set(run.errors)
+
 
         # The trigger function.
         async def trigger():
@@ -346,13 +359,14 @@ def server(input, output, session):
         # Send a custom message to trigger the graph rendering.
         session.on_flushed(trigger, once=True)
 
-    @render.text
-    async def error_msg():
-        return err_value.get()
 
-    @render.text
+    @render.ui
+    async def error_msg():
+        return create_list(error_list())
+
+    @render.ui
     async def info_msg():
-        return info_value.get()
+        return create_list(info_value())
 
     @render.text
     async def csv_data():
