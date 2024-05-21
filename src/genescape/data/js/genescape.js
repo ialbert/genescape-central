@@ -1,15 +1,28 @@
 
-var ZOOM_LEVEL = 1; // Initial zoom level
-var ZOOM_STEP = 1.2; // Zoom step
+
+var ZOOM_IN = 1.2;
+var ZOOM_OUT = 1 / ZOOM_IN;
+
+var initialBox = null; // Initial viewBox of the SVG element
+
+function resize_container(){
+	var div = document.getElementById('graph_root');
+	var svg = document.getElementById('svgtree');
+
+	// Get the bounding box of the SVG content
+    const bbox = svg.getBBox();
+
+    // Update the size of the container based on the bounding box
+    div.style.width = `${bbox.width+200}px`;
+    div.style.height = `${bbox.height+200}px`;
+}
 
 // Renders the graph using Graphviz
 function render_graph() {
 
-	// Reset the zoom level.
-	ZOOM_LEVEL = 1;
-
 	// Get the DOM elements to operate on.
     dot = document.getElementById('dot_data');
+
     graph = document.getElementById('graph_root')
 
     // Pop modal window if either is missing
@@ -25,22 +38,12 @@ function render_graph() {
         var svg = viz.renderSVGElement(dot);
         svg.setAttribute("id", "svgtree");
         svg.setAttribute("width", "100%");
-		svg.setAttribute("height", "100%");
 
 		graph.innerHTML = '';
         graph.appendChild(svg);
 
-		rect = graph.getBoundingClientRect();
-
-		var bbox = svg.getBBox();
-
-		zoom = rect.width/bbox.width;
-
-		var svg_obj = document.querySelector('#svgtree');
-
-		//svg_obj.style.transformOrigin = 'top left';
-		//svg_obj.style.transform = `scale(${zoom})`;
-		//debugger;
+		// The initial viewBox of the SVG element.
+		initialBox = svg.getAttribute("viewBox");
 
     }).catch(
         error => console.error("Error rendering Graphviz: ", error)
@@ -71,26 +74,25 @@ function save_image() {
     };
 }
 
-// Adjusts the zoom level of the graph
-function adjust_zoom(action) {
+var currentZoom = 1;
 
-    var svg = document.querySelector('#svgtree');
+// JavaScript function to zoom SVG
+function zoom_SVG(zoomFactor) {
+    const svg = document.getElementById("svgtree");
+    const viewBox = svg.getAttribute("viewBox").split(' ').map(Number);
 
-    if (!svg) return;
+	currentZoom *= zoomFactor;
 
-	// Adjust zoom level based on the action
-    if (action === 'zoom_in') {
-        ZOOM_LEVEL *= ZOOM_STEP
-    } else if (action === 'zoom_out') {
-        ZOOM_LEVEL /= ZOOM_STEP
-    } else {
-        ZOOM_LEVEL = 1;
-    }
+	svg.style.transformOrigin = 'top left';
+    svg.style.transform = `scale(${currentZoom})`;
 
-    // Apply new zoom level to the SVG
-    svg.style.transform = `scale(${ZOOM_LEVEL})`;
-    svg.style.transformOrigin = 'top left';
+    //resize_container();
+}
 
+function reset_SVG() {
+	currentZoom = 1;
+    const svg = document.getElementById("svgtree");
+	svg.style.transform = `scale(${currentZoom})`;
 }
 
 // Add event listeners to the DOM elements after page load.
@@ -98,11 +100,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         document.getElementById("save_image").addEventListener("click", save_image);
 
-		document.querySelectorAll('button[data-action]').forEach(button => {
-	        button.addEventListener('click', function() {
-	            var action = this.getAttribute('data-action');
-	            adjust_zoom(action);
-	        });
+		document.getElementById('zoom_in').addEventListener('click', () => zoom_SVG(ZOOM_IN));
+		document.getElementById('zoom_out').addEventListener('click', () => zoom_SVG(ZOOM_OUT));
+		document.getElementById('zoom_reset').addEventListener('click', reset_SVG);
 
-		});
+
 });

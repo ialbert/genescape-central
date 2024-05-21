@@ -1,21 +1,17 @@
 from shiny import reactive
 from shiny import App, render, ui
-import asyncio, os
+import asyncio, os, time
 from genescape import icons
-from genescape import __version__, nexus, utils, resources
+from genescape import __version__, gs_graph, utils, resources
 import pandas as pd
+from pathlib import Path
 
-# Get a resource configuration file.
-cnf_fname = os.environ.get("GENESCAPE_CONFIG", None)
-
-# Load the configuration file.
-cnf = resources.get_config(fname=cnf_fname)
+from starlette.applications import Starlette
+from starlette.routing import Mount
+from starlette.staticfiles import StaticFiles
 
 # Load the default resources.
-res = resources.init(config=cnf)
-
-# Update the resources from the environment.
-res.update_from_env()
+res = resources.init()
 
 # This is the global database choices
 DATABASE_CHOICES = dict()
@@ -32,7 +28,7 @@ GENE_LIST = res.config.get("GENE_LIST", "ABTB3\nBCAS4\nC3P1\nGRTP1")
 PATTERN = res.config.get("PATTERN", "")
 
 # Default mincount.
-MINCOUNT = res.config.get("MINCOUNT", 1)
+MINCOUNT = res.config.get("MINCOUNT", "autodetect")
 
 # Load the sidebar width.
 SIDEBAR_WIDTH = res.config.get("SIDEBAR_WIDTH", 300)
@@ -47,60 +43,188 @@ HELP = """
 The functional annotations will be shown in the table below. 
 """
 
-DOCS = """
-* Reduce the graph size by filtering for coverage or words in the functions (regex ok).
-* The coverage indicates how many genes in the input cover that function.
-* Green nodes indicate functions present in input genes.
-* Dark green nodes indicate leaf nodes in the ontology (highest possible granularity).
+GRAPH_TAB = """
+Press "Draw Tree" to generate the graph.
+"""
+
+ANNOT_TAB = """
+
+This panel shows the cumulative functional annotations across genes in the list.
+
+The coverage column indicates how many genes in the input cover that function.
+
+How to reduce the graph size:
+
+1. The **Coverage** filter will select for the minimum coverage.
+1. The **Filtering pattern** will keep only functions that match.
+
+Examples: 
+
+* `Coverage=5` at least 5 genes carrying the function
+* `Filter=GTP|kinase` keep only functions that match both `GTP` and `kinase`.
+
+"""
+
+HELP_TAB = """
+Type a list of genes of GO terms then press "Draw Tree".
+
+Tips for making graphs smaller:
+
+1. Filter for minimum coverage in the functions. You can use regular expressions in the pattern.
+
+**Legend**
+
+<img src="/static/node-help.png" class="img-fluid helpimg" alt="Alt text">
+
+The coverage indicates how many genes in the input cover that function.
+
+**Colors**
+
+Green nodes indicate functions present in input genes.
+
+Dark green nodes indicate leaf nodes in the ontology (highest possible granularity).
+
 * Subtrees are colored by Ontology namespace: Cellular Component (pink), Molecular Function (blue), Biological Process (beige).
 * The number `[234]` in a node indicates the number of annotation for that GO term in total.
 * The number `(1/5)` in a node indicates how many input genes carry that function.
 """
 
-ANN_COLUMNS = "coverage,function,node_id,source,size,ann_count,ann_total,desc_count".split(",")
+print(os.getcwd())
 
 app_ui = ui.page_sidebar(
-
     ui.sidebar(
-        ui.input_text_area("terms", label="Gene List", value=GENE_LIST),
 
-        ui.div({"class": "left-aligned"},
+        # The gene list.
+        ui.input_text_area("input_list", label="Gene List", value=GENE_LIST),
 
-               ui.input_select(
-                   "database",
-                   "Organism", DATABASE_CHOICES,
-               ),
-
-               ui.input_text("mincount", label="Coverage", value=MINCOUNT),
-               ui.input_text("pattern", label="Pattern", value=PATTERN),
-
-               ui.input_select(
-                   "root",
-                   "Root", {
-                       utils.NS_ALL: "All roots",
-                       utils.NS_BP: "Biological Process",
-                       utils.NS_MF: "Molecular Function",
-                       utils.NS_CC: "Cellular Component"
-                   },
-               ),
-               ),
-        ui.input_action_button("submit", "Draw Tree", class_="btn-success", icon=icons.icon_play),
-
-        ui.tags.p(
-            ui.download_link("download_csv", "Download annotations as CSV", icon=icons.icon_down),
+        # The main submit button.
+        ui.input_action_button(
+            "submit", "Draw Tree", class_="btn-success", icon=icons.icon_play
         ),
-        ui.tags.p(
-            ui.download_link("download_dot", "Download graph as a DOT file", icon=icons.icon_down),
+
+        # Select the database.
+        ui.input_select(
+            "database",
+            label="Organism:", choices=DATABASE_CHOICES,
         ),
-        ui.output_code("annot_csv"),
-        ui.output_code("dot_elem"),
+
+        # Select the root
+        ui.input_select(
+            "root",
+            "Domain:", {
+                utils.NS_ALL: "All domains",
+                utils.NS_BP: "Biological Process",
+                utils.NS_MF: "Molecular Function",
+                utils.NS_CC: "Cellular Component"
+            },
+            selected=utils.NS_BP,
+        ),
+
+        # Minimum count.
+        ui.input_text("coverage", label="Coverage:", value=MINCOUNT),
+
+        # Filtering pattern.
+        ui.input_text("pattern", label="Word filter (regex ok):", value=PATTERN),
+
+        # Download button for annotation CSV.
+        ui.tags.p(
+            ui.download_link("download_csv", "Download CSV file", icon=icons.icon_down),
+        ),
+
+        # Download button for the dot data
+        ui.tags.p(
+            ui.download_link("download_dot", "Download DOT file", icon=icons.icon_down),
+        ),
+
+        # The annotation data as csv.
+        ui.output_code("csv_data"),
+
+        # The dot file as text.
+        ui.output_code("dot_data"),
 
         width=SIDEBAR_WIDTH, bg=SIDEBAR_BG,
+    ),
+
+    ui.navset_tab(
+
+        # Graph panel.
+        ui.nav_panel(
+            "Graph", ui.tags.p(
+
+                ui.tags.div(
+                    ui.input_action_button("zoom_in", label="Zoom", icon=icons.icon_zoom_in,
+                                           class_="btn btn-light btn-sm",),
+                    ui.tags.span(" "),
+                    ui.input_action_button("zoom_reset", label=" Reset", icon=icons.zoom_reset,
+                                           class_="btn btn-light btn-sm"),
+                    ui.tags.span(" "),
+                    ui.input_action_button("zoom_out", label="Zoom", icon=icons.icon_zoom_out,
+                                           class_="btn btn-light btn-sm"),
+                    ui.tags.span(" "),
+                    ui.input_action_button("save_image", "Save", class_="btn btn-light btn-sm", icon=icons.icon_down),
+
+                    align="center", id="zoom_buttons",
+                ),
+
+                # Error message label.
+                ui.tags.div(
+                    ui.output_text(id="error_msg"),
+                    class_="error_msg",
+                ),
+
+                # Info message label.
+                ui.tags.div(
+                    ui.output_text(id="info_msg1"),
+                    class_="info_msg", align="center",
+                ),
+
+                # The graph root object.
+                ui.div(
+                    ui.tags.b(GRAPH_TAB),
+                    id="graph_root", align="center"),
+
+                # Info message label.
+                ui.tags.div(
+                    ui.output_text(id="info_msg2"),
+                    class_="info_msg", align="center",
+                ),
+                class_="graph_root",
+            ),
+        ),
+
+        ui.nav_panel(
+            "Annotations", ui.tags.p(
+                ui.div(
+
+                    ui.output_data_frame("df_data"),
+
+                ),
+                ui.tags.p(
+                    ui.markdown(ANNOT_TAB),
+                ),
+            ),
+        ),
+
+        ui.nav_panel(
+            "Help", ui.tags.p(
+                ui.markdown(HELP_TAB)),
+
+        ),
+        id="tabs", selected="Graph"
+    ),
+
+    ui.tags.div(
+        ui.tags.p(
+            ui.tags.a(HOME, href=HOME),
+        ),
+        ui.tags.p(f"GeneScape {__version__}"),
+        align="center",
     ),
 
     ui.head_content(
         ui.tags.script(
             """
+            // Page complete trigger.
             $(function() {
                 Shiny.addCustomMessageHandler("trigger", function(message) {
                     render_graph();
@@ -111,62 +235,13 @@ app_ui = ui.page_sidebar(
         ui.include_js(res.VIZ_JS, defer=""),
         ui.include_js(res.GENESCAPE_JS, method="inline"),
     ),
-
-    ui.tags.p(
-        ui.input_action_button("zoom_in", label="Zoom", icon=icons.icon_zoom_in, class_="btn btn-light btn-sm",
-                               data_action="zoom-in"),
-        ui.tags.span(" "),
-        ui.input_action_button("reset", label="Reset", icon=icons.zoom_reset, class_="btn btn-light btn-sm",
-                               data_action="zoom-reset"),
-        ui.tags.span(" "),
-        ui.input_action_button("zoom_out", label="Zoom", icon=icons.icon_zoom_out, class_="btn btn-light btn-sm",
-                               data_action="zoom-out"),
-        ui.tags.span(" "),
-        ui.input_action_button("saveImage", "Save", class_="btn btn-light btn-sm", icon=icons.icon_down),
-
-        align="center",
-    ),
-
-    ui.tags.p(
-        # ui.tags.hr(),
-        ui.output_text("err_label"),
-        ui.p(
-            ui.tags.b('Press "Draw Tree" to generate the graph.  '),
-            id="graph_elem", align="center"),
-    ),
-
-    ui.tags.p(
-        ui.tags.div(
-            ui.output_text("msg_elem"),
-            align="center"),
-    ),
-
-    ui.tags.p(
-        ui.output_data_frame("annot_table"),
-    ),
-
-    ui.tags.hr(),
-    ui.markdown(DOCS),
-
-    ui.tags.div(
-        ui.tags.hr(),
-        ui.tags.p(
-            ui.tags.a(HOME, href=HOME),
-        ),
-        ui.tags.p(f"GeneScape {__version__}"),
-        align="center",
-    ),
-
-    ui.output_text("run_elem"),
-
     title=PAGE_TITLE, id="main",
-
 )
 
 
 def text2list(text):
     """
-    Parses a text block into a list of terms
+    Parses a text inptu into a list of terms
     """
     terms = map(lambda x: x.strip(), text.splitlines())
     terms = filter(None, terms)
@@ -175,123 +250,30 @@ def text2list(text):
 
 
 def server(input, output, session):
-    """
-    Shiny server.
-    """
-    global res
-
-    # The annotation table.
-    ann_table = reactive.Value(pd.DataFrame(columns=ANN_COLUMNS))
+    # Runtime messages
+    info_value1 = reactive.Value("")
 
     # Runtime messages
-    msg_value = reactive.Value(HELP)
+    info_value2 = reactive.Value("")
 
     # Runtime error message
     err_value = reactive.Value("")
 
     # Annotation as a CSV string (invisible)
-    ann_csv = reactive.Value("# The annotation table will appear here.")
+    csv_value = reactive.Value("# The annotation CSV will appear here.")
+
+    # Default dataframe.
+    df_value = reactive.Value(pd.DataFrame())
 
     # The dot file as a text (invisible)
     dot_value = reactive.Value("# The dot file will appear here.")
 
-    async def create_tree(text):
-        mincount = int(input.mincount())
-        pattern = input.pattern()
-        code = input.database()
-
-        genes = text2list(text)
-
-        root = input.root()
-
-        # idx_fname = res.INDEX_FILE
-
-        idx_fname = res.find_index(code=code)
-
-        # msg = utils.index_stats(index=index, verbose=False)[-1]
-
-        idx, dot, tree, ann, status = nexus.run(genes=genes, idx_fname=idx_fname, mincount=mincount, pattern=pattern,
-                                                root=root)
-
-        ann_table.set(ann)
-        ann_csv.set(ann.to_csv(index=False))
-        dot_value.set(dot.to_string())
-
-        nodes = len(tree.nodes())
-        edges = len(tree.edges())
-        stats = nexus.stats(idx)
-
-        valid_count = len(status.get('sym_valid',[]))
-
-        # Set main message.
-        msg = f"Recognized {valid_count} symbols. Subgraph with {nodes} nodes and {edges} edges. Index: {stats[0]:,d} mappings of {stats[1]:,d} genes,over {stats[2]} terms."
-        msg_value.set(msg)
-
-        # Set the error message
-        miss = status.get("sym_miss")
-        if miss:
-            msg = f"Unknown symbols: {', '.join(miss)}"
-            err_value.set(msg)
-        else:
-            err_value.set("")
-
-        async def trigger():
-            await session.send_custom_message("trigger", 1)
-
-        session.on_flushed(trigger, once=True)
-
-        return dot, text
-
-    @render.download(filename=lambda: "genescape.csv")
-    async def download_csv():
-        await asyncio.sleep(0.5)
-        yield ann_csv.get()
-
-    @render.download(filename=lambda: "genescape.dot.txt")
-    async def download_dot():
-        await asyncio.sleep(0.5)
-        yield dot_value.get()
-
-    @output
-    @render.data_frame
-    def annot_table():
-        df = ann_table.get()
-        return render.DataTable(df, width='fit-content')
-
-    @output
-    @render.text
-    def annot_csv():
-        return ann_csv.get()
-
-    @output
-    @render.text
-    def err_label():
-        return err_value.get()
-
-    @output
-    @render.text
-    def dot_elem():
-        return dot_value.get()
-
-    @output
-    @render.text
-    def msg_elem():
-        return msg_value.get()
-
-    @output
-    @render.text
-    def demo_elem():
-        return dot_value.get()
-
-    @output
-    @render.text
+    @reactive.effect
     @reactive.event(input.submit)
-    async def run_elem():
-        await run_main()
-        return ""
+    async def submit():
+        await create_tree()
 
-    # The main tree runner.
-    async def run_main():
+    async def create_tree():
         limit = 10
         # Emulate some sort of progress bar
         with ui.Progress(min=1, max=limit) as p:
@@ -300,13 +282,119 @@ def server(input, output, session):
                 p.set(i)
                 await asyncio.sleep(0.1)
 
-            # Generate the tree
-            await create_tree(input.terms())
+        coverage = input.coverage()
+
+        if coverage in ('autodetect', 'auto'):
+            coverage = 0
+        else:
+            try:
+                coverage = int(coverage)
+            except ValueError:
+                coverage = 1
+
+        pattern = input.pattern()
+        root = input.root()
+
+        res = resources.init()
+
+        idx_fname = res.INDEX_FILE
+
+        # The input gene list.
+        targets = text2list(input.input_list())
+
+        # Create the subgraph.
+        run = gs_graph.subgraph(idx_fname, targets=targets, pattern=pattern, root=root, mincount=coverage)
+
+        # Get the dataframe
+        df = run.as_df()
+
+        # Set the dataframe value.
+        df_value.set(df)
+
+        # Set the CSV data.
+        csv_value.set(df.to_csv(index=False))
+
+        # Create the pydot object.
+        pg = run.as_pydot()
+
+        # Set the dot data.
+        dot_value.set(str(pg))
+
+        # Set the info messages.
+        info_str1 = f"Graph: {run.tree.number_of_nodes()} nodes and {run.tree.number_of_edges()} edges."
+        # info_value1.set(info_str1)
+
+        info_str2 = str(run.idx)
+        info_value2.set(f"{info_str1} {info_str2}")
+
+        # Set the error message.
+        if run.errors:
+            err_str = ",".join(run.errors)
+            err_value.set(err_str)
+
+        # The trigger function.
+        async def trigger():
+            await session.send_custom_message("trigger", 1)
+
+        # Send a custom message to trigger the graph rendering.
+        session.on_flushed(trigger, once=True)
+
+    @render.text
+    async def error_msg():
+        return err_value.get()
+
+    @render.text
+    async def info_msg1():
+        return info_value1.get()
+
+    @render.text
+    async def info_msg2():
+        return info_value2.get()
+
+    @render.text
+    async def csv_data():
+        return csv_value.get()
+
+    @render.text
+    async def dot_data():
+        return dot_value.get()
+
+    @render.data_frame
+    async def df_data():
+        df = df_value.get()
+        dg = render.DataGrid(df, filters=True, width="100%")
+        return dg
+
+    @render.download(filename=lambda: "genescape.csv")
+    async def download_csv():
+        await asyncio.sleep(0.5)
+        yield csv_value.get()
+
+    @render.download(filename=lambda: "genescape.dot.txt")
+    async def download_dot():
+        await asyncio.sleep(0.5)
+        yield dot_value.get()
 
 
-app = App(app_ui, server)
+# The Static app
+app_static = StaticFiles(directory=Path(__file__).parent / "static")
+
+# The shiny app
+app_shiny = App(app_ui, server)
+
+
+def app():
+    routes = [
+        Mount('/static', app=app_static),
+        Mount('/', app=app_shiny)
+    ]
+
+    webapp = Starlette(routes=routes)
+
+    return webapp
+
 
 if __name__ == '__main__':
     import shiny
 
-    shiny.run_app(app)
+    shiny.run_app(app, host='localhost', port=8000, reload=True)

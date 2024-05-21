@@ -31,15 +31,11 @@ usage:
 
 # Performs the testing.
 web:
-	shiny run --reload genescape.shiny.app:app
+	shiny run --reload genescape.shiny.tree.app:app --factory
 
 # Tag and push to repository.
 tag: test
 	python src/genescape/exe.py --tag
-
-# Build the executable.
-exe: test
-	python src/genescape/exe.py --build
 
 
 # Generate images for the documentation
@@ -100,7 +96,7 @@ clean:
 env:
 	micromamba create -n shiny python=3.11 rsconnect-python graphviz make -y
 
-shiny-tree:
+shiny:
 	rsconnect deploy shiny src/genescape/shiny/tree --name biostar --title GeneScape
 
 install:

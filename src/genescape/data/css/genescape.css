@@ -13,15 +13,23 @@
     visibility: hidden;
 }
 
+#svgtree {
+    //max-height: 500px;
+    //max-width: 2000px;
+}
+
 #error_msg {
     color: red;
 }
 
 #graph_root {
-    max-height: 700px;
+    min-height: 300px;
+    //max-height: 800px;
     overflow: auto;
-    border: var(--border-color) solid 1px;
-    padding: 20px;
+    border-top: var(--border-color) solid 1px;
+    border-bottom: var(--border-color) solid 1px;
+    padding: 10px;
+    transform-origin: top left;
 }
 
 #dot_data {
