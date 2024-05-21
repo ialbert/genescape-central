@@ -14,7 +14,7 @@ The public version of the software can be accessed at:
 
 [pyshiny]: https://shiny.posit.co/py/
 
-## Local installation
+### Local installation
 
 Users can also run the program on their system by installing the software via `pip`:
 
@@ -48,7 +48,7 @@ The user interface is browser-based via the URL:
 
 Once you are done running with the program, you will need to close the terminal that started the program or press CTRL+C to stop the program from running.
 
-## What does GeneScape do?
+### What does GeneScape do?
 
 **GeneScape** works the following way:
 
@@ -58,9 +58,9 @@ Once you are done running with the program, you will need to close the terminal 
 
 > **Note**: Even short lists of genes (under ten genes) can create large trees. Filter by minimum counts (how many genes share the function) or functional patterns (functions that match a pattern). 
 
-When not explicitly specified, GeneScape will try to find reasonable coverage treshold for the input genes.
+When not explicitly specified, GeneScape will try to find reasonable coverage threshold for the input genes.
 
-## Node Labeling 
+### Node Labeling 
 
 The labels in the graph carry additional information on the number of genes in the input that carry that function as well as an indicator for the specificity of the function in the organism. For example, the label:
 
@@ -77,7 +77,7 @@ The `(1/5)` means that  `1` out of `5` genes in the input list carry this annota
 
 It is possible to compute a p-value to determine whether an observed enrichment difference is statistically significant. We'll just note that assigning p-values to enrichment counts is fraught with several challenges. In our opinion, GO annotations are neither complete, nor independent, nor precise enough to satisfy mathematical requirements. In addition, appropriate selection of the background (aka the `19000` above) to correct p-values for multiple comparisons also presents many challenges. For these reasons, we do not compute p-values in our application.
 
-## Node Coloring
+### Node Coloring
 
 The colors in the tree carry additional meaning:
 
@@ -113,7 +113,7 @@ Filters are applied during the annotation step and will filter the GO terms deri
 
 In the Shiny interface use the **coverage** filter to remove functions that are not well represented in the input list. Recall that `coverage` represents the number of genes in the input list that carry that function. You can see the counts for each annotation in the **Function Annotations** box as the first column.
 
-## Command line requirements
+### Command line requirements
 
 To generate images from command line the `graphviz` software must be installed. You can install it via `conda`
 
@@ -133,7 +133,7 @@ Then use an online tool like [viz-js][viz] to visualize the graph.
 
 [viz]: https://viz-js.com/ 
 
-## genescape tree
+### genescape tree
 
 We packaged test data with the software so you can test it like so:
 
@@ -147,7 +147,7 @@ Which will generate a tree visualization of the test data.
 
 [out1]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_output_1.png
 
-## Reducing the graph size
+### Reducing the graph size
 
 We can pass the tree visualizer a list of genes or a list of GO ids, or even a mix of both. 
 
@@ -166,17 +166,16 @@ For most gene list the result might be a huge tree
 We can narrow down the visualization in multiple ways, for example, we can select only terms that match the word `lipid` :
 
 ```console
-genescape tree -m signal genes.txt 
+genescape tree -m repair genes.txt 
 ```
 
 When filtered as shown above, the output is much more manageable:
 
 ![GeneScape output][out3]
 
-
 [out3]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_output_3.png
 
-## genetrack annotation
+### genetrack annotation
 
 The annotator operates on gene names. Suppose you have a list of gene names in the format:
 
@@ -190,29 +189,23 @@ Smpd3
 The command:
 
 ```console
-genescape annotate --test 
+genescape annotate genelist.txt
 ```
 
 will produce the output:
 
 ```
-coverage,function,node_id,source,size,ann_count,ann_total,desc_count
-1,endopeptidase inhibitor activity,GO:0004866,C3P1,4,39,199,5
-1,GTPase activator activity,GO:0005096,GRTP1,4,274,274,0
-1,extracellular space,GO:0005615,C3P1,4,1669,1669,0
-1,cytoplasm,GO:0005737,BCAS4,4,5118,5452,44
-1,membrane,GO:0016020,ABTB3,4,3268,20199,360
-1,PDZ domain binding,GO:0030165,ABTB3,4,86,86,0
-1,BLOC-1 complex,GO:0031083,BCAS4,4,15,15,0
-1,"synaptic transmission, glutamatergic",GO:0035249,ABTB3,4,42,42,0
-1,exploration behavior,GO:0035640,ABTB3,4,19,35,1
-1,protein heterodimerization activity,GO:0046982,ABTB3,4,319,319,0
-1,protein stabilization,GO:0050821,ABTB3,4,219,219,0
-1,activation of GTPase activity,GO:0090630,GRTP1,4,100,100,0
-1,glutamatergic synapse,GO:0098978,ABTB3,4,412,428,3
+Coverage,Function,GO,Genes
+3,protein binding,GO:0005515,CYP1A1|SMPD3|SPHK2
+2,cytoplasm,GO:0005737,SMPD3|SPHK2
+2,mitochondrial inner membrane,GO:0005743,CYP1A1|SPHK2
+2,endoplasmic reticulum membrane,GO:0005789,CYP1A1|SPTLC2
+2,sphingolipid biosynthetic process,GO:0030148,SPHK2|SPTLC2
+2,intracellular membrane-bounded organelle,GO:0043231,CYP1A1|SPHK2
+2,sphingosine biosynthetic process,GO:0046512,SPHK2|SPTLC2
 ```
 
-## genescape build
+### genescape build
 
 The software is currently packaged with a human and a mouse genome derived data index.
 
@@ -234,7 +227,7 @@ genescape web --index mydata.index.gz
 
 See the `--help` for more options.
 
-## Odds and ends
+### Odds and ends
 
 It is possible to mix gene and ontology terms. The following is a valid input:
 
@@ -248,7 +241,7 @@ Sptlc2
 
 Listing the same gene or GO term multiple times will count it multiple times.
 
-## Testing
+### Testing
 
 Tests are run via a `Makefile` as:
 
@@ -256,7 +249,7 @@ Tests are run via a `Makefile` as:
 make test
 ```
 
-## Additional customizations
+### Additional customizations
 
 The software can be customized by creating a copy of the `config.toml` file and settings the `GENESCAPE_CONFIG` environment variable to point to the new configuration file.
 
@@ -264,10 +257,10 @@ The software can be customized by creating a copy of the `config.toml` file and 
 
 In this file the lines that have an `index` type will be used to build the dropdown menu in the web interface.
 
-## Contributing
+### Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the development of GeneScape.
 
-## License
+### License
 
 `genescape` is distributed under the terms of the MIT license. 
