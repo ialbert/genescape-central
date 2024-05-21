@@ -9,16 +9,17 @@ function resize_container(){
 	var div = document.getElementById('graph_root');
 	var svg = document.getElementById('svgtree');
 
-	// Get the bounding box of the SVG content
-    const bbox = svg.getBBox();
 
-    // Update the size of the container based on the bounding box
-    div.style.width = `${bbox.width+200}px`;
-    div.style.height = `${bbox.height+200}px`;
+	const bbox = svg.getBBox();
+    //div.style.width = `${bbox.width}px`;
+    //div.style.height = `${bbox.height}px`;
+
 }
 
 // Renders the graph using Graphviz
 function render_graph() {
+
+	currentZoom = 1;
 
 	// Get the DOM elements to operate on.
     dot = document.getElementById('dot_data');
@@ -38,7 +39,7 @@ function render_graph() {
         var svg = viz.renderSVGElement(dot);
         svg.setAttribute("id", "svgtree");
         svg.setAttribute("width", "100%");
-
+		svg.setAttribute("height", "100%");
 		graph.innerHTML = '';
         graph.appendChild(svg);
 
@@ -79,20 +80,22 @@ var currentZoom = 1;
 // JavaScript function to zoom SVG
 function zoom_SVG(zoomFactor) {
     const svg = document.getElementById("svgtree");
-    const viewBox = svg.getAttribute("viewBox").split(' ').map(Number);
+    const div = document.getElementById("graph_root");
 
 	currentZoom *= zoomFactor;
 
 	svg.style.transformOrigin = 'top left';
     svg.style.transform = `scale(${currentZoom})`;
 
-    //resize_container();
+    resize_container();
 }
 
 function reset_SVG() {
 	currentZoom = 1;
     const svg = document.getElementById("svgtree");
 	svg.style.transform = `scale(${currentZoom})`;
+
+	resize_container();
 }
 
 // Add event listeners to the DOM elements after page load.

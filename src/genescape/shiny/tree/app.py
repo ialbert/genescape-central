@@ -5,6 +5,7 @@ from genescape import icons
 from genescape import __version__, gs_graph, utils, resources
 import pandas as pd
 from pathlib import Path
+from random import shuffle
 
 from starlette.applications import Starlette
 from starlette.routing import Mount
@@ -12,6 +13,12 @@ from starlette.staticfiles import StaticFiles
 
 # Load the default resources.
 res = resources.init()
+
+idg = gs_graph.load_index_graph(res.INDEX_FILE)
+
+syms = list(idg.idx.sym2go.keys())
+shuffle(syms)
+
 
 # This is the global database choices
 DATABASE_CHOICES = dict()
@@ -22,13 +29,15 @@ DATABASE_CHOICES.update(res.index_choices())
 PAGE_TITLE = res.config.get("PAGE_TITLE", "GeneScape")
 
 # Default gene list.
-GENE_LIST = res.config.get("GENE_LIST", "ABTB3\nBCAS4\nC3P1\nGRTP1")
+#GENE_LIST = res.config.get("GENE_LIST", "ABTB3\nBCAS4\nC3P1\nGRTP1")
+
+GENE_LIST = "\n".join(sorted(syms[:50]))
 
 # Default pattern.
 PATTERN = res.config.get("PATTERN", "")
 
 # Default mincount.
-MINCOUNT = res.config.get("MINCOUNT", "autodetect")
+MINCOUNT = res.config.get("MINCOUNT", "")
 
 # Load the sidebar width.
 SIDEBAR_WIDTH = res.config.get("SIDEBAR_WIDTH", 300)
@@ -172,28 +181,23 @@ app_ui = ui.page_sidebar(
                     class_="error_msg",
                 ),
 
-                # Info message label.
-                ui.tags.div(
-                    ui.output_text(id="info_msg1"),
-                    class_="info_msg", align="center",
-                ),
 
                 # The graph root object.
                 ui.div(
                     ui.tags.b(GRAPH_TAB),
                     id="graph_root", align="center"),
 
-                # Info message label.
-                ui.tags.div(
-                    ui.output_text(id="info_msg2"),
-                    class_="info_msg", align="center",
-                ),
-                class_="graph_root",
             ),
         ),
 
         ui.nav_panel(
             "Annotations", ui.tags.p(
+                # Info message label.
+                ui.tags.p(
+                    ui.output_text(id="info_msg"),
+                    class_="info_msg",
+                ),
+
                 ui.div(
 
                     ui.output_data_frame("df_data"),
@@ -251,10 +255,7 @@ def text2list(text):
 
 def server(input, output, session):
     # Runtime messages
-    info_value1 = reactive.Value("")
-
-    # Runtime messages
-    info_value2 = reactive.Value("")
+    info_value = reactive.Value("")
 
     # Runtime error message
     err_value = reactive.Value("")
@@ -284,13 +285,13 @@ def server(input, output, session):
 
         coverage = input.coverage()
 
-        if coverage in ('autodetect', 'auto'):
-            coverage = 0
-        else:
+        if coverage:
             try:
                 coverage = int(coverage)
             except ValueError:
                 coverage = 1
+        else:
+            coverage = 1
 
         pattern = input.pattern()
         root = input.root()
@@ -325,7 +326,7 @@ def server(input, output, session):
         # info_value1.set(info_str1)
 
         info_str2 = str(run.idx)
-        info_value2.set(f"{info_str1} {info_str2}")
+        info_value.set(f"{info_str1} {info_str2}")
 
         # Set the error message.
         if run.errors:
@@ -344,12 +345,8 @@ def server(input, output, session):
         return err_value.get()
 
     @render.text
-    async def info_msg1():
-        return info_value1.get()
-
-    @render.text
-    async def info_msg2():
-        return info_value2.get()
+    async def info_msg():
+        return info_value.get()
 
     @render.text
     async def csv_data():
