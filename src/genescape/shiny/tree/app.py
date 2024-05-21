@@ -418,16 +418,17 @@ app_static = StaticFiles(directory=Path(__file__).parent / "static")
 app_shiny = App(app_ui, server)
 
 
-def app():
+def web_app():
     routes = [
         Mount('/static', app=app_static),
         Mount('/', app=app_shiny)
     ]
 
-    webapp = Starlette(routes=routes)
+    web = Starlette(routes=routes)
 
-    return webapp
+    return web
 
+app = web_app()
 
 if __name__ == '__main__':
     import shiny

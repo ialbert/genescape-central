@@ -31,7 +31,7 @@ usage:
 
 # Performs the testing.
 web:
-	shiny run --reload genescape.shiny.tree.app:app --factory
+	shiny run --reload genescape.shiny.tree.app:app
 
 # Tag and push to repository.
 tag: test

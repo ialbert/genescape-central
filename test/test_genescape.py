@@ -66,7 +66,7 @@ def test_genescape(inp_name, out_name, cmd):
         raise AssertionError(f"content mismatch: {out_name}")
 
 
-@pytest.mark.parametrize("cmd", ["build -s", "annotate -t -o test/out/genescape.csv", "tree -t -o test/out/genescape.pdf"])
+@pytest.mark.parametrize("cmd", ["build -s --idx src/genescape/data/human.index.gz", "annotate -t -o test/out/genescape.csv", "tree -t -o test/out/genescape.pdf"])
 def test_run(cmd):
 
     full = f"{cmd}"
