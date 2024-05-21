@@ -43,7 +43,7 @@ GeneScape is a Python package that allows users to visualize a list of gene prod
 
 GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software via the [Shiny platform][shiny] [@shiny], thus making it accessible to a wide range of users.
 
-![GeneScape as a Shiny App \label{fig:shiny}](images/genescape-app.png)
+![GeneScape as a Shiny App \label{fig:shiny}](images/gs_web_interface.png){height="216pt"}
 
 [shiny]: https://shiny.posit.co/
 
@@ -91,7 +91,7 @@ count,function,root,goid,source,size,label
 
 In the next step, GeneScape draws the GO terms as the graph structure using the Networkx package [@networkx] helping users visualize the functional context of the genes relative to the larger Gene Ontology.
 
-![Ontology subgraph for a gene list \label{fig:interface}](images/genescape-output1.png){height="216pt"}
+![Ontology subgraph for a gene list \label{fig:interface}](images/gs_output_1.png){height="216pt"}
 
 Various colors are used to provide additional context to the nodes in the graph; for example, functions derived from the input genes are colored green. The intermediate nodes are colored by their category. 
 
@@ -113,19 +113,19 @@ Smpd3
 
 the resulting functional ontology graph is huge:
 
-![Very few genes can produce a large ontology tree \label{fig:huge}](images/genescape-output2.png)
+![Very few genes can produce a large ontology tree \label{fig:huge}](images/gs_output_2.png)
 
-Users can reduce the tree to show only terms that match the word `lipid` via the graphical user interface or the command line:
+Users can reduce the tree to show only terms that match the word `repair` via the graphical user interface or the command line:
 
 ```console
-genescape tree -m lipid genes.txt -o output.pdf
+genescape tree -m repair genes.txt -o output.pdf
 ```
 
-The filtering process will result in a smaller tree focused on the lipid-related terms:
+The filtering process will result in a smaller tree focused on the functions that contain the word "repair":
 
-![Filtering a large graph for a specific term \label{fig:filter}](images/genescape-output3.png){height="216pt"}
+![Filtering a large graph for a specific term \label{fig:filter}](images/gs_output_3.png){height="216pt"}
 
-In addition, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
+In the web interface, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
 
 The software's primary purpose is to allow users to assess the functional depth of genes and to identify commonalities and differences in the functional context of these genes.
 
