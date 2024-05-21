@@ -28,7 +28,6 @@ TAG = 'v1'
 # Loggin format
 LOG_FORMAT = "# %(levelname)s\t%(module)s.%(funcName)-12s\t%(message)s"
 
-
 # A callable to initialize the logger
 def init_logger(logger):
     formatter = logging.Formatter(LOG_FORMAT)
@@ -63,7 +62,6 @@ def verbosity(flag=False):
         logger.setLevel(DEBUG)
     else:
         logger.setLevel(INFO)
-
 
 # Initialize the logger
 init_logger(logger)

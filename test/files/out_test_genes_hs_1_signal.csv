@@ -1,0 +1,9 @@
+Coverage,Function,GO,Genes
+5,signal transduction,GO:0007165,CEACAM20|INPP5D|O60431|Q8IUC4|Q9UJF2
+1,transforming growth factor beta receptor signaling pathway,GO:0007179,ONECUT2
+1,G protein-coupled receptor signaling pathway,GO:0007186,O60431
+1,negative regulation of signal transduction,GO:0009968,INPP5D
+1,negative regulation of transforming growth factor beta receptor signaling pathway,GO:0030512,ONECUT2
+1,intracellular signal transduction,GO:0035556,INPP5D
+1,positive regulation of calcium-mediated signaling,GO:0050850,NEUROD2
+1,T cell receptor signaling pathway,GO:0050852,INPP5D

@@ -21,10 +21,18 @@ SIDEBAR_BG = "#f8f8f8"
 
 # Default gene list.
 GENE_LIST = """
-ABTB3
-BCAS4
-C3P1
-GRTP1
+CEACAM20
+INPP5D
+O60431
+Q8IUC4
+Q9UJF2
+NEUROD2
+O95905
+ONECUT2
+Q14119
+P49459
+POLK
+UVRAG
 """
 
 # A listing of the files used by GeneScape

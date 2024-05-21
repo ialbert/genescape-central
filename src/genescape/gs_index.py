@@ -1,7 +1,7 @@
 """
 Represents a GeneScape index.
 """
-import csv, gzip, json, os
+import csv, gzip, json, os, random
 from pathlib import Path
 from itertools import tee, takewhile, dropwhile, islice
 from genescape import utils
@@ -67,7 +67,7 @@ class Index:
     def __str__(self):
         map_count, sym_count, go_count = self.stats()
         source = self.info.get("gaf_fname", "unknown")
-        return f"Index: {map_count:,d} associations of {sym_count:,d} genes over {go_count:,d} GO terms ({source})"
+        return f"index: {map_count:,d} associations of {sym_count:,d} genes over {go_count:,d} GO terms ({source})"
 
 
 class IndexGraph:
@@ -81,6 +81,10 @@ class IndexGraph:
 
         # Generate the graph.
         self.graph = build_graph(idx)
+
+    def __str__(self):
+        return f"# IndexGraph\n# {self.idx}\n# {self.graph}"
+
 
 # Parse a stream to an OBO file and for
 @utils.timer
@@ -228,6 +232,7 @@ def parse_gaf(fname, idx):
 
     return idx
 
+@utils.memoize
 def load_index(path):
     if not isinstance(path, Path):
         path = Path(path)

@@ -1,0 +1,69 @@
+digraph genescape {
+"GO:0003674" [fillcolor="#A2CDF6", label="GO:0003674
+molecular_function [714]", shape=box, style=filled];
+"GO:0005488" [fillcolor="#A2CDF6", label="GO:0005488
+binding [0]", shape=box, style=filled];
+"GO:0005515" [fillcolor="#A3F6A2", label="GO:0005515
+protein binding [13K]
+(6/12)", shape=box, style=filled];
+"GO:0005575" [fillcolor="#F5A2F6", label="GO:0005575
+cellular_component [415]", shape=box, style=filled];
+"GO:0005634" [fillcolor="#A3F6A2", label="GO:0005634
+nucleus [6K]
+(5/12)", shape=box, style=filled];
+"GO:0005654" [fillcolor="#17DA15", label="GO:0005654
+nucleoplasm [4K]
+(5/12)", shape=box, style=filled];
+"GO:0005829" [fillcolor="#A3F6A2", label="GO:0005829
+cytosol [5K]
+(5/12)", shape=box, style=filled];
+"GO:0007165" [fillcolor="#A3F6A2", label="GO:0007165
+signal transduction [1107]
+(5/12)", shape=box, style=filled];
+"GO:0008150" [fillcolor="#F6CBA2", label="GO:0008150
+biological_process [564]", shape=box, style=filled];
+"GO:0009987" [fillcolor="#F6CBA2", label="GO:0009987
+cellular process [0]", shape=box, style=filled];
+"GO:0043226" [fillcolor="#F5A2F6", label="GO:0043226
+organelle [0]", shape=box, style=filled];
+"GO:0043227" [fillcolor="#F5A2F6", label="GO:0043227
+membrane-bounded
+organelle [4]", shape=box, style=filled];
+"GO:0043229" [fillcolor="#F5A2F6", label="GO:0043229
+intracellular
+organelle [7]", shape=box, style=filled];
+"GO:0043231" [fillcolor="#F5A2F6", label="GO:0043231
+intracellular
+membrane-bounded
+organelle [866]", shape=box, style=filled];
+"GO:0050789" [fillcolor="#F6CBA2", label="GO:0050789
+regulation of
+biological process [0]", shape=box, style=filled];
+"GO:0050794" [fillcolor="#F6CBA2", label="GO:0050794
+regulation of
+cellular process [0]", shape=box, style=filled];
+"GO:0065007" [fillcolor="#F6CBA2", label="GO:0065007
+biological
+regulation [0]", shape=box, style=filled];
+"GO:0110165" [fillcolor="#F5A2F6", label="GO:0110165
+cellular anatomical
+entity [0]", shape=box, style=filled];
+"GO:0003674" -> "GO:0005488";
+"GO:0005488" -> "GO:0005515";
+"GO:0005575" -> "GO:0110165";
+"GO:0008150" -> "GO:0009987";
+"GO:0008150" -> "GO:0065007";
+"GO:0009987" -> "GO:0007165";
+"GO:0043226" -> "GO:0043227";
+"GO:0043226" -> "GO:0043229";
+"GO:0043227" -> "GO:0043231";
+"GO:0043229" -> "GO:0043231";
+"GO:0043231" -> "GO:0005634";
+"GO:0050789" -> "GO:0050794";
+"GO:0050794" -> "GO:0007165";
+"GO:0065007" -> "GO:0050789";
+"GO:0110165" -> "GO:0005654";
+"GO:0110165" -> "GO:0005829";
+"GO:0110165" -> "GO:0043226";
+
+}

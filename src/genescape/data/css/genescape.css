@@ -69,6 +69,10 @@ code {
     display: inline-block;
 }
 
+blockquote {
+   color: orangered;
+}
+
 .left-aligned {
     display: grid;
     align-items: center;

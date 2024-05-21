@@ -2,13 +2,14 @@ import sys, json, os
 from pathlib import Path
 import click
 from genescape import __version__
-from genescape import resources, utils, gs_graph, gs_index, nexus
+from genescape import resources, utils, gs_graph, gs_index
 from pprint import pprint
 
 # Valid choices for root
 ROOT_CHOICES = [utils.NS_BP, utils.NS_MF, utils.NS_CC, utils.NS_ALL]
 
 HELP = f"Gene function visualization (v{__version__})."
+
 
 def require_params(it):
     errflag = False
@@ -18,6 +19,7 @@ def require_params(it):
             errflag = True
     if errflag:
         sys.exit(1)
+
 
 def check_files(it):
     errflag = False
@@ -34,6 +36,7 @@ def check_files(it):
     if errflag:
         sys.exit(1)
 
+
 class HelpFormatter(click.Group):
     def format_help(self, ctx, fmt):
         super().format_help(ctx, fmt)
@@ -44,16 +47,19 @@ class HelpFormatter(click.Group):
             fmt.write_text('genescape tree genelist.txt -o output.pdf')
             fmt.write_text('genescape show GO:0005737')
 
+
 @click.group(help=HELP, cls=HelpFormatter)
 def run():
     pass
+
 
 @run.command()
 @click.argument("fname", default=None, required=False)
 @click.option("-i", "--idx", "idx_fname", metavar="TEXT", help="Genescape index file.")
 @click.option("-o", "--out", "out_fname", default="", metavar="TEXT", help="Output file (default: screen).")
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
-@click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal coverage for a GO term (1)")
+@click.option("-c", "--mincov", "coverage", metavar="INT", default=0, type=int,
+              help="The minimal coverage for a GO term (1)")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
 @click.option('-r', '--root',
               type=click.Choice(ROOT_CHOICES, case_sensitive=False),
@@ -62,7 +68,7 @@ def run():
               )
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def annotate(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=False, test=False, match="", count=1):
+def annotate(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=False, test=False, match="", coverage=0):
     """
     Generates GO terms annotations for a list of genes.
     """
@@ -75,7 +81,15 @@ def annotate(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=Fal
 
     targets = utils.parse_genes(fname)
 
-    run = gs_graph.subgraph(idx_fname, targets=targets, root=root, mincount=count, pattern=match)
+    idg = gs_graph.load_index_graph(idx_fname)
+
+    # Estimate the count if not provided
+    if coverage < 1:
+        coverage = gs_graph.estimate(idg, targets=targets, pattern=match, root=root)
+
+    run = gs_graph.subgraph(idg, targets=targets, root=root, coverage=coverage, pattern=match)
+
+    utils.info(f"graph: {run.tree.number_of_nodes()} nodes, {run.tree.number_of_edges()} edges")
 
     df = run.as_df()
 
@@ -94,7 +108,8 @@ def annotate(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=Fal
 @click.option("-i", "--idx", "idx_fname", metavar="TEXT", help="Genescape index file.")
 @click.option("-o", "--out", "out_fname", default="output.pdf", metavar="TEXT", help="Output image file.")
 @click.option("-m", "--match", "match", metavar="REGEX", default='', help="Regular expression match on function")
-@click.option("-c", "--count", "count", metavar="INT", default=1, type=int, help="The minimal coverage for a GO term (1)")
+@click.option("-c", "--mincov", "coverage", metavar="INT", default=0, type=int,
+              help="The minimal coverage for a GO term (1)")
 @click.option("-t", "--test", "test", is_flag=True, help="Run with test data")
 @click.option('-r', '--root',
               type=click.Choice(ROOT_CHOICES, case_sensitive=False),
@@ -103,7 +118,7 @@ def annotate(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=Fal
               )
 @click.option("-v", "verbose", is_flag=True, help="Verbose output.")
 @click.help_option("-h", "--help")
-def tree(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=False, test=False, match="", count=1):
+def tree(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=False, test=False, match="", coverage=0):
     """
     Generates GO terms annotations for a list of genes.
     """
@@ -116,9 +131,17 @@ def tree(fname, out_fname='', idx_fname=None, root=utils.NS_ALL, verbose=False, 
 
     targets = utils.parse_genes(fname)
 
-    run = gs_graph.subgraph(idx_fname, targets=targets, root=root, mincount=count, pattern=match)
+    idg = gs_graph.load_index_graph(idx_fname)
+
+    # Estimate the count if not provided
+    if coverage < 1:
+        coverage = gs_graph.estimate(idg, targets=targets, pattern=match, root=root)
+
+    run = gs_graph.subgraph(idg, targets=targets, root=root, coverage=coverage, pattern=match)
 
     pg = run.as_pydot()
+
+    utils.info(f"graph: {run.tree.number_of_nodes()} nodes, {run.tree.number_of_edges()} edges")
 
     gs_graph.save_graph(pg, fname=out_fname, imgsize=2048)
 
@@ -179,8 +202,9 @@ def build(idx_fname=None, obo_fname=None, gaf_fname=None, stats=False, dump=Fals
 @click.option("--host", "host", default="127.0.0.1", help="Hostname to bind to")
 @click.option("--port", "port", default=8000, type=int, help="Port number")
 @click.option("-r", "--reload", "reload", is_flag=True, help="Reload the webserver on changes")
+@click.option("-t", "--test", "test", is_flag=True, help="Test mode (autgenerates gene lists)")
 @click.help_option("-h", "--help")
-def web(idx_fname='', host='localhost', port=8000, reload=False):
+def web(idx_fname='', host='localhost', port=8000, reload=False, test=False):
     """
     Runs the web interface
     """
@@ -193,7 +217,12 @@ def web(idx_fname='', host='localhost', port=8000, reload=False):
         key = "idx"
         label = str(Path(idx_fname).name).split(".")[0].title()
         os.environ['GENESCAPE_INDEX'] = f'{key}:{label}:{idx_fname}'
-    shiny.run_app("genescape.shiny.tree.app_new", host=host, port=port, reload=reload)
+
+    # Set the testing enviroment.
+    if test:
+        os.environ['GENESCAPE_TEST'] = '1'
+
+    shiny.run_app("genescape.shiny.tree.app:app", host=host, port=port, reload=reload, factory=True)
 
 
 @run.command()
@@ -233,6 +262,7 @@ def show(words, idx_fname=''):
         data['info'] = info
         text = json.dumps(data, indent=4)
         print(text)
+
 
 if __name__ == '__main__':
     # sys.argv.extend( ("build", "--stats"))

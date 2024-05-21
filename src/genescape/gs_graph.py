@@ -2,7 +2,7 @@ from genescape import utils, resources
 from genescape import gs_index
 import networkx as nx
 import pandas as pd
-import re, textwrap
+import re, textwrap,random
 import pydot
 
 ATTR_KEY = 'attr'
@@ -89,7 +89,7 @@ class Run:
         if pattern:
             try:
                 patt = re.compile(pattern, re.IGNORECASE)
-                self.valid_goids = filter(lambda x: re.search(patt, self.idx.graph.nodes[x]["name"]), self.valid_goids)
+                self.valid_goids = filter(lambda x: re.search(patt, self.graph.nodes[x]["name"]), self.valid_goids)
             except re.error:
                 msg = f"Invalid pattern: {pattern}"
                 self.errors.append(msg)
@@ -99,7 +99,7 @@ class Run:
 
         # Check for input.
         if not self.valid_goids:
-            msg = "No GO terms pass all conditions."
+            msg = f"No GO terms pass filtering conditions: Coverage>={mincount} Pattern={pattern}"
             self.errors.append(msg)
 
         # Find the ancestors for each node.
@@ -290,12 +290,28 @@ def load_index_graph(fname):
 
     return idx
 
-def subgraph(idx_fname, targets, root=utils.NS_ALL, mincount=1, pattern=''):
-    idg = load_index_graph(idx_fname)
+
+# Returns N random symbols from the index
+def random_symbols(idg, N=10):
+    values = list(idg.idx.sym2go.keys())
+    syms = random.sample(values, N)
+    return list(sorted(syms))
+
+def subgraph(idg, targets, root=utils.NS_ALL, coverage=1, pattern=''):
     utils.info(str(idg.idx))
-    res = Run(idg=idg, targets=targets, root=root, mincount=mincount, pattern=pattern)
+    res = Run(idg=idg, targets=targets, root=root, mincount=coverage, pattern=pattern)
     return res
 
+def estimate(idg, targets, root=utils.NS_ALL, coverage=1, pattern=''):
+    """
+    The default coverage is the number of unique coverages - 1.
+    """
+    res = Run(idg=idg, targets=targets, root=root, mincount=coverage, pattern=pattern)
+    df = res.as_df()
+    uniq = df['Coverage'].nunique()
+    cov = max( [1, uniq - 1] )
+    utils.info(f"coverage={cov}")
+    return cov
 
 def demo():
     # Initialize the graph datastructure.
@@ -307,15 +323,17 @@ def demo():
 
     targets = "ABTB3 BCAS4 C3P1 GRTP1".split()
 
-    res = Run(idg=idg, targets=targets)
+    cov = estimate(idg, targets=targets)
+
+    print (cov)
+
+    #res = Run(idg=idg, targets=targets)
 
     #pg = res.as_pydot()
 
-    df = res.as_df()
+    #df = res.as_df()
 
-    print(df)
-
-
+    #print(df)
 
 
 if __name__ == "__main__":

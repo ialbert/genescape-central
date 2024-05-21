@@ -2,3 +2,6 @@
 # Input may contain both genes and GO terms.
 #
 GO:0062091
+GO:0007186
+GO:0046512
+GO:0007165

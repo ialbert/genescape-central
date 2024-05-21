@@ -14,10 +14,14 @@ from starlette.staticfiles import StaticFiles
 # Load the default resources.
 res = resources.init()
 
-idg = gs_graph.load_index_graph(res.INDEX_FILE)
 
-syms = list(idg.idx.sym2go.keys())
-shuffle(syms)
+def random_gene_list(res, N=50):
+    """
+    Returns a random gene list.
+    """
+    idg = gs_graph.load_index_graph(res.INDEX_FILE)
+    sym = gs_graph.random_symbols(idg, N=N)
+    return "\n".join(sym)
 
 
 # This is the global database choices
@@ -28,10 +32,12 @@ DATABASE_CHOICES.update(res.index_choices())
 
 PAGE_TITLE = res.config.get("PAGE_TITLE", "GeneScape")
 
-# Default gene list.
-#GENE_LIST = res.config.get("GENE_LIST", "ABTB3\nBCAS4\nC3P1\nGRTP1")
-
-GENE_LIST = "\n".join(sorted(syms[:50]))
+# In testmode we generate a random gene list.
+if os.environ.get("GENESCAPE_TEST"):
+    GENE_LIST = random_gene_list(res, N=50)
+    utils.info("test mode: Random gene list")
+else:
+    GENE_LIST = res.config.get("GENE_LIST", "ABTB3\nBCAS4\nC3P1\nGRTP1")
 
 # Default pattern.
 PATTERN = res.config.get("PATTERN", "")
@@ -48,10 +54,6 @@ SIDEBAR_BG = res.config.get("SIDEBAR_WIDTH", "#f9f9f9")
 # Home page link
 HOME = "https://github.com/ialbert/genescape-central/"
 
-HELP = """
-The functional annotations will be shown in the table below. 
-"""
-
 GRAPH_TAB = """
 Press "Draw Tree" to generate the graph.
 """
@@ -60,17 +62,19 @@ ANNOT_TAB = """
 
 This panel shows the cumulative functional annotations across genes in the list.
 
-The coverage column indicates how many genes in the input cover that function.
+The **Coverage** column indicates how many genes in the input cover that function.
+
+> When the **Coverage** is not specified the program will guess a reasonable value for it.
 
 How to reduce the graph size:
 
 1. The **Coverage** filter will select for the minimum coverage.
 1. The **Filtering pattern** will keep only functions that match.
 
-Examples: 
+Examples:
 
-* `Coverage=5` at least 5 genes carrying the function
-* `Filter=GTP|kinase` keep only functions that match both `GTP` and `kinase`.
+* **Coverage=5** at least 5 genes carrying the function
+* **Filter=GTP|kinase** keep only functions that match both `GTP` and `kinase`.
 
 """
 
@@ -98,18 +102,11 @@ Dark green nodes indicate leaf nodes in the ontology (highest possible granulari
 * The number `(1/5)` in a node indicates how many input genes carry that function.
 """
 
-print(os.getcwd())
-
 app_ui = ui.page_sidebar(
     ui.sidebar(
 
         # The gene list.
         ui.input_text_area("input_list", label="Gene List", value=GENE_LIST),
-
-        # The main submit button.
-        ui.input_action_button(
-            "submit", "Draw Tree", class_="btn-success", icon=icons.icon_play
-        ),
 
         # Select the database.
         ui.input_select(
@@ -134,6 +131,11 @@ app_ui = ui.page_sidebar(
 
         # Filtering pattern.
         ui.input_text("pattern", label="Word filter (regex ok):", value=PATTERN),
+
+        # The main submit button.
+        ui.input_action_button(
+            "submit", "Draw Tree", class_="btn-success", icon=icons.icon_play
+        ),
 
         # Download button for annotation CSV.
         ui.tags.p(
@@ -162,7 +164,7 @@ app_ui = ui.page_sidebar(
 
                 ui.tags.div(
                     ui.input_action_button("zoom_in", label="Zoom", icon=icons.icon_zoom_in,
-                                           class_="btn btn-light btn-sm",),
+                                           class_="btn btn-light btn-sm", ),
                     ui.tags.span(" "),
                     ui.input_action_button("zoom_reset", label=" Reset", icon=icons.zoom_reset,
                                            class_="btn btn-light btn-sm"),
@@ -180,7 +182,6 @@ app_ui = ui.page_sidebar(
                     ui.output_text(id="error_msg"),
                     class_="error_msg",
                 ),
-
 
                 # The graph root object.
                 ui.div(
@@ -290,8 +291,6 @@ def server(input, output, session):
                 coverage = int(coverage)
             except ValueError:
                 coverage = 1
-        else:
-            coverage = 1
 
         pattern = input.pattern()
         root = input.root()
@@ -303,8 +302,15 @@ def server(input, output, session):
         # The input gene list.
         targets = text2list(input.input_list())
 
+        # Load the index.
+        idg = gs_graph.load_index_graph(idx_fname)
+
+        # Guess the coverage
+        if not coverage:
+            coverage = gs_graph.estimate(idg, targets=targets, pattern=pattern, root=root)
+
         # Create the subgraph.
-        run = gs_graph.subgraph(idx_fname, targets=targets, pattern=pattern, root=root, mincount=coverage)
+        run = gs_graph.subgraph(idg, targets=targets, pattern=pattern, root=root, coverage=coverage)
 
         # Get the dataframe
         df = run.as_df()
@@ -322,7 +328,7 @@ def server(input, output, session):
         dot_value.set(str(pg))
 
         # Set the info messages.
-        info_str1 = f"Graph: {run.tree.number_of_nodes()} nodes and {run.tree.number_of_edges()} edges."
+        info_str1 = f"Coverage={coverage}; Graph: {run.tree.number_of_nodes()} nodes and {run.tree.number_of_edges()} edges."
         # info_value1.set(info_str1)
 
         info_str2 = str(run.idx)

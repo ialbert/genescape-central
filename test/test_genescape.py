@@ -28,11 +28,16 @@ def show_diff(exp, gen, cmd):
     print(f"# Replace: genescape {fix}")
 
 PARAMS = [
-    ("test_genes.txt", "test_genes.csv", "annotate"),
-    ("hs_genes1.txt", "hs_genes1.csv", "annotate"),
-    ("hs_genes2.txt", "hs_genes2.csv", "annotate"),
-    ("hs_genes1.txt", "hs_genes1.dot", "tree"),
-    ("hs_genes2.txt", "hs_genes2.dot", "tree"),
+    ("test_genes_hs_1.txt", "out_test_genes_hs_1.csv", "annotate"),
+    ("test_genes_hs_1.txt", "out_test_genes_hs_1_signal.csv", "annotate --mincov 1 --match signal"),
+    ("test_genes_hs_2.txt", "out_test_genes_hs_2.csv", "annotate"),
+    ("test_goids.txt", "out_test_goids.csv", "annotate --mincov 1"),
+
+    ("test_genes_hs_1.txt", "out_test_genes_hs_1.dot", "tree"),
+    ("test_genes_hs_1.txt", "out_test_genes_hs_1_signal.dot", "tree --mincov 1 --match signal"),
+    ("test_genes_hs_2.txt", "out_test_genes_hs_2.dot", "tree"),
+    ("test_goids.txt", "out_test_goids.dot", "tree --mincov 1"),
+
 ]
 
 @pytest.mark.parametrize("inp_name, out_name, cmd", PARAMS)
@@ -61,7 +66,7 @@ def test_genescape(inp_name, out_name, cmd):
         raise AssertionError(f"content mismatch: {out_name}")
 
 
-@pytest.mark.parametrize("cmd", ["build -s", "annotate -t", "tree -t -o test/out/genescape.pdf"])
+@pytest.mark.parametrize("cmd", ["build -s", "annotate -t -o test/out/genescape.csv", "tree -t -o test/out/genescape.pdf"])
 def test_run(cmd):
 
     full = f"{cmd}"

@@ -1,0 +1,217 @@
+digraph genescape {
+"GO:0003674" [fillcolor="#A2CDF6", label="GO:0003674
+molecular_function [714]", shape=box, style=filled];
+"GO:0005488" [fillcolor="#A2CDF6", label="GO:0005488
+binding [0]", shape=box, style=filled];
+"GO:0005515" [fillcolor="#A3F6A2", label="GO:0005515
+protein binding [13K]
+(3/5)", shape=box, style=filled];
+"GO:0005575" [fillcolor="#F5A2F6", label="GO:0005575
+cellular_component [415]", shape=box, style=filled];
+"GO:0005737" [fillcolor="#A3F6A2", label="GO:0005737
+cytoplasm [5K]
+(2/5)", shape=box, style=filled];
+"GO:0005743" [fillcolor="#17DA15", label="GO:0005743
+mitochondrial inner
+membrane [471]
+(2/5)", shape=box, style=filled];
+"GO:0005789" [fillcolor="#A3F6A2", label="GO:0005789
+endoplasmic
+reticulum membrane [1119]
+(2/5)", shape=box, style=filled];
+"GO:0006066" [fillcolor="#F6CBA2", label="GO:0006066
+alcohol metabolic
+process [6]", shape=box, style=filled];
+"GO:0006629" [fillcolor="#F6CBA2", label="GO:0006629
+lipid metabolic
+process [172]", shape=box, style=filled];
+"GO:0006643" [fillcolor="#F6CBA2", label="GO:0006643
+membrane lipid
+metabolic process [2]", shape=box, style=filled];
+"GO:0006665" [fillcolor="#F6CBA2", label="GO:0006665
+sphingolipid
+metabolic process [16]", shape=box, style=filled];
+"GO:0006670" [fillcolor="#F6CBA2", label="GO:0006670
+sphingosine
+metabolic process [9]", shape=box, style=filled];
+"GO:0008150" [fillcolor="#F6CBA2", label="GO:0008150
+biological_process [564]", shape=box, style=filled];
+"GO:0008152" [fillcolor="#F6CBA2", label="GO:0008152
+metabolic process [0]", shape=box, style=filled];
+"GO:0008610" [fillcolor="#F6CBA2", label="GO:0008610
+lipid biosynthetic
+process [16]", shape=box, style=filled];
+"GO:0009058" [fillcolor="#F6CBA2", label="GO:0009058
+biosynthetic process [15]", shape=box, style=filled];
+"GO:0009987" [fillcolor="#F6CBA2", label="GO:0009987
+cellular process [0]", shape=box, style=filled];
+"GO:0016020" [fillcolor="#F5A2F6", label="GO:0016020
+membrane [3K]", shape=box, style=filled];
+"GO:0019751" [fillcolor="#F6CBA2", label="GO:0019751
+polyol metabolic
+process [0]", shape=box, style=filled];
+"GO:0019866" [fillcolor="#F5A2F6", label="GO:0019866
+organelle inner
+membrane [1]", shape=box, style=filled];
+"GO:0030148" [fillcolor="#A3F6A2", label="GO:0030148
+sphingolipid
+biosynthetic process [44]
+(2/5)", shape=box, style=filled];
+"GO:0031090" [fillcolor="#F5A2F6", label="GO:0031090
+organelle membrane [26]", shape=box, style=filled];
+"GO:0031966" [fillcolor="#F5A2F6", label="GO:0031966
+mitochondrial
+membrane [152]", shape=box, style=filled];
+"GO:0034311" [fillcolor="#F6CBA2", label="GO:0034311
+diol metabolic
+process [1]", shape=box, style=filled];
+"GO:0034312" [fillcolor="#F6CBA2", label="GO:0034312
+diol biosynthetic
+process [0]", shape=box, style=filled];
+"GO:0043226" [fillcolor="#F5A2F6", label="GO:0043226
+organelle [0]", shape=box, style=filled];
+"GO:0043227" [fillcolor="#F5A2F6", label="GO:0043227
+membrane-bounded
+organelle [4]", shape=box, style=filled];
+"GO:0043229" [fillcolor="#F5A2F6", label="GO:0043229
+intracellular
+organelle [7]", shape=box, style=filled];
+"GO:0043231" [fillcolor="#A3F6A2", label="GO:0043231
+intracellular
+membrane-bounded
+organelle [866]
+(2/5)", shape=box, style=filled];
+"GO:0044237" [fillcolor="#F6CBA2", label="GO:0044237
+cellular metabolic
+process [0]", shape=box, style=filled];
+"GO:0044238" [fillcolor="#F6CBA2", label="GO:0044238
+primary metabolic
+process [0]", shape=box, style=filled];
+"GO:0044249" [fillcolor="#F6CBA2", label="GO:0044249
+cellular
+biosynthetic process [0]", shape=box, style=filled];
+"GO:0044255" [fillcolor="#F6CBA2", label="GO:0044255
+cellular lipid
+metabolic process [13]", shape=box, style=filled];
+"GO:0044281" [fillcolor="#F6CBA2", label="GO:0044281
+small molecule
+metabolic process [1]", shape=box, style=filled];
+"GO:0044283" [fillcolor="#F6CBA2", label="GO:0044283
+small molecule
+biosynthetic process [0]", shape=box, style=filled];
+"GO:0046165" [fillcolor="#F6CBA2", label="GO:0046165
+alcohol biosynthetic
+process [0]", shape=box, style=filled];
+"GO:0046173" [fillcolor="#F6CBA2", label="GO:0046173
+polyol biosynthetic
+process [0]", shape=box, style=filled];
+"GO:0046467" [fillcolor="#F6CBA2", label="GO:0046467
+membrane lipid
+biosynthetic process [0]", shape=box, style=filled];
+"GO:0046512" [fillcolor="#17DA15", label="GO:0046512
+sphingosine
+biosynthetic process [14]
+(2/5)", shape=box, style=filled];
+"GO:0046519" [fillcolor="#F6CBA2", label="GO:0046519
+sphingoid metabolic
+process [0]", shape=box, style=filled];
+"GO:0046520" [fillcolor="#F6CBA2", label="GO:0046520
+sphingoid
+biosynthetic process [1]", shape=box, style=filled];
+"GO:0071704" [fillcolor="#F6CBA2", label="GO:0071704
+organic substance
+metabolic process [0]", shape=box, style=filled];
+"GO:0110165" [fillcolor="#F5A2F6", label="GO:0110165
+cellular anatomical
+entity [0]", shape=box, style=filled];
+"GO:1901564" [fillcolor="#F6CBA2", label="GO:1901564
+organonitrogen
+compound metabolic
+process [0]", shape=box, style=filled];
+"GO:1901566" [fillcolor="#F6CBA2", label="GO:1901566
+organonitrogen
+compound
+biosynthetic process [0]", shape=box, style=filled];
+"GO:1901576" [fillcolor="#F6CBA2", label="GO:1901576
+organic substance
+biosynthetic process [0]", shape=box, style=filled];
+"GO:1901615" [fillcolor="#F6CBA2", label="GO:1901615
+organic hydroxy
+compound metabolic
+process [0]", shape=box, style=filled];
+"GO:1901617" [fillcolor="#F6CBA2", label="GO:1901617
+organic hydroxy
+compound
+biosynthetic process [0]", shape=box, style=filled];
+"GO:0003674" -> "GO:0005488";
+"GO:0005488" -> "GO:0005515";
+"GO:0005575" -> "GO:0110165";
+"GO:0006066" -> "GO:0019751";
+"GO:0006066" -> "GO:0046165";
+"GO:0006629" -> "GO:0008610";
+"GO:0006629" -> "GO:0044255";
+"GO:0006643" -> "GO:0006665";
+"GO:0006643" -> "GO:0046467";
+"GO:0006665" -> "GO:0030148";
+"GO:0006665" -> "GO:0046519";
+"GO:0006670" -> "GO:0046512";
+"GO:0008150" -> "GO:0008152";
+"GO:0008150" -> "GO:0009987";
+"GO:0008152" -> "GO:0009058";
+"GO:0008152" -> "GO:0044237";
+"GO:0008152" -> "GO:0044238";
+"GO:0008152" -> "GO:0044281";
+"GO:0008152" -> "GO:0071704";
+"GO:0008610" -> "GO:0046467";
+"GO:0009058" -> "GO:0044249";
+"GO:0009058" -> "GO:0044283";
+"GO:0009058" -> "GO:1901576";
+"GO:0009987" -> "GO:0044237";
+"GO:0016020" -> "GO:0031090";
+"GO:0019751" -> "GO:0034311";
+"GO:0019751" -> "GO:0046173";
+"GO:0019866" -> "GO:0005743";
+"GO:0030148" -> "GO:0046520";
+"GO:0031090" -> "GO:0005789";
+"GO:0031090" -> "GO:0019866";
+"GO:0031090" -> "GO:0031966";
+"GO:0031966" -> "GO:0005743";
+"GO:0034311" -> "GO:0006670";
+"GO:0034311" -> "GO:0034312";
+"GO:0034312" -> "GO:0046512";
+"GO:0043226" -> "GO:0043227";
+"GO:0043226" -> "GO:0043229";
+"GO:0043227" -> "GO:0043231";
+"GO:0043229" -> "GO:0043231";
+"GO:0044237" -> "GO:0044249";
+"GO:0044237" -> "GO:0044255";
+"GO:0044238" -> "GO:0006629";
+"GO:0044249" -> "GO:0046467";
+"GO:0044255" -> "GO:0006643";
+"GO:0044281" -> "GO:0006066";
+"GO:0044281" -> "GO:0044283";
+"GO:0044283" -> "GO:0046165";
+"GO:0046165" -> "GO:0046173";
+"GO:0046173" -> "GO:0034312";
+"GO:0046467" -> "GO:0030148";
+"GO:0046519" -> "GO:0006670";
+"GO:0046519" -> "GO:0046520";
+"GO:0046520" -> "GO:0046512";
+"GO:0071704" -> "GO:0006629";
+"GO:0071704" -> "GO:1901564";
+"GO:0071704" -> "GO:1901576";
+"GO:0071704" -> "GO:1901615";
+"GO:0110165" -> "GO:0005737";
+"GO:0110165" -> "GO:0016020";
+"GO:0110165" -> "GO:0043226";
+"GO:1901564" -> "GO:0006665";
+"GO:1901564" -> "GO:1901566";
+"GO:1901566" -> "GO:0030148";
+"GO:1901576" -> "GO:0008610";
+"GO:1901576" -> "GO:1901566";
+"GO:1901576" -> "GO:1901617";
+"GO:1901615" -> "GO:0006066";
+"GO:1901615" -> "GO:1901617";
+"GO:1901617" -> "GO:0046165";
+
+}
