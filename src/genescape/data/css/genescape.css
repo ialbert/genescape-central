@@ -22,11 +22,13 @@
 }
 
 #graph_root {
+    width: 100%;
     min-height: 150px;
     //max-height: 800px;
     overflow: visible;
     border-top: var(--border-color) solid 1px;
     padding: 10px;
+    display: inline-block;
 }
 
 .shiny-data-grid {

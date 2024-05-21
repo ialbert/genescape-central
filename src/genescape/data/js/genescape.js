@@ -1,6 +1,6 @@
 
 
-var ZOOM_IN = 1.2;
+var ZOOM_IN = 1.3;
 var ZOOM_OUT = 1 / ZOOM_IN;
 
 var initialBox = null; // Initial viewBox of the SVG element
@@ -13,6 +13,11 @@ function resize_container(){
 	const bbox = svg.getBBox();
     //div.style.width = `${bbox.width}px`;
     //div.style.height = `${bbox.height}px`;
+
+	div.style.display = 'none';
+    div.offsetHeight;  // Trigger a reflow
+    div.style.display = 'block';
+
 
 }
 
