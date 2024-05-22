@@ -49,7 +49,7 @@ class Run:
 
         # Store the missing targets
         if self.missing_targets:
-            msg = f"{len(self.missing_targets)} unkown symbols: {','.join(self.missing_targets)}"
+            msg = f"{len(self.missing_targets)} unkown symbols: {', '.join(self.missing_targets)}"
             self.errors.append(msg)
 
         # The valid targets.
@@ -75,7 +75,7 @@ class Run:
         self.missing_goids = list(filter(lambda x: x not in self.idx.obo, self.goids))
 
         if self.missing_goids:
-            msg = f"Missing GO terms: {','.join(self.missing_goids)}"
+            msg = f"Missing GO terms: {', '.join(self.missing_goids)}"
             self.errors.append(msg)
 
         # Nodes to build the subgraph from.

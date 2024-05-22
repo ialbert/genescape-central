@@ -222,7 +222,7 @@ def web(idx_fname='', host='localhost', port=8000, reload=False, test=False):
     if test:
         os.environ['GENESCAPE_TEST'] = '1'
 
-    shiny.run_app("genescape.shiny.tree.app:app", host=host, port=port, reload=reload, factory=True)
+    shiny.run_app("genescape.shiny.tree.app:app", host=host, port=port, reload=reload)
 
 
 @run.command()

@@ -64,7 +64,6 @@ This panel shows the cumulative functional annotations across genes in the list.
 
 The **Coverage** column indicates how many genes in the input cover that function.
 
-
 How to reduce the graph size:
 
 1. The **Coverage** filter will select for the minimum coverage.
@@ -75,26 +74,22 @@ Examples:
 * **Coverage=5** at least 5 genes carrying the function
 * **Filter=GTP|kinase** keep only functions that match both `GTP` and `kinase`.
 
-Notes:
-
-1. When the **Coverage** is not specified the program will guess a reasonable value for it.
-
 """
 
 HELP_TAB = """
-Type a list of genes of GO terms then press "Draw Tree".
 
-Tips for making graphs smaller:
+## Usage
 
-1. Filter for minimum coverage in the functions. You can use regular expressions in the pattern.
+1. Press **Draw Tree** to generate the graph.
+1. The **Coverage** indicates how many genes in the input cover that function.
+1. When the **Coverage** is not specified the program will guess a reasonable value for it.
 
-**Legend**
+## Legend
 
 <img src="https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/node_help_1.png" class="img-fluid help" alt="Node help">
 
-The coverage indicates how many genes in the input cover that function.
 
-**Colors**
+## Colors
 
 Green nodes indicate functions present in input genes.
 
