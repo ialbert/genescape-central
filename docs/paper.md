@@ -43,7 +43,7 @@ GeneScape is a Python package that allows users to visualize a list of gene prod
 
 GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software via the [Shiny platform][shiny] [@shiny], thus making it accessible to a wide range of users.
 
-![GeneScape as a Shiny App \label{fig:shiny}](images/gs_web_interface.png){height="216pt"}
+![GeneScape as a Shiny App \label{fig:shiny}](images/gs_web_interface.png)
 
 [shiny]: https://shiny.posit.co/
 
@@ -77,7 +77,7 @@ genescape tree genes1.txt -o output.pdf
 
 The command above will produce the image:
 
-![Ontology subgraph for a gene list \label{fig:interface}][img_shiny]{height="216pt"}
+![Ontology subgraph for a gene list \label{fig:interface}][img_shiny]
 
 [img_shiny]: images/gs_output_1.png
 
@@ -104,7 +104,7 @@ In the next step, GeneScape draws the GO terms as the graph structure using the 
 
 Various colors and labels are used to provide additional context to the nodes in the graph; for example, functions present in the input genes are colored green. The intermediate nodes are colored by their category. Node labels display the total annotations and the number of genes that carry that function.
 
-![Filtering a large graph for a specific term \label{fig:help}][img_help]{height="216pt"}
+![Filtering a large graph for a specific term \label{fig:help}][img_help]
 
 [img_help]: images/node_help_1.png
 
