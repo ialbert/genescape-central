@@ -27,7 +27,7 @@ The Gene Ontology (GO)  [@Ashburner2000; @GO2023] is a structured vocabulary tha
 
 For example, in the GO data, `GO:0090630` defines *activation of GTPase activity* and is a child of `GO:0043547`, defined as *positive regulation of GTPase activity* which in turn is a child of `GO:0051345` representing *positive regulation of hydrolase activity*. 
 
-Gene association files (GAF) are text files used to annotate an organism's gene products with Gene Ontology terms, associating a function to a gene product. For example, a GAF file connects a gene product label, such as `ZC3H11B`, with multiple GO terms, such as `GO:0046872` or `GO:0016973`. The complete human genome GAF representation contains 288,575 associations of 19,606 gene symbols with over 18,680 GO terms.
+Gene association files (GAF) are text files used to annotate an organism's gene products with Gene Ontology terms, associating functions to gene products. For example, a GAF file connects a gene product label, such as `ZC3H11B`, with multiple GO terms, such as `GO:0046872` or `GO:0016973`. The complete human genome GAF representation contains 288,575 associations of 19,606 gene symbols with over 18,680 GO terms.
 
 The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. Typical genomic analysis protocols generate gene lists that must be placed in a functional context. 
 
@@ -39,15 +39,15 @@ The most annotated gene in the human genome, `HTT`, currently has 1100 annotatio
 
 Web-based tools designed to visualize and filter gene ontology data include `AmiGO` [@AmiGO] and `QuickGO` [@QuickGO]. Command line tools like `goatools` [@goatools] support GO term lineage visualization. R packages like `topGO` [@topGO] implement GO structure visualizations of enriched GO terms. We are unaware of locally installable software that specifically allows for interactive filtering and visualization of gene ontology derived on gene lists.
 
-GeneScape is a Python package that allows users to visualize a list of gene products in terms of the functional context represented by the Gene Ontology. 
+GeneScape is a Python package that allows users to visualize a list of genes in the functional context represented by the Gene Ontology
 
-GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software via the [Shiny platform][shiny] [@shiny], thus making it accessible to a wide range of users.
+GeneScape is distributed both as a command-line tool and as GUI-enabled standalone software via the [Shiny platform][shiny] [@shiny], making it accessible to a wide range of users.
 
 ![GeneScape as a Shiny App \label{fig:shiny}](images/gs_web_interface.png)
 
 [shiny]: https://shiny.posit.co/
 
-GeneScape comes with a number of prebuilt databases for model organisms including the human, mouse, rat, fruitfly and zebrafish genomes. To study additional organisms, users must download GAF files from the Gene Ontology website and create custom databases using the `build` subcommand:
+GeneScape is distributed with several prebuilt databases for model organisms including the human, mouse, rat, fruitfly and zebrafish genomes. To study additional organisms, users must download GAF files from the Gene Ontology website and create custom databases using the `build` subcommand:
 
 ```
 genescape build --gaf mydata.gaf.gz --index mydata.index.gz 
@@ -69,7 +69,7 @@ C3P1
 GRTP1
 ```
 
-Users can process the list above via the command line or via the Shiny interface. A command line invocation might look like:
+Users can process the list above via the command line or the Shiny interface. A command line invocation might look like:
 
 ```console
 genescape tree genes1.txt -o output.pdf
@@ -100,9 +100,9 @@ Coverage,Function,Domain,GO,Genes
 1,glutamatergic synapse,CC,GO:0098978,ABTB3
 ```
 
-In the next step, GeneScape draws the GO terms as the graph structure using the Networkx package [@networkx] helping users visualize the functional context of the genes relative to the larger Gene Ontology.
+In the next step, GeneScape draws the GO terms as the graph structure using the Networkx package [@networkx], helping users visualize the functional context of the genes relative to the larger Gene Ontology.
 
-Various colors and labels are used to provide additional context to the nodes in the graph; for example, functions present in the input genes are colored green. The intermediate nodes are colored by their category. Node labels display the total annotations and the number of genes that carry that function.
+Various colors and labels are used to provide additional context to the nodes in the graph; for example, functions present in the input genes are colored green. Intermediate nodes are colored by their category. Node labels display the total annotations and the number of genes that carry that function.
 
 ![Filtering a large graph for a specific term \label{fig:help}][img_help]
 
@@ -110,14 +110,13 @@ Various colors and labels are used to provide additional context to the nodes in
 
 In the web interface, users can zoom in and out of the tree. The software's command-line version supports generating outputs in various formats, such as PDF or PNG. 
 
-Since the resulting graphs may also be large, with thousands of nodes, the main interface provides input widgets that allow users to interactively 
-reduce the subgraph to nodes for which:
+Since the resulting graphs may also be large, with thousands of nodes, the main interface provides input widgets that allow users to interactively reduce the subgraph to nodes for which:
 
 1. The function definitions match certain patterns.
 2. A minimum number of genes share a function. 
 3. Nodes belong to a specific GO subtree: Biological Process (BP), Molecular Function (MF), Cellular Component (CC).
 
-As an example, take the input genelist of just four genes:
+As an example, take the input gene list of just four genes:
 
 ```
 Cyp1a1
@@ -126,7 +125,7 @@ Sptlc2
 Smpd3
 ```
 
-the resulting functional ontology graph is large with 641 nodes and 1007 edges:
+the resulting functional ontology graph is large with 641 nodes and 1,007 edges:
 
 ![Very few genes can produce a large ontology tree \label{fig:huge}][img_bigtree]
 
@@ -138,14 +137,14 @@ Users can reduce the tree to show only terms that match the word `lipid` and wit
 genescape tree -m lipid --micov 2 genes2.txt -o output.pdf
 ```
 
-The filtering process will result in a smaller tree with 18 nodes and 29 edges focused on the functions that contain the word "lipid":
+The filtering process will result in a smaller tree with 18 nodes and 29 edges, focused on the functions that contain the word "lipid":
 
 ![Filtering a large graph for a specific term \label{fig:filter}][img_filter]{height="216pt"}
 
 [img_filter]: images/gs_output_3.png
 
 
-The software's primary purpose is to allow users to assess the functional depth of genes and to identify commonalities and differences in the functional context of these genes.
+The software's primary purpose is to allow users to assess the functional depth of genes and identify commonalities and differences in the functional context of these genes.
 
 # Acknowledgments
 
