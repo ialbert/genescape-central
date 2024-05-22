@@ -12,6 +12,8 @@ The public version of the software can be accessed at:
 
 * https://biostar.shinyapps.io/genescape/
 
+Usage limits may apply to the public version. For unlimited use, install and run the software locally.
+
 [pyshiny]: https://shiny.posit.co/py/
 
 ### Local installation
