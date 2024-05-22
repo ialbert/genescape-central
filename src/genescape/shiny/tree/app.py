@@ -90,7 +90,7 @@ Tips for making graphs smaller:
 
 **Legend**
 
-<img src="/static/node-help.png" class="img-fluid helpimg" alt="Alt text">
+<img src="https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/node_help_1.png" class="img-fluid helpimg" alt="Alt text">
 
 The coverage indicates how many genes in the input cover that function.
 
