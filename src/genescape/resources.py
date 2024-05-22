@@ -11,6 +11,7 @@ from pathlib import Path
 import toml
 
 from genescape import utils
+from pprint import pprint
 
 CURR_DIR = Path(os.path.dirname(__file__))
 
@@ -90,6 +91,7 @@ class Resource:
     def find_index(self, code=None):
         code = code or self.DEFAULT_CODE
         if code not in self.INDEX_MAP:
+            pprint(self.INDEX_MAP)
             raise Exception(f"Code not found: {code}")
         return self.INDEX_MAP[code][2]
 
@@ -103,7 +105,7 @@ class Resource:
         """
         value = os.environ.get(key, None)
         if value:
-
+            utils.info(f"Environment: {value}")
             code, label, path = value.split(":")
 
             path = Path(path)
@@ -117,6 +119,7 @@ class Resource:
 
             # Recreate the index map
             self.INDEX_MAP = dict(map(lambda x: (x[0], x), current))
+
 
 # Reset the resource directory
 def reset_dir(cnf=None):

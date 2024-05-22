@@ -139,7 +139,7 @@ genescape tree -m lipid --micov 2 genes2.txt -o output.pdf
 
 The filtering process will result in a smaller tree with 18 nodes and 29 edges, focused on the functions that contain the word "lipid":
 
-![Filtering a large graph for a specific term \label{fig:filter}][img_filter]{height="216pt"}
+![Filtering a large graph for a specific term \label{fig:filter}][img_filter]
 
 [img_filter]: images/gs_output_3.png
 

@@ -179,7 +179,6 @@ def build(idx_fname=None, obo_fname=None, gaf_fname=None, stats=False, dump=Fals
     fnames = [
         ('obo', obo_fname),
         ('gaf', gaf_fname),
-        ('idx', idx_fname),
     ]
 
     check_files(fnames)
@@ -198,7 +197,7 @@ def build(idx_fname=None, obo_fname=None, gaf_fname=None, stats=False, dump=Fals
 
 
 @run.command()
-@click.option("-i", "--index", "idx_fname", default="", help="Index file")
+@click.option("-i", "--idx", "idx_fname", default="", help="Index file")
 @click.option("--host", "host", default="127.0.0.1", help="Hostname to bind to")
 @click.option("--port", "port", default=8000, type=int, help="Port number")
 @click.option("-r", "--reload", "reload", is_flag=True, help="Reload the webserver on changes")
@@ -223,45 +222,6 @@ def web(idx_fname='', host='localhost', port=8000, reload=False, test=False):
         os.environ['GENESCAPE_TEST'] = '1'
 
     shiny.run_app("genescape.shiny.tree.app:app", host=host, port=port, reload=reload)
-
-
-@run.command()
-@click.argument("words", default=None, nargs=-1)
-@click.option("-i", "--index", "idx_fname", default="", help="Index file (genescape.json.gz)")
-@click.help_option("-h", "--help")
-def show(words, idx_fname=''):
-    res = resources.init()
-    idx_fname = idx_fname or res.INDEX_FILE
-
-    utils.info(f"index: {idx_fname}")
-
-    idx = nexus.load_index(idx_fname)
-    obo = idx[nexus.OBO_KEY]
-    go2sym = idx[nexus.GO2SYM]
-    name2sym = idx[nexus.NAME2SYM]
-
-    obo = idx[nexus.OBO_KEY]
-
-    graph = nexus.build_graph(idx)
-
-    valid = list(filter(lambda x: x in obo, words))
-    missing = set(words) - set(valid)
-
-    if missing:
-        utils.error(f"Words not found: {missing}")
-
-    # The database info
-    info = idx[nexus.INFO_KEY]
-
-    for word in valid:
-        data = graph.nodes[word]
-        vals = go2sym[word]
-        # data['symbols'] = vals
-        data['parents'] = list(graph.predecessors(word))
-        data['children'] = list(graph.successors(word))
-        data['info'] = info
-        text = json.dumps(data, indent=4)
-        print(text)
 
 
 if __name__ == '__main__':

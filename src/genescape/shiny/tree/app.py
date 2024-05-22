@@ -14,7 +14,6 @@ from starlette.staticfiles import StaticFiles
 # Load the default resources.
 res = resources.init()
 
-
 def random_gene_list(res, N=50):
     """
     Returns a random gene list.
@@ -23,6 +22,9 @@ def random_gene_list(res, N=50):
     sym = gs_graph.random_symbols(idg, N=N)
     return "\n".join(sym)
 
+
+# Update the index location from environment
+res.update_from_env()
 
 # This is the global database choices
 DATABASE_CHOICES = dict()
@@ -291,6 +293,8 @@ def server(input, output, session):
         await create_tree()
 
     async def create_tree():
+        global res
+
         limit = 10
         # Emulate some sort of progress bar
         with ui.Progress(min=1, max=limit) as p:
@@ -311,8 +315,6 @@ def server(input, output, session):
         pattern = input.pattern()
         root = input.root()
 
-        # Initialize the resources.
-        res = resources.init()
 
         # Locate the database from the index.
         idx_fname = res.find_index(db_code)
