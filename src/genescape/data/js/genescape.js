@@ -43,13 +43,16 @@ function render_graph() {
 	Viz.instance().then(function (viz) {
         var svg = viz.renderSVGElement(dot);
         svg.setAttribute("id", "svgtree");
-        svg.setAttribute("width", "100%");
-		svg.setAttribute("max-height", "1200px");
+        svg.setAttribute("preserveAspectRatio", "xMinYMin meet");
+        //svg.setAttribute("width", "100%");
+		//svg.setAttribute("height", "100%");
+		svg.setAttribute("height", "800px");
+
 		graph.innerHTML = '';
         graph.appendChild(svg);
 
-		// The initial viewBox of the SVG element.
-		initialBox = svg.getAttribute("viewBox");
+
+
 
     }).catch(
         error => console.error("Error rendering Graphviz: ", error)
