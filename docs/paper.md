@@ -37,7 +37,7 @@ The [Gene Ontology Consortium][GO] maintains GAF files for various organisms. Ty
 
 The most annotated gene in the human genome, `HTT`, currently has 1100 annotations. Thus, even small lists of genes may have a large number of annotations presenting an extraordinary challenge for interpretation. There is a clear need to visualize shared gene functions in an informative manner. 
 
-Web-based tools designed to visualize and filter gene ontology data include `AmiGO` [@AmiGO] and `QuickGO` [@QuickGO]. Command line tools like `goatools` [@goatools] support GO term lineage visualization. R packages like `topGO` [@topGO] implement GO structure visualizations of enriched GO terms. We are unaware of locally installable software that specifically allows for interactive filtering and visualization of gene ontology derived on gene lists.
+Web-based tools designed to visualize and filter gene ontology data include `AmiGO` [@AmiGO] and `QuickGO` [@QuickGO]. Command line tools like `goatools` [@goatools] support GO term lineage visualization. R packages like `topGO` [@topGO] implement GO structure visualizations of enriched GO terms. We are unaware of locally installable software that allows for interactive filtering and visualization of gene ontology terms derived from gene lists.
 
 GeneScape is a Python package that allows users to visualize a list of genes in the functional context represented by the Gene Ontology
 
@@ -134,7 +134,7 @@ the resulting functional ontology graph is large with 641 nodes and 1,007 edges:
 Users can reduce the tree to show only terms that match the word `lipid` and with at least two genes supporting the function via the graphical user interface or the command line:
 
 ```console
-genescape tree -m lipid --micov 2 genes2.txt -o output.pdf
+genescape tree -m lipid --mincov 2 genes2.txt -o output.pdf
 ```
 
 The filtering process will result in a smaller tree with 18 nodes and 29 edges, focused on the functions that contain the word "lipid":
