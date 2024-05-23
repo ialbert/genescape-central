@@ -162,7 +162,7 @@ The software will try to find a reasonable coverage threshold for the input gene
 We can narrow down the visualization in multiple ways; for example, we can select only terms that match the word `lipid` :
 
 ```console
-genescape tree -m repair genes.txt 
+genescape tree -m lipid --mincov 2 genes.txt 
 ```
 
 When filtered as shown above, the output is much more manageable:
