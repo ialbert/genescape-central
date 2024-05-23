@@ -93,9 +93,9 @@ Numbers such as 1/4 mean how many genes in the input carry that function.
 
 The trees can get huge, even for a small number of genes. 
 
-Users can greatly reduce the size of the graph by removing functions that are not well represented in the input list or by focusing the graph to contain only functions that match a pattern.
+One can greatly reduce the size of the graph by removing functions that are not well represented in the input list or by focusing the graph to contain only functions that match a pattern.
 
-Just by setting the `mincount` to 2 or higher is often enough to simplify the graph to a manageable size.
+Setting the `mincov` to 2 or higher is often enough to simplify the graph to a manageable size.
 
 The filtering conditions that users can apply are:
 
