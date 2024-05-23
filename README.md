@@ -30,7 +30,7 @@ After installation, the Shiny interface can be started via:
 genescape web
 ``` 
 
-Visit the url [http://localhost:8000][local] URL in your browser to see the interface.
+Visit the [http://localhost:8000][local] URL in your browser to see the interface.
 
 [local]: http://localhost:8000
 
