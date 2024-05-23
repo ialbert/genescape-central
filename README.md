@@ -8,11 +8,11 @@
 
 [interface]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_web_interface.png
 
-The public version of the software can be accessed at:
+The Shiny version of the software can be accessed at:
 
 * https://biostar.shinyapps.io/genescape/
 
-Usage limits may apply to the public version. For unlimited use, install and run the software locally.
+Usage limits may apply to the public interface. For unlimited use, install and run the software locally.
 
 [pyshiny]: https://shiny.posit.co/py/
 
@@ -52,13 +52,13 @@ The program can also be used at the command line to generate images or annotatio
 1. Then extracts the **Annotations** associated with the input genes 
 1. Finally it builds and visualizes the functional subtree tree based on these Annotations. 
 
-**Note**: Even short lists of genes (under ten genes) can create large trees. Filter by minimum counts (how many genes share the function) or functional patterns (functions that match a pattern). 
+**Note**: Even short lists of genes (under ten genes) can create large trees. Filter by minimum coverage (how many genes share the function) or functional patterns (functions that match a pattern). 
 
-When not explicitly specified, GeneScape will try to find a reasonable coverage threshold for the input genes.
+GeneScape will try to find a reasonable coverage coverage threshold when that threshold is not explicitly specified.
 
 ### Node Labeling 
 
-The labels in the graph carry additional information on the number of genes in the input that carry that function as well as an indicator for the specificity of the function in the organism. For example, the label:
+The labels in the graph carry additional information on the number of genes in the input that carry that function and an indicator for the specificity of the function in the organism. For example, the label:
 
 ```
       GO:0004866
@@ -71,8 +71,6 @@ Indicates that the function `endopeptidase inhibitor activity` was seen as an an
 
 The `(1/5)` means that  `1` out of `5` genes in the input list carry this annotation. Thus the value is a characteristic of the input list. The `mincount` filter is applied to the count value to filter out functions that are under a threshold.
 
-It is possible to compute a p-value to determine whether an observed enrichment difference is statistically significant. We'll just note that assigning p-values to enrichment counts is fraught with several challenges. In our opinion, GO annotations are neither complete, nor independent, nor precise enough to satisfy mathematical requirements. In addition, appropriate selection of the background (aka the `19000` above) to correct p-values for multiple comparisons also presents many challenges. For these reasons, we do not compute p-values in our application.
-
 ### Node Coloring
 
 The colors in the tree carry additional meaning:
@@ -80,7 +78,7 @@ The colors in the tree carry additional meaning:
 - Light green nodes represent functions that are in the input list.
 - Dark green nodes are functions present in the input and are leaf nodes in the terminology, the most granular annotation possible 
 
-A dark green means that the ontology has no terms that would be even more specific than that specific annotation. A light green means there are more specific annotations, but none of the genes were annotated as such. In both cases, the green color indicates that the function was present in the input list.
+A dark green means that the term is a leaf node, the most specific annotation possible. In both cases, the green color indicates that the function was present in the input list.
 
 Each subtree in a different GO category has a different color:
   - Biological Process (BP)
@@ -102,8 +100,8 @@ Just by setting the `mincount` to 2 or higher is often enough to simplify the gr
 The filtering conditions that users can apply are:
 
 1. a pattern that matches the **Function** columns
-2. a minimum **Coverage** that means the minimum number of genes that carry that function
-3. the GO subtree shown in the **root** column
+1. a minimum **Coverage** that means the minimum number of genes that carry that function
+1. a GO subtree 
 
 Filters are applied during the annotation step and will filter the GO terms derived from the gene list.
 
@@ -111,7 +109,7 @@ In the Shiny interface use the **coverage** filter to remove functions that are 
 
 ### Command line requirements
 
-To generate images from command line the `graphviz` software must be installed. You can install it via `conda`
+To generate images from the command line, the `graphviz` software must be installed. You can install it via `conda`
 
 ```console
 conda install graphviz
@@ -145,9 +143,9 @@ Which will generate a tree visualization of the test data.
 
 ### Reducing the graph size
 
-We can pass the tree visualizer a list of genes or a list of GO ids, or even a mix of both. 
+We can pass the tree visualizer a list of genes or a list of GO IDs, or even a mix of both. 
 
-We run the `tree` command to visualize the relationships between the GO terms that includes all coverages:
+We run the `tree` command to visualize the relationships between the GO terms that include all coverages:
 
 ```console
 genescape tree genes.txt --mincov 1 
@@ -203,7 +201,7 @@ Coverage,Function,GO,Genes
 
 ### genescape build
 
-The software is currently packaged with a human and a mouse genome derived data index.
+The software is currently packaged indices for a number of organisms.
 
 To build an index for a different organism, download the GAF association file from the Gene Ontology website. 
 
