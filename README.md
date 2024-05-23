@@ -50,15 +50,15 @@ The program can also be used at the command line to generate images or annotatio
 
 1. It first reads genes from an **Input List** 
 1. Then extracts the **Annotations** associated with the input genes 
-1. Finally it builds and visualizes the functional subtree tree based on these Annotations. 
+1. Finally, it builds and visualizes the functional subtree tree based on these Annotations. 
 
 **Note**: Even short lists of genes (under ten genes) can create large trees. Filter by minimum coverage (how many genes share the function) or functional patterns (functions that match a pattern). 
 
-GeneScape will try to find a reasonable coverage coverage threshold when that threshold is not explicitly specified.
+GeneScape will try to find a reasonable coverage threshold when that threshold is not explicitly specified.
 
 ### Node Labeling 
 
-The labels in the graph carry additional information on the number of genes in the input that carry that function and an indicator for the specificity of the function in the organism. For example, the label:
+The labels in the graph carry additional information on the number of genes in the input that carry that function and are an indicator of the specificity of the function in the organism. For example, the label:
 
 ```
       GO:0004866
@@ -67,9 +67,9 @@ The labels in the graph carry additional information on the number of genes in t
         (1/5)
 ```
 
-Indicates that the function `endopeptidase inhibitor activity` was seen as an annotation to `39` of *all genes* in the original association file (for the human there are over 19K gene symbols). Thus, the `[39]` is a characteristic of annotation of the organism.
+The label indicates that the function `endopeptidase inhibitor activity` was seen as an annotation to `39` of *all genes* in the original association file (for humans, there are over 19K gene symbols). Thus, the `[39]` is a characteristic of annotation of the organism.
 
-The `(1/5)` means that  `1` out of `5` genes in the input list carry this annotation. Thus the value is a characteristic of the input list. The `mincount` filter is applied to the count value to filter out functions that are under a threshold.
+The `(1/5)` means that  `1` out of `5` genes in the input list carry this annotation. Thus, the value is a characteristic of the input list. The `mincov` (minimum coverage) filter is applied to the coverage value to filter out functions under a threshold.
 
 ### Node Coloring
 
@@ -78,7 +78,7 @@ The colors in the tree carry additional meaning:
 - Light green nodes represent functions that are in the input list.
 - Dark green nodes are functions present in the input and are leaf nodes in the terminology, the most granular annotation possible 
 
-A dark green means that the term is a leaf node, the most specific annotation possible. In both cases, the green color indicates that the function was present in the input list.
+A dark green means the term is a leaf node, the most specific annotation possible. In both cases, the green color indicates that the function was present in the input list.
 
 Each subtree in a different GO category has a different color:
   - Biological Process (BP)
@@ -105,11 +105,11 @@ The filtering conditions that users can apply are:
 
 Filters are applied during the annotation step and will filter the GO terms derived from the gene list.
 
-In the Shiny interface use the **coverage** filter to remove functions that are not well represented in the input list. Recall that `coverage` represents the number of genes in the input list that carry that function. You can see the counts for each annotation in the **Function Annotations** box as the first column.
+In the Shiny interface, use the **coverage** filter to remove functions not well represented in the input list. Recall that `coverage` represents the number of genes in the input list that carry that function. You can see the counts for each annotation in the **Function Annotations** box as the first column.
 
 ### Command line requirements
 
-To generate images from the command line, the `graphviz` software must be installed. You can install it via `conda`
+The `graphviz` software must be installed to generate images from the command line. You can install it via `conda`
 
 ```console
 conda install graphviz
@@ -151,13 +151,15 @@ We run the `tree` command to visualize the relationships between the GO terms th
 genescape tree genes.txt --mincov 1 
 ```
 
-For many (most) gene lists resulting functional graph might be huge. If no coverage is specified, the software will try to find a reasonable coverage threshold for the input genes.
+The resulting functional graph might be huge for many (most) gene lists. 
+
+The software will try to find a reasonable coverage threshold for the input genes if no coverage is specified.
 
 ![GeneScape output][out2]
 
 [out2]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_output_2.png
 
-We can narrow down the visualization in multiple ways, for example, we can select only terms that match the word `lipid` :
+We can narrow down the visualization in multiple ways; for example, we can select only terms that match the word `lipid` :
 
 ```console
 genescape tree -m repair genes.txt 
@@ -243,7 +245,7 @@ make test
 
 ### Additional customizations
 
-The software can be customized by creating a copy of the `config.toml` file and settings the `GENESCAPE_CONFIG` environment variable to point to the new configuration file.
+The software can be customized by creating a copy of the `config.toml` file and setting the `GENESCAPE_CONFIG` environment variable to point to the new configuration file.
 
 * [config.toml](src/genescape/data/config.toml)
 
