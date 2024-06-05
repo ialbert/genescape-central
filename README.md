@@ -1,10 +1,10 @@
 # GeneScape: Gene Function Visualization
 
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.06624/status.svg)](https://doi.org/10.21105/joss.06624)
 
 **GeneScape** is a software tool for visualizing gene functions. Users enter a list of genes, the software then draws a subgraph of the Gene Ontology (GO) terms associated with the genes.
 
 **GeneScape** is a Python-based [Shiny][pyshiny] application that be run both at the command line and also via a graphical user interface.
-
 
 ![GeneScape Tree][interface]
 
