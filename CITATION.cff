@@ -1,0 +1,26 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Albert
+  given-names: Istvan
+  orcid: "https://orcid.org/0000-0001-8366-984X"
+doi: 10.5281/zenodo.11245264
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
+preferred-citation:
+  authors:
+  - family-names: Albert
+    given-names: Istvan
+    orcid: "https://orcid.org/0000-0001-8366-984X"
+  date-published: 2024-06-05
+  doi: 10.21105/joss.06624
+  issn: 2475-9066
+  issue: 98
+  journal: Journal of Open Source Software
+  publisher:
+    name: Open Journals
+  start: 6624
+  title: "GeneScape: A Python package for gene ontology visualization"
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.06624"
+  volume: 9
+title: "GeneScape: A Python package for gene ontology visualization"
