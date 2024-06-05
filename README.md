@@ -10,7 +10,7 @@
 
 [interface]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_web_interface.png
 
-Paper (see also BibTex entry in the sidebar):
+Publication (BibTex entry in the sidebar):
 
 * [Albert, I. (2024). GeneScape: A Python package for gene ontology visualization. Journal of Open Source Software, 9(98), 6624.][joss.06624]
 
