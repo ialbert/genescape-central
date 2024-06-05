@@ -1,12 +1,20 @@
 # GeneScape: Gene Function Visualization
 
+
 **GeneScape** is a software tool for visualizing gene functions. Users enter a list of genes, the software then draws a subgraph of the Gene Ontology (GO) terms associated with the genes.
 
 **GeneScape** is a Python-based [Shiny][pyshiny] application that be run both at the command line and also via a graphical user interface.
 
+
 ![GeneScape Tree][interface]
 
 [interface]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_web_interface.png
+
+Paper (see also BibTex entry in the sidebar):
+
+* [Albert, I. (2024). GeneScape: A Python package for gene ontology visualization. Journal of Open Source Software, 9(98), 6624.][joss.06624]
+
+[joss.06624]:  https://doi.org/10.21105/joss.06624
 
 The Shiny version of the software can be accessed at:
 
@@ -255,6 +263,22 @@ In this file the lines that have an `index` type will be used to build the dropd
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the development of GeneScape.
 
+### Citation:
+
+```
+@article{GeneScape,
+author = {Albert, Istvan},
+doi = {10.21105/joss.06624},
+journal = {Journal of Open Source Software},
+month = jun,
+number = {98},
+pages = {6624},
+title = {{GeneScape: A Python package for gene ontology visualization}},
+url = {https://joss.theoj.org/papers/10.21105/joss.06624},
+volume = {9},
+year = {2024}
+}
+```
 ### License
 
 `genescape` is distributed under the terms of the MIT license. 
