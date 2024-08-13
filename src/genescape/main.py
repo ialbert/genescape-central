@@ -4,6 +4,8 @@ import click
 from genescape import __version__
 from genescape import resources, utils, gs_graph, gs_index
 from pprint import pprint
+from threading import Timer
+import webbrowser
 
 # Valid choices for root
 ROOT_CHOICES = [utils.NS_BP, utils.NS_MF, utils.NS_CC, utils.NS_ALL]
@@ -196,6 +198,8 @@ def build(idx_fname=None, obo_fname=None, gaf_fname=None, stats=False, dump=Fals
     utils.info(f"index: {idx_fname} ({size:.2f} MB)")
 
 
+
+
 @run.command()
 @click.option("-i", "--idx", "idx_fname", default="", help="Index file")
 @click.option("--host", "host", default="127.0.0.1", help="Hostname to bind to")
@@ -221,6 +225,14 @@ def web(idx_fname='', host='localhost', port=8000, reload=False, test=False):
     if test:
         os.environ['GENESCAPE_TEST'] = '1'
 
+
+    def open_browser():
+        webbrowser.open_new(f"http://{host}:{port}")
+
+    # Pops a web browser
+    Timer(1, open_browser).start()
+
+    # Run the server
     shiny.run_app("genescape.shiny.tree.app:app", host=host, port=port, reload=reload)
 
 
