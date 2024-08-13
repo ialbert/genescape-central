@@ -10,11 +10,26 @@
 
 [interface]: https://raw.githubusercontent.com/ialbert/genescape-central/main/docs/images/gs_web_interface.png
 
-Publication (BibTex entry in the sidebar):
+Publication:
 
 * [Albert, I. (2024). GeneScape: A Python package for gene ontology visualization. Journal of Open Source Software, 9(98), 6624.][joss.06624]
 
 [joss.06624]:  https://doi.org/10.21105/joss.06624
+
+```
+@article{Albert_GeneScape_A_Python_2024,
+author = {Albert, Istvan},
+doi = {10.21105/joss.06624},
+journal = {Journal of Open Source Software},
+month = jun,
+number = {98},
+pages = {6624},
+title = {{GeneScape: A Python package for gene ontology visualization}},
+url = {https://joss.theoj.org/papers/10.21105/joss.06624},
+volume = {9},
+year = {2024}
+}
+```
 
 The Shiny version of the software can be accessed at:
 
@@ -41,8 +56,6 @@ genescape web
 Visit the [http://localhost:8000][local] URL in your browser to see the interface.
 
 [local]: http://localhost:8000
-
-Once you are done running the web interface, press CTRL+C to stop the program from running.
 
 ### Command line use
 
