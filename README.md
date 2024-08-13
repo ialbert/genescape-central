@@ -16,21 +16,6 @@ Publication:
 
 [joss.06624]:  https://doi.org/10.21105/joss.06624
 
-```
-@article{Albert_GeneScape_A_Python_2024,
-author = {Albert, Istvan},
-doi = {10.21105/joss.06624},
-journal = {Journal of Open Source Software},
-month = jun,
-number = {98},
-pages = {6624},
-title = {{GeneScape: A Python package for gene ontology visualization}},
-url = {https://joss.theoj.org/papers/10.21105/joss.06624},
-volume = {9},
-year = {2024}
-}
-```
-
 The Shiny version of the software can be accessed at:
 
 * https://biostar.shinyapps.io/genescape/
