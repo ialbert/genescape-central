@@ -52,11 +52,12 @@ function render_graph() {
         graph.appendChild(svg);
 
 
-
-
     }).catch(
         error => console.error("Error rendering Graphviz: ", error)
     );
+
+	addEventListeners();
+
 }
 
 // Saves the SVG as an image.
@@ -107,13 +108,9 @@ function reset_SVG() {
 }
 
 // Add event listeners to the DOM elements after page load.
-document.addEventListener("DOMContentLoaded", function() {
-
-        document.getElementById("save_image").addEventListener("click", save_image);
-
+function addEventListeners() {
+        //document.getElementById("save_image").addEventListener("click", save_image);
 		document.getElementById('zoom_in').addEventListener('click', () => zoom_SVG(ZOOM_IN));
 		document.getElementById('zoom_out').addEventListener('click', () => zoom_SVG(ZOOM_OUT));
 		document.getElementById('zoom_reset').addEventListener('click', reset_SVG);
-
-
-});
+}

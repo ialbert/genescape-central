@@ -139,10 +139,7 @@ app_ui = ui.page_sidebar(
         # Filtering pattern.
         ui.input_text("pattern", label="Word filter (regex ok):", value=PATTERN),
 
-        # The main submit button.
-        ui.input_action_button(
-            "submit", "Draw Tree", class_="btn-success", icon=icons.icon_play
-        ),
+
 
         # Download button for annotation CSV.
         ui.tags.p(
@@ -163,13 +160,36 @@ app_ui = ui.page_sidebar(
         width=SIDEBAR_WIDTH, bg=SIDEBAR_BG,
     ),
 
-    ui.navset_tab(
+    ui.navset_pill(
 
         # Graph panel.
         ui.nav_panel(
             "Graph", ui.tags.p(
 
+                # Error message.
                 ui.tags.div(
+                    ui.output_ui(id="error_msg"),
+                    class_="error_msg",
+                ),
+
+
+                # The graph root object.
+                ui.div(
+                    ui.tags.b(GRAPH_TAB),
+                    id="graph_root", align="center"),
+
+                # Notification message
+                ui.tags.div(
+                    ui.output_ui(id="note_msg"),
+                    class_="note_msg",
+                ),
+
+                ui.tags.div(
+                    # The main submit button.
+                    ui.input_action_button(
+                        "submit", "Draw Tree", class_="btn-success btn-sm", icon=icons.icon_play
+                    ),
+
                     ui.input_action_button("zoom_in", label="Zoom", icon=icons.icon_zoom_in,
                                            class_="btn btn-light btn-sm", ),
                     ui.tags.span(" "),
@@ -178,28 +198,11 @@ app_ui = ui.page_sidebar(
                     ui.tags.span(" "),
                     ui.input_action_button("zoom_out", label="Zoom", icon=icons.icon_zoom_out,
                                            class_="btn btn-light btn-sm"),
-                    ui.tags.span(" "),
-                    ui.input_action_button("save_image", "Save", class_="btn btn-light btn-sm", icon=icons.icon_down),
+                    #ui.tags.span(" "),
+                    #ui.input_action_button("save_image", "Save", class_="btn btn-light btn-sm", icon=icons.icon_down),
 
-                    align="center", id="zoom_buttons",
+                    id="zoom_buttons",
                 ),
-
-                # Error message.
-                ui.tags.div(
-                    ui.output_ui(id="error_msg"),
-                    class_="error_msg",
-                ),
-
-                # Notification message
-                ui.tags.div(
-                    ui.output_ui(id="note_msg"),
-                    class_="note_msg",
-                ),
-
-                # The graph root object.
-                ui.div(
-                    ui.tags.b(GRAPH_TAB),
-                    id="graph_root", align="center"),
 
             ),
         ),
@@ -331,7 +334,7 @@ def server(input, output, session):
         # Guess the coverage
         if not coverage:
             coverage = gs_graph.estimate(idg, targets=targets, pattern=pattern, root=root)
-            cover_msg = f"Estimated coverage cutoff {coverage}"
+            cover_msg = f"Automatically estimated coverage cutoff: {coverage}"
             note_list.set([cover_msg])
         else:
             cover_msg = f"Coverage set to {coverage}"
