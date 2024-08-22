@@ -69,7 +69,7 @@ The **Coverage** column indicates how many genes in the input cover that functio
 How to reduce the graph size:
 
 1. The **Coverage** filter will select for the minimum coverage.
-1. The **World filter pattern** will keep only functions that match.
+1. The **Word filter pattern** will keep only functions that match.
 
 Examples:
 
